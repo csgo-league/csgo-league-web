@@ -1,0 +1,28 @@
+.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.match-image {
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: #000000 !important;
+  background: #fff;
+}
+
+.page-item.disabled .page-link {
+  background-color: #b8b8b8;
+}
+
+.page-item.active .page-link,
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+  background-color: #e9e9e9;
+}
