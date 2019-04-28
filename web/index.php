@@ -129,7 +129,6 @@ if (isset($_GET["page"])) {
             </nav>';
         }
 ?>
-    </div><a class="text-white" href="https://github.com/DistrictNineHost/Sourcemod-SQLMatches" target="_blank" style="position:fixed;bottom:0px;right:10px;">Developed by DistrictNine.Host</a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js?h=98fdbbd86223499341d76166d015c405"></script>
