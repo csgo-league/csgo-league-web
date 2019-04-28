@@ -4,13 +4,12 @@
 }
 
 .match-image {
-  background-position:center;
   background-size:cover;
-  background-repeat:no-repeat;
+  background: no-repeat center;
 }
 
-.pagination>li>a,
-.pagination>li>span {
+.pagination > li > a,
+.pagination > li > span {
   color: #000000 !important;
   background: #fff;
 }
