@@ -1,6 +1,7 @@
 <?php
-$site_name = "DistrictNine.Host"; // Name of Site
-$page_title = "DistrictNine.Host | Matches"; // Page title in browser.
+
+$site_name = "RedlineCS"; // Name of Site
+$page_title = "RedlineCS | Matches"; // Page title in browser.
 $logo = "assets/img/White.png";
 $limit = 3; // Page Limit for match cards.
 
@@ -9,7 +10,7 @@ $username = ""; // DB Username
 $password = ""; // DB Password
 $dbname = ""; // DB Name
 
-$maps = array(
+$maps = [
     // "Path/To/Image" => "full_map_name",
     "assets/img/maps/austria.jpg" => "de_austria",
     "assets/img/maps/cache.jpg" => "de_cache",
@@ -24,10 +25,9 @@ $maps = array(
     "assets/img/maps/overpass.jpg" => "de_overpass",
     "assets/img/maps/train.jpg" => "de_train",
     "assets/img/maps/inferno.jpg" => "de_inferno"
-);
+];
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-?>

@@ -1,5 +1,5 @@
 <?php
-require ("config.php");
+require(__DIR__ . "/../app/config.php");
 
 if (isset($_GET["id"])) {
     $match_id = $_GET["id"];
