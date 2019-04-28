@@ -35,30 +35,30 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     } else if (isset($_GET['page'])) {
         $page_number = $conn->real_escape_string($_GET['page']);
         $offset = ($page_number - 1) * $limit;
-        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT $offset, $limit";
+        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$offset}, {$limit}";
     } else {
         $page_number = 1;
-        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT $limit";
+        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$limit}";
     }
 
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $half = ($row["team_2"] + $row["team_3"]) / 2;
+            $half = ($row['team_2'] + $row['team_3']) / 2;
 
-            if ($row["team_2"] > $half) {
+            if ($row['team_2'] > $half) {
                 $image = 'ct_icon.png';
-            } elseif ($row["team_2"] == $half && $row["team_3"] == $half) {
+            } elseif ($row['team_2'] == $half && $row['team_3'] == $half) {
                 $image = 'tie_icon.png';
             } else {
                 $image = 't_icon.png';
             }
 
-            $map_img = array_search($row["map"], $maps);
+            $map_img = array_search($row['map'], $maps);
 
             echo '        
-            <a href="scoreboard.php?id='.$row["match_id"].'">
+            <a href="scoreboard.php?id='.$row['match_id'].'">
                 <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
                     <div class="card-img-overlay">
                         <h4 class="text-white float-left" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4><img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;"></div>
@@ -68,18 +68,18 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     } else {
         echo '<h1 style="margin-top:20px;text-align:center;">No Results!</h1>';
     }
-?>
-<?php
+
     if (!isset($_POST['Submit'])) {
-        $sql_pages = "SELECT COUNT(*) FROM sql_matches_scoretotal";
+        $sql_pages = 'SELECT COUNT(*) FROM sql_matches_scoretotal';
         $result_pages = $conn->query($sql_pages);
         $row_pages = $result_pages->fetch_assoc();
 
-        $total_pages = ceil($row_pages["COUNT(*)"] / $limit);
+        $total_pages = ceil($row_pages['COUNT(*)'] / $limit);
 
         echo '
         <nav style="margin-top:30px;width:80%;" class="center">
             <ul class="pagination">';
+
             if ($page_number == 1) {
                 echo '
                 <li class="page-item disabled">
