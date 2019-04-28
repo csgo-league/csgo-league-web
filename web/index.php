@@ -25,7 +25,10 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
         <?php require('head.php'); ?>
 
         <form method="post">
-            <div class="search-container center" style="width:70%;"><input type="text" name="search-bar" placeholder="Search Match ID, Player Name or SteamID64" class="search-input"><button class="btn btn-light search-btn" type="submit" name="Submit"> <i class="fa fa-search"></i></button></div>
+            <div class="search-container center" style="width:70%;">
+                <input type="text" name="search-bar" placeholder="Search Match ID, Player Name or SteamID64" class="search-input">
+                <button class="btn btn-light search-btn" type="submit" name="Submit"> <i class="fa fa-search"></i></button>
+            </div>
         </form>
 <?php
     if (isset($_POST['Submit']) && !empty($_POST['search-bar'])) {
@@ -63,7 +66,8 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
             <a href="scoreboard.php?id='.$row['match_id'].'">
                 <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
                     <div class="card-img-overlay">
-                        <h4 class="text-white float-left" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4><img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;"></div>
+                        <h4 class="text-white float-left" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4><img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+                    </div>
                 </div>
             </a>';
         }
@@ -85,13 +89,17 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
             if ($page_number == 1) {
                 echo '
                 <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
+                    <span class="page-link">
+                        Previous
+                    </span>
                 </li>';
             } else {
                 $past_page = $page_number - 1;
                 echo '
                 <li class="page-item">
-                    <a class="page-link" href="?page='.$past_page.'">Previous</a>
+                    <a class="page-link" href="?page='.$past_page.'">
+                        Previous
+                    </a>
                 </li>';
             }
 
@@ -100,18 +108,27 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
                     echo '
                     <li class="page-item active">
                         <span class="page-link">
-                        '.$i.'
-                        <span class="sr-only">(current)</span>
+                            '.$i.'
+                            <span class="sr-only">
+                                (current)
+                            </span>
                         </span>
                     </li>';
                 } else {
-                    echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+                    echo '
+                    <li class="page-item">
+                        <a class="page-link" href="?page='.$i.'">
+                            '.$i.'
+                        </a>
+                    </li>';
                 }
             }
             if ($page_number == $total_pages) {
                 echo '
                 <li class="page-item disabled">
-                    <span class="page-link">Next</span>
+                    <span class="page-link">
+                        Next
+                    </span>
                 </li>';
             } else {
                 $next_page = $page_number + 1;
