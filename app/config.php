@@ -8,7 +8,7 @@ $limit = 3; // Page Limit for match cards.
 $servername = "denial.network"; // Server IP
 $username = "denialnetwork"; // DB Username
 $password = "cQcXAdZk78"; // DB Password
-$dbname = "denialnetwork_rankme"; // DB Name
+$dbname = "denialnetwork_matches"; // DB Name
 
 $maps = [
     // "Path/To/Image" => "full_map_name",

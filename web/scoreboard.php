@@ -94,9 +94,9 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                 <div class="row" style="margin-top:20px;">
                     <div class="col-md-12">
                         <div class="card rounded-borders" style="border: none !important;">
-                            <div class="card-body" style="padding-right:0px;padding-left:0px;padding-bottom:0px;padding-top:0px;">
+                            <div class="card-body" style="padding: 0;">
                             <div style="background-color:#5b768d;height:25px;">
-                                <h3 class="text-uppercase text-center text-white" style="font-size:22px;">'.$ct_name.'<br></h3>
+                                <h3 class="text-uppercase text-center text-white" style="font-size:22px;">' .$ct_name.'<br></h3>
                             </div>
                                 <div class="table-responsive" style="border: none !important;">
                                     <table class="table">
@@ -123,15 +123,15 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="text-center" style="margin-top:10px;margin-bottom:10px;"><span style="color:#5b768d;">'.$ct_score.'</span>:<span style="color:#ac9b66;">'.$t_score.'</span></h1>
+                        <h1 class="text-center" style="margin-top:10px;margin-bottom:10px;"><span style="color:#5b768d;">'.$ct_score.'</span> : <span style="color:#ac9b66;">'.$t_score. '</span></h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card rounded-borders" style="border: none !important;">
-                            <div class="card-body" style="padding-right:0px;padding-left:0px;padding-bottom:0px;padding-top:0px;">
+                            <div class="card-body" style="padding: 0;">
                                 <div style="background-color:#ac9b66;height:25px;">
-                                    <h3 class="text-uppercase text-center text-white" style="font-size:22px;">'.$t_name.'<br></h3>
+                                    <h3 class="text-uppercase text-center text-white" style="font-size:22px;">' .$t_name.'<br></h3>
                                 </div>
                                 <div class="table-responsive" style="border-top:none !important;">
                                     <table class="table">
@@ -160,7 +160,6 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
             echo '<h4 style="margin-top:40px;text-align:center;">No Match with that ID!</h4>';
         }
 ?>
-    <a class="text-white" href="https://github.com/DistrictNineHost/Sourcemod-SQLMatches" target="_blank" style="position:fixed;bottom:0px;right:10px;">Developed by DistrictNine.Host</a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js?h=98fdbbd86223499341d76166d015c405"></script>

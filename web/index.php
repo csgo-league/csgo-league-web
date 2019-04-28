@@ -40,10 +40,10 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     } else if (isset($_GET['page'])) {
         $page_number = $conn->real_escape_string($_GET['page']);
         $offset = ($page_number - 1) * $limit;
-        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT $offset, $limit";
+        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$offset}, {$limit}";
     } else {
         $page_number = 1;
-        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT $limit";
+        $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$limit}";
     }
 
     $result = $conn->query($sql);
