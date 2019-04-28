@@ -62,11 +62,17 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 
             $map_img = array_search($row['map'], $maps);
 
+            $date = date("d/m/Y H:ia", strtotime($row['timestamp'] . ' PST'));
+
             echo '        
             <a href="scoreboard.php?id='.$row['match_id'].'">
                 <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
-                    <div class="card-img-overlay">
-                        <h4 class="text-white float-left" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4><img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+                    <div class="row card-img-overlay">
+                        <h4 class="text-white col-4" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4>
+                        <h4 class="text-white col-4" style="text-align: center; font-size:30px;margin-top:15px;">'.$date.'</h4>
+                        <div class="col-4">
+                            <img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+                        </div>
                     </div>
                 </div>
             </a>';
