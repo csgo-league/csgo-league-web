@@ -1,11 +1,7 @@
 <?php
-require(__DIR__ . "/../app/config.php");
+require(__DIR__ . '/../app/config.php');
 
-if (isset($_GET["id"])) {
-    $match_id = $_GET["id"];
-} else {
-    $match_id = 0;
-}
+$match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +23,7 @@ if (isset($_GET["id"])) {
 <body>
     <div class="container" style="margin-top:20px;">
 <?php
-        require ("head.php");
+        require ('head.php');
 
         $match_id = $conn->real_escape_string($match_id);
 
@@ -47,12 +43,15 @@ if (isset($_GET["id"])) {
                 } else {
                     $kdr = 0;
                 }
+
                 if ($row["team"] == 2) {
                     $t_score = $row["team_3"];
                     $t_name = $row["teamname_1"];
-                    if ($t_name == NULL) {
+
+                    if ($t_name == null) {
                         $t_name = "Terrorists";
                     }
+
                     $t .= '
                     <tr>
                         <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,12)).'</a></td>
@@ -67,9 +66,11 @@ if (isset($_GET["id"])) {
                 } elseif ($row["team"] == 3) {
                     $ct_score = $row["team_2"];
                     $ct_name = $row["teamname_2"];
-                    if ($ct_name == NULL) {
+
+                    if ($ct_name == null) {
                         $ct_name = "Counter-Terrorists";
                     }
+
                     $ct .= '
                     <tr>
                         <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,12)).'</a></td>
