@@ -84,93 +84,96 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                     </tr>';
                 }
             }
-                if (!isset($ct)) {
-                    $ct = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
-                }
-                if (!isset($t)) {
-                    $t = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
-                }
-                echo '
-                <div class="row" style="margin-top:20px;">
-                    <div class="col-md-12">
-                        <div class="card rounded-borders" style="border: none !important;">
-                            <div class="card-body" style="padding: 0;">
-                                <div class="table-responsive" style="border: none !important;">
-                                    <table class="table">
-                                        <thead class="table-borderless" style="border: none !important;">
-                                            <tr>
-                                                <th colspan="8" style="
-                                                    font-size: 30px;
-                                                    text-align: center;
-                                                    background-color: #5b768d;
-                                                    height:25px;">
-                                                    ' .$ct_name.'
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:200px;">Player</th>
-                                                <th>Kills</th>
-                                                <th>Assists</th>
-                                                <th>Deaths</th>
-                                                <th>KDR</th>
-                                                <th>MVPs</th>
-                                                <th>Score</th>
-                                                <th>Ping</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        '.$ct.'
-                                        </tbody>
-                                    </table>
-                                </div>
+
+            if (!isset($ct)) {
+                $ct = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
+            }
+
+            if (!isset($t)) {
+                $t = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
+            }
+
+            echo '
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-12">
+                    <div class="card rounded-borders" style="border: none !important;">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-responsive" style="border: none !important;">
+                                <table class="table">
+                                    <thead class="table-borderless" style="border: none !important;">
+                                        <tr>
+                                            <th colspan="8" style="
+                                                font-size: 30px;
+                                                text-align: center;
+                                                background-color: #5b768d;
+                                                height:25px;">
+                                                ' .$ct_name.'
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th style="width:200px;">Player</th>
+                                            <th>Kills</th>
+                                            <th>Assists</th>
+                                            <th>Deaths</th>
+                                            <th>KDR</th>
+                                            <th>MVPs</th>
+                                            <th>Score</th>
+                                            <th>Ping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    '.$ct.'
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="text-center" style="margin-top:10px;margin-bottom:10px;"><span style="color:#5b768d;">'.$ct_score.'</span> : <span style="color:#ac9b66;">'.$t_score. '</span></h1>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center" style="margin-top:10px;margin-bottom:10px;"><span style="color:#5b768d;">'.$ct_score.'</span> : <span style="color:#ac9b66;">'.$t_score. '</span></h1>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card rounded-borders" style="border: none !important;">
-                            <div class="card-body" style="padding: 0;">
-                                <div class="table-responsive" style="border-top:none !important;">
-                                    <table class="table">
-                                        <thead class="table-borderless" style="border: none !important;">
-                                            <tr>
-                                                <th colspan="8" style="
-                                                    font-size: 30px;
-                                                    text-align: center;
-                                                    background-color: #ac9b66;
-                                                    height:25px;">
-                                                    ' .$t_name.'
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:200px;">Player</th>
-                                                <th>Kills</th>
-                                                <th>Assists</th>
-                                                <th>Deaths</th>
-                                                <th>KDR</th>
-                                                <th>MVPs</th>
-                                                <th>Score</th>
-                                                <th>Ping</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        '.$t.'
-                                        </tbody>
-                                    </table>
-                                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card rounded-borders" style="border: none !important;">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-responsive" style="border-top:none !important;">
+                                <table class="table">
+                                    <thead class="table-borderless" style="border: none !important;">
+                                        <tr>
+                                            <th colspan="8" style="
+                                                font-size: 30px;
+                                                text-align: center;
+                                                background-color: #ac9b66;
+                                                height:25px;">
+                                                ' .$t_name.'
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th style="width:200px;">Player</th>
+                                            <th>Kills</th>
+                                            <th>Assists</th>
+                                            <th>Deaths</th>
+                                            <th>KDR</th>
+                                            <th>MVPs</th>
+                                            <th>Score</th>
+                                            <th>Ping</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    '.$t.'
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>';
-        } else {
-            echo '<h4 style="margin-top:40px;text-align:center;">No Match with that ID!</h4>';
-        }
+                </div>
+            </div>';
+    } else {
+        echo '<h4 style="margin-top:40px;text-align:center;">No Match with that ID!</h4>';
+    }
 ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
