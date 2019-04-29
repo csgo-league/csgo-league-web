@@ -73,7 +73,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 
                     $ct .= '
                     <tr>
-                        <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,12)).'</a></td>
+                        <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,32)).'</a></td>
                         <td>'.$row["kills"].'</td>
                         <td>'.$row["assists"].'</td>
                         <td>'.$row["deaths"].'</td>
@@ -95,12 +95,18 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                     <div class="col-md-12">
                         <div class="card rounded-borders" style="border: none !important;">
                             <div class="card-body" style="padding: 0;">
-                            <div style="background-color:#5b768d;height:25px;">
-                                <h3 class="text-uppercase text-center text-white" style="font-size:22px;">' .$ct_name.'<br></h3>
-                            </div>
                                 <div class="table-responsive" style="border: none !important;">
                                     <table class="table">
                                         <thead class="table-borderless" style="border: none !important;">
+                                            <tr>
+                                                <th colspan="8" style="
+                                                    font-size: 30px;
+                                                    text-align: center;
+                                                    background-color: #5b768d;
+                                                    height:25px;">
+                                                    ' .$ct_name.'
+                                                </th>
+                                            </tr>
                                             <tr>
                                                 <th style="width:200px;">Player</th>
                                                 <th>Kills</th>
@@ -130,12 +136,18 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                     <div class="col-md-12">
                         <div class="card rounded-borders" style="border: none !important;">
                             <div class="card-body" style="padding: 0;">
-                                <div style="background-color:#ac9b66;height:25px;">
-                                    <h3 class="text-uppercase text-center text-white" style="font-size:22px;">' .$t_name.'<br></h3>
-                                </div>
                                 <div class="table-responsive" style="border-top:none !important;">
                                     <table class="table">
                                         <thead class="table-borderless" style="border: none !important;">
+                                            <tr>
+                                                <th colspan="8" style="
+                                                    font-size: 30px;
+                                                    text-align: center;
+                                                    background-color: #ac9b66;
+                                                    height:25px;">
+                                                    ' .$t_name.'
+                                                </th>
+                                            </tr>
                                             <tr>
                                                 <th style="width:200px;">Player</th>
                                                 <th>Kills</th>
