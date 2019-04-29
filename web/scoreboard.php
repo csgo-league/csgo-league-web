@@ -37,8 +37,6 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
         $result = $conn->query($sql);
     
         if ($result->num_rows > 0) {
-            $t = '';
-            $ct = '';
             while ($row = $result->fetch_assoc()) {
                 if ($row["kills"] > 0 && $row["deaths"] > 0) {
                     $kdr = round(($row["kills"] / $row["deaths"]), 2); 
