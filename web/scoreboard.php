@@ -38,49 +38,49 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
     
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                if ($row["kills"] > 0 && $row["deaths"] > 0) {
-                    $kdr = round(($row["kills"] / $row["deaths"]), 2); 
+                if ($row['kills'] > 0 && $row['deaths'] > 0) {
+                    $kdr = round(($row['kills'] / $row['deaths']), 2);
                 } else {
                     $kdr = 0;
                 }
 
-                if ($row["team"] == 2) {
-                    $t_score = $row["team_3"];
-                    $t_name = $row["teamname_1"];
+                if ($row['team'] == 2) {
+                    $t_score = $row['team_3'];
+                    $t_name = $row['teamname_1'];
 
                     if ($t_name == null) {
-                        $t_name = "Terrorists";
+                        $t_name = 'Terrorists';
                     }
 
                     $t .= '
                     <tr>
-                        <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,12)).'</a></td>
-                        <td>'.$row["kills"].'</td>
-                        <td>'.$row["assists"].'</td>
-                        <td>'.$row["deaths"].'</td>
+                        <td><a href="https://steamcommunity.com/profiles/'.$row['steamid64'].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row['name'],0,12)).'</a></td>
+                        <td>'.$row['kills'].'</td>
+                        <td>'.$row['assists'].'</td>
+                        <td>'.$row['deaths'].'</td>
                         <td>'.$kdr.'</td>
-                        <td>'.$row["mvps"].'</td>
-                        <td>'.$row["score"].'</td>
-                        <td>'.$row["ping"].'</td>
+                        <td>'.$row['mvps'].'</td>
+                        <td>'.$row['score'].'</td>
+                        <td>'.$row['ping'].'</td>
                     </tr>';
-                } elseif ($row["team"] == 3) {
-                    $ct_score = $row["team_2"];
-                    $ct_name = $row["teamname_2"];
+                } elseif ($row['team'] == 3) {
+                    $ct_score = $row['team_2'];
+                    $ct_name = $row['teamname_2'];
 
                     if ($ct_name == null) {
-                        $ct_name = "Counter-Terrorists";
+                        $ct_name = 'Counter-Terrorists';
                     }
 
                     $ct .= '
                     <tr>
-                        <td><a href="https://steamcommunity.com/profiles/'.$row["steamid64"].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row["name"],0,32)).'</a></td>
-                        <td>'.$row["kills"].'</td>
-                        <td>'.$row["assists"].'</td>
-                        <td>'.$row["deaths"].'</td>
+                        <td><a href="https://steamcommunity.com/profiles/'.$row['steamid64'].'" class="text-white" target="_blank">'.htmlspecialchars(substr($row['name'],0,32)).'</a></td>
+                        <td>'.$row['kills'].'</td>
+                        <td>'.$row['assists'].'</td>
+                        <td>'.$row['deaths'].'</td>
                         <td>'.$kdr.'</td>
-                        <td>'.$row["mvps"].'</td>
-                        <td>'.$row["score"].'</td>
-                        <td>'.$row["ping"].'</td>
+                        <td>'.$row['mvps'].'</td>
+                        <td>'.$row['score'].'</td>
+                        <td>'.$row['ping'].'</td>
                     </tr>';
                 }
             }
