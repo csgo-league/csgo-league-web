@@ -37,7 +37,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
         $result = $conn->query($sql);
     
         if ($result->num_rows > 0) {
-            $ct = $t = null;
+            $ct = $t = '';
             while ($row = $result->fetch_assoc()) {
                 if ($row['kills'] > 0 && $row['deaths'] > 0) {
                     $kdr = round(($row['kills'] / $row['deaths']), 2);
@@ -47,11 +47,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 
                 if ($row['team'] == 2) {
                     $t_score = $row['team_3'];
-                    $t_name = $row['teamname_1'];
-
-                    if ($t_name == null) {
-                        $t_name = 'Terrorists';
-                    }
+                    $t_name = $row['teamname_1'] ?: 'Terrorists';
 
                     $t .= '
                     <tr>
@@ -66,11 +62,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
                     </tr>';
                 } elseif ($row['team'] == 3) {
                     $ct_score = $row['team_2'];
-                    $ct_name = $row['teamname_2'];
-
-                    if ($ct_name == null) {
-                        $ct_name = 'Counter-Terrorists';
-                    }
+                    $ct_name = $row['teamname_2'] ?: 'Counter-Terrorists';
 
                     $ct .= '
                     <tr>
