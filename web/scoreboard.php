@@ -8,6 +8,8 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?= $page_title; ?></title>
@@ -21,7 +23,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 </head>
 
 <body>
-    <div class="container" style="margin-top:20px;">
+    <div class="container" style="margin-top: 20px;">
 <?php
         require ('head.php');
 
