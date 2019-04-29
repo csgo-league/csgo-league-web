@@ -62,8 +62,9 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 
             $map_img = array_search($row['map'], $maps);
 
-            $date = date("d/m/Y H:ia", strtotime($row['timestamp'] . ' PST'));
-            echo '<script>console.log("'. date("d/m/Y H:ia O", strtotime($row['timestamp'] . ' PST')) .'")</script>';
+            date_default_timezone_set('Europe/London');
+            $date = date('d/m/Y H:ia', strtotime($row['timestamp'] . ' PST'));
+
             echo '        
             <a href="scoreboard.php?id='.$row['match_id'].'">
                 <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
