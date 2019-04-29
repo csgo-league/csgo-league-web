@@ -63,7 +63,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
             $map_img = array_search($row['map'], $maps);
 
             date_default_timezone_set('Europe/London');
-            $date = date('d/m/Y H:ia', strtotime($row['timestamp'] . ' PST'));
+            $date = date('d/m/Y H:ia', $row['timestamp']);
 
             echo '        
             <a href="scoreboard.php?id='.$row['match_id'].'">
