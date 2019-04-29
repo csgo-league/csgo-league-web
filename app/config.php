@@ -3,7 +3,7 @@
 $site_name = "RedlineCS"; // Name of Site
 $page_title = "RedlineCS | Matches"; // Page title in browser.
 $logo = "assets/img/White.png";
-$limit = 3; // Page Limit for match cards.
+$limit = 10; // Page Limit for match cards.
 
 $servername = "denial.network"; // Server IP
 $username = "denialnetwork"; // DB Username
