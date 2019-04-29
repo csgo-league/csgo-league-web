@@ -37,6 +37,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
         $result = $conn->query($sql);
     
         if ($result->num_rows > 0) {
+            $ct = $t = null;
             while ($row = $result->fetch_assoc()) {
                 if ($row['kills'] > 0 && $row['deaths'] > 0) {
                     $kdr = round(($row['kills'] / $row['deaths']), 2);
@@ -86,11 +87,11 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
             }
 
             if (!isset($ct)) {
-                $ct = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
+                $ct = '<h3 style="margin-top:20px; text-align:center;">No Players Recorded!</h3>';
             }
 
             if (!isset($t)) {
-                $t = '<h3 style="margin-top:20px;text-align:center;">No Players Recorded!</h3>';
+                $t = '<h3 style="margin-top:20px; text-align:center;">No Players Recorded!</h3>';
             }
 
             echo '
