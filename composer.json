@@ -1,18 +1,20 @@
 {
-    "name": "b3none/redlinecs-league",
-    "type": "project",
-    "authors": [
-        {
-            "name": "B3none",
-            "email": "ablackham2000@gmail.com"
-        }
-    ],
-    "require": {
-
-    },
-    "autoload": {
-        "psr-4": {
-            "Redline\\League\\": "src/"
-        }
+  "name": "b3none/redlinecs-league",
+  "type": "project",
+  "authors": [
+    {
+      "name": "B3none",
+      "email": "ablackham2000@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Redline\\League\\": "src/"
+    }
+  },
+  "require": {
+    "pecee/simple-router": "4.2.0.6",
+    "ext-PDO": "*",
+    "ext-json": "*"
+  }
 }
