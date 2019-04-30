@@ -16,8 +16,8 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/search-with-icon.css?h=407fbd3e4331a9634a54008fed5b49b9">
-    <link rel="stylesheet" href="assets/css/styles.css?h=a95bd1c65d4dfacc3eae1239db3fae0b">
+    <link rel="stylesheet" href="assets/css/search-with-icon.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
         <?php require('head.php'); ?>
 
         <form method="post">
-            <div class="search-container center" style="width:70%;">
+            <div class="search-container center" style="width: 70%;">
                 <input type="text" name="search-bar" placeholder="Search Match ID, Player Name or SteamID64" class="search-input">
                 <button class="btn btn-light search-btn" type="submit" name="Submit"> <i class="fa fa-search"></i></button>
             </div>
@@ -63,18 +63,15 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 
             $map_img = array_search($row['map'], $maps);
 
-            date_default_timezone_set('Europe/London');
-            $date = date('d/m/Y H:ia', $row['timestamp']);
-
             echo '
-            <div style="margin-bottom: 35px">        
+            <div class="match d-none" style="margin-bottom: 35px">        
                 <a href="scoreboard.php?id='.$row['match_id'].'">
                     <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
                         <div class="row card-img-overlay">
                             <h4 class="text-white col-4" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4>
-                            <h4 class="text-white col-4" style="text-align: center; font-size:30px;margin-top:15px;">'.$date.'</h4>
+                            <h4 class="text-white col-4 timestamp" style="text-align: center; font-size:30px;margin-top:15px;">'.$row['timestamp'].'</h4>
                             <div class="col-4">
-                                <img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+                                <img class="float-right" src="assets/img/icons/'.$image.'" style="width:110px;">
                             </div>
                         </div>
                     </div>
@@ -158,7 +155,8 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bs-animation.js?h=98fdbbd86223499341d76166d015c405"></script>
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
