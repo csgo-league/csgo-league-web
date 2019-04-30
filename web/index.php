@@ -30,6 +30,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
                 <button class="btn btn-light search-btn" type="submit" name="Submit"> <i class="fa fa-search"></i></button>
             </div>
         </form>
+
 <?php
     if (isset($_POST['Submit']) && !empty($_POST['search-bar'])) {
         $search = $conn->real_escape_string($_POST['search-bar']);
@@ -65,18 +66,20 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
             date_default_timezone_set('Europe/London');
             $date = date('d/m/Y H:ia', $row['timestamp']);
 
-            echo '        
-            <a href="scoreboard.php?id='.$row['match_id'].'">
-                <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
-                    <div class="row card-img-overlay">
-                        <h4 class="text-white col-4" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4>
-                        <h4 class="text-white col-4" style="text-align: center; font-size:30px;margin-top:15px;">'.$date.'</h4>
-                        <div class="col-4">
-                            <img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+            echo '
+            <div style="margin-bottom: 35px">        
+                <a href="scoreboard.php?id='.$row['match_id'].'">
+                    <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;"><img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;'.$map_img.'&quot;);height:150px;">
+                        <div class="row card-img-overlay">
+                            <h4 class="text-white col-4" style="font-size:70px;margin-top:15px;">'.$row['team_2'].':'.$row['team_3'].'</h4>
+                            <h4 class="text-white col-4" style="text-align: center; font-size:30px;margin-top:15px;">'.$date.'</h4>
+                            <div class="col-4">
+                                <img class="float-right" src="assets/img/icons/'.$image.'?h=4347d1d6c5595286f4b1acacc902fedd" style="width:110px;">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>';
+                </a>
+            </div>';
         }
     } else {
         echo '<h1 style="margin-top:20px;text-align:center;">No Results!</h1>';
