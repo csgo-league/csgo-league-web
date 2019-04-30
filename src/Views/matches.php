@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . '/../app/config.php');
+require(__DIR__ . '/../../app/config.php');
 
 $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 ?>
@@ -22,7 +22,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 
 <body>
     <div class="container" style="margin-top:20px;">
-        <?php require('head.php'); ?>
+        <?php require(__DIR__ . '/Partials/head.php'); ?>
 
         <form method="post">
             <div class="search-container center" style="width: 70%;">
