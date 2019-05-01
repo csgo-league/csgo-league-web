@@ -1,0 +1,21 @@
+{
+  "name": "redlinecs-league",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b3none/redlinecs-league.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/b3none/redlinecs-league/issues"
+  },
+  "homepage": "https://github.com/b3none/redlinecs-league#readme"
+}
