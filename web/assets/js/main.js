@@ -52,10 +52,20 @@ $(document).ready(function() {
       } else {
         $('.im-sheep').removeClass('d-none');
       }
+
+      if (isMobile) {
+        $('html, body').on('touchstart touchmove', function(e) {
+          e.preventDefault();
+        });
+      }
     } else {
       $notWideEnough.addClass('d-none');
       $body.css({ overflow: "" });
       $rotate.addClass('d-none');
+
+      if (isMobile) {
+        $('html, body').on('touchstart touchmove', function(){});
+      }
     }
   }
   // Execute on load
