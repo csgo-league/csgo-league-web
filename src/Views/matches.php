@@ -17,11 +17,48 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/search-with-icon.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css?v=1">
 </head>
 
 <body>
-    <div class="container" style="margin-top:20px;">
+    <div id="not-wide-enough" class="error-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="error-text">
+                        <div class="im-sheep">
+                            <div class="top">
+                                <div class="body"></div>
+                                <div class="head">
+                                    <div class="im-eye one"></div>
+                                    <div class="im-eye two"></div>
+                                    <div class="im-ear one"></div>
+                                    <div class="im-ear two"></div>
+                                </div>
+                            </div>
+                            <div class="im-legs">
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                            </div>
+                        </div>
+                        <div id="is-mobile" class="d-none">
+                            <h4>Oh no!</h4>
+                            <p>We're desktop only at the moment, sorry for the inconvenience.</p>
+                            <p id="#rotate" class="d-none">Psst! Try turning your device to the side.</p>
+                        </div>
+                        <div id="is-desktop" class="d-none">
+                            <h4>Oh no!</h4>
+                            <p>Please make the window wider.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="matches container" style="margin-top: 20px;">
         <?php require(__DIR__ . '/Partials/head.php'); ?>
 
         <form method="post">
@@ -156,7 +193,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v=7"></script>
 </body>
 
 </html>
