@@ -21,7 +21,44 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 </head>
 
 <body>
-    <div class="container" style="margin-top:20px;">
+    <div id="not-wide-enough" class="error-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="error-text">
+                        <div class="im-sheep">
+                            <div class="top">
+                                <div class="body"></div>
+                                <div class="head">
+                                    <div class="im-eye one"></div>
+                                    <div class="im-eye two"></div>
+                                    <div class="im-ear one"></div>
+                                    <div class="im-ear two"></div>
+                                </div>
+                            </div>
+                            <div class="im-legs">
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                                <div class="im-leg"></div>
+                            </div>
+                        </div>
+                        <div id="is-mobile" class="d-none">
+                            <h4>Oh no!</h4>
+                            <p>We're desktop only at the moment, sorry for the inconvenience.</p>
+                            <p id="#rotate" class="d-none">Psst! Try turning your device to the side.</p>
+                        </div>
+                        <div id="is-desktop" class="d-none">
+                            <h4>Oh no!</h4>
+                            <p>Please make the window wider.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 20px;">
         <?php require('head.php'); ?>
 
         <form method="post">
