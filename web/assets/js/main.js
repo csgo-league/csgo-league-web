@@ -46,6 +46,12 @@ $(document).ready(function() {
       if (height > supportedWidth) {
         $rotate.removeClass('d-none');
       }
+
+      if (width < 168) {
+        $('.im-sheep').addClass('d-none');
+      } else {
+        $('.im-sheep').removeClass('d-none');
+      }
     } else {
       $notWideEnough.addClass('d-none');
       $body.css({ overflow: "" });
