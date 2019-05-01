@@ -1,8 +1,3 @@
-<?php
-require(__DIR__ . '/../../app/config.php');
-
-$match_id = isset($_GET['id']) ? $_GET['id'] : 0;
-?>
 <!DOCTYPE html>
 <html>
 
@@ -10,14 +5,9 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= $page_title; ?></title>
+    <title><?= env('PAGE_TITLE') ?></title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.1.2/darkly/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/search-with-icon.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <?php require('Partials/styles.php'); ?>
 </head>
 
 <body>
@@ -25,12 +15,12 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 <?php
         require(__DIR__ . '/Partials/head.php');
 
-        $match_id = $conn->real_escape_string($match_id);
+        $matchId = $conn->real_escape_string($matchId);
 
         $sql = "SELECT sql_matches_scoretotal.*, sql_matches.*
                 FROM sql_matches_scoretotal INNER JOIN sql_matches
                 ON sql_matches_scoretotal.match_id = sql_matches.match_id
-                WHERE sql_matches_scoretotal.match_id = '".$match_id."' ORDER BY sql_matches.score DESC";
+                WHERE sql_matches_scoretotal.match_id = '".$matchId."' ORDER BY sql_matches.score DESC";
     
         $result = $conn->query($sql);
     
@@ -165,10 +155,9 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
     } else {
         echo '<h4 style="margin-top:40px;text-align:center;">No Match with that ID!</h4>';
     }
+
+    require('Partials/scripts.php');
 ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bs-animation.js"></script>
 </body>
 
 </html>

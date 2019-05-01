@@ -1,7 +1,5 @@
-<?php require(__DIR__ . '/../../../app/config.php'); ?>
-
-<a class="text-white" href="https://redlinecs.net">
+<a class="text-white" href="<?= env('WEBSITE') ?>">
     <h1 class="text-center">
-        <?= $site_name ?>
+        <?= env('PAGE_TITLE') ?>
     </h1>
 </a>
