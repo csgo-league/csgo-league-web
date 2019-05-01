@@ -1,7 +1,7 @@
 function formatAMPM(date) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
-  return hours + ':' + minutes + hours >= 12 ? 'pm' : 'am';
+  return hours + ':' + minutes + (hours >= 12 ? 'pm' : 'am');
 }
 
 $(document).ready(function() {
