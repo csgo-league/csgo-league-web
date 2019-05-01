@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9d8e6487c0395d5ac6e80c077093340",
+    "content-hash": "d2e3456a6764124b006cdc66383add05",
     "packages": [
         {
             "name": "jeremeamia/SuperClosure",
@@ -362,6 +362,35 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "smith197/steamauthentication",
+            "version": "v4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SmItH197/SteamAuthentication.git",
+                "reference": "a11628cf03a9ba73995d0b8299dd18c36ef8389a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SmItH197/SteamAuthentication/zipball/a11628cf03a9ba73995d0b8299dd18c36ef8389a",
+                "reference": "a11628cf03a9ba73995d0b8299dd18c36ef8389a",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SteamAuthentication is a basic set of PHP files that enable users to login using their steam account to view protected content on your website. it creates a session using their steamid as the sessionID and checks for the session when a user visits the page. It also includes a file which allows you to use their profile information such as their avatar and online status.",
+            "homepage": "https://github.com/SmItH197/SteamAuthentication",
+            "keywords": [
+                "steam",
+                "steam api",
+                "steam authentication",
+                "steam sdk"
+            ],
+            "time": "2018-04-06T09:57:30+00:00"
         },
         {
             "name": "symfony/polyfill-php56",

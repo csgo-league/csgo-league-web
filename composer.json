@@ -15,6 +15,7 @@
   "require": {
     "pecee/simple-router": "4.2.0.6",
     "ext-PDO": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "smith197/steamauthentication": "^4.0"
   }
 }
