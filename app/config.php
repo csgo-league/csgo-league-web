@@ -1,7 +1,7 @@
 <?php
 
-$site_name = 'RedlineCS'; // Name of Site
-$page_title = 'RedlineCS | Matches'; // Page title in browser.
+$site_name = 'Redline'; // Name of Site
+$page_title = 'Redline | Matches'; // Page title in browser.
 $logo = 'assets/img/White.png';
 $limit = 10; // Page Limit for match cards.
 

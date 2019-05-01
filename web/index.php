@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if (file_exists(__DIR__ . '/../env.php')) {
     include __DIR__ . '/../env.php';
@@ -12,6 +11,7 @@ if (!function_exists('env')) {
         if ($value === false) {
             return $default;
         }
+
         return $value;
     }
 }
