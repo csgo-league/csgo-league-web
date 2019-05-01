@@ -168,7 +168,7 @@ $match_id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bs-animation.js?h=98fdbbd86223499341d76166d015c405"></script>
+    <script src="assets/js/bs-animation.js"></script>
 </body>
 
 </html>
