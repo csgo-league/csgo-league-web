@@ -35,6 +35,7 @@ $(document).ready(function() {
   function checkWidth() {
     var supportedWidth = 992;
     var $rotate = $('#rotate');
+    var $matches = $('.matches');
     var width = $window.width();
     var height = $window.height();
     $('#is-' + (isMobile ? 'mobile' : 'desktop')).removeClass('d-none');
@@ -42,6 +43,7 @@ $(document).ready(function() {
     if (width < supportedWidth) {
       $notWideEnough.removeClass('d-none');
       $body.css({ overflow: "hidden" });
+      $matches.addClass('d-none');
 
       if (height > supportedWidth) {
         $rotate.removeClass('d-none');
@@ -62,6 +64,7 @@ $(document).ready(function() {
       $notWideEnough.addClass('d-none');
       $body.css({ overflow: "" });
       $rotate.addClass('d-none');
+      $matches.removeClass('d-none');
 
       if (isMobile) {
         $('html, body').on('touchstart touchmove', function(){});
