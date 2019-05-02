@@ -2,6 +2,7 @@
 
 namespace Redline\League\Helpers;
 
+use Redline\League\Handlers\PDOHandler;
 
 class BaseHelper
 {
@@ -11,9 +12,9 @@ class BaseHelper
     protected $twig;
 
     /**
-     * @var \PDO
+     * @var PDOHandler
      */
-    protected $PDO;
+    protected $db;
 
     public function __construct()
     {
@@ -24,7 +25,8 @@ class BaseHelper
         ]);
 
         try {
-            $this->PDO = new \PDO("mysql:host=" . env('DB_HOST') . ";dbname=" . env('DB_NAME'), env('DB_USERNAME'), env('DB_PASSWORD'));
+            $pdo = new \PDO("mysql:host=" . env('DB_HOST') . ";dbname=" . env('DB_NAME'), env('DB_USERNAME'), env('DB_PASSWORD'));
+            $this->db = new PDOHandler($pdo);
         } catch (\Exception $e) {
             die('There was an errors connecting to the database.');
         }
