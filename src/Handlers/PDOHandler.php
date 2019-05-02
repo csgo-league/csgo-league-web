@@ -2,6 +2,7 @@
 
 namespace Redline\League\Handlers;
 
+use PDO;
 use PDOStatement;
 
 class PDOHandler
@@ -53,6 +54,7 @@ class PDOHandler
      * @param $sql
      * @param array $params
      * @return array
+     * @throws \Exception
      */
     public function query($sql, $params = [])
     {
@@ -154,6 +156,7 @@ class PDOHandler
      * @param string $table
      * @param array $where
      * @return int
+     * @throws \Exception
      */
     public function delete($table, $where = [])
     {

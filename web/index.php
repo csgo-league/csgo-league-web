@@ -20,6 +20,10 @@ require(__DIR__ . "/../vendor/autoload.php");
 require(__DIR__ . "/../vendor/pecee/simple-router/helpers.php");
 require(__DIR__ . "/../app/Router.php");
 
+$a = new \Redline\League\Helpers\MatchesHelper();
+echo json_encode($a->getMatches());
+die;
+
 /**
  * Register routes
  */
