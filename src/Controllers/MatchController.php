@@ -2,9 +2,7 @@
 
 namespace Redline\League\Controllers;
 
-use Redline\League\Helpers\BaseHelper;
-
-class MatchController extends BaseHelper
+class MatchController extends BaseController
 {
     protected $table = '';
 

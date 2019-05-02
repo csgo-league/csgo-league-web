@@ -2,7 +2,7 @@
 
 namespace Redline\League\Controllers;
 
-class MatchesController
+class MatchesController extends BaseController
 {
     public function getIndex(string $page)
     {

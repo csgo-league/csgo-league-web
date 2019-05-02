@@ -2,7 +2,7 @@
 
 namespace Redline\League\Controllers;
 
-class ProfileController
+class ProfileController extends BaseController
 {
     public function getProfile(string $steamId)
     {
