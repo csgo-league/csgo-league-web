@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title><?= env('PAGE_TITLE') ?></title>
-
-    <?php require('Partials/styles.php'); ?>
-</head>
-
-<body>
-    <div class="container" style="margin-top: 20px;">
+<div class="container" style="margin-top: 20px;">
 <?php
-        require(__DIR__ . '/Partials/head.php');
+        require(__DIR__ . '/Partials/head.twig');
 
         $matchId = $conn->real_escape_string($matchId);
 
@@ -156,8 +143,5 @@
         echo '<h4 style="margin-top:40px;text-align:center;">No Match with that ID!</h4>';
     }
 
-    require('Partials/scripts.php');
+    require('Partials/scripts.twig');
 ?>
-</body>
-
-</html>

@@ -12,7 +12,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 
     <title><?= $page_title; ?></title>
 
-    <?php require('Partials/styles.php'); ?>
+    <?php require('Partials/styles.twig'); ?>
 </head>
 
 <body>
@@ -54,7 +54,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
     </div>
 
     <div class="matches container" style="margin-top: 20px;">
-        <?php require(__DIR__ . '/Partials/head.php'); ?>
+        <?php require(__DIR__ . '/Partials/head.twig'); ?>
 
         <form method="post">
             <div class="search-container center" style="width: 70%;">
@@ -185,7 +185,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
         }
     }
 
-    require('Partials/scripts.php');
+    require('Partials/scripts.twig');
 ?>
 </body>
 
