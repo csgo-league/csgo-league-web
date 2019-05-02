@@ -8,4 +8,9 @@ class MatchesController extends BaseController
     {
 
     }
+
+    public function postIndex(string $search)
+    {
+
+    }
 }
