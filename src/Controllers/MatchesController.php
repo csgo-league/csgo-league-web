@@ -26,15 +26,16 @@ class MatchesController extends BaseController
 
     /**
      * @param null|string $page
+     * @return string
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function getIndex(?string $page = null)
+    public function getIndex(?string $page = null): string
     {
         $matches = $this->matchesHelper->getMatches($page);
 
-        $this->twig->render('matches.twig', [
+        return $this->twig->render('matches.twig', [
             'matches' => $matches
         ]);
     }
