@@ -11,7 +11,7 @@ class MatchesHelper extends BaseHelper
         try {
             $query = $this->db->query("SELECT * FROM {$this->table}");
         } catch (\Exception $e) {
-
+            die;
         }
 
         return $query;
