@@ -15,7 +15,7 @@ class PDOHandler
     /**
      * @var null|PDO
      */
-    public $dbh = null;
+    public $pdo = null;
 
     /**
      * PDOHandler constructor.
@@ -23,7 +23,7 @@ class PDOHandler
      */
     public function __construct(\PDO $pdo)
     {
-        $this->dbh = $pdo;
+        $this->pdo = $pdo;
     }
 
     /**
@@ -31,7 +31,7 @@ class PDOHandler
      */
     public function beginTransaction()
     {
-        $this->dbh->beginTransaction();
+        $this->pdo->beginTransaction();
     }
 
     /**
@@ -39,7 +39,7 @@ class PDOHandler
      */
     public function commitTransaction()
     {
-        $this->dbh->dbh();
+        $this->pdo->dbh();
     }
 
     /**
@@ -47,7 +47,7 @@ class PDOHandler
      */
     public function rollbackTransaction()
     {
-        $this->dbh->rollBack();
+        $this->pdo->rollBack();
     }
 
     /**
@@ -75,7 +75,7 @@ class PDOHandler
      */
     public function yieldQuery($sql, $params = [])
     {
-        $this->stmt = $this->dbh->prepare($sql);
+        $this->stmt = $this->pdo->prepare($sql);
 
         if (!$this->stmt->execute($params)) {
             $error = $this->stmt->errorInfo();
@@ -98,7 +98,7 @@ class PDOHandler
 
         $sql = "INSERT INTO {$table} (" . implode(",", $keys) . ") VALUES (" . implode(",", $bound) . ")";
 
-        $stmt = $this->dbh->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
         // You can't feed booleans into PDO, it wants ints, so if we're fed bools, give it an int
         foreach ($params as $key => &$value) {
@@ -117,7 +117,7 @@ class PDOHandler
 
     public function lastInsertId()
     {
-        return $this->dbh->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
     public function update($table, $data, $where = [])
@@ -143,7 +143,7 @@ class PDOHandler
             $sql .= " AND {$key}=?";
         }
 
-        $stmt = $this->dbh->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         if (!$stmt->execute($values)) {
             $error = $stmt->errorInfo();
             throw new \Exception('[' . $error[0] . '][' . $error[1] . '] ' . $error[2]);

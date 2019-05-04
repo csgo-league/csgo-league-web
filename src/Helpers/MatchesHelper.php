@@ -8,6 +8,8 @@ class MatchesHelper extends BaseHelper
 
     public function getMatches(int $page = 1): array
     {
+        print_r($this->db);
+
         try {
             $query = $this->db->query("SELECT * FROM {$this->table}");
         } catch (\Exception $e) {
