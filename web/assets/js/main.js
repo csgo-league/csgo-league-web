@@ -18,7 +18,11 @@ $(document).ready(function() {
     var matchDate = $(el.find('.timestamp')[0]);
     var timestamp = parseInt(matchDate.prop('innerHTML'));
     var date = new Date(timestamp * 1000);
-    matchDate.prop('innerHTML', date.toLocaleDateString() + ' ' + date.getHours() + ':' + date.getMinutes());
+    var hours = date.getHours();
+    hours = ('0' + hours).slice(-2);
+    var minutes = date.getMinutes();
+    minutes = ('0' + minutes).slice(-2);
+    matchDate.prop('innerHTML', date.toLocaleDateString() + ' ' + hours + ':' + minutes);
     el.removeClass('d-none');
   });
 
