@@ -7,10 +7,10 @@ class MatchesHelper extends BaseHelper
     const TABLE = 'sql_matches_scoretotal';
 
     /**
-     * @param int|null $page
+     * @param int $page
      * @return array
      */
-    public function getMatches(?int $page = 1): array
+    public function getMatches(int $page = 1): array
     {
         try {
             $limit = env('LIMIT');

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="matches container" style="margin-top: 20px;">
-        {% include('/Partials/head.twig') %}
+        {% include('Partials/head.twig') %}
 
         <form method="post">
             <div class="search-container center" style="width: 70%;">
@@ -14,6 +14,5 @@
         {% for match in matches %}
             {% include 'Partials/match-bar.twig' with match %}
         {% endfor %}
-
     </div>
 {% endblock content %}

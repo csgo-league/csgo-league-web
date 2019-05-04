@@ -33,7 +33,7 @@ class MatchesController extends BaseController
      */
     public function getIndex(?string $page = null): string
     {
-        $matches = $this->matchesHelper->getMatches($page);
+        $matches = $this->matchesHelper->getMatches($page ?? 1);
 
         return $this->twig->render('matches.twig', [
             'matches' => $matches
