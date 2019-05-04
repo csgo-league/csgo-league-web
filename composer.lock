@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2b6262637a9f7459e1ccce06c7967fd",
+    "content-hash": "9c11f02fb0f8238e03fcba52bf7bb68f",
     "packages": [
+        {
+            "name": "catfan/medoo",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/catfan/Medoo.git",
+                "reference": "53a02b300d673f716cb06bf0e24fd774ec53939f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/catfan/Medoo/zipball/53a02b300d673f716cb06bf0e24fd774ec53939f",
+                "reference": "53a02b300d673f716cb06bf0e24fd774ec53939f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=5.4"
+            },
+            "suggest": {
+                "ext-pdo_dblib": "For MSSQL or Sybase database on Linux/UNIX platform",
+                "ext-pdo_mysql": "For MySQL or MariaDB database",
+                "ext-pdo_oci": "For Oracle database",
+                "ext-pdo_oci8": "For Oracle version 8 database",
+                "ext-pdo_pqsql": "For PostgreSQL database",
+                "ext-pdo_sqlite": "For SQLite database",
+                "ext-pdo_sqlsrv": "For MSSQL database"
+            },
+            "type": "framework",
+            "autoload": {
+                "psr-4": {
+                    "Medoo\\": "/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Angel Lai",
+                    "email": "angel@catfan.me"
+                }
+            ],
+            "description": "The lightest PHP database framework to accelerate development",
+            "homepage": "https://medoo.in",
+            "keywords": [
+                "database",
+                "lightweight",
+                "mariadb",
+                "mssql",
+                "mysql",
+                "oracle",
+                "php framework",
+                "postgresql",
+                "sql",
+                "sqlite"
+            ],
+            "time": "2018-12-08T20:24:23+00:00"
+        },
         {
             "name": "jeremeamia/SuperClosure",
             "version": "2.4.0",
@@ -114,6 +173,50 @@
                 "php"
             ],
             "time": "2019-02-16T20:54:15+00:00"
+        },
+        {
+            "name": "paragonie/easydb",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/easydb.git",
+                "reference": "a05c4f70e2837d73b9895932b6201c059d688818"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/easydb/zipball/a05c4f70e2837d73b9895932b6201c059d688818",
+                "reference": "a05c4f70e2837d73b9895932b6201c059d688818",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParagonIE\\EasyDB\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Scott Arciszewski",
+                    "email": "scott@paragonie.com",
+                    "homepage": "https://paragonie.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy-to-use database abstraction",
+            "keywords": [
+                "database",
+                "pdo",
+                "security",
+                "sql"
+            ],
+            "time": "2016-10-19T03:06:26+00:00"
         },
         {
             "name": "pecee/simple-router",

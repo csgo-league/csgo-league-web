@@ -17,6 +17,7 @@
     "ext-PDO": "*",
     "ext-json": "*",
     "smith197/steamauthentication": "^4.0",
-    "twig/twig": "^2.9"
+    "twig/twig": "^2.9",
+    "catfan/medoo": "^1.6"
   }
 }

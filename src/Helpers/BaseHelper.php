@@ -2,6 +2,7 @@
 
 namespace Redline\League\Helpers;
 
+use Medoo\Medoo;
 use Redline\League\Handlers\PDOHandler;
 
 class BaseHelper
@@ -25,8 +26,13 @@ class BaseHelper
         ]);
 
         try {
-            $pdo = new \PDO("mysql:host=" . env('DB_HOST') . ";dbname=" . env('DB_NAME'), env('DB_USERNAME'), env('DB_PASSWORD'));
-            $this->db = new PDOHandler($pdo);
+            $this->db = new Medoo([
+                'database_type' => 'mysql',
+                'database_name' => env('DB_NAME'),
+                'server' => env('DB_HOST'),
+                'username' => env('DB_USERNAME'),
+                'password' => env('DB_PASSWORD')
+            ]);
         } catch (\Exception $e) {
             die('There was an error connecting to the database.');
         }
