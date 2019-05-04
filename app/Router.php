@@ -39,12 +39,13 @@ class Router
     {
         // Redirect to the leaderboard homepage.
         $homeRedirects = [
+            '/',
             '/match',
             '/profile'
         ];
         foreach ($homeRedirects as $homeRedirect) {
             SimpleRouter::get($homeRedirect, function () {
-                response()->redirect('/');
+                response()->redirect('/matches');
             });
         }
 
@@ -57,7 +58,7 @@ class Router
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {
-            response()->redirect('https://redlinecs.net');
+//            response()->redirect('https://redlinecs.net');
         });
     }
 }

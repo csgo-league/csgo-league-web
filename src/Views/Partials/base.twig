@@ -14,14 +14,14 @@
         {% endblock %}
     </title>
 
-    {% include 'styles.twig' %}
+    {% include 'Partials/styles.twig' %}
 </head>
 
 <body>
-    {% include 'min-width.twig' %}
+    {% include 'Partials/min-width.twig' %}
 
     {% block content %}{% endblock %}
 
-    {% include 'scripts.twig' %}
+    {% include 'Partials/scripts.twig' %}
 </body>
 </html>

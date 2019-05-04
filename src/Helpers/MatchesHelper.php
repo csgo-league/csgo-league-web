@@ -4,15 +4,32 @@ namespace Redline\League\Helpers;
 
 class MatchesHelper extends BaseHelper
 {
-    protected $table = 'sql_matches_scoretotal';
+    const TABLE = 'sql_matches_scoretotal';
 
-    public function getMatches(int $page = 1): array
+    /**
+     * @param int|null $page
+     * @return array
+     */
+    public function getMatches(?int $page = 1): array
     {
         try {
-            return $this->db->query("SELECT * FROM {$this->table} LIMIT {$page}")->fetchAll();
+            $limit = env('LIMIT');
+            $offset = ($page - 1) * $limit;
+
+            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY match_id DESC LIMIT :offset, :limit", [
+                ':offset' => $offset,
+                ':limit' => (int)$limit
+            ]);
+
+            return $query->fetchAll();
         } catch (\Exception $e) {
             header("HTTP/1.1 500 Internal Server Error");
-            die(json_encode(['status' => 500]));
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
         }
     }
 }

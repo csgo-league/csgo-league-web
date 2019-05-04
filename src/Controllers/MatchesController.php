@@ -3,8 +3,11 @@
 namespace Redline\League\Controllers;
 
 use Redline\League\Helpers\MatchesHelper;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-class MatchesController
+class MatchesController extends BaseController
 {
     /**
      * @var MatchesHelper
@@ -16,22 +19,24 @@ class MatchesController
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->matchesHelper = new MatchesHelper();
     }
 
     /**
      * @param null|string $page
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getIndex(?string $page = null)
     {
-        if (isset($_GET['page'])) {
-            $page_number = $conn->real_escape_string($_GET['page']);
-            $offset = ($page_number - 1) * $limit;
-            $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$offset}, {$limit}";
-        } else {
-            $page_number = 1;
-            $sql = "SELECT * FROM sql_matches_scoretotal ORDER BY match_id DESC LIMIT {$limit}";
-        }
+        $matches = $this->matchesHelper->getMatches($page);
+
+        $this->twig->render('matches.twig', [
+            'matches' => $matches
+        ]);
     }
 
     public function postIndex(string $search)
