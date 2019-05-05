@@ -1,0 +1,15 @@
+<div style="margin-top:45px;">
+    <div class="container">
+        <a class="text-white" href="/matches">
+            <h1>Latest matches</h1>
+        </a>
+
+        <div id="matches" class="row" style="margin-top:-25px;">
+            <div class="col-md-12">
+                {% for match in latest %}
+                    {% include 'partials/match-bar.twig' with match %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

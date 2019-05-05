@@ -1,0 +1,105 @@
+{% extends 'partials/base.twig' %}
+
+{% block content %}
+<div class="container" style="margin-top: 20px;">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-12">
+            <div class="card rounded-borders" style="border: none !important;">
+                <div class="card-body" style="padding: 0;">
+                    <div class="table-responsive" style="border: none !important;">
+                        <table class="table">
+                            <thead class="table-borderless" style="border: none !important;">
+                                <tr>
+                                    <th colspan="8" style="
+                                        font-size: 30px;
+                                        text-align: center;
+                                        background-color: #5b768d;
+                                        height:25px;">
+                                        {{ ct.name }}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="width:200px;">Player</th>
+                                    <th>Kills</th>
+                                    <th>Assists</th>
+                                    <th>Deaths</th>
+                                    <th>KDR</th>
+                                    <th>MVPs</th>
+                                    <th>Score</th>
+                                    <th>Ping</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in ct.players %}
+                                    <tr>
+                                        <td><a href="/profile/{{ player.steamid64 }}" class="text-white" target="_blank">{{ player.name }}</a></td>
+                                        <td>{{ player.kills }}</td>
+                                        <td>{{ player.assists }}</td>
+                                        <td>{{ player.deaths }}</td>
+                                        <td>{{ player.kdr }}</td>
+                                        <td>{{ player.mvps }}</td>
+                                        <td>{{ player.score }}</td>
+                                        <td>{{ player.ping }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center" style="margin-top:10px;margin-bottom:10px;"><span style="color:#5b768d;">{{ ct.score }}</span> : <span style="color:#ac9b66;">{{ t.score }}</span></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card rounded-borders" style="border: none !important;">
+                <div class="card-body" style="padding: 0;">
+                    <div class="table-responsive" style="border-top:none !important;">
+                        <table class="table">
+                            <thead class="table-borderless" style="border: none !important;">
+                                <tr>
+                                    <th colspan="8" style="
+                                        font-size: 30px;
+                                        text-align: center;
+                                        background-color: #ac9b66;
+                                        height:25px;">
+                                        {{ t.name }}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="width:200px;">Player</th>
+                                    <th>Kills</th>
+                                    <th>Assists</th>
+                                    <th>Deaths</th>
+                                    <th>KDR</th>
+                                    <th>MVPs</th>
+                                    <th>Score</th>
+                                    <th>Ping</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in t.players %}
+                                    <tr>
+                                        <td><a href="/profile/{{ player.steamid64 }}" class="text-white" target="_blank">{{ player.name }}</a></td>
+                                        <td>{{ player.kills }}</td>
+                                        <td>{{ player.assists }}</td>
+                                        <td>{{ player.deaths }}</td>
+                                        <td>{{ player.kdr }}</td>
+                                        <td>{{ player.mvps }}</td>
+                                        <td>{{ player.score }}</td>
+                                        <td>{{ player.ping }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
