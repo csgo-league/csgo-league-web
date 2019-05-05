@@ -62,7 +62,7 @@
                                         text-align: center;
                                         background-color: #5b768d;
                                         height:25px;">
-                                        ' .$ct_name.'
+                                        {{ ct.name }}
                                     </th>
                                 </tr>
                                 <tr>
@@ -103,7 +103,7 @@
                                         text-align: center;
                                         background-color: #ac9b66;
                                         height:25px;">
-                                        ' .$t_name.'
+                                        {{ t.name }}
                                     </th>
                                 </tr>
                                 <tr>
