@@ -42,7 +42,8 @@ class Router
         $homeRedirects = [
             '/',
             '/match',
-            '/profile'
+            '/profile',
+            '/login'
         ];
         foreach ($homeRedirects as $homeRedirect) {
             SimpleRouter::get($homeRedirect, function () {
