@@ -21,7 +21,9 @@ class MatchHelper extends BaseHelper
                 ':matchId' => $matchId,
             ]);
 
-            return $query->fetchAll();
+            $matchPlayers = $query->fetchAll();
+
+            return $this->formatMatchPlayers($matchPlayers);
         } catch (\Exception $e) {
             header("HTTP/1.1 500 Internal Server Error");
 
@@ -42,25 +44,31 @@ class MatchHelper extends BaseHelper
         $formattedPlayers = [
             'ct' => [
                 'players' => [],
-                'name' => '',
-                'score' => ''
+                'name' => 'Counter-Terrorists',
+                'score' => 0
             ],
             't' => [
                 'players' => [],
-                'name' => '',
-                'score' => ''
+                'name' => 'Terrorists',
+                'score' => 0
             ],
         ];
 
         foreach ($players as $player) {
             if ($player['team'] == 2) {
                 $formattedPlayers['ct']['players'][] = $this->formatMatchPlayer($player);
-                $formattedPlayers['ct']['name'] = $player['teamname_2'] ?: 'Counter-Terrorists';
                 $formattedPlayers['ct']['score'] = $player['team_2'];
+
+                if (array_key_exists('teamname_2', $player) && !empty($player['teamname_2'])) {
+                    $formattedPlayers['ct']['name'] = $player['teamname_2'];
+                }
             } else if ($player['team'] == 3) {
                 $formattedPlayers['t']['players'][] = $this->formatMatchPlayer($player);
-                $formattedPlayers['t']['name'] = $player['teamname_3'] ?: 'Terrorists';
                 $formattedPlayers['t']['score'] = $player['team_3'];
+
+                if (array_key_exists('teamname_3', $player) && !empty($player['teamname_3'])) {
+                    $formattedPlayers['t']['name'] = $player['teamname_3'];
+                }
             }
         }
 
