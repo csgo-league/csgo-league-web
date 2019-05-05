@@ -2,3 +2,4 @@
 /app/cache/
 /web/assets/
 /vendor/
+/node_modules/
