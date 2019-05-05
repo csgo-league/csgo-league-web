@@ -39,7 +39,6 @@
                     {% endif %}
 
                     {% for i in max(1, currentPage - 2)..min(currentPage + 4, totalPages) %}
-                    {#for ($i = max(1, $page_number - 2); $i <= min($page_number + 4, $total_pages); $i++) {#}
                         {% if i == currentPage %}
                             <li class="page-item active">
                                 <span class="page-link">

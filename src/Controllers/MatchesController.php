@@ -40,7 +40,7 @@ class MatchesController extends BaseController
         return $this->twig->render('matches.twig', [
             'matches' => $matches,
             'currentPage' => $page,
-            'totalPages' => $totalMatches / env('LIMIT')
+            'totalPages' => ceil($totalMatches / env('LIMIT'))
         ]);
     }
 
