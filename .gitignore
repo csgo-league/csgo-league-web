@@ -1,5 +1,5 @@
 /.idea/
 /app/cache/
-/web/assets/
+/web/build/
 /vendor/
 /node_modules/
