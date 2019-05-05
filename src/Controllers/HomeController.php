@@ -32,6 +32,9 @@ class HomeController extends BaseController
         $matches = $this->matchesHelper->getLatestMatches(3);
 
         return $this->twig->render('home.twig', [
+            'nav' => [
+                'active' => 'home'
+            ],
             'latest' => $matches
         ]);
     }

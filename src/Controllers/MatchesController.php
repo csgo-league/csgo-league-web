@@ -38,6 +38,9 @@ class MatchesController extends BaseController
         $totalMatches = $this->matchesHelper->getMatchesCount();
 
         return $this->twig->render('matches.twig', [
+            'nav' => [
+                'active' => 'matches'
+            ],
             'matches' => $matches,
             'currentPage' => $page,
             'totalPages' => ceil($totalMatches / env('LIMIT'))

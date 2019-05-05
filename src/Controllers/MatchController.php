@@ -32,6 +32,10 @@ class MatchController extends BaseController
     {
         $match = $this->matchHelper->getMatchPlayers($matchId);
 
-        return $this->twig->render('match.twig', $match);
+        return $this->twig->render('match.twig', array_merge($match, [
+            'nav' => [
+                'active' => 'matches'
+            ]
+        ]));
     }
 }
