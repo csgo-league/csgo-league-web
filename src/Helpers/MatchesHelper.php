@@ -97,9 +97,9 @@ class MatchesHelper extends BaseHelper
 
             $response = $query->fetchAll();
 
-            print_r($response);
-            echo $this->db->last();
-            die;
+//            print_r($response);
+//            echo $this->db->last();
+//            die;
 
             foreach ($response as $key => $match) {
                 $response[$key] = $this->formatMatch($match);
