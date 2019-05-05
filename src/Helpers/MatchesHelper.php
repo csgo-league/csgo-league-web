@@ -87,7 +87,7 @@ class MatchesHelper extends BaseHelper
     public function searchMatches(string $search): array
     {
         try {
-            $query = $this->db->query("SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3, sql_matches_scoretotal.timestamp,
+            $query = $this->db->query("SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3, sql_matches_scoretotal.timestamp
               FROM sql_matches_scoretotal INNER JOIN sql_matches
               ON sql_matches_scoretotal.match_id = sql_matches.match_id
               WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.timestamp DESC", [
@@ -96,10 +96,6 @@ class MatchesHelper extends BaseHelper
             ]);
 
             $response = $query->fetchAll();
-
-//            print_r($response);
-//            echo $this->db->last();
-//            die;
 
             foreach ($response as $key => $match) {
                 $response[$key] = $this->formatMatch($match);
