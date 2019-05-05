@@ -18,6 +18,7 @@
     "ext-json": "*",
     "smith197/steamauthentication": "^4.0",
     "twig/twig": "^2.9",
-    "catfan/medoo": "^1.6"
+    "catfan/medoo": "^1.6",
+    "b3none/steam-id-converter": "^1.1"
   }
 }

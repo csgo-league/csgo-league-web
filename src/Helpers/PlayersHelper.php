@@ -3,9 +3,26 @@
 namespace Redline\League\Helpers;
 
 
+use B3none\SteamIDConverter\Client as Converter;
+
 class PlayersHelper extends BaseHelper
 {
     const TABLE = 'sql_matches';
+
+    /**
+     * @var Converter
+     */
+    protected $converter;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->converter = Converter::create();
+
+        // This is a filthy hack to make sure that all of our players have a steam64 id
+        $this->updatePlayers();
+    }
 
     /**
      * @param int $page
@@ -58,6 +75,34 @@ class PlayersHelper extends BaseHelper
             }
 
             return $response;
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
+    }
+
+    public function updatePlayers()
+    {
+        try {
+            $query = $this->db->query("SELECT * FROM rankme WHERE steamid64 IS NULL AND steam IS NOT NULL");
+
+            $response = $query->fetchAll();
+
+            foreach ($response as $player) {
+                $steam = $this->converter->createFromSteamID($player['steam']);
+                $steam64 = $steam->getSteamID64();
+
+                $this->db->update('rankme', [
+                    'steamid64' => $steam64
+                ], [
+                    'steam' => $player['steam']
+                ]);
+            }
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 

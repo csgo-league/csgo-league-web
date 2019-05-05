@@ -8,6 +8,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 use Redline\League\Controllers\HomeController;
 use Redline\League\Controllers\MatchController;
 use Redline\League\Controllers\MatchesController;
+use Redline\League\Controllers\PlayersController;
 use Redline\League\Controllers\ProfileController;
 
 class Router
@@ -57,6 +58,10 @@ class Router
         // Get matches
         SimpleRouter::get('/matches', MatchesController::class . '@getIndex');
         SimpleRouter::get('/matches/{page}', MatchesController::class . '@getIndex');
+
+        // Get players
+        SimpleRouter::get('/players', PlayersController::class . '@getPlayers');
+        SimpleRouter::get('/players/{page}', PlayersController::class . '@getPlayers');
 
         // Search matches
         SimpleRouter::post('/matches', MatchesController::class . '@postIndex');
