@@ -57,19 +57,13 @@ class MatchesHelper extends BaseHelper
      */
     public function searchMatches(string $search): array
     {
-//      SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3
-//      FROM sql_matches_scoretotal INNER JOIN sql_matches
-//      ON sql_matches_scoretotal.match_id = sql_matches.match_id
-//      WHERE sql_matches.name LIKE '%".$search."%' OR sql_matches.steamid64 = '".$search."' OR sql_matches_scoretotal.match_id = '".$search."' ORDER BY sql_matches_scoretotal.match_id DESC
-
         try {
             $query = $this->db->query("SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3
               FROM sql_matches_scoretotal INNER JOIN sql_matches
               ON sql_matches_scoretotal.match_id = sql_matches.match_id
-              WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.match_id DESC LIMIT :limit", [
+              WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.match_id DESC", [
                 ':search' => $search,
                 ':like_search' => '%'.$search.'%',
-                ':limit' => (int)env('LIMIT')
             ]);
 
             $response = $query->fetchAll();

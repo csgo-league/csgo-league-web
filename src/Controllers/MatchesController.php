@@ -54,8 +54,6 @@ class MatchesController extends BaseController
     {
         $search = input()->post('search')->getValue();
 
-        print_r($search);
-
         if (!$search) {
             response()->redirect('/matches');
         }
@@ -64,16 +62,6 @@ class MatchesController extends BaseController
 
         return $this->twig->render('matches.twig', [
             'matches' => $matches,
-//            'currentPage' => $page,
-//            'totalPages' => ceil($totalMatches / env('LIMIT'))
         ]);
-//        if (isset($_POST['Submit']) && !empty($_POST['search-bar'])) {
-//            $search = $conn->real_escape_string($_POST['search-bar']);
-//            $sql = "SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3
-//                FROM sql_matches_scoretotal INNER JOIN sql_matches
-//                ON sql_matches_scoretotal.match_id = sql_matches.match_id
-//                WHERE sql_matches.name LIKE '%".$search."%' OR sql_matches.steamid64 = '".$search."' OR sql_matches_scoretotal.match_id = '".$search."' ORDER BY sql_matches_scoretotal.match_id DESC";
-//        }
-//        return '';
     }
 }
