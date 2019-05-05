@@ -25,7 +25,7 @@ class MatchHelper extends BaseHelper
 
             return $this->formatMatchPlayers($matchPlayers);
         } catch (\Exception $e) {
-            header("HTTP/1.1 500 Internal Server Error");
+            header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
                 'status' => 500

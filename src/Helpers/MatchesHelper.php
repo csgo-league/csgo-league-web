@@ -41,7 +41,7 @@ class MatchesHelper extends BaseHelper
 
             return $response;
         } catch (\Exception $e) {
-            header("HTTP/1.1 500 Internal Server Error");
+            header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
                 'status' => 500
@@ -70,7 +70,7 @@ class MatchesHelper extends BaseHelper
 
             return $response;
         } catch (\Exception $e) {
-            header("HTTP/1.1 500 Internal Server Error");
+            header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
                 'status' => 500
@@ -103,7 +103,7 @@ class MatchesHelper extends BaseHelper
 
             return $response;
         } catch (\Exception $e) {
-            header("HTTP/1.1 500 Internal Server Error");
+            header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
                 'status' => 500
