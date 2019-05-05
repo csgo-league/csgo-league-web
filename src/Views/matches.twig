@@ -1,9 +1,7 @@
-{% extends 'Partials/base.twig' %}
+{% extends 'partials/base.twig' %}
 
 {% block content %}
     <div class="matches container" style="margin-top: 20px;">
-        {% include('Partials/head.twig') %}
-
         <form method="post">
             <div class="search-container center" style="width: 70%;">
                 <input type="text" name="search" placeholder="Search Match ID, Player Name or SteamID64" class="search-input">
@@ -13,7 +11,7 @@
 
         {% if matches|length > 1 %}
             {% for match in matches %}
-                {% include 'Partials/match-bar.twig' with match %}
+                {% include 'partials/match-bar.twig' with match %}
             {% endfor %}
         {% else %}
             <h1 style="margin-top:20px;text-align:center;">

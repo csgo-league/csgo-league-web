@@ -5,6 +5,7 @@ use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 use Pecee\SimpleRouter\SimpleRouter;
+use Redline\League\Controllers\HomeController;
 use Redline\League\Controllers\MatchController;
 use Redline\League\Controllers\MatchesController;
 use Redline\League\Controllers\ProfileController;
@@ -41,14 +42,16 @@ class Router
         $homeRedirects = [
             '/',
             '/match',
-//            '/matches',
             '/profile'
         ];
         foreach ($homeRedirects as $homeRedirect) {
             SimpleRouter::get($homeRedirect, function () {
-                response()->redirect('/matches/1');
+                response()->redirect('/home');
             });
         }
+
+        // Get home
+        SimpleRouter::get('/home', HomeController::class . '@getIndex');
 
         // Get matches
         SimpleRouter::get('/matches', MatchesController::class . '@getIndex');

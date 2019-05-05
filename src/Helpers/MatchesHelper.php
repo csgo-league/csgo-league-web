@@ -28,8 +28,37 @@ class MatchesHelper extends BaseHelper
             $limit = env('LIMIT');
             $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY match_id DESC LIMIT :offset, :limit", [
+            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit", [
                 ':offset' => $offset,
+                ':limit' => (int)$limit
+            ]);
+
+            $response = $query->fetchAll();
+
+            foreach ($response as $key => $match) {
+                $response[$key] = $this->formatMatch($match);
+            }
+
+            return $response;
+        } catch (\Exception $e) {
+            header("HTTP/1.1 500 Internal Server Error");
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
+    }
+
+    /**
+     * @param int $limit
+     * @return array
+     */
+    public function getLatestMatches(int $limit = 3)
+    {
+        try {
+            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit", [
                 ':limit' => (int)$limit
             ]);
 
@@ -61,7 +90,7 @@ class MatchesHelper extends BaseHelper
             $query = $this->db->query("SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3, sql_matches_scoretotal.timestamp,
               FROM sql_matches_scoretotal INNER JOIN sql_matches
               ON sql_matches_scoretotal.match_id = sql_matches.match_id
-              WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.match_id DESC", [
+              WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.timestamp DESC", [
                 ':search' => $search,
                 ':like_search' => '%'.$search.'%',
             ]);

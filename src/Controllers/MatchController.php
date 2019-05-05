@@ -7,11 +7,6 @@ use Redline\League\Helpers\MatchHelper;
 class MatchController extends BaseController
 {
     /**
-     * @var string
-     */
-    protected $table = '';
-
-    /**
      * @var MatchHelper
      */
     protected $matchHelper;

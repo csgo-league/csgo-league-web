@@ -1,0 +1,16 @@
+{% extends 'partials/base.twig' %}
+
+{% block content %}
+    <div class="background-gradient text-center text-white" style="background:#881228;height:300px;padding-top:110px;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-capitalize text-white" style="font-size:45px;margin-bottom:0;">RedlineCS</h1>
+                    <p style="font-size:20px;">Quality 10 mans based in the United Kingdom</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/latest-matches.twig' with latest %}
+{% endblock %}
