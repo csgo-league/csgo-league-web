@@ -41,15 +41,17 @@ class Router
         $homeRedirects = [
             '/',
             '/match',
+//            '/matches',
             '/profile'
         ];
         foreach ($homeRedirects as $homeRedirect) {
             SimpleRouter::get($homeRedirect, function () {
-                response()->redirect('/matches');
+                response()->redirect('/matches/1');
             });
         }
 
-        SimpleRouter::controller('/matches', MatchesController::class);
+        SimpleRouter::get('/matches', MatchesController::class . '@getIndex');
+        SimpleRouter::get('/matches/{page}', MatchesController::class . '@getIndex');
         SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatch');
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
 

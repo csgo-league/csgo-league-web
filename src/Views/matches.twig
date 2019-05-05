@@ -21,74 +21,58 @@
             </h1>
         {% endif %}
 
-        {#if (!isset($_POST['Submit'])) {#}
-        {#$sql_pages = 'SELECT COUNT(*) FROM sql_matches_scoretotal';#}
-        {#$result_pages = $conn->query($sql_pages);#}
-        {#$row_pages = $result_pages->fetch_assoc();#}
+        {% if totalPages > 1 %}
+            <nav style="margin-top:30px;width:80%;" class="center">
+                <ul class="pagination">
+                    {% if currentPage == 1 %}
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                Previous
+                            </span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="/matches/{{ currentPage - 1 }}">
+                                Previous
+                            </a>
+                        </li>
+                    {% endif %}
 
-        {#$total_pages = ceil($row_pages['COUNT(*)'] / $limit);#}
+                    {% for i in max(1, currentPage - 2)..min(currentPage + 4, totalPages) %}
+                    {#for ($i = max(1, $page_number - 2); $i <= min($page_number + 4, $total_pages); $i++) {#}
+                        {% if i == currentPage %}
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    {{ i }}
+                                    <span class="sr-only">
+                                        (current)
+                                    </span>
+                                </span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="/matches/{{ i }}">
+                                    {{ i }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
 
-        {#if ($total_pages > 1) {#}
-        {#echo '#}
-        {#<nav style="margin-top:30px;width:80%;" class="center">#}
-            {#<ul class="pagination">';#}
-
-                {#{% if  %}#}
-                {#if ($page_number == 1) {#}
-                {#echo '#}
-                {#<li class="page-item disabled">#}
-                        {#<span class="page-link">#}
-                            {#Previous#}
-                        {#</span>#}
-                {#</li>';#}
-                {#} else {#}
-                {#$past_page = $page_number - 1;#}
-                {#echo '#}
-                {#<li class="page-item">#}
-                    {#<a class="page-link" href="?page=' . $past_page . '">#}
-                        {#Previous#}
-                    {#</a>#}
-                {#</li>';#}
-                {#}#}
-
-                {#for ($i = max(1, $page_number - 2); $i <= min($page_number + 4, $total_pages); $i++) {#}
-                {#if ($i == $page_number) {#}
-                {#echo '#}
-                {#<li class="page-item active">#}
-                            {#<span class="page-link">#}
-                                {#' . $i . '#}
-                                {#<span class="sr-only">#}
-                                    {#(current)#}
-                                {#</span>#}
-                            {#</span>#}
-                {#</li>';#}
-                {#} else {#}
-                {#echo '#}
-                {#<li class="page-item">#}
-                    {#<a class="page-link" href="?page=' . $i . '">#}
-                        {#' . $i . '#}
-                    {#</a>#}
-                {#</li>';#}
-                {#}#}
-                {#}#}
-                {#if ($page_number == $total_pages) {#}
-                {#echo '#}
-                {#<li class="page-item disabled">#}
-                        {#<span class="page-link">#}
-                            {#Next#}
-                        {#</span>#}
-                {#</li>';#}
-                {#} else {#}
-                {#$next_page = $page_number + 1;#}
-                {#echo '#}
-                {#<li class="page-item">#}
-                    {#<a class="page-link" href="?page=' . $next_page . '">#}
-                        {#Next#}
-                    {#</a>#}
-                {#</li>';#}
-                {#}#}
-                {#echo '#}
-            {#</ul>#}
-        {#</nav>';#}
+                    {% if currentPage == totalPages %}
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                Next
+                            </span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="/matches/{{ currentPage + 1 }}">
+                                Next
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
     </div>
 {% endblock content %}
