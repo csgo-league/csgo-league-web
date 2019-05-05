@@ -71,7 +71,7 @@ $page_number = isset($_GET['page']) ? $_GET['page'] : 0;
 <?php
     if (isset($_POST['Submit']) && !empty($_POST['search-bar'])) {
         $search = $conn->real_escape_string($_POST['search-bar']);
-        $sql = "SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3
+        $sql = "SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3, sql_matches_scoretotal.timestamp 
                 FROM sql_matches_scoretotal INNER JOIN sql_matches
                 ON sql_matches_scoretotal.match_id = sql_matches.match_id
                 WHERE sql_matches.name LIKE '%".$search."%' OR sql_matches.steamid64 = '".$search."' OR sql_matches_scoretotal.match_id = '".$search."' ORDER BY sql_matches_scoretotal.match_id DESC";
