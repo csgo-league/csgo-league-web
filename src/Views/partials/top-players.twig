@@ -1,0 +1,30 @@
+<div style="margin-top:45px;">
+    <div class="container">
+        <div class="row">
+            <a class="text-white" href="/players">
+                <h1>Top players</h1>
+            </a>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 text-dark" style="margin-top:35px;">
+                <div style="margin-top:-20px;">
+                    <ul class="list-group">
+                        {% for player in leftPlayers %}
+                            {% include 'partials/player/player-bar.twig' with player %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 text-dark" style="margin-top:35px;">
+                <div style="margin-top:-20px;">
+                    <ul class="list-group">
+                        {% for player in rightPlayers %}
+                            {% include 'partials/player/player-bar.twig' with player %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
