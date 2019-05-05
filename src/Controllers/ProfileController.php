@@ -4,7 +4,7 @@ namespace Redline\League\Controllers;
 
 use Redline\League\Helpers\ProfileHelper;
 
-class ProfileController
+class ProfileController extends BaseController
 {
     /**
      * @var ProfileHelper
@@ -16,11 +16,16 @@ class ProfileController
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->profileHelper = new ProfileHelper();
     }
 
-    public function getProfile(string $steamId)
+    /**
+     * @param string $steamId
+     */
+    public function getProfile(string $steamId): void
     {
-
+        response()->redirect('https://steamcommunity.com/profiles/' . $steamId);
     }
 }
