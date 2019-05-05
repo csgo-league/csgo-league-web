@@ -50,9 +50,18 @@ class Router
             });
         }
 
+        // Get matches
         SimpleRouter::get('/matches', MatchesController::class . '@getIndex');
         SimpleRouter::get('/matches/{page}', MatchesController::class . '@getIndex');
+
+        // Search matches
+        SimpleRouter::post('/matches', MatchesController::class . '@postIndex');
+        SimpleRouter::post('/matches/{page}', MatchesController::class . '@postIndex');
+
+        // Get match
         SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatch');
+
+        // Get profile
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
 
 //        SimpleRouter::get('/errors/{errors}', ErrorController::class . '@returnError');
