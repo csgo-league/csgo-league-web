@@ -131,19 +131,30 @@ class MatchesHelper extends BaseHelper
             $match['icon'] = 't_icon.png';
         }
 
+        $match['map_image'] = $this->getMatchMapImage($match['map']);
+
+        return $match;
+    }
+
+    /**
+     * Get match map image
+     *
+     * @param string $map
+     * @return string
+     */
+    protected function getMatchMapImage(string $map): string
+    {
         $rawMaps = explode(',', env('MAPS'));
         $maps = [];
         for ($i = 0; $i < count($rawMaps); $i += 2) {
             $maps[$rawMaps[$i]] = $rawMaps[$i + 1];
         }
 
-        if (array_key_exists($match['map'], $maps)) {
-            $match['map_image'] = $maps[$match['map']];
+        if (array_key_exists($map, $maps)) {
+            return $maps[$map];
         } else {
-            $match['map_image'] = 'austria.jpg';
+            return $maps['de_austria'];
         }
-
-        return $match;
     }
 
     /**
@@ -155,18 +166,18 @@ class MatchesHelper extends BaseHelper
      */
     public function getPlayerMatches(string $steamId, int $matches = 3): array
     {
-        $query = $this->db->query("SELECT sql_matches_scoretotal.*,
-            FROM sql_matches_scoretotal INNER JOIN sql_matches
+        $query = $this->db->query("SELECT sql_matches_scoretotal.match_id, sql_matches_scoretotal.timestamp, sql_matches_scoretotal.map, sql_matches.kills,  sql_matches.deaths
+            FROM sql_matches JOIN sql_matches_scoretotal
             ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches.steamid64 = :steam ORDER BY sql_matches_scoretotal.match_id DESC LIMIT :limit", [
+            WHERE sql_matches.steamid64 = :steam ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit", [
             ':steam' => $steamId,
-            ':matches' => $matches,
+            ':limit' => $matches,
         ]);
 
         $response = $query->fetchAll();
 
         foreach ($response as $key => $match) {
-            $response[$key] = $this->formatMatch($match);
+            $response[$key]['map_image'] = $this->getMatchMapImage($match['map']);
         }
 
         return $response;
