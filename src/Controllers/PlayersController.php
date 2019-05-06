@@ -61,13 +61,13 @@ class PlayersController extends BaseController
         $search = input()->post('search')->getValue();
 
         if (!$search) {
-            response()->redirect('/matches');
+            response()->redirect('/players');
         }
 
-        $matches = $this->playersHelper->searchPlayers($search);
+        $players = $this->playersHelper->searchPlayers($search);
 
         return $this->twig->render('players.twig', [
-            'players' => $matches,
+            'players' => $players
         ]);
     }
 }
