@@ -67,6 +67,9 @@ class MatchesController extends BaseController
         $matches = $this->matchesHelper->searchMatches($search);
 
         return $this->twig->render('matches.twig', [
+            'nav' => [
+                'active' => 'matches'
+            ],
             'matches' => $matches,
             'searchedValue' => $search
         ]);

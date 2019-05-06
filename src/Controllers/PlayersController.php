@@ -41,6 +41,9 @@ class PlayersController extends BaseController
         $totalPlayers = $this->playersHelper->getPlayersCount();
 
         return $this->twig->render('players.twig', [
+            'nav' => [
+                'active' => 'players'
+            ],
             'players' => $players,
             'pagination' => [
                 'currentPage' => $page,
@@ -67,6 +70,9 @@ class PlayersController extends BaseController
         $players = $this->playersHelper->searchPlayers($search);
 
         return $this->twig->render('players.twig', [
+            'nav' => [
+                'active' => 'players'
+            ],
             'players' => $players,
             'searchedValue' => $search
         ]);
