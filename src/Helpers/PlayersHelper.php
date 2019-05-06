@@ -52,7 +52,7 @@ class PlayersHelper extends BaseHelper
             $limit = 12;
             $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :offset, :limit", [
+            $query = $this->db->query("SELECT rankme.*, players.steamid64 FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :offset, :limit", [
                 ':offset' => $offset,
                 ':limit' => (int)$limit
             ]);
@@ -85,7 +85,7 @@ class PlayersHelper extends BaseHelper
     public function getTopPlayers(int $players): array
     {
         try {
-            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :limit", [
+            $query = $this->db->query('SELECT rankme.*, players.steamid64 FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :limit', [
                 ':limit' => $players
             ]);
 
@@ -161,17 +161,16 @@ class PlayersHelper extends BaseHelper
     public function updatePlayers(): void
     {
         try {
-            $query = $this->db->query("SELECT * FROM rankme WHERE steamid64 IS NULL AND steam IS NOT NULL");
+            $query = $this->db->query('SELECT rankme.steam FROM rankme WHERE rankme.steam IS NOT NULL AND rankme.steam NOT IN (SELECT steam FROM players)');
 
             $response = $query->fetchAll();
 
             foreach ($response as $player) {
                 $steam = $this->converter->createFromSteamID($player['steam']);
 
-                $this->db->update('rankme', [
-                    'steamid64' => $steam->getSteamID64()
-                ], [
-                    'steam' => $player['steam']
+                $this->db->insert('players', [
+                    'steam' => $player['steam'],
+                    'steamid64' => $steam->getSteamID64(),
                 ]);
             }
         } catch (\Exception $e) {
