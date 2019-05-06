@@ -53,8 +53,8 @@ class PlayersHelper extends BaseHelper
 
             $response = $query->fetchAll();
 
-            foreach ($response as $key => $match) {
-                $response[$key] = $this->formatPlayer($match);
+            foreach ($response as $key => $player) {
+                $response[$key] = $this->formatPlayer($player);
             }
 
             return $response;
@@ -84,8 +84,33 @@ class PlayersHelper extends BaseHelper
 
             $response = $query->fetchAll();
 
-            foreach ($response as $key => $match) {
-                $response[$key] = $this->formatPlayer($match);
+            foreach ($response as $key => $player) {
+                $response[$key] = $this->formatPlayer($player);
+            }
+
+            return $response;
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
+    }
+
+    public function searchPlayers(string $search)
+    {
+        try {
+            $query = $this->db->query("SELECT steam, steamid64, score, kills, deaths, assists FROM rankme WHERE name LIKE :search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
+                ':search' => $search
+            ]);
+
+            $response = $query->fetchAll();
+
+            foreach ($response as $key => $player) {
+                $response[$key] = $this->formatPlayer($player);
             }
 
             return $response;

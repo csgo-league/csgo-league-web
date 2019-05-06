@@ -59,13 +59,17 @@ class Router
         SimpleRouter::get('/matches', MatchesController::class . '@getIndex');
         SimpleRouter::get('/matches/{page}', MatchesController::class . '@getIndex');
 
+        // Search matches
+        SimpleRouter::post('/matches', MatchesController::class . '@postIndex');
+        SimpleRouter::post('/matches/{page}', MatchesController::class . '@postIndex');
+
         // Get players
         SimpleRouter::get('/players', PlayersController::class . '@getPlayers');
         SimpleRouter::get('/players/{page}', PlayersController::class . '@getPlayers');
 
-        // Search matches
-        SimpleRouter::post('/matches', MatchesController::class . '@postIndex');
-        SimpleRouter::post('/matches/{page}', MatchesController::class . '@postIndex');
+        // Search players
+        SimpleRouter::post('/players', PlayersController::class . '@postIndex');
+        SimpleRouter::post('/players/{page}', PlayersController::class . '@postIndex');
 
         // Get match
         SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatch');

@@ -3,6 +3,9 @@
 namespace Redline\League\Controllers;
 
 use Redline\League\Helpers\PlayersHelper;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class PlayersController extends BaseController
 {
@@ -44,6 +47,27 @@ class PlayersController extends BaseController
                 'totalPages' => ceil($totalPlayers / 12),
                 'link' => 'players'
             ]
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function postIndex(): string
+    {
+        $search = input()->post('search')->getValue();
+
+        if (!$search) {
+            response()->redirect('/matches');
+        }
+
+        $matches = $this->matchesHelper->searchMatches($search);
+
+        return $this->twig->render('matches.twig', [
+            'matches' => $matches,
         ]);
     }
 }
