@@ -14,10 +14,16 @@ class PlayersHelper extends BaseHelper
      */
     protected $converter;
 
+    /**
+     * @var ProfileHelper
+     */
+    protected $profileHelper;
+
     public function __construct()
     {
         parent::__construct();
 
+        $this->profileHelper = new ProfileHelper();
         $this->converter = Converter::create();
 
         // This is a filthy hack to make sure that all of our players have a steam64 id
@@ -54,6 +60,7 @@ class PlayersHelper extends BaseHelper
             $response = $query->fetchAll();
 
             foreach ($response as $key => $player) {
+                $this->profileHelper->cacheProfileDetails($player['steamid64']);
                 $response[$key] = $this->formatPlayer($player);
             }
 
@@ -85,6 +92,7 @@ class PlayersHelper extends BaseHelper
             $response = $query->fetchAll();
 
             foreach ($response as $key => $player) {
+                $this->profileHelper->cacheProfileDetails($player['steamid64']);
                 $response[$key] = $this->formatPlayer($player);
             }
 
