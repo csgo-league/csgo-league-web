@@ -39,13 +39,16 @@
 .error-content {
   padding: 0 0 70px;
 }
+
 .error-text{
   text-align: center;
 }
+
 .error {
   font-size: 180px;
   font-weight: 100;
 }
+
 @keyframes bob {
   0% {
     top: 0;
@@ -54,6 +57,7 @@
     top: 0.2em;
   }
 }
+
 .im-sheep {
   margin-top: 200px;
   display: inline-block;
@@ -61,27 +65,34 @@
   font-size: 1em;
   margin-bottom: 70px;
 }
+
 .im-sheep * {
   transition: transform 0.3s;
 }
+
 .im-sheep .top {
   position: relative;
   top: 0;
   animation: bob 1s infinite;
 }
+
 .im-sheep:hover .head {
   transform: rotate(0deg);
 }
+
 .im-sheep:hover .head .im-eye {
   width: 1.25em;
   height: 1.25em;
 }
+
 .im-sheep:hover .head .im-eye:before {
   right: 30%;
 }
+
 .im-sheep:hover .top {
   animation-play-state: paused;
 }
+
 .im-sheep .head {
   display: inline-block;
   width: 5em;
@@ -93,6 +104,7 @@
   top: 1em;
   transform: rotate(30deg);
 }
+
 .im-sheep .head:before {
   content: '';
   display: inline-block;
@@ -104,9 +116,11 @@
   right: -10%;
   border-radius: 50% 40%;
 }
+
 .im-sheep .head:hover .im-ear.one, .im-sheep .head:hover .im-ear.two {
   transform: rotate(0deg);
 }
+
 .im-sheep .head .im-eye {
   display: inline-block;
   width: 1em;
@@ -116,6 +130,7 @@
   position: absolute;
   overflow: hidden;
 }
+
 .im-sheep .head .im-eye:before {
   content: '';
   display: inline-block;
@@ -128,14 +143,17 @@
   bottom: 10%;
   transition: all 0.3s;
 }
+
 .im-sheep .head .im-eye.one {
   right: -2%;
   top: 1.7em;
 }
+
 .im-sheep .head .im-eye.two {
   right: 2.5em;
   top: 1.7em;
 }
+
 .im-sheep .head .im-ear {
   background: #253858;
   width: 50%;
@@ -148,11 +166,13 @@
   top: 5%;
   transform: rotate(-30deg);
 }
+
 .im-sheep .head .im-ear.two {
   top: 2%;
   right: -5%;
   transform: rotate(20deg);
 }
+
 .im-sheep .body {
   display: inline-block;
   width: 7em;
@@ -163,6 +183,7 @@
   vertical-align: middle;
   margin-right: -3em;
 }
+
 .im-sheep .im-legs {
   display: inline-block;
   position: absolute;
@@ -170,6 +191,7 @@
   left: 10%;
   z-index: -1;
 }
+
 .im-sheep .im-legs .im-leg {
   display: inline-block;
   background: #141214;
@@ -177,6 +199,7 @@
   height: 2.5em;
   margin: 0.2em;
 }
+
 .im-sheep::before {
   left: 0;
   content: '';
@@ -271,9 +294,11 @@ a:hover {
   color: inherit;
   opacity: .75
 }
+
 .footer-clean .item.social>a:hover {
   opacity: .9
 }
+
 @media (max-width:991px) {
   .footer-clean .item.social>a {
     margin-top: 40px
