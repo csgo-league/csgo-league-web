@@ -25,18 +25,19 @@ class PlayersController extends BaseController
      * Get players.
      *
      * @param null|string $page
+     * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function getPlayers(?string $page = null): void
+    public function getPlayers(?string $page = null): string
     {
         $page = $page ?? 1;
 
         $players = $this->playersHelper->getPlayers($page);
 
-        $this->twig->render('players.twig', [
-
+        return $this->twig->render('players.twig', [
+            'players' => $players
         ]);
     }
 }

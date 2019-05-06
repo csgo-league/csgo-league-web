@@ -33,10 +33,10 @@ class PlayersHelper extends BaseHelper
     public function getPlayers(int $page): array
     {
         try {
-            $limit = env('LIMIT');
+            $limit = 12;
             $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :limit", [
+            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :offset, :limit", [
                 ':offset' => $offset,
                 ':limit' => (int)$limit
             ]);
