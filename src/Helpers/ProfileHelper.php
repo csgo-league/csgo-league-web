@@ -46,6 +46,12 @@ class ProfileHelper extends BaseHelper
                     'cachecreated' => date('Y-m-d'),
                 ];
 
+                $this->db->update('players', [
+                    'name' => $steam['response']['players'][0]['personaname']
+                ], [
+                    'steamid64' => $steam['response']['players'][0]['steamid']
+                ]);
+
                 $avatar = file_get_contents($steam['response']['players'][0]['avatarfull']);
                 file_put_contents("$cacheDir/$steamId.jpg", $avatar);
 

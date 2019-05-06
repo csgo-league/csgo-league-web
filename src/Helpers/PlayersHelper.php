@@ -52,7 +52,7 @@ class PlayersHelper extends BaseHelper
             $limit = 12;
             $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT rankme.*, players.steamid64 FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :offset, :limit", [
+            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :offset, :limit", [
                 ':offset' => $offset,
                 ':limit' => (int)$limit
             ]);
@@ -85,7 +85,7 @@ class PlayersHelper extends BaseHelper
     public function getTopPlayers(int $players): array
     {
         try {
-            $query = $this->db->query('SELECT rankme.*, players.steamid64 FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :limit', [
+            $query = $this->db->query('SELECT * FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :limit', [
                 ':limit' => $players
             ]);
 
@@ -117,7 +117,7 @@ class PlayersHelper extends BaseHelper
     public function searchPlayers(string $search): array
     {
         try {
-            $query = $this->db->query("SELECT * FROM rankme WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
+            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
                 ':search' => $search,
                 ':like_search' => '%'.$search.'%',
             ]);
