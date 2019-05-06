@@ -67,7 +67,8 @@ class PlayersController extends BaseController
         $players = $this->playersHelper->searchPlayers($search);
 
         return $this->twig->render('players.twig', [
-            'players' => $players
+            'players' => $players,
+            'searchedValue' => $search
         ]);
     }
 }

@@ -68,6 +68,7 @@ class MatchesController extends BaseController
 
         return $this->twig->render('matches.twig', [
             'matches' => $matches,
+            'searchedValue' => $search
         ]);
     }
 }
