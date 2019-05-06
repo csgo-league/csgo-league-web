@@ -19,6 +19,8 @@
             </h1>
         {% endif %}
 
-        {% include 'partials/pagination.twig' with pagination %}
+        {% if pagination is defined %}
+            {% include 'partials/pagination.twig' with pagination %}
+        {% endif %}
     </div>
 {% endblock content %}
