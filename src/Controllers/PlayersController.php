@@ -64,10 +64,10 @@ class PlayersController extends BaseController
             response()->redirect('/matches');
         }
 
-        $matches = $this->matchesHelper->searchMatches($search);
+        $matches = $this->playersHelper->searchPlayers($search);
 
-        return $this->twig->render('matches.twig', [
-            'matches' => $matches,
+        return $this->twig->render('players.twig', [
+            'players' => $matches,
         ]);
     }
 }
