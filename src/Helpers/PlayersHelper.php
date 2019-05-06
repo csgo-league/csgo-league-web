@@ -98,7 +98,7 @@ class PlayersHelper extends BaseHelper
     {
         $playerModel = new PlayerModel($player);
 
-        $player['kd'] = $playerModel->getKD();
+        $player['kdr'] = $playerModel->getKDR();
         $player['adr'] = $playerModel->getADR();
         $player['accuracy'] = $playerModel->getAccuracy();
 

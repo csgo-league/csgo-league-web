@@ -175,7 +175,7 @@ class PlayerModel
     /**
      * @return float
      */
-    public function getKD(): float
+    public function getKDR(): float
     {
         $deaths = $this->get('deaths');
 
@@ -183,7 +183,8 @@ class PlayerModel
             $deaths = 1;
         }
 
-        return round($this->get('kills') / $deaths, 2);
+        // Force 2dp
+        return $this->get('kills') / $deaths;
     }
 
     /**
