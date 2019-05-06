@@ -26,7 +26,7 @@ class ProfileController extends BaseController
      */
     public function getProfile(string $steamId): void
     {
-        echo json_encode($this->profileHelper->cacheProfileDetails($steamId));
-//        response()->redirect('https://steamcommunity.com/profiles/' . $steamId);
+//        echo json_encode($this->profileHelper->cacheProfileDetails($steamId));
+        response()->redirect('https://steamcommunity.com/profiles/' . $steamId);
     }
 }
