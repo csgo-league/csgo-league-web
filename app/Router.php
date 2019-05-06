@@ -83,7 +83,7 @@ class Router
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {
-            response()->redirect('https://redlinecs.net');
+//            response()->redirect('https://redlinecs.net');
         });
     }
 }

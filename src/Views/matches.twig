@@ -9,7 +9,7 @@
 
         {% if matches|length > 1 %}
             {% for match in matches %}
-                {% include 'partials/match-bar.twig' with match %}
+                {% include 'partials/match/match-bar.twig' with match %}
             {% endfor %}
         {% else %}
             <h1 style="margin-top:20px;text-align:center;">

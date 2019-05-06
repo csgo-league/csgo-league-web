@@ -145,4 +145,30 @@ class MatchesHelper extends BaseHelper
 
         return $match;
     }
+
+    /**
+     * Get a players past matches
+     *
+     * @param string $steamId
+     * @param int $matches
+     * @return array
+     */
+    public function getPastMatches(string $steamId, int $matches = 3): array
+    {
+        $query = $this->db->query("SELECT sql_matches_scoretotal.*,
+            FROM sql_matches_scoretotal INNER JOIN sql_matches
+            ON sql_matches_scoretotal.match_id = sql_matches.match_id
+            WHERE sql_matches.steamid64 = :steam ORDER BY sql_matches_scoretotal.match_id DESC LIMIT :limit", [
+            ':steam' => $steamId,
+            ':matches' => $matches,
+        ]);
+
+        $response = $query->fetchAll();
+
+        foreach ($response as $key => $match) {
+            $response[$key] = $this->formatMatch($match);
+        }
+
+        return $response;
+    }
 }

@@ -183,4 +183,32 @@ class PlayersHelper extends BaseHelper
             die;
         }
     }
+
+    /**
+     * Get player
+     *
+     * @param string $steamId
+     * @return array
+     */
+    public function getPlayer(string $steamId): array
+    {
+        try {
+            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam WHERE players.steamid64 = :steam", [
+                ':steam' => $steamId,
+            ]);
+
+            $player = $query->fetch();
+            $this->profileHelper->cacheProfileDetails($player['steamid64']);
+
+            return $this->formatPlayer($player);
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
+    }
 }

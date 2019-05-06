@@ -1,5 +1,103 @@
 {% extends 'partials/base.twig' %}
 
 {% block content %}
+    <div style="margin-top:45px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card rounded-borders" style="border: none !important;">
+                        <div class="card-body">
+                            <div style="clear: both;">
 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="text-align: center">
+                                        <img class="rounded-circle img-fluid" src="/profile/{{ player.steamid64 }}/avatar" style="width:100px;">
+                                    </p>
+                                    <h2 style="text-align: center">
+                                        {{ player.name }}
+                                    </h2>
+                                </div>
+
+                                {#<div class="col-md-6">#}
+                                    {#<div class="float-left badge-display" style="width:75%;">#}
+                                        {#<h1 class="text-capitalize text-center" style="margin-top:20px;">#}
+                                            {#No badges#}
+                                        {#</h1>#}
+                                    {#</div>#}
+                                    {#<div class="float-right elo-badge" style="background: rgb(0,189,255); background: linear-gradient(180deg, rgba(0,189,255,1) 0%, rgba(0,135,242,1) 100%);">#}
+                                        {#<span>#}
+                                            {#1#}
+                                        {#</span>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            </div>
+                            <div class="row" style="margin-top:15px;">
+                                <div class="col-md-12">
+                                    {#<a href="#">#}
+                                        <h1 style="font-size:24px;">
+                                            Statistics
+                                        </h1>
+                                    {#</a>#}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h4><i class="fas fa-crosshairs"></i>Kills: {{ player.kills }}</h4>
+                                    <h4><i class="fas fa-skull"></i>deaths:&nbsp;<strong>{{ player.deaths }}</strong><br></h4>
+                                    <h4><i class="fas fa-dot-circle"></i>kdr: {{ player.kdr|number_format(2, '.', ',') }}<br></h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4><i class="far fa-handshake" style="font-size:16px;"></i>assists: {{ player.assists }}</h4>
+                                    <h4><i class="fas fa-meh"></i>shots: {{ player.shots }}</h4>
+                                    <h4><i class="fas fa-chess-queen"></i>damage: {{ player.damage }}</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4><i class="fas fa-calendar-times"></i>dps: {{ player.dps }}</h4>
+                                    <h4><i class="fas fa-ruler-combined" style="font-size:18px;"></i>ADR: {{ player.adr|number_format(2, '.', ',') }}</h4>
+                                    <h4><i class="fas fa-calculator"></i>hits: {{ player.hits }}</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4><i class="fas fa-user-slash" style="font-size:16px;"></i>HS: {{ player.headshots }}</h4>
+                                    {#<h4><i class="fas fa-eye" style="font-size:18px;"></i>HSP: 43%</h4>#}
+                                    {#<h4><i class="fas fa-dna" style="width:23px;"></i>HSR: 7.17</h4>#}
+                                </div>
+                            </div>
+                            <div class="social-icons-profile" style="margin-top:15px;">
+                                <a href="https://steamcommunity.com/profiles/{{ player.steamid64 }}" style="margin-left:10px;color:#171A21;"><i class="fab fa-steam"></i></a>
+                                {#<a href="#" style="margin-left:10px;color:#6441a4;"><i class="fab fa-twitch"></i></a>#}
+                                {#<a href="#" style="margin-left:10px;color:#ff0000;"><i class="fab fa-youtube"></i></a>#}
+                                {#<a href="#" style="color:#1da1f2;"><i class="fab fa-twitter"></i></a>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card rounded-borders" style="border:none;margin-top:40px;">
+                <div class="card-body" style="padding-top:20px;">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#">
+                                <h1 style="margin-bottom:-5px;font-size:24px;">matches</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" style="margin-top:15px;">
+                            <a href="/match/1">
+                                <div class="card" data-bs-hover-animate="pulse" style="border:none;">
+                                    <img class="card-img w-100 d-block matches-img" style="background-image:url(&quot;/img/maps/mirage.jpg&quot;);height:130px;">
+                                    <div class="card-img-overlay text-center" style="color:rgb(255,255,255);">
+                                        <h1 class="text-white">LOST</h1>
+                                        <h1 class="text-white">11:1</h1>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
