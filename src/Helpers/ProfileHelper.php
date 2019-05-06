@@ -24,7 +24,7 @@ class ProfileHelper extends BaseHelper
     public function cacheProfileDetails(string $steamId): array
     {
         $steam_api = $this->steamApiKey;
-        $cacheDir = __DIR__ . '/../../web/cache';
+        $cacheDir = __DIR__ . '/../../app/cache/steam';
 
         if (file_exists("$cacheDir/$steamId.json")) {
             $json_file = file_get_contents("$cacheDir/$steamId.json");
