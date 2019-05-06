@@ -208,3 +208,127 @@
 .navbar-light .navbar-nav .nav-link:focus,.navbar-light .navbar-nav .nav-link:hover {
   color: #d1d1d1;
 }
+
+.footer-clean {
+  padding: 50px 0;
+}
+
+.footer-clean h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 16px
+}
+
+.footer-clean ul {
+  padding: 0;
+  list-style: none;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0
+}
+
+.footer-clean ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: .8
+}
+
+.footer-clean ul a:hover {
+  opacity: 1
+}
+
+.footer-clean .item.social {
+  text-align: right
+}
+
+@media (max-width:768px) {
+  .footer-clean .item.social {
+    text-align: center
+  }
+}
+
+.footer-clean .item.social>a {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  margin-top: 22px;
+  color: inherit;
+  opacity: .75
+}
+.footer-clean .item.social>a:hover {
+  opacity: .9
+}
+@media (max-width:991px) {
+  .footer-clean .item.social>a {
+    margin-top: 40px
+  }
+}
+@media (max-width:767px) {
+  .footer-clean .item {
+    text-align: center;
+    padding-bottom: 20px
+  }
+  .footer-clean .item.social>a {
+    margin-top: 10px
+  }
+}
+.footer-clean .copyright {
+  margin-top: 14px;
+  margin-bottom: 0;
+  font-size: 13px;
+  opacity: .6
+}
+.table-borderless td, .table-borderless th {
+  border: 0!important
+}
+
+.search-container {
+  display: flex;
+  font-size: 14px;
+  margin: 25px 0
+}
+
+.search-input {
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  padding: 10px;
+  border-right: none;
+  width: 100%
+}
+
+.btn.btn-default.search-btn {
+  border: 1px solid #ddd;
+  background-color: #FFF!important;
+  border-radius: 0 5px 5px 0;
+  border-left: none;
+  background-image: none;
+  box-shadow: none;
+  color: #919693
+}
+
+.player-name {
+  font-size: 20px
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.match-card {
+  color: #fff;
+  border: none!important
+}
+
+.rounded-borders {
+  -webkit-box-shadow: 0 0 40px -5px rgba(0, 0, 0, .58);
+  -moz-box-shadow: 0 0 40px -5px rgba(0, 0, 0, .58);
+  box-shadow: 0 0 40px -5px rgba(0, 0, 0, .58);
+  border-radius: 25px!important
+}

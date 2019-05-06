@@ -2,8 +2,8 @@
 
 namespace Redline\League\Helpers;
 
-
 use B3none\SteamIDConverter\Client as Converter;
+use Redline\League\Models\PlayerModel;
 
 class PlayersHelper extends BaseHelper
 {
@@ -25,6 +25,8 @@ class PlayersHelper extends BaseHelper
     }
 
     /**
+     * Get players
+     *
      * @param int $page
      * @return array
      */
@@ -34,7 +36,7 @@ class PlayersHelper extends BaseHelper
             $limit = env('LIMIT');
             $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit", [
+            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :limit", [
                 ':offset' => $offset,
                 ':limit' => (int)$limit
             ]);
@@ -42,7 +44,7 @@ class PlayersHelper extends BaseHelper
             $response = $query->fetchAll();
 
             foreach ($response as $key => $match) {
-                $response[$key] = $this->formatMatch($match);
+                $response[$key] = $this->formatPlayer($match);
             }
 
             return $response;
@@ -58,20 +60,22 @@ class PlayersHelper extends BaseHelper
     }
 
     /**
+     * Get top players
+     *
      * @param int $players
      * @return array
      */
     public function getTopPlayers(int $players): array
     {
         try {
-            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit", [
+            $query = $this->db->query("SELECT * FROM rankme ORDER BY rankme.score DESC LIMIT :limit", [
                 ':limit' => $players
             ]);
 
             $response = $query->fetchAll();
 
             foreach ($response as $key => $match) {
-                $response[$key] = $this->formatMatch($match);
+                $response[$key] = $this->formatPlayer($match);
             }
 
             return $response;
@@ -86,7 +90,25 @@ class PlayersHelper extends BaseHelper
         }
     }
 
-    public function updatePlayers()
+    /**
+     * @param array $player
+     * @return array
+     */
+    public function formatPlayer(array $player): array
+    {
+        $playerModel = new PlayerModel($player);
+
+        $player['kd'] = $playerModel->getKD();
+        $player['adr'] = $playerModel->getADR();
+        $player['accuracy'] = $playerModel->getAccuracy();
+
+        return $player;
+    }
+
+    /**
+     * Update players
+     */
+    public function updatePlayers(): void
     {
         try {
             $query = $this->db->query("SELECT * FROM rankme WHERE steamid64 IS NULL AND steam IS NOT NULL");
@@ -95,10 +117,9 @@ class PlayersHelper extends BaseHelper
 
             foreach ($response as $player) {
                 $steam = $this->converter->createFromSteamID($player['steam']);
-                $steam64 = $steam->getSteamID64();
 
                 $this->db->update('rankme', [
-                    'steamid64' => $steam64
+                    'steamid64' => $steam->getSteamID64()
                 ], [
                     'steam' => $player['steam']
                 ]);

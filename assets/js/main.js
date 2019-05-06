@@ -50,6 +50,7 @@ $(document).ready(() => {
       if (width < 168) {
         $('.im-sheep').addClass('d-none');
       } else {
+        window.scrollTo(0, 0);
         $('.im-sheep').removeClass('d-none');
       }
 
