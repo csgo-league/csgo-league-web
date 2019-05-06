@@ -189,6 +189,15 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #e60832;
+  text-decoration: none;
+}
+
 .nav-margins {
   margin-top: 5px;
 }
@@ -315,10 +324,6 @@
 
 .player-name {
   font-size: 20px
-}
-
-a:hover {
-  text-decoration: none;
 }
 
 .match-card {

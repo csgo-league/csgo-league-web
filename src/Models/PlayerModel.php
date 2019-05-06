@@ -196,7 +196,7 @@ class PlayerModel
         $roundsTotal += $this->get('rounds_tr');
         $damageTotal = $this->get('damage');
 
-        return round($damageTotal / $roundsTotal, 2);
+        return $damageTotal / $roundsTotal;
     }
 
     /**
