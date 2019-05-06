@@ -109,7 +109,7 @@ class PlayersHelper extends BaseHelper
     public function searchPlayers(string $search): array
     {
         try {
-            $query = $this->db->query("SELECT steam, steamid64, score, kills, deaths, assists FROM rankme WHERE name LIKE :search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
+            $query = $this->db->query("SELECT steam, steamid64, score, kills, deaths, assists FROM rankme WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
                 ':search' => $search,
                 ':like_search' => '%'.$search.'%',
             ]);
