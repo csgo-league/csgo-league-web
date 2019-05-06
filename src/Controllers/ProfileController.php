@@ -2,6 +2,7 @@
 
 namespace Redline\League\Controllers;
 
+use Redline\League\Helpers\MatchesHelper;
 use Redline\League\Helpers\PlayersHelper;
 use Redline\League\Helpers\ProfileHelper;
 
@@ -18,6 +19,11 @@ class ProfileController extends BaseController
     protected $playersHelper;
 
     /**
+     * @var MatchesHelper
+     */
+    protected $matchesHelper;
+
+    /**
      * MatchController constructor.
      */
     public function __construct()
@@ -26,6 +32,7 @@ class ProfileController extends BaseController
 
         $this->profileHelper = new ProfileHelper();
         $this->playersHelper = new PlayersHelper();
+        $this->matchesHelper = new MatchesHelper();
     }
 
     /**
@@ -55,9 +62,11 @@ class ProfileController extends BaseController
     {
 //        echo json_encode($this->profileHelper->cacheProfileDetails($steamId));
         $player = $this->playersHelper->getPlayer($steamId);
+        $matches = $this->matchesHelper->getPlayerMatches($steamId);
 
         return $this->twig->render('profile.twig', [
-            'player' => $player
+            'player' => $player,
+            'matches' => $matches
         ]);
 //        response()->redirect('https://steamcommunity.com/profiles/' . $steamId);
     }

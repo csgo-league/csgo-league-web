@@ -85,15 +85,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4" style="margin-top:15px;">
-                            <a href="/match/1">
-                                <div class="card" data-bs-hover-animate="pulse" style="border:none;">
-                                    <img class="card-img w-100 d-block matches-img" style="background-image:url(&quot;/img/maps/mirage.jpg&quot;);height:130px;">
-                                    <div class="card-img-overlay text-center" style="color:rgb(255,255,255);">
-                                        <h1 class="text-white">LOST</h1>
-                                        <h1 class="text-white">11:1</h1>
-                                    </div>
-                                </div>
-                            </a>
+                            {% for match in matches %}
+                                {% include 'partials/match/profile-matches.twig' with match %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

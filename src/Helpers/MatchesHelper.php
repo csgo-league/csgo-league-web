@@ -153,7 +153,7 @@ class MatchesHelper extends BaseHelper
      * @param int $matches
      * @return array
      */
-    public function getPastMatches(string $steamId, int $matches = 3): array
+    public function getPlayerMatches(string $steamId, int $matches = 3): array
     {
         $query = $this->db->query("SELECT sql_matches_scoretotal.*,
             FROM sql_matches_scoretotal INNER JOIN sql_matches

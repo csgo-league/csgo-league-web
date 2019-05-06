@@ -1,0 +1,9 @@
+<a href="/match/{{ match.match_id }}">
+    <div class="card" data-bs-hover-animate="pulse" style="border:none;">
+        <img class="card-img w-100 d-block matches-img" style="background-image:url(&quot;{{ match.map }}&quot;);height:130px;">
+        <div class="card-img-overlay text-center" style="color:rgb(255,255,255);">
+            <h1 class="text-white">LOST</h1>
+            <h1 class="text-white">{{ match.ct_score }}:{{ match.t_score }}</h1>
+        </div>
+    </div>
+</a>
