@@ -35,9 +35,15 @@ class PlayersController extends BaseController
         $page = $page ?? 1;
 
         $players = $this->playersHelper->getPlayers($page);
+        $totalPlayers = $this->playersHelper->getPlayersCount();
 
         return $this->twig->render('players.twig', [
-            'players' => $players
+            'players' => $players,
+            'pagination' => [
+                'currentPage' => $page,
+                'totalPages' => ceil($totalPlayers / 12),
+                'link' => 'players'
+            ]
         ]);
     }
 }

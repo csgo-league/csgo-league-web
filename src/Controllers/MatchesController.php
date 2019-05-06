@@ -42,8 +42,11 @@ class MatchesController extends BaseController
                 'active' => 'matches'
             ],
             'matches' => $matches,
-            'currentPage' => $page,
-            'totalPages' => ceil($totalMatches / env('LIMIT'))
+            'pagination' => [
+                'currentPage' => $page,
+                'totalPages' => ceil($totalMatches / env('LIMIT')),
+                'link' => 'matches'
+            ]
         ]);
     }
 

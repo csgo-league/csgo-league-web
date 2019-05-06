@@ -19,57 +19,6 @@
             </h1>
         {% endif %}
 
-        {% if totalPages > 1 %}
-            <nav style="margin-top:30px;width:80%;" class="center">
-                <ul class="pagination">
-                    {% if currentPage == 1 %}
-                        <li class="page-item disabled">
-                            <span class="page-link">
-                                Previous
-                            </span>
-                        </li>
-                    {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="/matches/{{ currentPage - 1 }}">
-                                Previous
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% for i in max(1, currentPage - 2)..min(currentPage + 4, totalPages) %}
-                        {% if i == currentPage %}
-                            <li class="page-item active">
-                                <span class="page-link">
-                                    {{ i }}
-                                    <span class="sr-only">
-                                        (current)
-                                    </span>
-                                </span>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="/matches/{{ i }}">
-                                    {{ i }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if currentPage == totalPages %}
-                        <li class="page-item disabled">
-                            <span class="page-link">
-                                Next
-                            </span>
-                        </li>
-                    {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="/matches/{{ currentPage + 1 }}">
-                                Next
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
+        {% include 'partials/pagination.twig' with pagination %}
     </div>
 {% endblock content %}

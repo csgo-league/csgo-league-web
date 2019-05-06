@@ -13,29 +13,8 @@
                     {% include 'partials/player/player-card.twig' with player %}
                 {% endfor %}
             </div>
-            <nav style="margin-top:25px;">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">
-                            1
-                            <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="/players/2">
-                            2
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="/players/2">
-                            Next
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+
+            {% include 'partials/pagination.twig' with pagination %}
         </div>
     </div>
 {% endblock %}

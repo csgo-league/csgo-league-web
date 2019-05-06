@@ -1,0 +1,52 @@
+{% if pagination.totalPages > 1 %}
+    <nav style="margin-top:30px;width:80%;" class="center">
+        <ul class="pagination">
+            {% if pagination.currentPage == 1 %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Previous
+                    </span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="/{{ pagination.link }}/{{ pagination.currentPage - 1 }}">
+                        Previous
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for i in max(1, pagination.currentPage - 2)..min(pagination.currentPage + 4, pagination.totalPages) %}
+                {% if i == pagination.currentPage %}
+                    <li class="page-item active disabled">
+                        <span class="page-link">
+                            {{ i }}
+                            <span class="sr-only">
+                                (current)
+                            </span>
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="/{{ pagination.link }}/{{ i }}">
+                            {{ i }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.currentPage == pagination.totalPages %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Next
+                    </span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="/{{ pagination.link }}/{{ pagination.currentPage + 1 }}">
+                        Next
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

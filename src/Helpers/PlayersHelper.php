@@ -25,6 +25,16 @@ class PlayersHelper extends BaseHelper
     }
 
     /**
+     * Get the total number of players
+     *
+     * @return int
+     */
+    public function getPlayersCount(): int
+    {
+        return $this->db->count('rankme');
+    }
+
+    /**
      * Get players
      *
      * @param int $page

@@ -196,6 +196,10 @@ class PlayerModel
         $roundsTotal += $this->get('rounds_tr');
         $damageTotal = $this->get('damage');
 
+        if ($roundsTotal == 0 || $damageTotal == 0) {
+            return 0;
+        }
+
         return $damageTotal / $roundsTotal;
     }
 
@@ -206,9 +210,12 @@ class PlayerModel
     {
         $shots = $this->get('shots');
         $hits = $this->get('hits');
-        $accuracy = ceil(($hits / $shots) * 100);
 
-        return $accuracy;
+        if ($hits == 0 || $shots == 0) {
+            return 0;
+        }
+
+        return ceil(($hits / $shots) * 100);
     }
 
     /**
