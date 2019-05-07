@@ -280,15 +280,14 @@ a:hover {
   }
 }
 
-.footer-clean .item.social>a {
-  font-size: 24px;
+.footer-clean .item.social>i {
+  font-size: 24px !important;
   width: 40px;
   height: 40px;
   line-height: 40px;
   display: inline-block;
   text-align: center;
   border-radius: 50%;
-  border: 1px solid #ccc;
   margin-left: 10px;
   margin-top: 22px;
   color: inherit;
@@ -314,8 +313,7 @@ a:hover {
   }
 }
 .footer-clean .copyright {
-  margin-top: 14px;
-  margin-bottom: 0;
+  margin: 14px 0;
   font-size: 13px;
   opacity: .6;
 }
