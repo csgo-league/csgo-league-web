@@ -19,19 +19,25 @@
   },
   "homepage": "https://github.com/b3none/redlinecs-league#readme",
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "babel-loader": "^8.0.5",
+    "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "gulp": "^4.0.1",
+    "del": "^4.1.1",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-less": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
     "node-sass": "^4.11.0",
-    "axios": "^0.18.0"
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "uglifyjs-webpack-plugin": "^2.1.2"
   }
 }

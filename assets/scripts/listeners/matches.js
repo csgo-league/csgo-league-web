@@ -1,4 +1,4 @@
-$(document).ready(() => {
+export function listen() {
   $('.match').each((i, el) => {
     el = $(el);
     var matchDate = $(el.find('.timestamp')[0]);
@@ -11,18 +11,4 @@ $(document).ready(() => {
     matchDate.prop('innerHTML', date.toLocaleDateString() + ' ' + hours + ':' + minutes);
     el.removeClass('d-none');
   });
-
-  function getSteamProfile(steam) {
-    if (window.DOMParser)
-    {
-      parser = new DOMParser();
-      xmlDoc = parser.parseFromString(txt, "text/xml");
-    }
-    else // Internet Explorer
-    {
-      xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-      xmlDoc.async = false;
-      xmlDoc.loadXML(txt);
-    }
-  }
-});
+}
