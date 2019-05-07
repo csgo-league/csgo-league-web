@@ -9,7 +9,7 @@
     <meta http-equiv="pragma" content="no-cache">
 
     <title>
-        RedlineCS
+        Redline
         {% block title %}
             {% if title is defined %}
                 | {{ title }}
@@ -24,6 +24,8 @@
     {% include 'partials/navbar.twig' %}
 
     {% block content %}{% endblock %}
+
+    {% include 'partials/footer.twig' %}
 
     {% include 'partials/scripts.twig' %}
 </body>
