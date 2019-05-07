@@ -23,7 +23,7 @@ export function styles() {
   return gulp.src(paths.styles.src)
     .pipe(sass())
     .pipe(cleanCSS())
-    .pipe(concat('styles.min.css'))
+    .pipe(concat('styles.css'))
     .pipe(gulp.dest(paths.styles.dest));
 }
 
@@ -36,7 +36,7 @@ export function scripts() {
           // this.emitter.emit('end'); // Recover from errors
         })
     )
-    .pipe(concat('scripts.min.js'))
+    .pipe(concat('scripts.js'))
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
