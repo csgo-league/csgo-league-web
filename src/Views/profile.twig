@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="https://steamcommunity.com/profiles/{{ player.steamid64 }}" class="card rounded-borders" style="border: none !important;">
+                    <a id="{{ player.steamid64 }}" href="https://steamcommunity.com/profiles/{{ player.steamid64 }}" class="card rounded-borders steam-profile" style="border: none !important;">
                         <div class="card-body">
                             <div style="clear: both;">
 
@@ -13,10 +13,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="text-align: center">
-                                        <img class="rounded-circle img-fluid" src="/profile/{{ player.steamid64 }}/avatar" style="width:100px;">
+                                        <img class="rounded-circle img-fluid steam-profile-avatar" src="/img/icons/loading.gif" style="width:100px;">
                                     </p>
-                                    <h1 style="text-align: center">
-                                        {{ player.name }}
+                                    <h1 class="steam-profile-name" style="text-align: center">
+                                        Loading...
                                     </h1>
                                 </div>
                             </div>
