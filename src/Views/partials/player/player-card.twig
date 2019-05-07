@@ -7,28 +7,24 @@
                 <h4 class="text-center card-title steam-profile-name" style="margin-top:10px;">
                     Loading...
                 </h4>
+                <hr>
                 <h5 style="text-align: center">
                     <i class="fas fa-cannabis" style="color: #228b22"></i>&nbsp;Points: {{ player.score }}<br>
                 </h5>
                 <h5 style="text-align: center">
                     <i class="fas fa-crosshairs"></i>&nbsp;Kills:&nbsp;{{ player.kills }}
-                    <br>
                 </h5>
                 <h5 style="text-align: center">
                     <i class="fas fa-skull"></i>&nbsp;Deaths:&nbsp;{{ player.deaths }}
-                    <br>
                 </h5>
                 <h5 style="text-align: center">
                     <i class="fas fa-book-dead"></i>&nbsp;KDR:&nbsp;{{ player.kdr|number_format(2, '.', ',') }}
-                    <br>
                 </h5>
                 <h5 style="text-align: center">
                     <i class="fas fa-chart-bar"></i>&nbsp;ADR:&nbsp;{{ player.adr|number_format(2, '.', ',') }}
-                    <br>
                 </h5>
                 <h5 style="text-align: center">
                     <i class="fas fa-user-tag" style="width:19px;"></i>&nbsp;&nbsp;Assists:&nbsp;{{ player.assists }}
-                    <br>
                 </h5>
             </div>
         </div>
