@@ -31,9 +31,7 @@
     "gulp-less": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "node-sass": "^4.11.0"
-  },
-  "dependencies": {
-    "xml-js": "^1.6.11"
+    "node-sass": "^4.11.0",
+    "axios": "^0.18.0"
   }
 }

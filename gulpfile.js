@@ -15,6 +15,7 @@ gulp.task('styles', () =>
 );
 
 gulp.task('scripts', () => gulp.src([
+    'node_modules/',
     'assets/js/**/*.js',
     'assets/js/*.js'
   ])
