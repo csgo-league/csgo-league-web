@@ -37,8 +37,18 @@ class PlayersController extends BaseController
     {
         $page = $page ?? 1;
 
-        $players = $this->playersHelper->getPlayers($page);
+        if ($page < 1) {
+            response()->redirect('/players/');
+        }
+
         $totalPlayers = $this->playersHelper->getPlayersCount();
+        $totalPages = ceil($totalPlayers / 12);
+
+        if ($page > $totalPages) {
+            response()->redirect('/players/' . $totalPages);
+        }
+
+        $players = $this->playersHelper->getPlayers($page);
 
         return $this->twig->render('players.twig', [
             'nav' => [

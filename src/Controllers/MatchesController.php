@@ -34,8 +34,19 @@ class MatchesController extends BaseController
     public function getIndex(?string $page = null): string
     {
         $page = $page ?? 1;
-        $matches = $this->matchesHelper->getMatches($page);
+
+        if ($page < 1) {
+            response()->redirect('/matches/');
+        }
+
         $totalMatches = $this->matchesHelper->getMatchesCount();
+        $totalPages = ceil($totalMatches / env('LIMIT'));
+
+        if ($page > $totalPages) {
+            response()->redirect('/matches/' . $totalPages);
+        }
+
+        $matches = $this->matchesHelper->getMatches($page);
 
         return $this->twig->render('matches.twig', [
             'nav' => [
@@ -44,7 +55,7 @@ class MatchesController extends BaseController
             'matches' => $matches,
             'pagination' => [
                 'currentPage' => $page,
-                'totalPages' => ceil($totalMatches / env('LIMIT')),
+                'totalPages' => $totalPages,
                 'link' => 'matches'
             ]
         ]);
