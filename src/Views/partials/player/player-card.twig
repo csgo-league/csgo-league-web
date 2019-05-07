@@ -1,15 +1,35 @@
 <div class="col-md-4" style="margin-top:25px;">
-    <a href="/profile/{{ player.steamid64 }}" style="text-decoration:none;">
+    <a id="{{ player.steamid64 }}" href="/profile/{{ player.steamid64 }}" class="steam-profile"
+       style="text-decoration:none;">
         <div class="card rounded-borders" data-bs-hover-animate="bounce" style="border:none !important;">
             <div class="card-body">
-                <img class="rounded-circle img-fluid rounded mx-auto d-block" src="/profile/{{ player.steamid64 }}/avatar" style="width:125px;">
-                <h4 class="text-center card-title" style="margin-top:10px;">{{ player.name }}</h4>
-                <h5 style="text-align: center"><i class="fas fa-cannabis" style="color: #228b22"></i>&nbsp;Points: {{ player.score }}<br></h5>
-                <h5 style="text-align: center"><i class="fas fa-crosshairs"></i>&nbsp;Kills: {{ player.kills }}<br></h5>
-                <h5 style="text-align: center"><i class="fas fa-skull"></i>&nbsp;Deaths: {{ player.deaths }}<br></h5>
-                <h5 style="text-align: center"><i class="fas fa-book-dead"></i>&nbsp;KDR: {{ player.kdr|number_format(2, '.', ',') }}<br></h5>
-                <h5 style="text-align: center"><i class="fas fa-chart-bar"></i>&nbsp;ADR: {{ player.adr|number_format(2, '.', ',') }}<br></h5>
-                <h5 style="text-align: center"><i class="fas fa-user-tag" style="width:19px;"></i>&nbsp;&nbsp;Assists: {{ player.assists }}<br></h5>
+                <img class="rounded-circle img-fluid rounded mx-auto d-block steam-profile-avatar" src="/img/icons/tie_icon.png" style="width:125px;">
+                <h4 class="text-center card-title steam-profile-name" style="margin-top:10px;">
+                    Loading...
+                </h4>
+                <h5 style="text-align: center">
+                    <i class="fas fa-cannabis" style="color: #228b22"></i>&nbsp;Points: {{ player.score }}<br>
+                </h5>
+                <h5 style="text-align: center">
+                    <i class="fas fa-crosshairs"></i>&nbsp;Kills:&nbsp;{{ player.kills }}
+                    <br>
+                </h5>
+                <h5 style="text-align: center">
+                    <i class="fas fa-skull"></i>&nbsp;Deaths:&nbsp;{{ player.deaths }}
+                    <br>
+                </h5>
+                <h5 style="text-align: center">
+                    <i class="fas fa-book-dead"></i>&nbsp;KDR:&nbsp;{{ player.kdr|number_format(2, '.', ',') }}
+                    <br>
+                </h5>
+                <h5 style="text-align: center">
+                    <i class="fas fa-chart-bar"></i>&nbsp;ADR:&nbsp;{{ player.adr|number_format(2, '.', ',') }}
+                    <br>
+                </h5>
+                <h5 style="text-align: center">
+                    <i class="fas fa-user-tag" style="width:19px;"></i>&nbsp;&nbsp;Assists:&nbsp;{{ player.assists }}
+                    <br>
+                </h5>
             </div>
         </div>
     </a>

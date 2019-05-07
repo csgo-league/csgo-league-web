@@ -1,10 +1,9 @@
 import axios from "axios";
 
-const parser = new DOMParser();
-
 export function listen() {
-  $('.steam-profile').each(v => {
+  $('.steam-profile').each((k, v) => {
     v = $(v);
+
     let steamId = v.attr('id');
 
     updateSteamProfile(v, steamId);
@@ -14,26 +13,24 @@ export function listen() {
 const updateSteamProfile = (element, steam) => {
   axios.get(`https://cors-anywhere.herokuapp.com/https://steamcommunity.com/profiles/${steam}?xml=true`)
     .then(response => {
-      let xmlDoc;
+      let profileXML;
 
       if (window.DOMParser)
       {
-        xmlDoc = parser.parseFromString(response.data, 'text/xml');
+        const parser = new DOMParser();
+        profileXML = parser.parseFromString(response.data, 'text/xml');
       }
       else // Internet Explorer
       {
-        xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
-        xmlDoc.async = false;
-        xmlDoc.loadXML(response.data);
+        profileXML = new ActiveXObject('Microsoft.XMLDOM');
+        profileXML.async = false;
+        profileXML.loadXML(response.data);
       }
 
-      console.log(response);
-      console.log(xmlDoc);
+      let name = profileXML.getElementsByTagName('steamID')[0].childNodes[0].nodeValue;
+      let avatar = profileXML.getElementsByTagName('avatarFull')[0].childNodes[0].nodeValue;
 
-      let name = xmlDoc.getElementsByTagName('steamID')[0].childNodes[0].nodeValue;
-      let avatar = xmlDoc.getElementsByTagName('avatarFull')[0].childNodes[0].nodeValue;
-
-      element.find('.steam-profile-name').val(name);
+      element.find('.steam-profile-name').text(name);
       element.find('.steam-profile-avatar').attr('src', avatar);
     });
 };

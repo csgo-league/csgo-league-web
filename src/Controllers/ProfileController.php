@@ -37,22 +37,6 @@ class ProfileController extends BaseController
 
     /**
      * @param string $steamId
-     */
-    public function getAvatar(string $steamId): void
-    {
-        $avatar = __DIR__ . "/../../app/cache/steam/$steamId.jpg";
-        $fp = fopen($avatar, 'rb');
-
-        // send the right headers
-        header('Content-Type: image/jpg');
-        header('Content-Length: ' . filesize($avatar));
-
-        // dump the picture and stop the script
-        fpassthru($fp);
-    }
-
-    /**
-     * @param string $steamId
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -60,7 +44,6 @@ class ProfileController extends BaseController
      */
     public function getProfile(string $steamId): string
     {
-//        echo json_encode($this->profileHelper->cacheProfileDetails($steamId));
         $player = $this->playersHelper->getPlayer($steamId);
         $matches = $this->matchesHelper->getPlayerMatches($steamId);
 
@@ -68,6 +51,5 @@ class ProfileController extends BaseController
             'player' => $player,
             'matches' => $matches
         ]);
-//        response()->redirect('https://steamcommunity.com/profiles/' . $steamId);
     }
 }

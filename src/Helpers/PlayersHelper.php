@@ -60,7 +60,6 @@ class PlayersHelper extends BaseHelper
             $response = $query->fetchAll();
 
             foreach ($response as $key => $player) {
-                $this->profileHelper->cacheProfileDetails($player['steamid64']);
                 $response[$key] = $this->formatPlayer($player);
             }
 
@@ -92,7 +91,6 @@ class PlayersHelper extends BaseHelper
             $response = $query->fetchAll();
 
             foreach ($response as $key => $player) {
-                $this->profileHelper->cacheProfileDetails($player['steamid64']);
                 $response[$key] = $this->formatPlayer($player);
             }
 
@@ -198,7 +196,6 @@ class PlayersHelper extends BaseHelper
             ]);
 
             $player = $query->fetch();
-            $this->profileHelper->cacheProfileDetails($player['steamid64']);
 
             return $this->formatPlayer($player);
         } catch (\Exception $e) {

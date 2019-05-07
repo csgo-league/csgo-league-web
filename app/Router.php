@@ -76,10 +76,6 @@ class Router
 
         // Get profile
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
-        SimpleRouter::get('/profile/{steamId}/avatar', ProfileController::class . '@getAvatar');
-
-//        SimpleRouter::get('/errors/{errors}', ErrorController::class . '@returnError');
-//        SimpleRouter::controller('/search', SearchController::class);
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {
