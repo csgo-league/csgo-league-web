@@ -6,13 +6,13 @@ listen();
 const parser = new DOMParser();
 
 const getSteamProfile = steam => {
-  axios.get(`https://steamcommunity.com/profiles/${steam}?xml=true`)
+  axios.get(`https://cors-anywhere.herokuapp.com/https://steamcommunity.com/profiles/${steam}?xml=true`)
     .then(response => {
       let xmlDoc;
 
       if (window.DOMParser)
       {
-        xmlDoc = parser.parseFromString(txt, 'text/xml');
+        xmlDoc = parser.parseFromString(response, 'text/xml');
       }
       else // Internet Explorer
       {
@@ -21,6 +21,7 @@ const getSteamProfile = steam => {
         xmlDoc.loadXML(response);
       }
 
+      console.log(response);
       console.log(xmlDoc);
     });
 };
