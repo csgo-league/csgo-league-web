@@ -2,7 +2,12 @@
     <div class="card" data-bs-hover-animate="pulse" style="border:none;">
         <img class="card-img w-100 d-block matches-img" style="background-image:url(&quot;{{ match.map_image }}&quot;);height:130px;">
         <div class="card-img-overlay text-center" style="color:rgb(255,255,255);">
-            <h1 class="text-white">{{ match.kills }} / {{ match.deaths }}</h1>
+            <h1 class="text-white" style="float: left; margin-top: 8%; margin-left: 10%">
+                <i class="fas fa-crosshairs"></i> {{ match.kills }}
+            </h1>
+            <h1 class="text-white" style="float: right; margin-top: 8%; margin-right: 10%">
+                <i class="fas fa-skull"></i> {{ match.deaths }}
+            </h1>
         </div>
     </div>
 </a>
