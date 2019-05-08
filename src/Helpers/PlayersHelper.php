@@ -7,8 +7,6 @@ use B3none\League\Models\PlayerModel;
 
 class PlayersHelper extends BaseHelper
 {
-    const TABLE = 'sql_matches';
-
     /**
      * @var Converter
      */

@@ -4,8 +4,6 @@ namespace B3none\League\Helpers;
 
 class MatchHelper extends BaseHelper
 {
-    const TABLE = 'sql_matches';
-
     /**
      * @param string $matchId
      * @return array
