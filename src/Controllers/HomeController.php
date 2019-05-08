@@ -1,9 +1,9 @@
 <?php
 
-namespace Redline\League\Controllers;
+namespace B3none\League\Controllers;
 
-use Redline\League\Helpers\MatchesHelper;
-use Redline\League\Helpers\PlayersHelper;
+use B3none\League\Helpers\MatchesHelper;
+use B3none\League\Helpers\PlayersHelper;
 
 class HomeController extends BaseController
 {

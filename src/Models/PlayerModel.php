@@ -1,6 +1,6 @@
 <?php
 
-namespace Redline\League\Models;
+namespace B3none\League\Models;
 
 class PlayerModel
 {

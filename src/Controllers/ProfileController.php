@@ -1,10 +1,10 @@
 <?php
 
-namespace Redline\League\Controllers;
+namespace B3none\League\Controllers;
 
-use Redline\League\Helpers\MatchesHelper;
-use Redline\League\Helpers\PlayersHelper;
-use Redline\League\Helpers\ProfileHelper;
+use B3none\League\Helpers\MatchesHelper;
+use B3none\League\Helpers\PlayersHelper;
+use B3none\League\Helpers\ProfileHelper;
 
 class ProfileController extends BaseController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Redline\League\Helpers;
+namespace B3none\League\Helpers;
 
 class MatchesHelper extends BaseHelper
 {
