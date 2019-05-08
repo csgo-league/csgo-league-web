@@ -267,3 +267,4 @@ class PlayerModel
         return array_search(max($weapons), $weapons);
     }
 }
+
