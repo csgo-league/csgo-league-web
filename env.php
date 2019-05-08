@@ -5,10 +5,8 @@ $variables = [
     'DB_USERNAME' => 'denialnetwork',
     'DB_PASSWORD' => 'cQcXAdZk78',
     'DB_NAME' => 'denialnetwork_matches',
-    'SITE_NAME' => 'RedlineCS',
     'STEAM_API' => '168DBF78C391F05A6FCC0939A86B36F5',
-    'WEBSITE' => 'https://redlinecs.net',
-    'PAGE_TITLE' => 'RedlineCS | Matches',
+    'BASE_TITLE' => 'Redline',
     'LIMIT' => 10, // Page Limit for matches page.
     'MAPS' => [
         'de_austria,/img/maps/austria.jpg',

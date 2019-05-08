@@ -54,6 +54,7 @@ class PlayersController extends BaseController
             'nav' => [
                 'active' => 'players'
             ],
+            'baseTitle' => env('BASE_TITLE'),
             'title' => 'Players',
             'players' => $players,
             'pagination' => [

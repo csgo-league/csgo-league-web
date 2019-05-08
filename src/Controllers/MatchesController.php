@@ -52,6 +52,7 @@ class MatchesController extends BaseController
             'nav' => [
                 'active' => 'matches'
             ],
+            'baseTitle' => env('BASE_TITLE'),
             'title' => 'Matches',
             'matches' => $matches,
             'pagination' => [

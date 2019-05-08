@@ -36,6 +36,7 @@ class MatchController extends BaseController
             'nav' => [
                 'active' => 'matches'
             ],
+            'baseTitle' => env('BASE_TITLE'),
             'title' => 'Match',
         ]));
     }
