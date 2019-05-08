@@ -35,6 +35,7 @@ class PlayersController extends BaseController
      */
     public function getPlayers(?string $page = null): string
     {
+        $limit = env('PLAYERS_PAGE_LIMIT');
         $page = $page ?? 1;
 
         if ($page < 1) {
@@ -42,7 +43,7 @@ class PlayersController extends BaseController
         }
 
         $totalPlayers = $this->playersHelper->getPlayersCount();
-        $totalPages = ceil($totalPlayers / 12);
+        $totalPages = ceil($totalPlayers / $limit);
 
         if ($page > $totalPages) {
             response()->redirect('/players/' . $totalPages);
@@ -59,7 +60,7 @@ class PlayersController extends BaseController
             'players' => $players,
             'pagination' => [
                 'currentPage' => $page,
-                'totalPages' => ceil($totalPlayers / 12),
+                'totalPages' => ceil($totalPlayers / $limit),
                 'link' => 'players'
             ]
         ]);

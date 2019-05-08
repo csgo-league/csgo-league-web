@@ -7,7 +7,8 @@ $variables = [
     'DB_NAME' => 'denialnetwork_matches',
     'STEAM_API' => '168DBF78C391F05A6FCC0939A86B36F5',
     'BASE_TITLE' => 'Redline',
-    'LIMIT' => 10, // Page Limit for matches page.
+    'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page
+    'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page
     'MAPS' => [
         'de_austria,/img/maps/austria.jpg',
         'de_cache,/img/maps/cache.jpg',
