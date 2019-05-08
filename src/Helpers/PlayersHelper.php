@@ -1,9 +1,9 @@
 <?php
 
-namespace Redline\League\Helpers;
+namespace B3none\League\Helpers;
 
 use B3none\SteamIDConverter\Client as Converter;
-use Redline\League\Models\PlayerModel;
+use B3none\League\Models\PlayerModel;
 
 class PlayersHelper extends BaseHelper
 {

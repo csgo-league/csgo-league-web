@@ -1,8 +1,8 @@
 <?php
 
-namespace Redline\League\Controllers;
+namespace B3none\League\Controllers;
 
-use Redline\League\Helpers\MatchHelper;
+use B3none\League\Helpers\MatchHelper;
 
 class MatchController extends BaseController
 {

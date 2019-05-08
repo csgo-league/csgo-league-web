@@ -1,8 +1,8 @@
 <?php
 
-namespace Redline\League\Controllers;
+namespace B3none\League\Controllers;
 
-use Redline\League\Helpers\PlayersHelper;
+use B3none\League\Helpers\PlayersHelper;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;

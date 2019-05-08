@@ -1,6 +1,6 @@
 <?php
 
-namespace Redline\League\Controllers;
+namespace B3none\League\Controllers;
 
 class BaseController
 {

@@ -5,11 +5,11 @@ use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 use Pecee\SimpleRouter\SimpleRouter;
-use Redline\League\Controllers\HomeController;
-use Redline\League\Controllers\MatchController;
-use Redline\League\Controllers\MatchesController;
-use Redline\League\Controllers\PlayersController;
-use Redline\League\Controllers\ProfileController;
+use B3none\League\Controllers\HomeController;
+use B3none\League\Controllers\MatchController;
+use B3none\League\Controllers\MatchesController;
+use B3none\League\Controllers\PlayersController;
+use B3none\League\Controllers\ProfileController;
 
 class Router
 {
