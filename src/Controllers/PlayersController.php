@@ -54,6 +54,7 @@ class PlayersController extends BaseController
             'nav' => [
                 'active' => 'players'
             ],
+            'title' => 'Players',
             'players' => $players,
             'pagination' => [
                 'currentPage' => $page,

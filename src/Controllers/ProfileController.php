@@ -49,7 +49,7 @@ class ProfileController extends BaseController
 
         return $this->twig->render('profile.twig', [
             'player' => $player,
-            'matches' => $matches
+            'matches' => $matches,
         ]);
     }
 }

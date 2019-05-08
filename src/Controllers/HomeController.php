@@ -48,6 +48,7 @@ class HomeController extends BaseController
             'nav' => [
                 'active' => 'home'
             ],
+            'title' => 'Home',
             'latest' => $matches,
             'leftPlayers' => $leftPlayers,
             'rightPlayers' => $rightPlayers
