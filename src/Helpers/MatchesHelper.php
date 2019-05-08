@@ -159,7 +159,8 @@ class MatchesHelper extends BaseHelper
             sql_matches.deaths
             
             FROM sql_matches 
-            JOIN sql_matches_scoretotal ON sql_matches_scoretotal.match_id = sql_matches.match_id
+            JOIN sql_matches_scoretotal 
+            ON sql_matches_scoretotal.match_id = sql_matches.match_id
             WHERE sql_matches.steamid64 = :steam 
             ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
         ', [

@@ -54,7 +54,7 @@ class MatchHelper extends BaseHelper
                 if (array_key_exists('teamname_2', $player) && !empty($player['teamname_2'])) {
                     $formattedPlayers['ct']['name'] = $player['teamname_2'];
                 }
-            } else if ($player['team'] == 3) {
+            } elseif ($player['team'] == 3) {
                 $formattedPlayers['t']['players'][] = $this->formatMatchPlayer($player);
                 $formattedPlayers['t']['score'] = $player['team_3'];
 
@@ -79,7 +79,7 @@ class MatchHelper extends BaseHelper
             $player['kdr'] = 0;
         }
 
-        $player['name'] = htmlspecialchars(substr($player['name'],0,32));
+        $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
 
         return $player;
     }
