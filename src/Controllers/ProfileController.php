@@ -4,15 +4,9 @@ namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\MatchesHelper;
 use B3none\League\Helpers\PlayersHelper;
-use B3none\League\Helpers\ProfileHelper;
 
 class ProfileController extends BaseController
 {
-    /**
-     * @var ProfileHelper
-     */
-    protected $profileHelper;
-
     /**
      * @var PlayersHelper
      */
@@ -30,7 +24,6 @@ class ProfileController extends BaseController
     {
         parent::__construct();
 
-        $this->profileHelper = new ProfileHelper();
         $this->playersHelper = new PlayersHelper();
         $this->matchesHelper = new MatchesHelper();
     }
