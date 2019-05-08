@@ -18,6 +18,7 @@
     "ext-json": "*",
     "twig/twig": "^2.9",
     "catfan/medoo": "^1.6",
-    "b3none/steam-id-converter": "^1.1"
+    "b3none/steam-id-converter": "^1.1",
+    "squizlabs/php_codesniffer": "^3.4"
   }
 }
