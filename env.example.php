@@ -1,14 +1,17 @@
 <?php
 
 $variables = [
-    'DB_HOST' => 'denial.network',
-    'DB_USERNAME' => 'denialnetwork',
-    'DB_PASSWORD' => 'cQcXAdZk78',
-    'DB_NAME' => 'denialnetwork_matches',
-    'STEAM_API' => '168DBF78C391F05A6FCC0939A86B36F5',
-    'BASE_TITLE' => 'Redline',
-    'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page
-    'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page
+    'DB_HOST' => '', // Your database ip address or host name.
+    'DB_USERNAME' => '', // Your database username.
+    'DB_PASSWORD' => '', // Your database password.
+    'DB_NAME' => '', // Your database name.
+    'STEAM_API' => '', // Your steam API key.
+    'BASE_TITLE' => 'B3none', // This is the base title for your site.
+    'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page.
+    'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page.
+
+    // This is a crude hack to store an array in the env.
+    // map_name,/path/to/map/from/web
     'MAPS' => [
         'de_austria,/img/maps/austria.jpg',
         'de_cache,/img/maps/cache.jpg',

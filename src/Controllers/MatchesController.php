@@ -40,7 +40,7 @@ class MatchesController extends BaseController
         }
 
         $totalMatches = $this->matchesHelper->getMatchesCount();
-        $totalPages = ceil($totalMatches / env('LIMIT'));
+        $totalPages = ceil($totalMatches / env('MATCHES_PAGE_LIMIT'));
 
         if ($page > $totalPages) {
             response()->redirect('/matches/' . $totalPages);
@@ -52,6 +52,8 @@ class MatchesController extends BaseController
             'nav' => [
                 'active' => 'matches'
             ],
+            'baseTitle' => env('BASE_TITLE'),
+            'title' => 'Matches',
             'matches' => $matches,
             'pagination' => [
                 'currentPage' => $page,

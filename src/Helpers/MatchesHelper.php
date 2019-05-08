@@ -25,7 +25,7 @@ class MatchesHelper extends BaseHelper
     public function getMatches(int $page = 1): array
     {
         try {
-            $limit = env('LIMIT');
+            $limit = env('MATCHES_PAGE_LIMIT');
             $offset = ($page - 1) * $limit;
 
             $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit", [

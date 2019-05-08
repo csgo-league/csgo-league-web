@@ -35,7 +35,9 @@ class MatchController extends BaseController
         return $this->twig->render('match.twig', array_merge($match, [
             'nav' => [
                 'active' => 'matches'
-            ]
+            ],
+            'baseTitle' => env('BASE_TITLE'),
+            'title' => 'Match',
         ]));
     }
 }
