@@ -33,7 +33,6 @@ export function scripts() {
       webpack(webpackConfig)
         .on('error', (err) => {
           console.log(err.message);
-          // this.emitter.emit('end'); // Recover from errors
         })
     )
     .pipe(concat('scripts.js'))
