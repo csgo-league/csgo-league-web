@@ -3,9 +3,6 @@
 namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\PlayersHelper;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 class PlayersController extends BaseController
 {
@@ -68,26 +65,33 @@ class PlayersController extends BaseController
 
     /**
      * @return string
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function postIndex(): string
     {
-        $search = input()->post('search')->getValue();
+        try {
+            $search = input()->post('search')->getValue();
 
-        if (!$search) {
-            response()->redirect('/players');
+            if (!$search) {
+                response()->redirect('/players');
+            }
+
+            $players = $this->playersHelper->searchPlayers($search);
+
+            return $this->twig->render('players.twig', [
+                'nav' => [
+                    'active' => 'players'
+                ],
+                'players' => $players,
+                'searchedValue' => $search
+            ]);
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+            'status' => 500
+            ]);
+
+            die;
         }
-
-        $players = $this->playersHelper->searchPlayers($search);
-
-        return $this->twig->render('players.twig', [
-            'nav' => [
-                'active' => 'players'
-            ],
-            'players' => $players,
-            'searchedValue' => $search
-        ]);
     }
 }

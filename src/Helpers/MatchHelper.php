@@ -2,7 +2,6 @@
 
 namespace B3none\League\Helpers;
 
-
 class MatchHelper extends BaseHelper
 {
     const TABLE = 'sql_matches';
@@ -13,26 +12,19 @@ class MatchHelper extends BaseHelper
      */
     public function getMatchPlayers(string $matchId): array
     {
-        try {
-            $query = $this->db->query("SELECT sql_matches_scoretotal.*, sql_matches.*
-                FROM sql_matches_scoretotal INNER JOIN sql_matches
-                ON sql_matches_scoretotal.match_id = sql_matches.match_id
-                WHERE sql_matches_scoretotal.match_id = :matchId ORDER BY sql_matches.score DESC", [
-                ':matchId' => $matchId,
-            ]);
+        $query = $this->db->query('
+            SELECT sql_matches_scoretotal.*, sql_matches.*
+            FROM sql_matches_scoretotal 
+            INNER JOIN sql_matches ON sql_matches_scoretotal.match_id = sql_matches.match_id
+            WHERE sql_matches_scoretotal.match_id = :matchId 
+            ORDER BY sql_matches.score DESC
+        ', [
+            ':matchId' => $matchId,
+        ]);
 
-            $matchPlayers = $query->fetchAll();
+        $matchPlayers = $query->fetchAll();
 
-            return $this->formatMatchPlayers($matchPlayers);
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
-        }
+        return $this->formatMatchPlayers($matchPlayers);
     }
 
     /**

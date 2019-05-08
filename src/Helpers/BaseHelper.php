@@ -22,7 +22,13 @@ class BaseHelper
                 'password' => env('DB_PASSWORD')
             ]);
         } catch (\Exception $e) {
-            die('There was an error connecting to the database.');
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
         }
     }
 }

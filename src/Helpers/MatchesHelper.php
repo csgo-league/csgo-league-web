@@ -4,8 +4,6 @@ namespace B3none\League\Helpers;
 
 class MatchesHelper extends BaseHelper
 {
-    const TABLE = 'sql_matches_scoretotal';
-
     /**
      * Get the total number of matches
      *
@@ -13,7 +11,7 @@ class MatchesHelper extends BaseHelper
      */
     public function getMatchesCount(): int
     {
-        return $this->db->count(self::TABLE);
+        return $this->db->count('sql_matches_scoretotal');
     }
 
     /**
@@ -24,31 +22,25 @@ class MatchesHelper extends BaseHelper
      */
     public function getMatches(int $page = 1): array
     {
-        try {
-            $limit = env('MATCHES_PAGE_LIMIT');
-            $offset = ($page - 1) * $limit;
+        $limit = env('MATCHES_PAGE_LIMIT');
+        $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit", [
-                ':offset' => $offset,
-                ':limit' => (int)$limit
-            ]);
+        $query = $this->db->query('
+            SELECT * 
+            FROM sql_matches_scoretotal
+            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit
+        ', [
+            ':offset' => $offset,
+            ':limit' => (int)$limit
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $match) {
-                $response[$key] = $this->formatMatch($match);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $match) {
+            $response[$key] = $this->formatMatch($match);
         }
+
+        return $response;
     }
 
     /**
@@ -57,27 +49,21 @@ class MatchesHelper extends BaseHelper
      */
     public function getLatestMatches(int $limit = 3)
     {
-        try {
-            $query = $this->db->query("SELECT * FROM ". self::TABLE ." ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit", [
-                ':limit' => (int)$limit
-            ]);
+        $query = $this->db->query('
+            SELECT * 
+            FROM sql_matches_scoretotal 
+            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
+        ', [
+            ':limit' => (int)$limit
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $match) {
-                $response[$key] = $this->formatMatch($match);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $match) {
+            $response[$key] = $this->formatMatch($match);
         }
+
+        return $response;
     }
 
     /**
@@ -86,31 +72,29 @@ class MatchesHelper extends BaseHelper
      */
     public function searchMatches(string $search): array
     {
-        try {
-            $query = $this->db->query("SELECT DISTINCT sql_matches_scoretotal.match_id, sql_matches_scoretotal.map, sql_matches_scoretotal.team_2, sql_matches_scoretotal.team_3, sql_matches_scoretotal.timestamp
-              FROM sql_matches_scoretotal INNER JOIN sql_matches
-              ON sql_matches_scoretotal.match_id = sql_matches.match_id
-              WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search ORDER BY sql_matches_scoretotal.timestamp DESC", [
-                ':search' => $search,
-                ':like_search' => '%'.$search.'%',
-            ]);
+        $query = $this->db->query('
+            SELECT DISTINCT 
+            sql_matches_scoretotal.match_id,
+            sql_matches_scoretotal.map,
+            sql_matches_scoretotal.team_2,
+            sql_matches_scoretotal.team_3,
+            sql_matches_scoretotal.timestamp
+            FROM sql_matches_scoretotal 
+            INNER JOIN sql_matches ON sql_matches_scoretotal.match_id = sql_matches.match_id
+            WHERE sql_matches.name LIKE :like_search OR sql_matches.steamid64 = :search OR sql_matches_scoretotal.match_id = :search
+            ORDER BY sql_matches_scoretotal.timestamp DESC
+        ', [
+            ':search' => $search,
+            ':like_search' => '%'.$search.'%',
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $match) {
-                $response[$key] = $this->formatMatch($match);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $match) {
+            $response[$key] = $this->formatMatch($match);
         }
+
+        return $response;
     }
 
     /**
@@ -166,10 +150,19 @@ class MatchesHelper extends BaseHelper
      */
     public function getPlayerMatches(string $steamId, int $matches = 3): array
     {
-        $query = $this->db->query("SELECT sql_matches_scoretotal.match_id, sql_matches_scoretotal.timestamp, sql_matches_scoretotal.map, sql_matches.kills,  sql_matches.deaths
-            FROM sql_matches JOIN sql_matches_scoretotal
-            ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches.steamid64 = :steam ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit", [
+        $query = $this->db->query('
+            SELECT 
+            sql_matches_scoretotal.match_id, 
+            sql_matches_scoretotal.timestamp, 
+            sql_matches_scoretotal.map, 
+            sql_matches.kills,
+            sql_matches.deaths
+            
+            FROM sql_matches 
+            JOIN sql_matches_scoretotal ON sql_matches_scoretotal.match_id = sql_matches.match_id
+            WHERE sql_matches.steamid64 = :steam 
+            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
+        ', [
             ':steam' => $steamId,
             ':limit' => $matches,
         ]);

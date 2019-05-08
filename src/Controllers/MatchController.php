@@ -24,20 +24,27 @@ class MatchController extends BaseController
     /**
      * @param string $matchId
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
      */
     public function getMatch(string $matchId): string
     {
-        $match = $this->matchHelper->getMatchPlayers($matchId);
+        try {
+            $match = $this->matchHelper->getMatchPlayers($matchId);
 
-        return $this->twig->render('match.twig', array_merge($match, [
-            'nav' => [
-                'active' => 'matches'
-            ],
-            'baseTitle' => env('BASE_TITLE'),
-            'title' => 'Match',
-        ]));
+            return $this->twig->render('match.twig', array_merge($match, [
+                'nav' => [
+                    'active' => 'matches'
+                ],
+                'baseTitle' => env('BASE_TITLE'),
+                'title' => 'Match',
+            ]));
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
     }
 }

@@ -30,29 +30,36 @@ class HomeController extends BaseController
 
     /**
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
      */
     public function getIndex(): string
     {
-        $matches = $this->matchesHelper->getLatestMatches(3);
+        try {
+            $matches = $this->matchesHelper->getLatestMatches(3);
 
-        $topPlayers = 6;
-        $players = $this->playersHelper->getTopPlayers($topPlayers);
+            $topPlayers = 6;
+            $players = $this->playersHelper->getTopPlayers($topPlayers);
 
-        $leftPlayers = array_slice($players, 0, $topPlayers / 2);
-        $rightPlayers = array_slice($players, $topPlayers / 2);
+            $leftPlayers = array_slice($players, 0, $topPlayers / 2);
+            $rightPlayers = array_slice($players, $topPlayers / 2);
 
-        return $this->twig->render('home.twig', [
-            'nav' => [
-                'active' => 'home'
-            ],
-            'baseTitle' => env('BASE_TITLE'),
-            'title' => 'Home',
-            'latest' => $matches,
-            'leftPlayers' => $leftPlayers,
-            'rightPlayers' => $rightPlayers
-        ]);
+            return $this->twig->render('home.twig', [
+                'nav' => [
+                    'active' => 'home'
+                ],
+                'baseTitle' => env('BASE_TITLE'),
+                'title' => 'Home',
+                'latest' => $matches,
+                'leftPlayers' => $leftPlayers,
+                'rightPlayers' => $rightPlayers
+            ]);
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+                'status' => 500
+            ]);
+
+            die;
+        }
     }
 }

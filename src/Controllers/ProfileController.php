@@ -31,19 +31,26 @@ class ProfileController extends BaseController
     /**
      * @param string $steamId
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
      */
     public function getProfile(string $steamId): string
     {
-        $player = $this->playersHelper->getPlayer($steamId);
-        $matches = $this->matchesHelper->getPlayerMatches($steamId);
+        try {
+            $player = $this->playersHelper->getPlayer($steamId);
+            $matches = $this->matchesHelper->getPlayerMatches($steamId);
 
-        return $this->twig->render('profile.twig', [
-            'player' => $player,
-            'matches' => $matches,
-            'baseTitle' => env('BASE_TITLE'),
-        ]);
+            return $this->twig->render('profile.twig', [
+                'player' => $player,
+                'matches' => $matches,
+                'baseTitle' => env('BASE_TITLE'),
+            ]);
+        } catch (\Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+
+            echo json_encode([
+            'status' => 500
+            ]);
+
+            die;
+        }
     }
 }

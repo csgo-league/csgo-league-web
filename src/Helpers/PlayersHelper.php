@@ -14,16 +14,10 @@ class PlayersHelper extends BaseHelper
      */
     protected $converter;
 
-    /**
-     * @var ProfileHelper
-     */
-    protected $profileHelper;
-
     public function __construct()
     {
         parent::__construct();
 
-        $this->profileHelper = new ProfileHelper();
         $this->converter = Converter::create();
 
         // This is a filthy hack to make sure that all of our players have a steam64 id
@@ -48,31 +42,26 @@ class PlayersHelper extends BaseHelper
      */
     public function getPlayers(int $page): array
     {
-        try {
-            $limit = 12;
-            $offset = ($page - 1) * $limit;
+        $limit = 12;
+        $offset = ($page - 1) * $limit;
 
-            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :offset, :limit", [
-                ':offset' => $offset,
-                ':limit' => (int)$limit
-            ]);
+        $query = $this->db->query('
+            SELECT *
+            FROM rankme
+            JOIN players ON players.steam = rankme.steam
+            ORDER BY rankme.score DESC LIMIT :offset, :limit
+        ', [
+            ':offset' => $offset,
+            ':limit' => (int)$limit
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $player) {
-                $response[$key] = $this->formatPlayer($player);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $player) {
+            $response[$key] = $this->formatPlayer($player);
         }
+
+        return $response;
     }
 
     /**
@@ -83,27 +72,22 @@ class PlayersHelper extends BaseHelper
      */
     public function getTopPlayers(int $players): array
     {
-        try {
-            $query = $this->db->query('SELECT * FROM rankme JOIN players ON players.steam = rankme.steam ORDER BY rankme.score DESC LIMIT :limit', [
-                ':limit' => $players
-            ]);
+        $query = $this->db->query('
+            SELECT *
+            FROM rankme
+            JOIN players ON players.steam = rankme.steam
+            ORDER BY rankme.score DESC LIMIT :limit
+        ', [
+            ':limit' => $players
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $player) {
-                $response[$key] = $this->formatPlayer($player);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $player) {
+            $response[$key] = $this->formatPlayer($player);
         }
+
+        return $response;
     }
 
     /**
@@ -114,28 +98,23 @@ class PlayersHelper extends BaseHelper
      */
     public function searchPlayers(string $search): array
     {
-        try {
-            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search ORDER BY score DESC", [
-                ':search' => $search,
-                ':like_search' => '%'.$search.'%',
-            ]);
+        $query = $this->db->query('
+            SELECT * FROM rankme 
+            JOIN players ON players.steam = rankme.steam 
+            WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search 
+            ORDER BY score DESC
+        ', [
+            ':search' => $search,
+            ':like_search' => '%'.$search.'%',
+        ]);
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $key => $player) {
-                $response[$key] = $this->formatPlayer($player);
-            }
-
-            return $response;
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        foreach ($response as $key => $player) {
+            $response[$key] = $this->formatPlayer($player);
         }
+
+        return $response;
     }
 
     /**
@@ -158,27 +137,21 @@ class PlayersHelper extends BaseHelper
      */
     public function updatePlayers(): void
     {
-        try {
-            $query = $this->db->query('SELECT rankme.steam FROM rankme WHERE rankme.steam IS NOT NULL AND rankme.steam NOT IN (SELECT steam FROM players)');
+        $query = $this->db->query('
+            SELECT rankme.steam 
+            FROM rankme 
+            WHERE rankme.steam IS NOT NULL AND rankme.steam NOT IN (SELECT steam FROM players)
+        ');
 
-            $response = $query->fetchAll();
+        $response = $query->fetchAll();
 
-            foreach ($response as $player) {
-                $steam = $this->converter->createFromSteamID($player['steam']);
+        foreach ($response as $player) {
+            $steam = $this->converter->createFromSteamID($player['steam']);
 
-                $this->db->insert('players', [
-                    'steam' => $player['steam'],
-                    'steamid64' => $steam->getSteamID64(),
-                ]);
-            }
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
+            $this->db->insert('players', [
+                'steam' => $player['steam'],
+                'steamid64' => $steam->getSteamID64(),
             ]);
-
-            die;
         }
     }
 
@@ -190,22 +163,17 @@ class PlayersHelper extends BaseHelper
      */
     public function getPlayer(string $steamId): array
     {
-        try {
-            $query = $this->db->query("SELECT * FROM rankme JOIN players ON players.steam = rankme.steam WHERE players.steamid64 = :steam", [
-                ':steam' => $steamId,
-            ]);
+        $query = $this->db->query('
+            SELECT * 
+            FROM rankme 
+            JOIN players ON players.steam = rankme.steam 
+            WHERE players.steamid64 = :steam
+        ', [
+            ':steam' => $steamId,
+        ]);
 
-            $player = $query->fetch();
+        $player = $query->fetch();
 
-            return $this->formatPlayer($player);
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
-        }
+        return $this->formatPlayer($player);
     }
 }
