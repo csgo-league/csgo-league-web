@@ -37,6 +37,7 @@ class ProfileController extends BaseController
         try {
             $player = $this->playersHelper->getPlayer($steamId);
 
+            // If we don't have the player on our system redirect to the players page.
             if ($player === null) {
                 response()->redirect('/players');
                 die;
