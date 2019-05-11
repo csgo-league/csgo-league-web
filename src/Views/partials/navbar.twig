@@ -24,13 +24,13 @@
                         <i class="fas fa-users"></i>&nbsp;Players
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link {% if nav.active == 'myprofile' %}active {% endif %}nav-margins" href="/profile/{{ nav.user.steamid }}">
-                        <i class="fas fa-users"></i>&nbsp;My Profile
-                    </a>
-                </li>
                 {% if nav.loggedIn %}
                     <li class="nav-item" role="presentation">
+                        <a class="nav-link {% if nav.active == 'myprofile' %}active {% endif %}nav-margins" href="/profile/{{ nav.user.steamid }}">
+                            <i class="fas fa-user"></i>&nbsp;My Profile
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation" style="margin-top:5px">
                         <a class="nav-link btn btn-danger text-white" href="/logout">
                             <i class="fas fa-sign-out-alt"></i>&nbsp;logout
                         </a>
