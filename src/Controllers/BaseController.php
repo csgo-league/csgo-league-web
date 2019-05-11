@@ -36,7 +36,7 @@ class BaseController
             'apikey' => env('STEAM_API_KEY'), // Steam API KEY
             'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
             'loginpage' => 'http://localhost:5000', // Returns to last page if not set
-            "logoutpage" => '',
+            'logoutpage' => 'http://localhost:5000/logout',
             'skipAPI' => true, // true = dont get the data from steam, just return the steamid64
         ]);
     }
