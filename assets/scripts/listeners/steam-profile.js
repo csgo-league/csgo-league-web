@@ -15,23 +15,24 @@ const updateSteamProfile = (element, steam) => {
     .then(response => {
       let profileXML;
 
-      if (window.DOMParser)
-      {
+      if (window.DOMParser) {
         const parser = new DOMParser();
         profileXML = parser.parseFromString(response.data, 'text/xml');
-      }
-      else // Internet Explorer
-      {
+      } else {
         profileXML = new ActiveXObject('Microsoft.XMLDOM');
         profileXML.async = false;
         profileXML.loadXML(response.data);
       }
 
+      console.log(profileXML);
+
       let name = profileXML.getElementsByTagName('steamID')[0].childNodes[0].nodeValue;
       let avatar = profileXML.getElementsByTagName('avatarFull')[0].childNodes[0].nodeValue;
+      let avatarIcon = profileXML.getElementsByTagName('avatarIcon')[0].childNodes[0].nodeValue;
 
       element.find('.steam-profile-name').text(name);
       element.find('.steam-profile-avatar').attr('src', avatar);
+      element.find('.steam-profile-avatarIcon').attr('src', avatarIcon);
     });
 };
 

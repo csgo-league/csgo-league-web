@@ -10,7 +10,7 @@
                         <table class="table">
                             <thead class="table-borderless" style="border: none !important;">
                                 <tr>
-                                    <th colspan="8" style="
+                                    <th colspan="9" style="
                                         font-size: 30px;
                                         text-align: center;
                                         background-color: #5b768d;
@@ -19,27 +19,66 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th style="width:200px;">Player</th>
-                                    <th>Kills</th>
-                                    <th>Assists</th>
-                                    <th>Deaths</th>
-                                    <th>KDR</th>
-                                    <th>MVPs</th>
-                                    <th>Score</th>
-                                    <th>Ping</th>
+                                    <th colspan="2" style="width:232px;">
+                                        Player
+                                    </th>
+                                    <th>
+                                        Kills
+                                    </th>
+                                    <th>
+                                        Assists
+                                    </th>
+                                    <th>
+                                        Deaths
+                                    </th>
+                                    <th>
+                                        KDR
+                                    </th>
+                                    <th>
+                                        MVPs
+                                    </th>
+                                    <th>
+                                        Score
+                                    </th>
+                                    <th>
+                                        Ping
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for player in ct.players %}
                                     <tr id="{{ player.steamid64 }}" class="steam-profile">
-                                        <td><a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">Loading...</a></td>
-                                        <td>{{ player.kills }}</td>
-                                        <td>{{ player.assists }}</td>
-                                        <td>{{ player.deaths }}</td>
-                                        <td>{{ player.kdr }}</td>
-                                        <td>{{ player.mvps }}</td>
-                                        <td>{{ player.score }}</td>
-                                        <td>{{ player.ping }}</td>
+                                        <td style="width:32px;">
+                                            <a href="/profile/{{ player.steamid64 }}">
+                                                <img class="rounded-circle steam-profile-avatarIcon">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">
+                                                Loading...
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ player.kills }}
+                                        </td>
+                                        <td>
+                                            {{ player.assists }}
+                                        </td>
+                                        <td>
+                                            {{ player.deaths }}
+                                        </td>
+                                        <td>
+                                            {{ player.kdr|number_format(2, '.', ',') }}
+                                        </td>
+                                        <td>
+                                            {{ player.mvps }}
+                                        </td>
+                                        <td>
+                                            {{ player.score }}
+                                        </td>
+                                        <td>
+                                            {{ player.ping }}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -62,7 +101,7 @@
                         <table class="table">
                             <thead class="table-borderless" style="border: none !important;">
                                 <tr>
-                                    <th colspan="8" style="
+                                    <th colspan="9" style="
                                         font-size: 30px;
                                         text-align: center;
                                         background-color: #ac9b66;
@@ -71,27 +110,66 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th style="width:200px;">Player</th>
-                                    <th>Kills</th>
-                                    <th>Assists</th>
-                                    <th>Deaths</th>
-                                    <th>KDR</th>
-                                    <th>MVPs</th>
-                                    <th>Score</th>
-                                    <th>Ping</th>
+                                    <th colspan="2" style="width:232px;">
+                                        Player
+                                    </th>
+                                    <th>
+                                        Kills
+                                    </th>
+                                    <th>
+                                        Assists
+                                    </th>
+                                    <th>
+                                        Deaths
+                                    </th>
+                                    <th>
+                                        KDR
+                                    </th>
+                                    <th>
+                                        MVPs
+                                    </th>
+                                    <th>
+                                        Score
+                                    </th>
+                                    <th>
+                                        Ping
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for player in t.players %}
                                     <tr id="{{ player.steamid64 }}" class="steam-profile">
-                                        <td><a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">Loading...</a></td>
-                                        <td>{{ player.kills }}</td>
-                                        <td>{{ player.assists }}</td>
-                                        <td>{{ player.deaths }}</td>
-                                        <td>{{ player.kdr }}</td>
-                                        <td>{{ player.mvps }}</td>
-                                        <td>{{ player.score }}</td>
-                                        <td>{{ player.ping }}</td>
+                                        <td style="width:32px;">
+                                            <a href="/profile/{{ player.steamid64 }}">
+                                                <img class="rounded-circle steam-profile-avatarIcon">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">
+                                                Loading...
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ player.kills }}
+                                        </td>
+                                        <td>
+                                            {{ player.assists }}
+                                        </td>
+                                        <td>
+                                            {{ player.deaths }}
+                                        </td>
+                                        <td>
+                                            {{ player.kdr|number_format(2, '.', ',') }}
+                                        </td>
+                                        <td>
+                                            {{ player.mvps }}
+                                        </td>
+                                        <td>
+                                            {{ player.score }}
+                                        </td>
+                                        <td>
+                                            {{ player.ping }}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
