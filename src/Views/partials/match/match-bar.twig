@@ -3,14 +3,14 @@
         <div class="card match-card center" data-bs-hover-animate="pulse" style="margin-top:35px;">
             <img class="card-img w-100 d-block matches-img rounded-borders" style="background-image:url(&quot;{{ match.map_image }}&quot;);height:150px;">
             <div class="row card-img-overlay">
-                <h4 class="text-white col-4" style="font-size:70px;margin-top:15px;">
+                <h4 class="text-white text-center col-lg-4 col-md-6 col-sm-12 col-xs-12" style="font-size:70px;margin-top:15px;">
                     {{ match.team_2 }}:{{ match.team_3 }}
                 </h4>
-                <h4 class="text-white col-4 timestamp" style="text-align: center; font-size:30px;margin-top:15px;">
+                <h4 class="text-white col-lg-4 d-none d-lg-block timestamp" style="text-align: center; font-size:30px;margin-top:15px;">
                     {{ match.timestamp }}
                 </h4>
-                <div class="col-4">
-                    <img class="float-right" src="/img/icons/{{ match.icon }}" style="width:110px;">
+                <div class="text-center col-lg-4 col-md-6 d-none d-md-block">
+                    <img src="/img/icons/{{ match.icon }}" style="width:110px;">
                 </div>
             </div>
         </div>
