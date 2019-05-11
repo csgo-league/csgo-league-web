@@ -24,7 +24,7 @@ class PlayersController extends BaseController
     /**
      * Get players.
      *
-     * @param null|string $page
+     * @param string|null $page
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
