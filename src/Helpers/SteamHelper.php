@@ -2,7 +2,7 @@
 
 namespace B3none\League\Helpers;
 
-class SteamAuth
+class SteamHelper
 {
     const SUMMARY = 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/';
 
@@ -24,7 +24,7 @@ class SteamAuth
 
         // Start a session if none exists
         if ($this->settings['apikey'] == '') {
-            die('<b>SteamAuth:</b> Please supply a valid API-Key!');
+            die('<b>SteamHelper:</b> Please supply a valid API-Key!');
         }
 
         if ($this->settings['loginpage'] == '') {
@@ -170,7 +170,7 @@ class SteamAuth
             $this->{$key} = $value;
         }
 
-        // Make user-data accessable through $steam->var
+        // Make user-data accessible through $steam->var
         return true;
     }
 
@@ -179,7 +179,7 @@ class SteamAuth
      */
     public function debug()
     {
-        echo '<h1>SteamAuth debug report</h1><hr><b>Settings-array:</b><br>';
+        echo '<h1>SteamHelper debug report</h1><hr><b>Settings-array:</b><br>';
         echo '<pre>' . print_r($this->settings, true) . '</pre>';
         echo '<br><br><b>Data:</b><br>';
         echo '<pre>' . print_r($_SESSION['steamdata'], true) . '</pre>';

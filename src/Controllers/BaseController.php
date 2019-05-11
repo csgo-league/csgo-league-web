@@ -2,7 +2,7 @@
 
 namespace B3none\League\Controllers;
 
-use B3none\League\Helpers\SteamAuth;
+use B3none\League\Helpers\SteamHelper;
 use Twig\Environment;
 
 class BaseController
@@ -13,7 +13,7 @@ class BaseController
     protected $twig;
 
     /**
-     * @var SteamAuth
+     * @var SteamHelper
      */
     protected $steam;
 
@@ -32,7 +32,7 @@ class BaseController
             ]);
         }
 
-        $this->steam = new SteamAuth([
+        $this->steam = new SteamHelper([
             'apikey' => env('STEAM_API_KEY'), // Steam API KEY
             'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
             'loginpage' => 'http://localhost:5000', // Returns to last page if not set
