@@ -36,6 +36,12 @@ class ProfileController extends BaseController
     {
         try {
             $player = $this->playersHelper->getPlayer($steamId);
+
+            if ($player === null) {
+                response()->redirect('/players');
+                die;
+            }
+
             $matches = $this->matchesHelper->getPlayerMatches($steamId);
 
             return $this->twig->render('profile.twig', [

@@ -157,9 +157,9 @@ class PlayersHelper extends BaseHelper
      * Get player
      *
      * @param string $steamId
-     * @return array
+     * @return array|null
      */
-    public function getPlayer(string $steamId): array
+    public function getPlayer(string $steamId): ?array
     {
         $query = $this->db->query('
             SELECT * 
@@ -172,6 +172,6 @@ class PlayersHelper extends BaseHelper
 
         $player = $query->fetch();
 
-        return $this->formatPlayer($player);
+        return $player ? $this->formatPlayer($player) : null;
     }
 }
