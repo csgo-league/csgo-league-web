@@ -22,7 +22,7 @@ class MatchesController extends BaseController
     }
 
     /**
-     * @param null|string $page
+     * @param string|null $page
      * @return string
      */
     public function getIndex(?string $page = null): string

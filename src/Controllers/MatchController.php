@@ -30,6 +30,12 @@ class MatchController extends BaseController
         try {
             $match = $this->matchHelper->getMatchPlayers($matchId);
 
+            if ($match === null) {
+                response()->redirect('/matches');
+
+                die;
+            }
+
             return $this->twig->render('match.twig', array_merge($match, [
                 'nav' => [
                     'active' => 'matches'

@@ -6,9 +6,9 @@ class MatchHelper extends BaseHelper
 {
     /**
      * @param string $matchId
-     * @return array
+     * @return array|null
      */
-    public function getMatchPlayers(string $matchId): array
+    public function getMatchPlayers(string $matchId): ?array
     {
         $query = $this->db->query('
             SELECT sql_matches_scoretotal.*, sql_matches.*
@@ -22,7 +22,7 @@ class MatchHelper extends BaseHelper
 
         $matchPlayers = $query->fetchAll();
 
-        return $this->formatMatchPlayers($matchPlayers);
+        return $matchPlayers ? $this->formatMatchPlayers($matchPlayers) : null;
     }
 
     /**
