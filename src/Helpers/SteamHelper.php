@@ -2,10 +2,15 @@
 
 namespace B3none\League\Helpers;
 
+use Exception;
+
 class SteamHelper
 {
     const SUMMARY = 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/';
 
+    /**
+     * @var array
+     */
     protected $settings = [
         'apikey' => '', // Get yours today from http://steamcommunity.com/dev/apikey
         'domainname' => '', // Displayed domain in the login-screen
@@ -14,6 +19,11 @@ class SteamHelper
         'skipAPI' => false, // true = dont get the data from steam, just return the steamid64
     ];
 
+    /**
+     * SteamHelper constructor.
+     * @param array $config
+     * @throws Exception
+     */
     public function __construct(array $config)
     {
         if (session_id() == '') {
@@ -24,7 +34,7 @@ class SteamHelper
 
         // Start a session if none exists
         if ($this->settings['apikey'] == '') {
-            die('<b>SteamHelper:</b> Please supply a valid API-Key!');
+            throw new Exception('Please supply a valid steam API key');
         }
 
         if ($this->settings['loginpage'] == '') {
@@ -35,36 +45,41 @@ class SteamHelper
         // Code (c) 2010 ichimonai.com, released under MIT-License
         if (isset($_GET['openid_assoc_handle']) && !isset($_SESSION['steamdata']['steamid'])) {
             // Did we just return from steam login-page? If so, validate idendity and save the data
-            $steamid = $this->validate();
-            if ($steamid != '') {
+            $steamId = $this->validate();
+            if ($steamId != '') {
                 // ID Proven, get data from steam and save them
                 if ($this->settings['skipAPI']) {
-                    $_SESSION['steamdata']['steamid'] = $steamid;
+                    $_SESSION['steamdata']['steamid'] = $steamId;
                     return; // Skip API here
                 }
 
-                $response = file_get_contents(self::SUMMARY . "?key={$this->settings['apikey']}&steamids=$steamid");
+                $response = file_get_contents(self::SUMMARY . "?key={$this->settings['apikey']}&steamids=$steamId");
                 @$apiresp = json_decode($response, true);
                 foreach ($apiresp['response']['players'][0] as $key => $value) {
                     $_SESSION['steamdata'][$key] = $value;
                 }
             }
         }
+    }
 
-        if (isset($_SESSION['steamdata']['steamid'])) {
-            // If we are logged in, make user-data accessable through $steam->var
-            foreach ($_SESSION['steamdata'] as $key => $value) {
-                $this->{$key} = $value;
-            }
+    /**
+     * @return array|null
+     */
+    public function getAuthorisedUser(): ?array
+    {
+        if (is_array($_SESSION['steamdata'])) {
+            return $_SESSION['steamdata'];
         }
+
+        return null;
     }
 
     /**
      * Generate SteamLogin-URL
-     * @copyright loginUrl function (c) 2010 ichimonai.com, released under MIT-License
-     * Modified by BlackCetha for OOP use
+     *
+     * @return string
      */
-    public function loginUrl()
+    public function loginUrl(): string
     {
         $params = [
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
@@ -75,13 +90,11 @@ class SteamHelper
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
         ];
 
-        return 'https://steamcommunity.com/openid/login' . '?' . http_build_query($params, '', '&');
+        return 'https://steamcommunity.com/openid/login?' . http_build_query($params, '', '&');
     }
 
-    /*
-     * Validate data against Steam-Servers
-     * @copyright validate function (c) 2010 ichimonai.com, released under MIT-License
-     * Modified by BlackCetha for OOP use
+    /**
+     * @return int|string
      */
     private static function validate()
     {
@@ -126,7 +139,12 @@ class SteamHelper
         return preg_match('#is_valid\s*:\s*true#i', $result) == 1 ? $steamID64 : '';
     }
 
-    public function logout()
+    /**
+     * Log the user out
+     *
+     * @return bool
+     */
+    public function logout(): bool
     {
         if (!$this->loggedIn()) {
             return false;
@@ -147,41 +165,14 @@ class SteamHelper
         return true;
     }
 
-    public function loggedIn()
-    {
-        return isset($_SESSION['steamdata']['steamid']) && $_SESSION['steamdata']['steamid'] != '';
-    }
-
-    public function forceReload()
-    {
-        if (!isset($_SESSION['steamdata']['steamid'])) {
-            return false;
-        }
-
-        // User is not logged in, nothing to reload
-        $steamId = $_SESSION['steamdata']['steamid'];
-        $response = file_get_contents(self::SUMMARY."/?key={$this->settings['apikey']}&steamids={$steamId}");
-        @$apiresp = json_decode($response, true);
-        foreach ($apiresp['response']['players'][0] as $key => $value) {
-            $_SESSION['steamdata'][$key] = $value;
-        }
-
-        foreach ($_SESSION['steamdata'] as $key => $value) {
-            $this->{$key} = $value;
-        }
-
-        // Make user-data accessible through $steam->var
-        return true;
-    }
-
     /**
-     * Prints debug information about steamauth
+     * Return whether the user is logged in.
+     *
+     * @return bool
      */
-    public function debug()
+    public function loggedIn(): bool
     {
-        echo '<h1>SteamHelper debug report</h1><hr><b>Settings-array:</b><br>';
-        echo '<pre>' . print_r($this->settings, true) . '</pre>';
-        echo '<br><br><b>Data:</b><br>';
-        echo '<pre>' . print_r($_SESSION['steamdata'], true) . '</pre>';
+        $user = $this->getAuthorisedUser();
+        return  $user !== null && $user['steamid'] !== '';
     }
 }
