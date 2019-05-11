@@ -34,6 +34,9 @@ class HomeController extends BaseController
     public function getIndex(): string
     {
         try {
+            $this->steam->debug();
+//            die;
+
             $matches = $this->matchesHelper->getLatestMatches(3);
 
             $topPlayers = 6;

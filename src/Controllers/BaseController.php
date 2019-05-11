@@ -2,8 +2,8 @@
 
 namespace B3none\League\Controllers;
 
+use B3none\League\Helpers\SteamAuth;
 use Twig\Environment;
-use Vikas5914\SteamAuth;
 
 class BaseController
 {
@@ -37,7 +37,7 @@ class BaseController
             'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
             'loginpage' => 'http://localhost:5000', // Returns to last page if not set
             'logoutpage' => 'http://localhost:5000/logout',
-            'skipAPI' => true, // true = dont get the data from steam, just return the steamid64
+            'skipAPI' => false, // true = dont get the data from steam, just return the steamid64
         ]);
     }
 }

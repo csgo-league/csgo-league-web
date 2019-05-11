@@ -1,5 +1,6 @@
 <?php
 
+use B3none\League\Controllers\LoginController;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
 use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
@@ -43,8 +44,7 @@ class Router
         $homeRedirects = [
             '/',
             '/match',
-            '/profile',
-            '/login'
+            '/profile'
         ];
         foreach ($homeRedirects as $homeRedirect) {
             SimpleRouter::get($homeRedirect, function () {
@@ -77,9 +77,15 @@ class Router
         // Get profile
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
 
+        // Log in to steam
+        SimpleRouter::get('/login', LoginController::class . '@login');
+
+        // Log out of steam
+        SimpleRouter::get('/logout', LoginController::class . '@logout');
+
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {
-            response()->redirect('https://redlinecs.net');
+//            response()->redirect('https://redlinecs.net');
         });
     }
 }
