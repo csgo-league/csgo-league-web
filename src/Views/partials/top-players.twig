@@ -6,22 +6,18 @@
             </a>
         </div>
         <div class="row">
-            <div class="col-md-6 text-dark" style="margin-top:35px;">
+            <div class="col-md-6 text-dark" style="margin-top:20px;">
                 <div style="margin-top:-20px;">
-                    <ul class="list-group">
-                        {% for player in leftPlayers %}
-                            {% include 'partials/player/player-bar.twig' with player %}
-                        {% endfor %}
-                    </ul>
+                    {% for player in leftPlayers %}
+                        {% include 'partials/player/player-bar.twig' with player %}
+                    {% endfor %}
                 </div>
             </div>
-            <div class="col-md-6 text-dark" style="margin-top:35px;">
+            <div class="col-md-6 text-dark" style="margin-top:20px;">
                 <div style="margin-top:-20px;">
-                    <ul class="list-group">
-                        {% for player in rightPlayers %}
-                            {% include 'partials/player/player-bar.twig' with player %}
-                        {% endfor %}
-                    </ul>
+                    {% for player in rightPlayers %}
+                        {% include 'partials/player/player-bar.twig' with player %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
