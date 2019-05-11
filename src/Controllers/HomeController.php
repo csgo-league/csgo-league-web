@@ -44,7 +44,9 @@ class HomeController extends BaseController
 
             return $this->twig->render('home.twig', [
                 'nav' => [
-                    'active' => 'home'
+                    'active' => 'home',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'title' => 'Home',

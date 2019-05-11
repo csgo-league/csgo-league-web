@@ -10,28 +10,40 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav ml-auto" style="font-size:20px;">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link {% if nav.active == 'home' %}active{% endif %} nav-margins" href="/home">
+                    <a class="nav-link {% if nav.active == 'home' %}active {% endif %}nav-margins" href="/home">
                         <i class="fas fa-home"></i>&nbsp;Home
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link {% if nav.active == 'matches' %}active{% endif %} nav-margins" href="/matches">
+                    <a class="nav-link {% if nav.active == 'matches' %}active {% endif %}nav-margins" href="/matches">
                         <i class="fas fa-tv"></i>&nbsp;Matches
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link {% if nav.active == 'players' %}active{% endif %} nav-margins" href="/players">
+                    <a class="nav-link {% if nav.active == 'players' %}active {% endif %}nav-margins" href="/players">
                         <i class="fas fa-users"></i>&nbsp;Players
                     </a>
                 </li>
-                {#<li class="nav-item" role="presentation"><a class="nav-link  nav-margins" href="/ladder"><i class="far fa-list-alt"></i>&nbsp;Ladder</a></li>#}
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#login" type="button">
-                            <i class="fas fa-sign-in-alt"></i>&nbsp;login
-                        </button>
+                    <a class="nav-link {% if nav.active == 'myprofile' %}active {% endif %}nav-margins" href="/profile/{{ nav.user.steamid }}">
+                        <i class="fas fa-users"></i>&nbsp;My Profile
                     </a>
                 </li>
+                {% if nav.loggedIn %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link btn btn-danger text-white" href="/logout">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;logout
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#login" type="button">
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;login
+                            </button>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

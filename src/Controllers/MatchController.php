@@ -38,7 +38,9 @@ class MatchController extends BaseController
 
             return $this->twig->render('match.twig', array_merge($match, [
                 'nav' => [
-                    'active' => 'matches'
+                    'active' => 'matches',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'title' => 'Match',

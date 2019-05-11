@@ -46,6 +46,11 @@ class ProfileController extends BaseController
             $matches = $this->matchesHelper->getPlayerMatches($steamId);
 
             return $this->twig->render('profile.twig', [
+                'nav' => [
+                    'active' => $this->authorisedUser['steamid'] == $steamId ? 'myprofile' : '',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser
+                ],
                 'player' => $player,
                 'matches' => $matches,
                 'baseTitle' => env('BASE_TITLE'),
@@ -54,7 +59,7 @@ class ProfileController extends BaseController
             header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
-            'status' => 500
+                'status' => 500
             ]);
 
             die;

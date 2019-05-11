@@ -45,7 +45,9 @@ class MatchesController extends BaseController
 
             return $this->twig->render('matches.twig', [
                 'nav' => [
-                    'active' => 'matches'
+                    'active' => 'matches',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'title' => 'Matches',

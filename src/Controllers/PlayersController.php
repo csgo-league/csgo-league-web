@@ -50,7 +50,9 @@ class PlayersController extends BaseController
 
         return $this->twig->render('players.twig', [
             'nav' => [
-                'active' => 'players'
+                'active' => 'players',
+                'loggedIn' => $this->steam->loggedIn(),
+                'user' => $this->authorisedUser
             ],
             'baseTitle' => env('BASE_TITLE'),
             'title' => 'Players',
