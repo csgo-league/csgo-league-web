@@ -107,7 +107,8 @@ class MatchesHelper extends BaseHelper
      */
     protected function formatMatch(array $match): array
     {
-        $half = $match['team_2'] + $match['team_3'];
+        $half = ($match['team_2'] + $match['team_3']) / 2;
+        $half = ceil($half);
 
         if ($match['team_2'] > $half) {
             $match['icon'] = 'ct_icon.png';
