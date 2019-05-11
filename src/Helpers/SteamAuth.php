@@ -4,6 +4,8 @@ namespace B3none\League\Helpers;
 
 class SteamAuth
 {
+    const SUMMARY = 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/';
+
     protected $settings = [
         'apikey' => '', // Get yours today from http://steamcommunity.com/dev/apikey
         'domainname' => '', // Displayed domain in the login-screen
@@ -26,7 +28,8 @@ class SteamAuth
         }
 
         if ($this->settings['loginpage'] == '') {
-            $this->settings['loginpage'] = /* [ */(!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+            $protocol = !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+            $this->settings['loginpage'] = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
         }
 
         // Code (c) 2010 ichimonai.com, released under MIT-License
@@ -40,7 +43,8 @@ class SteamAuth
                     return; // Skip API here
                 }
 
-                @$apiresp = json_decode(file_get_contents('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' . $this->settings['apikey'] . '&steamids=' . $steamid), true);
+                $response = file_get_contents(self::SUMMARY . "?key={$this->settings['apikey']}&steamids=$steamid");
+                @$apiresp = json_decode($response, true);
                 foreach ($apiresp['response']['players'][0] as $key => $value) {
                     $_SESSION['steamdata'][$key] = $value;
                 }
@@ -155,7 +159,9 @@ class SteamAuth
         }
 
         // User is not logged in, nothing to reload
-        @$apiresp = json_decode(file_get_contents('https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' . $this->settings['apikey'] . '&steamids=' . $_SESSION['steamdata']['steamid']), true);
+        $steamId = $_SESSION['steamdata']['steamid'];
+        $response = file_get_contents(self::SUMMARY."/?key={$this->settings['apikey']}&steamids={$steamId}");
+        @$apiresp = json_decode($response, true);
         foreach ($apiresp['response']['players'][0] as $key => $value) {
             $_SESSION['steamdata'][$key] = $value;
         }
