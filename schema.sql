@@ -15,7 +15,6 @@ CREATE TABLE `players` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `player_link_codes` (
-  `steam64` varchar(100) NOT NULL,
   `discord` varchar(100) NOT NULL,
   `code` varchar(100) NOT NULL,
   `expires` int(11) DEFAULT NULL

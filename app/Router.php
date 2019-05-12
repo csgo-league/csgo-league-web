@@ -78,15 +78,13 @@ class Router
         // Get profile
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
 
-        // Log in to steam
+        // Log in & log out
         SimpleRouter::get('/login', LoginController::class . '@login');
+        SimpleRouter::get('/logout', LoginController::class . '@logout');
 
         // Link discord
-        SimpleRouter::get('/linkDiscord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
-        SimpleRouter::get('/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
-
-        // Log out of steam
-        SimpleRouter::get('/logout', LoginController::class . '@logout');
+        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
+        SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {

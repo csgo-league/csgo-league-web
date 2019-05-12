@@ -17,11 +17,12 @@ class DiscordHelper extends BaseHelper
     }
 
     /**
-     * @param string $steamId
+     * Generate a discord link code.
+     *
      * @param string $discordId
      * @return array|null
      */
-    public function generateDiscordLinkCode(string $steamId, string $discordId): ?array
+    public function generateDiscordLinkCode(string $discordId): ?array
     {
         $attempts = 0;
         $length = 5;
@@ -35,7 +36,6 @@ class DiscordHelper extends BaseHelper
         } while ($this->doesCodeExist($code));
 
         $insert = [
-            'steam64' => $steamId,
             'discord' => $discordId,
             'expires' => time() + (60 * 15), // 15 minutes
             'code' => $code
@@ -45,6 +45,12 @@ class DiscordHelper extends BaseHelper
         return $success ? $insert : null;
     }
 
+    /**
+     * Check whether the code exists
+     *
+     * @param string $code
+     * @return bool
+     */
     protected function doesCodeExist(string $code): bool
     {
         $query = $this->db->query('SELECT * FROM player_link_codes WHERE code = :code', [
@@ -67,7 +73,7 @@ class DiscordHelper extends BaseHelper
 
     public function processDiscordLink(string $steamId, string $discordId, string $code)
     {
-        if ($this->doesCodeExist($code) && $this->checkDiscordLink($steamId, $discordId, $code)) {
+        if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
             $this->db->update('players', [
                 'discord' => $discordId
             ], [
@@ -87,20 +93,18 @@ class DiscordHelper extends BaseHelper
     /**
      * Return whether the discord link is valid and in date.
      *
-     * @param string $steamId
      * @param string $discordId
      * @param string $code
      * @return bool
      */
-    protected function checkDiscordLink(string $steamId, string $discordId, string $code): bool
+    protected function checkDiscordLink(string $discordId, string $code): bool
     {
         $query = $this->db->query('
             SELECT expires
             FROM player_link_codes 
-            WHERE steam64 = :steamId AND discord = :discordId AND code = :code
+            WHERE discord = :discordId AND code = :code
         ', [
             ':code' => $code,
-            ':steamId' => $steamId,
             ':discordId' => $discordId
         ]);
 
