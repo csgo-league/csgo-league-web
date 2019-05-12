@@ -12,7 +12,13 @@ CREATE TABLE `players` (
   `steam` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `steamid64` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `discordId` varchar(100) COLLATE utf8mb4_unicode_ci,
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `player_link_codes` (
+  `steamid64` varchar(100) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `expires` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `rankme` (
   `id` int(11) NOT NULL,
@@ -98,7 +104,7 @@ CREATE TABLE `rankme` (
   `first_blood` decimal(10,0) DEFAULT NULL,
   `no_scope` decimal(10,0) DEFAULT NULL,
   `no_scope_dis` decimal(10,0) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `sql_matches` (
   `match_id` bigint(20) NOT NULL,
@@ -125,7 +131,7 @@ CREATE TABLE `sql_matches_scoretotal` (
   `teamname_1` varchar(64) NOT NULL,
   `teamname_2` varchar(64) NOT NULL,
   `map` varchar(128) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `rankme`
   ADD PRIMARY KEY (`id`),
