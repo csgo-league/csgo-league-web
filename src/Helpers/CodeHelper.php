@@ -2,7 +2,6 @@
 
 namespace B3none\League\Helpers;
 
-
 class CodeHelper
 {
     /**
