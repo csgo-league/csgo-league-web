@@ -24,6 +24,14 @@ class DiscordHelper extends BaseHelper
      */
     public function generateDiscordLinkCode(string $discordId): ?array
     {
+        $query = $this->db->query('SELECT * FROM player_link_codes WHERE discord = :discordId', [
+            'discordId' => $discordId
+        ]);
+
+        if ($query->rowCount() > 0) {
+            return $query->fetch();
+        }
+
         $attempts = 0;
         $length = 5;
         do {
