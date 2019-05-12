@@ -11,7 +11,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `players` (
   `steam` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `steamid64` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `steamid64` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `discordId` varchar(100) COLLATE utf8mb4_unicode_ci,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `rankme` (
