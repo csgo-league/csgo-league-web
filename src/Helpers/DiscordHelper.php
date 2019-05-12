@@ -30,8 +30,8 @@ class DiscordHelper extends BaseHelper
         } while ($this->doesCodeExist($code));
 
         $this->db->insert('player_link_codes', [
-            'steam' => $steamId,
-            'discord' => '',
+            'steam64' => $steamId,
+            'discord' => $discordId,
             'expires' => time() + (60 * 15), // 15 minutes
             'code' => $code
         ]);
