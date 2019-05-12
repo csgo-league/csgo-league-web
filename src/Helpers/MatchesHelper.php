@@ -82,7 +82,7 @@ class MatchesHelper extends BaseHelper
             FROM sql_matches_scoretotal 
             INNER JOIN sql_matches ON sql_matches_scoretotal.match_id = sql_matches.match_id
             WHERE sql_matches.name LIKE :like_search 
-            OR sql_matches.steamid64 = :search 
+            OR sql_matches.steam64 = :search 
             OR sql_matches_scoretotal.match_id = :search
             ORDER BY sql_matches_scoretotal.timestamp DESC
         ', [
@@ -164,7 +164,7 @@ class MatchesHelper extends BaseHelper
             FROM sql_matches 
             JOIN sql_matches_scoretotal 
             ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches.steamid64 = :steam 
+            WHERE sql_matches.steam64 = :steam 
             ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
         ', [
             ':steam' => $steamId,

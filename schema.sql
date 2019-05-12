@@ -10,12 +10,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `players` (
   `steam` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `steamid64` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discordId` varchar(100) COLLATE utf8mb4_unicode_ci,
+  `steam64` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `discord` varchar(100) COLLATE utf8mb4_unicode_ci,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `player_link_codes` (
-  `steamid64` varchar(100) NOT NULL,
+  `steam64` varchar(100) NOT NULL,
   `code` varchar(100) NOT NULL,
   `expires` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -109,7 +109,7 @@ CREATE TABLE `rankme` (
 CREATE TABLE `sql_matches` (
   `match_id` bigint(20) NOT NULL,
   `name` varchar(65) CHARACTER SET utf8 NOT NULL,
-  `steamid64` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `steam64` varchar(64) CHARACTER SET utf8 NOT NULL,
   `team` int(11) NOT NULL,
   `alive` int(11) NOT NULL,
   `ping` int(11) NOT NULL,

@@ -31,7 +31,8 @@ class DiscordHelper extends BaseHelper
 
         $this->db->insert('player_link_codes', [
             'steam' => $steamId,
-            'discordId' => $discordId,
+            'discord' => '',
+            'expires' => time() + (60 * 15), // 15 minutes
             'code' => $code
         ]);
 
@@ -44,11 +45,26 @@ class DiscordHelper extends BaseHelper
             ':code' => $code
         ]);
 
+        $response = $query->fetch();
+        if ($response === false) {
+            return false;
+        } elseif ($response['expires'] < time()) {
+            $this->db->delete('player_link_codes', [
+                'code' => $code
+            ]);
+
+            return false;
+        }
+
         return $query->rowCount() > 0;
     }
 
-    protected function checkDiscordLink(string $discordId, string $code)
+    protected function checkDiscordLink(string $steamId, string $discordId, string $code)
     {
+        $query = $this->db->query('SELECT * FROM player_link_codes WHERE code = :code', [
+            ':code' => $code
+        ]);
 
+        return $query->rowCount() > 0;
     }
 }

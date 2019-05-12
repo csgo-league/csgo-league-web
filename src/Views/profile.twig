@@ -5,11 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a id="{{ player.steamid64 }}" href="https://steamcommunity.com/profiles/{{ player.steamid64 }}" class="card rounded-borders steam-profile" style="border: none !important;">
+                    <div id="{{ player.steam64 }}" class="card rounded-borders steam-profile" style="border: none !important;">
                         <div class="card-body">
-                            <div style="clear: both;">
+                            <div style="clear: both;"></div>
 
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="text-align: center">
@@ -20,8 +19,20 @@
                                     </h1>
                                 </div>
                             </div>
+
+                            <hr>
+
+                            <div class="row" style="text-align: center;font-size: 100px">
+                                <div class="col-md-6">
+                                    <a href="https://steamcommunity.com/profiles/{{ player.steam64 }}" class="fab fa-steam-square"></a>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <i class="fab fa-discord"></i>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +68,7 @@
                                 </div>
                             </div>
                             {#<div class="social-icons-profile" style="margin-top:15px;">#}
-                                {#<a href="https://steamcommunity.com/profiles/{{ player.steamid64 }}" style="margin-left:10px;color:#171A21;"><i class="fab fa-steam"></i></a>#}
+                                {#<a href="https://steamcommunity.com/profiles/{{ player.steam64 }}" style="margin-left:10px;color:#171A21;"><i class="fab fa-steam"></i></a>#}
                                 {#<a href="#" style="margin-left:10px;color:#6441a4;"><i class="fab fa-twitch"></i></a>#}
                                 {#<a href="#" style="margin-left:10px;color:#ff0000;"><i class="fab fa-youtube"></i></a>#}
                                 {#<a href="#" style="color:#1da1f2;"><i class="fab fa-twitter"></i></a>#}

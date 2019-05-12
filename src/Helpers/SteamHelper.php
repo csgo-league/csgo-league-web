@@ -16,7 +16,7 @@ class SteamHelper
         'domainname' => '', // Displayed domain in the login-screen
         'loginpage' => '', // Returns to last page if not set
         'logoutpage' => '',
-        'skipAPI' => false, // true = dont get the data from steam, just return the steamid64
+        'skipAPI' => false, // true = dont get the data from steam, just return the steam64
     ];
 
     /**
@@ -133,10 +133,10 @@ class SteamHelper
 
         // Validate wheather it's true and if we have a good ID
         preg_match('#^https://steamcommunity.com/openid/id/([0-9]{17,25})#', $_GET['openid_claimed_id'], $matches);
-        $steamID64 = is_numeric($matches[1]) ? $matches[1] : 0;
+        $steam64 = is_numeric($matches[1]) ? $matches[1] : 0;
 
         // Return our final value
-        return preg_match('#is_valid\s*:\s*true#i', $result) == 1 ? $steamID64 : '';
+        return preg_match('#is_valid\s*:\s*true#i', $result) == 1 ? $steam64 : '';
     }
 
     /**

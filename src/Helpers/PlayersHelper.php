@@ -99,7 +99,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT * FROM rankme 
             JOIN players ON players.steam = rankme.steam 
-            WHERE name LIKE :like_search OR steam = :search OR steamid64 = :search 
+            WHERE name LIKE :like_search OR steam = :search OR steam64 = :search 
             ORDER BY score DESC
         ', [
             ':search' => $search,
@@ -148,7 +148,7 @@ class PlayersHelper extends BaseHelper
 
             $this->db->insert('players', [
                 'steam' => $player['steam'],
-                'steamid64' => $steam->getSteamID64(),
+                'steam64' => $steam->getSteam64(),
             ]);
         }
     }
@@ -165,7 +165,7 @@ class PlayersHelper extends BaseHelper
             SELECT * 
             FROM rankme 
             JOIN players ON players.steam = rankme.steam 
-            WHERE players.steamid64 = :steam
+            WHERE players.steam64 = :steam
         ', [
             ':steam' => $steamId,
         ]);

@@ -47,14 +47,14 @@
                             </thead>
                             <tbody>
                                 {% for player in ct.players %}
-                                    <tr id="{{ player.steamid64 }}" class="steam-profile">
+                                    <tr id="{{ player.steam64 }}" class="steam-profile">
                                         <td style="width:32px;">
-                                            <a href="/profile/{{ player.steamid64 }}">
+                                            <a href="/profile/{{ player.steam64 }}">
                                                 <img class="rounded-circle steam-profile-avatarIcon">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">
+                                            <a href="/profile/{{ player.steam64 }}" class="text-white steam-profile-name" target="_blank">
                                                 Loading...
                                             </a>
                                         </td>
@@ -138,14 +138,14 @@
                             </thead>
                             <tbody>
                                 {% for player in t.players %}
-                                    <tr id="{{ player.steamid64 }}" class="steam-profile">
+                                    <tr id="{{ player.steam64 }}" class="steam-profile">
                                         <td style="width:32px;">
-                                            <a href="/profile/{{ player.steamid64 }}">
+                                            <a href="/profile/{{ player.steam64 }}">
                                                 <img class="rounded-circle steam-profile-avatarIcon">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/profile/{{ player.steamid64 }}" class="text-white steam-profile-name" target="_blank">
+                                            <a href="/profile/{{ player.steam64 }}" class="text-white steam-profile-name" target="_blank">
                                                 Loading...
                                             </a>
                                         </td>

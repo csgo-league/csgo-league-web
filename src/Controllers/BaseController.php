@@ -38,7 +38,7 @@ class BaseController
                     'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
                     'loginpage' => 'http://localhost:5000/home', // Returns to last page if not set
                     'logoutpage' => 'http://localhost:5000/home',
-                    'skipAPI' => true, // true = dont get the data from steam, just return the steamid64
+                    'skipAPI' => true, // true = dont get the data from steam, just return the steam64
                 ]);
             } else {
                 $this->twig = new Environment($loader, [
@@ -50,7 +50,7 @@ class BaseController
                     'domainname' => 'https://league.redlinecs.net', // Displayed domain in the login-screen
                     'loginpage' => 'https://league.redlinecs.net/home', // Returns to last page if not set
                     'logoutpage' => 'https://league.redlinecs.net/home',
-                    'skipAPI' => true, // true = dont get the data from steam, just return the steamid64
+                    'skipAPI' => true, // true = dont get the data from steam, just return the steam64
                 ]);
             }
 

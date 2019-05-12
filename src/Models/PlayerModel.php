@@ -78,7 +78,7 @@ class PlayerModel
     protected $vip_played;
     protected $mvp;
     protected $damage;
-    protected $steamid64;
+    protected $steam64;
 
     /**
      * PlayerModel Constructor
@@ -160,7 +160,7 @@ class PlayerModel
         $this->vip_played = $item['vip_played'];
         $this->mvp = $item['mvp'];
         $this->damage = $item['damage'];
-        $this->steamid64 = $item['steamid64'];
+        $this->steam64 = $item['steam64'];
     }
 
     /**
