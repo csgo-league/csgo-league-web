@@ -96,7 +96,7 @@ class SteamHelper
     /**
      * @return int|string
      */
-    private static function validate()
+    protected function validate()
     {
         // Star off with some basic params
         $params = [
