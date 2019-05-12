@@ -13,7 +13,7 @@ class CodeHelper
      */
     public function generate(int $length = 5): string
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
         $charactersLength = strlen($characters);
 
         $randomString = '';
