@@ -54,14 +54,6 @@ class DiscordController extends BaseController
     public function generateDiscordLink(string $discordId): string
     {
         try {
-            if (!$this->steam->loggedIn()) {
-                response()->redirect($this->steam->loginUrl());
-
-                die;
-            }
-
-            $steamId = $this->authorisedUser['steamid'];
-
             return json_encode($this->discordHelper->generateDiscordLinkCode($discordId));
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
