@@ -53,6 +53,8 @@ class DiscordController extends BaseController
      */
     public function generateDiscordLink(string $discordId): string
     {
+        die('sausage');
+
         try {
             return json_encode($this->discordHelper->generateDiscordLinkCode($discordId));
         } catch (\Exception $e) {

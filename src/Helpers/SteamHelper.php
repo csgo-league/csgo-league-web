@@ -67,7 +67,7 @@ class SteamHelper
      */
     public function getAuthorisedUser(): ?array
     {
-        if (is_array($_SESSION['steamdata'])) {
+        if (key_exists('steamdata', $_SESSION) && is_array($_SESSION['steamdata'])) {
             return $_SESSION['steamdata'];
         }
 

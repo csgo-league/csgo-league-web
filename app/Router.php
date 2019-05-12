@@ -83,8 +83,8 @@ class Router
         SimpleRouter::get('/logout', LoginController::class . '@logout');
 
         // Link discord
-        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
         SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
+        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, \Exception $exception) {
