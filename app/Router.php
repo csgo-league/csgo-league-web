@@ -82,7 +82,8 @@ class Router
         SimpleRouter::get('/login', LoginController::class . '@login');
 
         // Link discord
-        SimpleRouter::get('/linkDiscord/{discordId}/{token}', DiscordController::class . '@linkDiscord');
+        SimpleRouter::get('/linkDiscord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
+        SimpleRouter::get('/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
 
         // Log out of steam
         SimpleRouter::get('/logout', LoginController::class . '@logout');

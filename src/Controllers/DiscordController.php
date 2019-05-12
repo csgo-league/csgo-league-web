@@ -19,10 +19,10 @@ class DiscordController extends BaseController
      * Link Discord
      *
      * @param string $discordId
-     * @param string $token
+     * @param string $code
      * @return void
      */
-    public function linkDiscord(string $discordId, string $token): void
+    public function linkDiscord(string $discordId, string $code): void
     {
         try {
             if (!$this->steam->loggedIn()) {
@@ -32,6 +32,8 @@ class DiscordController extends BaseController
             }
 
             $steamId = $this->authorisedUser['steamid'];
+
+            $this->discordHelper->processDiscordLink($steamId, $discordId, $code);
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 
@@ -43,18 +45,24 @@ class DiscordController extends BaseController
         }
     }
 
-    public function generateDiscordLink(string $discordId)
+    /**
+     * Generate discord link
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function generateDiscordLink(string $discordId): string
     {
         try {
             if (!$this->steam->loggedIn()) {
                 response()->redirect($this->steam->loginUrl());
 
-                return;
+                die;
             }
 
             $steamId = $this->authorisedUser['steamid'];
 
-            $this->discordHelper->generateDiscordLinkCode($steamId, $discordId);
+            return json_encode($this->discordHelper->generateDiscordLinkCode($steamId, $discordId));
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 
