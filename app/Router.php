@@ -1,5 +1,6 @@
 <?php
 
+use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
 use Pecee\Http\Request;
@@ -79,6 +80,9 @@ class Router
 
         // Log in to steam
         SimpleRouter::get('/login', LoginController::class . '@login');
+
+        // Link discord
+        SimpleRouter::get('/linkDiscord/{discordId}/{token}', DiscordController::class . '@linkDiscord');
 
         // Log out of steam
         SimpleRouter::get('/logout', LoginController::class . '@logout');
