@@ -96,7 +96,6 @@ class DiscordHelper extends BaseHelper
     public function processDiscordLink(string $steamId, string $discordId, string $code): bool
     {
         if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
-            echo "exists";
             $update = $this->db->update('players', [
                 'discord' => $discordId
             ], [
@@ -104,7 +103,7 @@ class DiscordHelper extends BaseHelper
             ]);
 
             if ($update->execute()) {
-                return $this->db->delete('player_link_codes', [
+                return !!$this->db->delete('player_link_codes', [
                     'code' => $code
                 ]);
             }
