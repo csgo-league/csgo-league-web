@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="{{ player.steam64 }}" class="card rounded-borders steam-profile" style="border: none !important;">
+                    <a href="https://steamcommunity.com/profiles/{{ player.steam64 }}" id="{{ player.steam64 }}" class="card rounded-borders steam-profile" style="border: none !important;">
                         <div class="card-body">
                             <div style="clear: both;"></div>
 
@@ -19,20 +19,8 @@
                                     </h1>
                                 </div>
                             </div>
-
-                            <hr>
-
-                            <div class="row" style="text-align: center;font-size: 100px">
-                                <div class="col-md-6">
-                                    <a href="https://steamcommunity.com/profiles/{{ player.steam64 }}" class="fab fa-steam-square"></a>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <i class="fab fa-discord"></i>
-                                </div>
-                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
