@@ -48,7 +48,7 @@ class DiscordHelper extends BaseHelper
             'expires' => time() + (60 * 15), // 15 minutes
             'code' => $code
         ];
-        $success = $this->db->insert('player_link_codes', $insert);
+        $success = !!$this->db->insert('player_link_codes', $insert);
 
         return $success ? $insert : null;
     }
