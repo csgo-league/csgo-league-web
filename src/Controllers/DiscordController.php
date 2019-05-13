@@ -33,7 +33,12 @@ class DiscordController extends BaseController
 
             $steamId = $this->authorisedUser['steamid'];
 
-            $this->discordHelper->processDiscordLink($steamId, $discordId, $code);
+            if ($this->discordHelper->processDiscordLink($steamId, $discordId, $code)) {
+                response()->redirect('/profile/' . $steamId);
+            }
+
+            response()->redirect('/home');
+            die;
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 

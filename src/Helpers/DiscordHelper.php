@@ -79,23 +79,33 @@ class DiscordHelper extends BaseHelper
         return $query->rowCount() > 0;
     }
 
-    public function processDiscordLink(string $steamId, string $discordId, string $code)
+    /**
+     * Process discord link
+     *
+     * @param string $steamId
+     * @param string $discordId
+     * @param string $code
+     * @return bool
+     */
+    public function processDiscordLink(string $steamId, string $discordId, string $code): bool
     {
         if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
-            $this->db->update('players', [
+            $success = $this->db->update('players', [
                 'discord' => $discordId
             ], [
                 'steam64' => $steamId
             ]);
 
-            $this->db->delete('player_link_codes', [
-                'code' => $code
-            ]);
+            if ($success) {
+                $this->db->delete('player_link_codes', [
+                    'code' => $code
+                ]);
 
-            return;
+                return true;
+            }
         }
 
-        response()->redirect('/home');
+        return false;
     }
 
     /**
