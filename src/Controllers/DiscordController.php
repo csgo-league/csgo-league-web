@@ -6,6 +6,9 @@ use B3none\League\Helpers\DiscordHelper;
 
 class DiscordController extends BaseController
 {
+    /**
+     * @var DiscordHelper
+     */
     protected $discordHelper;
 
     public function __construct()
