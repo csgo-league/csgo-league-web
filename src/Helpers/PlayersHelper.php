@@ -148,7 +148,7 @@ class PlayersHelper extends BaseHelper
 
             $this->db->insert('players', [
                 'steam' => $player['steam'],
-                'steam64' => $steam->getSteam64(),
+                'steam64' => $steam->getSteamID64(),
             ]);
         }
     }
