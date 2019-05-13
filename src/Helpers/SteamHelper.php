@@ -77,14 +77,15 @@ class SteamHelper
     /**
      * Generate SteamLogin-URL
      *
+     * @param string|null $returnTo
      * @return string
      */
-    public function loginUrl(): string
+    public function loginUrl(?string $returnTo = null): string
     {
         $params = [
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
             'openid.mode' => 'checkid_setup',
-            'openid.return_to' => $this->settings['loginpage'],
+            'openid.return_to' => $returnTo ?? $this->settings['loginpage'],
             'openid.realm' => (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
             'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
