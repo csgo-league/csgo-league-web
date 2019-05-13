@@ -11,6 +11,9 @@ class DiscordController extends BaseController
      */
     protected $discordHelper;
 
+    /**
+     * DiscordController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
