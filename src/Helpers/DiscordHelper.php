@@ -20,9 +20,9 @@ class DiscordHelper extends BaseHelper
      * Generate a discord link code.
      *
      * @param string $discordId
-     * @return array|null
+     * @return array
      */
-    public function generateDiscordLinkCode(string $discordId): ?array
+    public function generateDiscordLinkCode(string $discordId): array
     {
         $query = $this->db->query('SELECT * FROM player_link_codes WHERE discord = :discordId', [
             'discordId' => $discordId
@@ -50,7 +50,7 @@ class DiscordHelper extends BaseHelper
         ];
         $success = !!$this->db->insert('player_link_codes', $insert);
 
-        return $success ? $insert : null;
+        return $success ? $insert : ['code' => null];
     }
 
     /**

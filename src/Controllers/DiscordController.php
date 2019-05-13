@@ -26,26 +26,22 @@ class DiscordController extends BaseController
      *
      * @param string $discordId
      * @param string $code
-     * @return void
+     * @return string
      */
-    public function linkDiscord(string $discordId, string $code): void
+    public function linkDiscord(string $discordId, string $code): string
     {
         try {
             if (!$this->steam->loggedIn()) {
-                response()->redirect(
-                    $this->steam->loginUrl("https://league.redlinecs.net/discord/$discordId/$code")
-                );
-
-                return;
+                return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and try again.";
             }
 
             $steamId = $this->authorisedUser['steamid'];
 
             if ($this->discordHelper->processDiscordLink($steamId, $discordId, $code)) {
-                response()->redirect('/profile/' . $steamId);
+                return "Success! You may now close this window.";
             }
 
-            response()->redirect('/home');
+            return "Failure! If you're really struggling contact B3none";
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 
