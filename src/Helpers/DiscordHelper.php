@@ -65,6 +65,12 @@ class DiscordHelper extends BaseHelper
             ':code' => $code
         ]);
 
+        $rows = $query->rowCount();
+
+        if ($rows === 0) {
+            return false;
+        }
+
         $response = $query->fetch();
         if ($response === false) {
             return false;
@@ -76,7 +82,7 @@ class DiscordHelper extends BaseHelper
             return false;
         }
 
-        return $query->rowCount() > 0;
+        return $rows > 0;
     }
 
     /**
@@ -90,6 +96,7 @@ class DiscordHelper extends BaseHelper
     public function processDiscordLink(string $steamId, string $discordId, string $code): bool
     {
         if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
+            echo "exists";
             $update = $this->db->update('players', [
                 'discord' => $discordId
             ], [
