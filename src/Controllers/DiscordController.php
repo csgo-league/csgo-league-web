@@ -38,7 +38,6 @@ class DiscordController extends BaseController
             }
 
             response()->redirect('/home');
-            die;
         } catch (\Exception $e) {
             header('HTTP/1.1 500 Internal Server Error');
 
