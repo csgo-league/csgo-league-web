@@ -32,7 +32,9 @@ class DiscordController extends BaseController
     {
         try {
             if (!$this->steam->loggedIn()) {
-                response()->redirect($this->steam->loginUrl());
+                response()->redirect(
+                    $this->steam->loginUrl("https://league.redlinecs.net/discord/$discordId/$code")
+                );
 
                 return;
             }
