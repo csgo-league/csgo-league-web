@@ -30,7 +30,8 @@ class BaseController
         try {
             $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
 
-            if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
+            $remote = $_SERVER['REMOTE_ADDR'];
+            if ($remote === '127.0.0.1' || $remote === '::1') {
                 $this->twig = new Environment($loader);
 
                 $this->steam = new SteamHelper([
