@@ -50,7 +50,7 @@ class HomeController extends BaseController
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'title' => 'Home',
-                'latest' => $matches,
+                'latestMatches' => $matches,
                 'leftPlayers' => $leftPlayers,
                 'rightPlayers' => $rightPlayers
             ]);
