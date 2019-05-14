@@ -33,9 +33,7 @@ set_exception_handler(function (Exception $exception) {
         ]);
     }
 
-    echo json_encode($response);
-
-    die;
+    die(json_encode($response));
 });
 
 require(__DIR__ . '/../vendor/autoload.php');
