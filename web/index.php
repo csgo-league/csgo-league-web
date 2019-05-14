@@ -26,7 +26,7 @@ set_exception_handler(function (Exception $exception) {
 
     $remote = $_SERVER['REMOTE_ADDR'];
     if ($remote !== '127.0.0.1' && $remote !== '::1') {
-        array_merge($response, [
+        $response = array_merge($response, [
             'error' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine()
