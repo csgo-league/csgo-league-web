@@ -34,7 +34,7 @@ class HomeController extends BaseController
     public function getIndex(): string
     {
         try {
-            $matches = $this->matchesHelper->getLatestMatches(3);
+            $latestMatches = $this->matchesHelper->getLatestMatches(3);
 
             $topPlayers = 6;
             $players = $this->playersHelper->getTopPlayers($topPlayers);
@@ -50,7 +50,7 @@ class HomeController extends BaseController
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'title' => 'Home',
-                'latestMatches' => $matches,
+                'latestMatches' => $latestMatches,
                 'leftPlayers' => $leftPlayers,
                 'rightPlayers' => $rightPlayers
             ]);
@@ -58,7 +58,10 @@ class HomeController extends BaseController
             header('HTTP/1.1 500 Internal Server Error');
 
             echo json_encode([
-                'status' => 500
+                'status' => 500,
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
             ]);
 
             die;

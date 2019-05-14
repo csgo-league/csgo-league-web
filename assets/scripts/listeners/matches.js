@@ -8,7 +8,7 @@ export function listen() {
     hours = ('0' + hours).slice(-2);
     var minutes = date.getMinutes();
     minutes = ('0' + minutes).slice(-2);
-    matchDate.prop('innerHTML', date.toLocaleDateString() + ' ' + hours + ':' + minutes);
+    matchDate.prop('innerHTML', date.toLocaleDateString() + '<hr>' + hours + ':' + minutes);
     el.removeClass('d-none');
   });
 }
