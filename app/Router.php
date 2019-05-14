@@ -36,6 +36,7 @@ class Router
             die($e->getMessage());
         }
     }
+
     /**
      * Register the routes.
      */
