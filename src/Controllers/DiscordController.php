@@ -30,27 +30,17 @@ class DiscordController extends BaseController
      */
     public function linkDiscord(string $discordId, string $code): string
     {
-        try {
-            if (!$this->steam->loggedIn()) {
-                return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and try again.";
-            }
-
-            $steamId = $this->authorisedUser['steamid'];
-
-            if ($this->discordHelper->processDiscordLink($steamId, $discordId, $code)) {
-                return "Success! You may now close this window.";
-            }
-
-            return "Failure! If you're really struggling contact B3none";
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        if (!$this->steam->loggedIn()) {
+            return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and try again.";
         }
+
+        $steamId = $this->authorisedUser['steamid'];
+
+        if ($this->discordHelper->processDiscordLink($steamId, $discordId, $code)) {
+            return "Success! You may now close this window.";
+        }
+
+        return "Failure! If you're really struggling contact B3none";
     }
 
     /**

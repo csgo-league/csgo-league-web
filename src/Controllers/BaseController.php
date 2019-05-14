@@ -27,43 +27,33 @@ class BaseController
      */
     public function __construct()
     {
-        try {
-            $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
 
-            $remote = $_SERVER['REMOTE_ADDR'];
-            if ($remote === '127.0.0.1' || $remote === '::1') {
-                $this->twig = new Environment($loader);
+        $remote = $_SERVER['REMOTE_ADDR'];
+        if ($remote === '127.0.0.1' || $remote === '::1') {
+            $this->twig = new Environment($loader);
 
-                $this->steam = new SteamHelper([
-                    'apikey' => env('STEAM_API_KEY'), // Steam API KEY
-                    'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
-                    'loginpage' => 'http://localhost:5000/home', // Returns to last page if not set
-                    'logoutpage' => 'http://localhost:5000/home',
-                    'skipAPI' => true, // true = dont get the data from steam, just return the steam64
-                ]);
-            } else {
-                $this->twig = new Environment($loader, [
-                    'cache' => __DIR__ . '/../../app/cache/twig',
-                ]);
-
-                $this->steam = new SteamHelper([
-                    'apikey' => env('STEAM_API_KEY'), // Steam API KEY
-                    'domainname' => 'https://league.redlinecs.net', // Displayed domain in the login-screen
-                    'loginpage' => 'https://league.redlinecs.net/home', // Returns to last page if not set
-                    'logoutpage' => 'https://league.redlinecs.net/home',
-                    'skipAPI' => true, // true = dont get the data from steam, just return the steam64
-                ]);
-            }
-
-            $this->authorisedUser = $this->steam->getAuthorisedUser();
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
+            $this->steam = new SteamHelper([
+                'apikey' => env('STEAM_API_KEY'), // Steam API KEY
+                'domainname' => 'http://localhost:5000', // Displayed domain in the login-screen
+                'loginpage' => 'http://localhost:5000/home', // Returns to last page if not set
+                'logoutpage' => 'http://localhost:5000/home',
+                'skipAPI' => true, // true = dont get the data from steam, just return the steam64
+            ]);
+        } else {
+            $this->twig = new Environment($loader, [
+                'cache' => __DIR__ . '/../../app/cache/twig',
             ]);
 
-            die;
+            $this->steam = new SteamHelper([
+                'apikey' => env('STEAM_API_KEY'), // Steam API KEY
+                'domainname' => 'https://league.redlinecs.net', // Displayed domain in the login-screen
+                'loginpage' => 'https://league.redlinecs.net/home', // Returns to last page if not set
+                'logoutpage' => 'https://league.redlinecs.net/home',
+                'skipAPI' => true, // true = dont get the data from steam, just return the steam64
+            ]);
         }
+
+        $this->authorisedUser = $this->steam->getAuthorisedUser();
     }
 }

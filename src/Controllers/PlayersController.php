@@ -67,33 +67,26 @@ class PlayersController extends BaseController
 
     /**
      * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function postIndex(): string
     {
-        try {
-            $search = input()->post('search')->getValue();
+        $search = input()->post('search')->getValue();
 
-            if (!$search) {
-                response()->redirect('/players');
-            }
-
-            $players = $this->playersHelper->searchPlayers($search);
-
-            return $this->twig->render('players.twig', [
-                'nav' => [
-                    'active' => 'players'
-                ],
-                'players' => $players,
-                'searchedValue' => $search
-            ]);
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-            'status' => 500
-            ]);
-
-            die;
+        if (!$search) {
+            response()->redirect('/players');
         }
+
+        $players = $this->playersHelper->searchPlayers($search);
+
+        return $this->twig->render('players.twig', [
+            'nav' => [
+                'active' => 'players'
+            ],
+            'players' => $players,
+            'searchedValue' => $search
+        ]);
     }
 }

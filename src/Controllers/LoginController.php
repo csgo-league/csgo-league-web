@@ -11,17 +11,7 @@ class LoginController extends BaseController
      */
     public function login(): void
     {
-        try {
-            response()->redirect($this->steam->loginUrl());
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
-        }
+        response()->redirect($this->steam->loginUrl());
     }
 
     /**
@@ -29,16 +19,6 @@ class LoginController extends BaseController
      */
     public function logout(): void
     {
-        try {
-            $this->steam->logout();
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
-        }
+        $this->steam->logout();
     }
 }
