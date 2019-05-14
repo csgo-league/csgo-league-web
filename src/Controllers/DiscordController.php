@@ -3,6 +3,7 @@
 namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\DiscordHelper;
+use B3none\League\Helpers\ExceptionHelper;
 
 class DiscordController extends BaseController
 {
@@ -54,13 +55,7 @@ class DiscordController extends BaseController
         try {
             return json_encode($this->discordHelper->generateDiscordLinkCode($discordId));
         } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+            ExceptionHelper::handle($e);
         }
     }
 }

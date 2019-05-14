@@ -16,29 +16,14 @@ if (!function_exists('env')) {
     }
 }
 
-// Set the exception handler globally
-set_exception_handler(function (Exception $exception) {
-    header('HTTP/1.1 500 Internal Server Error');
-
-    $response = [
-        'status' => 500
-    ];
-
-    $remote = $_SERVER['REMOTE_ADDR'];
-    if ($remote !== '127.0.0.1' && $remote !== '::1') {
-        $response = array_merge($response, [
-            'error' => $exception->getMessage(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine()
-        ]);
-    }
-
-    die(json_encode($response));
-});
-
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/pecee/simple-router/helpers.php');
 require(__DIR__ . '/../app/Router.php');
+
+// Set the exception handler globally
+set_exception_handler(function(Throwable $error) {
+    return \B3none\League\Helpers\ExceptionHelper::handle($error);
+});
 
 /**
  * Register routes

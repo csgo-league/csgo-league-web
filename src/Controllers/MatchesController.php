@@ -2,6 +2,7 @@
 
 namespace B3none\League\Controllers;
 
+use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchesHelper;
 
 class MatchesController extends BaseController
@@ -24,42 +25,43 @@ class MatchesController extends BaseController
     /**
      * @param string|null $page
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
      */
     public function getIndex(?string $page = null): string
     {
-        $page = $page ?? 1;
+        try {
+            $page = $page ?? 1;
 
-        if ($page < 1) {
-            response()->redirect('/matches/');
+            if ($page < 1) {
+                response()->redirect('/matches/');
+            }
+
+            $totalMatches = $this->matchesHelper->getMatchesCount();
+            $totalPages = ceil($totalMatches / env('MATCHES_PAGE_LIMIT'));
+
+            if ($page > $totalPages) {
+                response()->redirect('/matches/' . $totalPages);
+            }
+
+            $matches = $this->matchesHelper->getMatches($page);
+
+            return $this->twig->render('matches.twig', [
+                'nav' => [
+                    'active' => 'matches',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser
+                ],
+                'baseTitle' => env('BASE_TITLE'),
+                'title' => 'Matches',
+                'matches' => $matches,
+                'pagination' => [
+                    'currentPage' => $page,
+                    'totalPages' => $totalPages,
+                    'link' => 'matches'
+                ]
+            ]);
+        } catch (\Exception $exception) {
+            ExceptionHelper::handle($exception);
         }
-
-        $totalMatches = $this->matchesHelper->getMatchesCount();
-        $totalPages = ceil($totalMatches / env('MATCHES_PAGE_LIMIT'));
-
-        if ($page > $totalPages) {
-            response()->redirect('/matches/' . $totalPages);
-        }
-
-        $matches = $this->matchesHelper->getMatches($page);
-
-        return $this->twig->render('matches.twig', [
-            'nav' => [
-                'active' => 'matches',
-                'loggedIn' => $this->steam->loggedIn(),
-                'user' => $this->authorisedUser
-            ],
-            'baseTitle' => env('BASE_TITLE'),
-            'title' => 'Matches',
-            'matches' => $matches,
-            'pagination' => [
-                'currentPage' => $page,
-                'totalPages' => $totalPages,
-                'link' => 'matches'
-            ]
-        ]);
     }
 
     /**
@@ -83,14 +85,8 @@ class MatchesController extends BaseController
                 'matches' => $matches,
                 'searchedValue' => $search
             ]);
-        } catch (\Exception $e) {
-            header('HTTP/1.1 500 Internal Server Error');
-
-            echo json_encode([
-                'status' => 500
-            ]);
-
-            die;
+        } catch (\Exception $exception) {
+            ExceptionHelper::handle($exception);
         }
     }
 }
