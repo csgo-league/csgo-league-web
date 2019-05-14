@@ -28,7 +28,10 @@ class DiscordHelper extends BaseHelper
     public function generateDiscordLinkCode(string $discordId): array
     {
         if ($this->isAlreadyLinked($discordId)) {
-            return ['code' => null];
+            return [
+                'code' => null,
+                'error' => 'It looks like you\'re already linked on our system.'
+            ];
         }
 
         $query = $this->db->query('SELECT * FROM player_link_codes WHERE discord = :discordId', [
@@ -57,7 +60,10 @@ class DiscordHelper extends BaseHelper
         ];
         $success = !!$this->db->insert('player_link_codes', $insert);
 
-        return $success ? $insert : ['code' => null];
+        return $success ? $insert : [
+            'code' => null,
+            'error' => 'Something has gone horribly wrong.'
+        ];
     }
 
     /**
