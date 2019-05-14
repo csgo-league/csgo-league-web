@@ -9,6 +9,9 @@ class DiscordHelper extends BaseHelper
      */
     protected $code;
 
+    /**
+     * DiscordHelper constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -24,6 +27,10 @@ class DiscordHelper extends BaseHelper
      */
     public function generateDiscordLinkCode(string $discordId): array
     {
+        if ($this->isAlreadyLinked($discordId)) {
+            return ['code' => null];
+        }
+
         $query = $this->db->query('SELECT * FROM player_link_codes WHERE discord = :discordId', [
             'discordId' => $discordId
         ]);
@@ -51,6 +58,27 @@ class DiscordHelper extends BaseHelper
         $success = !!$this->db->insert('player_link_codes', $insert);
 
         return $success ? $insert : ['code' => null];
+    }
+
+    /**
+     * @param string $discordId
+     * @return bool
+     */
+    protected function isAlreadyLinked(string $discordId): bool
+    {
+        $query = $this->db->query('
+            SELECT *
+            FROM players 
+            WHERE discord = :discordId
+        ', [
+            ':discordId' => $discordId
+        ]);
+
+        if ($query->rowCount() === 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
