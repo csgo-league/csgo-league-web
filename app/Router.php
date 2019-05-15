@@ -42,7 +42,7 @@ class Router
      */
     protected function registerRoutes()
     {
-        // Redirect to the leaderboard homepage.
+        // Redirect to the homepage.
         $homeRedirects = [
             '/',
             '/match',
