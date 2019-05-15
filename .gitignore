@@ -3,4 +3,3 @@
 /vendor/
 /node_modules/
 env.php
-src/Migrations/.migrations.log
