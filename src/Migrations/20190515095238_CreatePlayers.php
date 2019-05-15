@@ -17,7 +17,7 @@ class CreatePlayers extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            CREATE TABLE players (
+            CREATE TABLE IF NOT EXISTS players (
               `steam` varchar(100) NOT NULL,
               `steam64` varchar(100) NOT NULL,
               `discord` varchar(100)

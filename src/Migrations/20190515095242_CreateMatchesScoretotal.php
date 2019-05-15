@@ -17,7 +17,7 @@ class CreateMatchesScoretotal extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            CREATE TABLE sql_matches_scoretotal (
+            CREATE TABLE IF NOT EXISTS sql_matches_scoretotal (
               `match_id` bigint(20) UNSIGNED NOT NULL,
               `timestamp` int(11) NOT NULL,
               `team_0` int(11) NOT NULL,

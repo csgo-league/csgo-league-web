@@ -17,7 +17,7 @@ class CreateRankme extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            CREATE TABLE rankme (
+            CREATE TABLE IF NOT EXISTS rankme (
               `id` int(11) NOT NULL,
               `steam` varchar(100) DEFAULT NULL,
               `name` text,

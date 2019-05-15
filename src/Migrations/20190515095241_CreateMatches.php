@@ -17,7 +17,7 @@ class CreateMatches extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            CREATE TABLE sql_matches (
+            CREATE TABLE IF NOT EXISTS sql_matches (
               `match_id` bigint(20) NOT NULL,
               `name` varchar(100) NOT NULL,
               `steam64` varchar(100) NOT NULL,
