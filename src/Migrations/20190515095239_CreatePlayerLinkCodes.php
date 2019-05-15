@@ -16,8 +16,8 @@ class CreatePlayerLinkCodes extends Migration
          */
         $db = $this->get('db');
 
-        $query = $db->query('            
-            CREATE TABLE `player_link_codes` (
+        $query = $db->query('
+            CREATE TABLE player_link_codes (
               `discord` varchar(100) NOT NULL,
               `code` varchar(100) NOT NULL,
               `expires` int(11) DEFAULT NULL

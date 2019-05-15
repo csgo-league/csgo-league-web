@@ -16,10 +16,10 @@ class CreateRankme extends Migration
          */
         $db = $this->get('db');
 
-        $query = $db->query('            
-            CREATE TABLE `rankme` (
+        $query = $db->query('
+            CREATE TABLE rankme (
               `id` int(11) NOT NULL,
-              `steam` varchar(40) DEFAULT NULL,
+              `steam` varchar(100) DEFAULT NULL,
               `name` text,
               `lastip` text,
               `score` decimal(10,0) DEFAULT NULL,

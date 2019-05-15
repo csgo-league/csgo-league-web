@@ -4,7 +4,7 @@
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
-class CreatePlayers extends Migration
+class CreateMatches extends Migration
 {
     /**
      * Do the migration
@@ -17,10 +17,19 @@ class CreatePlayers extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            CREATE TABLE players (
-              `steam` varchar(100) NOT NULL,
+            CREATE TABLE sql_matches (
+              `match_id` bigint(20) NOT NULL,
+              `name` varchar(100) NOT NULL,
               `steam64` varchar(100) NOT NULL,
-              `discord` varchar(100)
+              `team` int(11) NOT NULL,
+              `alive` int(11) NOT NULL,
+              `ping` int(11) NOT NULL,
+              `account` int(11) NOT NULL,
+              `kills` int(11) NOT NULL,
+              `assists` int(11) NOT NULL,
+              `deaths` int(11) NOT NULL,
+              `mvps` int(11) NOT NULL,
+              `score` int(11) NOT NULL
             );
         ');
 
@@ -37,7 +46,7 @@ class CreatePlayers extends Migration
          */
         $db = $this->get('db');
 
-        $query = $db->query('DROP TABLE IF EXISTS players;');
+        $query = $db->query('DROP TABLE IF EXISTS sql_matches;');
 
         return $query->execute();
     }
