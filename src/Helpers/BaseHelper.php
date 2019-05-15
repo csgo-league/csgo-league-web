@@ -13,7 +13,12 @@ class BaseHelper
 
     public function __construct()
     {
-        $this->db = new Medoo([
+        $this->db = self::getDatabaseHandler();
+    }
+
+    public static function getDatabaseHandler(): Medoo
+    {
+        return new Medoo([
             'database_type' => 'mysql',
             'database_name' => env('DB_NAME'),
             'server' => env('DB_HOST'),
