@@ -1,7 +1,5 @@
 <?php
 
-namespace B3none\League\Migrations;
-
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
@@ -17,7 +15,15 @@ class InitialProject extends Migration
          */
         $db = $this->get('db');
 
-        $db->exec(file_get_contents(__DIR__ . '/../../schema.sql'));
+        $query = $db->query('            
+            CREATE TABLE `players` (
+              `steam` varchar(100) NOT NULL,
+              `steam64` varchar(100) NOT NULL,
+              `discord` varchar(100)
+            );
+        ');
+
+        return $query->execute();
     }
 
     /**
@@ -30,12 +36,8 @@ class InitialProject extends Migration
          */
         $db = $this->get('db');
 
-        $db->exec("
-            DROP TABLE IF EXISTS players;
-            DROP TABLE IF EXISTS player_link_codes;
-            DROP TABLE IF EXISTS rankme;
-            DROP TABLE IF EXISTS sql_matches;
-            DROP TABLE IF EXISTS sql_matches_scoretotal;
-        ");
+        $query = $db->query('DROP TABLE IF EXISTS players;');
+
+        return $query->execute();
     }
 }
