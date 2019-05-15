@@ -1,6 +1,5 @@
 <?php
-
-namespace B3none\League\Migrations;
+// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
