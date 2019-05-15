@@ -1,5 +1,7 @@
 <?php
 
+namespace B3none\League\Migrations;
+
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
