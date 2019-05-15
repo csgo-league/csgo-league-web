@@ -9,10 +9,6 @@ $container['phpmig.adapter'] = new Adapter\File\Flat(__DIR__ . DIRECTORY_SEPARAT
 
 $container['phpmig.migrations_path'] = __DIR__ . DIRECTORY_SEPARATOR . 'src/Migrations';
 
-// You can also provide an array of migration files
-// $container['phpmig.migrations'] = array_merge(
-//     glob('migrations_1/*.php'),
-//     glob('migrations_2/*.php')
-// );
+$container['db'] = \B3none\League\Helpers\BaseHelper::getDatabaseHandler();
 
 return $container;
