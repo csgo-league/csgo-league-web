@@ -3,7 +3,7 @@
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
-class InitialProject extends Migration
+class CreatePlayers extends Migration
 {
     /**
      * Do the migration
