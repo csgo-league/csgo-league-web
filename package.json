@@ -38,6 +38,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
+    "gulp-javascript-obfuscator": "^1.1.6",
     "uglifyjs-webpack-plugin": "^2.1.2"
   }
 }

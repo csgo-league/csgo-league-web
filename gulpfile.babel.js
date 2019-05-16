@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
 import cleanCSS from 'gulp-clean-css';
+import obfuscator from 'gulp-javascript-obfuscator';
 import del from 'del';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config';
@@ -35,6 +36,7 @@ export function scripts() {
           console.log(err.message);
         })
     )
+    .pipe(obfuscator())
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest(paths.scripts.dest));
 }
