@@ -30,7 +30,7 @@ const updateSteamProfile = (element, steam) => {
       let avatarFull = profileXML.getElementsByTagName('avatarFull')[0].childNodes[0].nodeValue;
       let avatarIcon = profileXML.getElementsByTagName('avatarIcon')[0].childNodes[0].nodeValue;
 
-      element.find('.steam-profile-name').text(name);
+      element.find('.steam-profile-name').text(decodeURI(name));
       element.find('.steam-profile-onlineState').text(onlineState);
       element.find('.steam-profile-stateMessage').text(stateMessage);
       element.find('.steam-profile-avatarFull').attr('src', avatarFull);
