@@ -35,7 +35,7 @@ class PlayersController extends BaseController
             $page = $page ?? 1;
 
             if ($page < 1) {
-                response()->redirect('/players/');
+                response()->redirect('/players');
             }
 
             $totalPlayers = $this->playersHelper->getPlayersCount();

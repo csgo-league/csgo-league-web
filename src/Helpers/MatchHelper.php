@@ -22,7 +22,7 @@ class MatchHelper extends BaseHelper
 
         $matchPlayers = $query->fetchAll();
 
-        return $matchPlayers ? $this->formatMatchPlayers($matchPlayers) : null;
+        return count($matchPlayers) > 0 ? $this->formatMatchPlayers($matchPlayers) : null;
     }
 
     /**
