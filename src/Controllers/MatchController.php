@@ -42,6 +42,7 @@ class MatchController extends BaseController
                 'user' => $this->authorisedUser
             ],
             'baseTitle' => env('BASE_TITLE'),
+            'description' => env('DESCRIPTION'),
             'title' => 'Match',
         ]));
     }

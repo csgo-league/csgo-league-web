@@ -86,7 +86,10 @@ class PlayersController extends BaseController
                     'active' => 'players'
                 ],
                 'players' => $players,
-                'searchedValue' => $search
+                'searchedValue' => $search,
+                'title' => 'Players',
+                'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
             ]);
         } catch (\Exception $exception) {
             ExceptionHelper::handle($exception);

@@ -50,6 +50,7 @@ class HomeController extends BaseController
                     'user' => $this->authorisedUser
                 ],
                 'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
                 'title' => 'Home',
                 'latestMatches' => $latestMatches,
                 'leftPlayers' => $leftPlayers,

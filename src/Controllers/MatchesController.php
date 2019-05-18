@@ -82,6 +82,9 @@ class MatchesController extends BaseController
                 'nav' => [
                     'active' => 'matches'
                 ],
+                'baseTitle' => env('BASE_TITLE'),
+                'title' => 'Matches',
+                'description' => env('DESCRIPTION'),
                 'matches' => $matches,
                 'searchedValue' => $search
             ]);

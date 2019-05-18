@@ -55,6 +55,8 @@ class ProfileController extends BaseController
                 'player' => $player,
                 'matches' => $matches,
                 'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
+                'title' => 'Profile',
             ]);
         } catch (\Exception $exception) {
             ExceptionHelper::handle($exception);
