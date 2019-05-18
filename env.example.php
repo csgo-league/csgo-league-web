@@ -11,9 +11,9 @@ $variables = [
     'WEBSITE' => '/home', // Path to your main website
 
     'BASE_TITLE' => 'B3none', // This is the base title for your site.
-    'DESCRIPTION' => '', // Meta description
+    'DESCRIPTION' => 'Top quality PUGs and 10 mans.', // Meta description
 
-    // This is a crude hack to store an array in the env.
+    // This is a crude hack to store a keyed array in the env.
     // map_name,/path/to/map/from/web
     'MAPS' => [
         'de_austria,/img/maps/austria.jpg',
