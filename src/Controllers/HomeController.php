@@ -40,8 +40,9 @@ class HomeController extends BaseController
             $topPlayers = 6;
             $players = $this->playersHelper->getTopPlayers($topPlayers);
 
-            $leftPlayers = array_slice($players, 0, $topPlayers / 2);
-            $rightPlayers = array_slice($players, $topPlayers / 2);
+            $length = ceil($topPlayers / 2);
+            $leftPlayers = array_slice($players, 0, $length);
+            $rightPlayers = array_slice($players, $length);
 
             return $this->twig->render('home.twig', [
                 'nav' => [
