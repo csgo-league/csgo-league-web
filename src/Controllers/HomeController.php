@@ -51,6 +51,7 @@ class HomeController extends BaseController
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'description' => env('DESCRIPTION'),
+                'website' => env('WEBSITE'),
                 'title' => 'Home',
                 'latestMatches' => $latestMatches,
                 'leftPlayers' => $leftPlayers,

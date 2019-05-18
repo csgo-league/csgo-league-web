@@ -92,7 +92,7 @@ class Router
             $remote = $_SERVER['REMOTE_ADDR'];
 
             if ($remote !== '127.0.0.1' && $remote !== '::1') {
-                response()->redirect('https://redlinecs.net');
+                response()->redirect(env('WEBSITE'));
             } else {
                 \B3none\League\Helpers\ExceptionHelper::handle($exception);
             }

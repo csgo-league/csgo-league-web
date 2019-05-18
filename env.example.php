@@ -8,6 +8,7 @@ $variables = [
     'STEAM_API_KEY' => '', // Your steam API key.
     'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page.
     'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page.
+    'WEBSITE' => '/home', // Path to your main website
 
     'BASE_TITLE' => 'B3none', // This is the base title for your site.
     'DESCRIPTION' => '', // Meta description
