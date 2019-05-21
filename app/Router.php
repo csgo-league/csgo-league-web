@@ -2,6 +2,7 @@
 
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
+use B3none\League\Helpers\ExceptionHelper;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
 use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
@@ -94,7 +95,7 @@ class Router
             if ($remote !== '127.0.0.1' && $remote !== '::1') {
                 response()->redirect(env('WEBSITE'));
             } else {
-                \B3none\League\Helpers\ExceptionHelper::handle($exception);
+                ExceptionHelper::handle($exception);
             }
         });
     }
