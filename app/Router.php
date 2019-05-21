@@ -97,7 +97,7 @@ class Router
             $remote = $_SERVER['REMOTE_ADDR'];
 
             if ($remote !== '127.0.0.1' && $remote !== '::1') {
-                response()->redirect(env('WEBSITE'));
+                response()->redirect(env('WEBSITE') ?? 'https://b3none.co.uk');
             } else {
                 ExceptionHelper::handle($exception);
             }
