@@ -11,6 +11,9 @@ class AssetsController extends BaseController
     {
         $file = preg_replace('/\.(?=.*\.)/', '', $file);
 
+        echo $file;
+        die;
+
         if (file_exists(__DIR__ . '/../../web/build/' . $file)) {
             include(file_get_contents($file));
         }
