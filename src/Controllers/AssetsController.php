@@ -12,7 +12,7 @@ class AssetsController extends BaseController
         $file = preg_replace('/\.(?=.*\.)/', '', $file);
 
         if (file_exists(__DIR__ . '/../../web/build/' . $file)) {
-            die(file_get_contents($file));
+            include(file_get_contents($file));
         }
 
         response()->redirect('/home');
