@@ -1,5 +1,6 @@
 <?php
 
+use B3none\League\Controllers\AssetsController;
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
 use B3none\League\Helpers\ExceptionHelper;
@@ -89,7 +90,7 @@ class Router
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Assets
-        SimpleRouter::get('/assets/{file}', );
+        SimpleRouter::get('/assets/{file}', AssetsController::class . '@getAsset');
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, Exception $exception) {
