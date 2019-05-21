@@ -3,6 +3,7 @@
 namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\MatchHelper;
+use Exception;
 
 class MatchController extends BaseController
 {
@@ -27,6 +28,10 @@ class MatchController extends BaseController
      */
     public function getMatch(string $matchId): string
     {
+        if ($matchId != (int)$matchId) {
+            throw new Exception('Please only pass an integer to the matchId value.');
+        }
+
         $match = $this->matchHelper->getMatchPlayers($matchId);
 
         if ($match === null) {

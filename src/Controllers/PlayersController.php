@@ -4,6 +4,7 @@ namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\PlayersHelper;
+use Exception;
 
 class PlayersController extends BaseController
 {
@@ -34,6 +35,10 @@ class PlayersController extends BaseController
             $limit = env('PLAYERS_PAGE_LIMIT');
             $page = $page ?? 1;
 
+            if ($page != (int)$page) {
+                throw new Exception('Please only pass an integer to the page parameter');
+            }
+
             if ($page < 1) {
                 response()->redirect('/players');
             }
@@ -62,7 +67,7 @@ class PlayersController extends BaseController
                     'link' => 'players'
                 ]
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }
@@ -91,7 +96,7 @@ class PlayersController extends BaseController
                 'baseTitle' => env('BASE_TITLE'),
                 'description' => env('DESCRIPTION'),
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }

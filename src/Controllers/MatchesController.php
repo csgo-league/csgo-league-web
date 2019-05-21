@@ -4,6 +4,7 @@ namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchesHelper;
+use Exception;
 
 class MatchesController extends BaseController
 {
@@ -30,6 +31,10 @@ class MatchesController extends BaseController
     {
         try {
             $page = $page ?? 1;
+
+            if ($page != (int)$page) {
+                throw new Exception('Please only pass an integer to the page parameter');
+            }
 
             if ($page < 1) {
                 response()->redirect('/matches/');

@@ -5,6 +5,7 @@ namespace B3none\League\Controllers;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchesHelper;
 use B3none\League\Helpers\PlayersHelper;
+use Exception;
 
 class ProfileController extends BaseController
 {
@@ -36,6 +37,10 @@ class ProfileController extends BaseController
     public function getProfile(string $steamId): string
     {
         try {
+            if ($steamId != (int)$steamId) {
+                throw new Exception('Please use a steam64 id');
+            }
+
             $player = $this->playersHelper->getPlayer($steamId);
 
             // If we don't have the player on our system redirect to the players page.
@@ -58,7 +63,7 @@ class ProfileController extends BaseController
                 'description' => env('DESCRIPTION'),
                 'title' => 'Profile',
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }

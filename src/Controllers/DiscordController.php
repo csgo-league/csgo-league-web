@@ -4,6 +4,7 @@ namespace B3none\League\Controllers;
 
 use B3none\League\Helpers\DiscordHelper;
 use B3none\League\Helpers\ExceptionHelper;
+use Exception;
 
 class DiscordController extends BaseController
 {
@@ -54,7 +55,7 @@ class DiscordController extends BaseController
     {
         try {
             return json_encode($this->discordHelper->generateDiscordLinkCode($discordId));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             ExceptionHelper::handle($e);
         }
     }
