@@ -88,8 +88,11 @@ class Router
         SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
+        // Assets
+        SimpleRouter::get('/assets/{file}', );
+
         // Anything that's not registered fallback to the homepage.
-        SimpleRouter::error(function(Request $request, \Exception $exception) {
+        SimpleRouter::error(function(Request $request, Exception $exception) {
             $remote = $_SERVER['REMOTE_ADDR'];
 
             if ($remote !== '127.0.0.1' && $remote !== '::1') {
