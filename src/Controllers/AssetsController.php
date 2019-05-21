@@ -15,6 +15,6 @@ class AssetsController extends BaseController
             die(file_get_contents($file));
         }
 
-        response()->redirect('/');
+        response()->redirect('/home');
     }
 }
