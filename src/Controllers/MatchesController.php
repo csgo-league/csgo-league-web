@@ -36,8 +36,9 @@ class MatchesController extends BaseController
                 throw new Exception('Please only pass an integer to the page parameter');
             }
 
+            // If the page number is less that 1 then redirect them to page 1.
             if ($page < 1) {
-                response()->redirect('/matches/');
+                response()->redirect('/matches/1');
             }
 
             $totalMatches = $this->matchesHelper->getMatchesCount();
