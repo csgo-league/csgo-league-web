@@ -5,6 +5,7 @@ namespace B3none\League\Controllers;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\SteamHelper;
 use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class BaseController
 {
@@ -29,7 +30,7 @@ class BaseController
     public function __construct()
     {
         try {
-            $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
+            $loader = new FilesystemLoader(__DIR__ . '/../Views');
 
             $remote = $_SERVER['REMOTE_ADDR'];
             if ($remote === '127.0.0.1' || $remote === '::1') {
