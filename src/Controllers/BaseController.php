@@ -34,13 +34,15 @@ class BaseController
 
             $remote = $_SERVER['REMOTE_ADDR'];
             if ($remote === '127.0.0.1' || $remote === '::1') {
+                $port = $_SERVER['SERVER_PORT'];
+
                 $this->twig = new Environment($loader);
 
                 $this->steam = new SteamHelper([
                     'apikey' => env('STEAM_API_KEY'),
-                    'domainname' => 'http://localhost:5000',
-                    'loginpage' => 'http://localhost:5000/home',
-                    'logoutpage' => 'http://localhost:5000/home',
+                    'domainname' => "http://localhost:$port",
+                    'loginpage' => "http://localhost:$port/home",
+                    'logoutpage' => "http://localhost:$port/home",
                     'skipAPI' => true,
                 ]);
             } else {
@@ -50,9 +52,9 @@ class BaseController
 
                 $this->steam = new SteamHelper([
                     'apikey' => env('STEAM_API_KEY'), // Steam API KEY
-                    'domainname' => 'https://league.redlinecs.net', // Displayed domain in the login-screen
-                    'loginpage' => 'https://league.redlinecs.net/home', // Returns to last page if not set
-                    'logoutpage' => 'https://league.redlinecs.net/home',
+                    'domainname' => env('URL'), // Displayed domain in the login-screen
+                    'loginpage' => env('URL') . '/home', // Returns to last page if not set
+                    'logoutpage' => env('URL') . '/home',
                     'skipAPI' => true, // true = don't get the data from steam, just return the steam64
                 ]);
             }
