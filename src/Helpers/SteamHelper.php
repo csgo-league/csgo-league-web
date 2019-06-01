@@ -152,16 +152,16 @@ class SteamHelper
 
         unset($_SESSION['steamdata']); // Delete the users info from the cache, DOESNT DESTROY YOUR SESSION!
 
+        // End the session if theres no more data in it
         if (!isset($_SESSION[0])) {
             session_destroy();
         }
-
-        // End the session if theres no more data in it
+        
+        // If the logout-page is set, go there
         if ($this->settings['logoutpage'] != '') {
             header('Location: ' . $this->settings['logoutpage']);
         }
 
-        // If the logout-page is set, go there
         return true;
     }
 

@@ -9,6 +9,7 @@ $variables = [
     'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page.
     'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page.
     'WEBSITE' => '/home', // Path to your main website
+    'URL' => '', // The URL to the league panel
 
     'BASE_TITLE' => 'B3none', // This is the base title for your site.
     'DESCRIPTION' => 'Top quality PUGs and 10 mans.', // Meta description
