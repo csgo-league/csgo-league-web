@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/b3none/redlinecs-league.git"
+    "url": "git+https://github.com/csgo-league/csgo-league-web.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/b3none/redlinecs-league/issues"
+    "url": "https://github.com/csgo-league/csgo-league-web/issues"
   },
-  "homepage": "https://github.com/b3none/redlinecs-league#readme",
+  "homepage": "https://github.com/csgo-league/csgo-league-web#readme",
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
