@@ -64,7 +64,7 @@ class MatchesController extends BaseController
                     'link' => 'matches'
                 ]
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }
@@ -93,7 +93,7 @@ class MatchesController extends BaseController
                 'matches' => $matches,
                 'searchedValue' => $search
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }
