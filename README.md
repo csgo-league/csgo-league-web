@@ -27,13 +27,22 @@ The steps below are all written with the presumption that you're using Ubuntu.
 4. PHP 7.1 or newer
 5. Gulp
 
+
 ## Installation
+
+### Settings
 1. `git clone https://github.com/b3none/csgo-league-web`
 2. `composer install`
 3. `npm i`
 4. `npm i -g gulp`
 5. `gulp build`
-6. `./vendor/bin/phpmig migration`
+
+### DB Migration
+1. Create Database
+2. Change `env.example.php` to `env.php`
+3. Edit `env.php` for your Database
+4. Migrate your DB with `./vendor/bin/phpmig migration`
+
 
 ## Serving
 
