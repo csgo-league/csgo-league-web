@@ -33,6 +33,7 @@ The steps below are all written with the presumption that you're using Ubuntu.
 3. `npm i`
 4. `npm i -g gulp`
 5. `gulp build`
+6. `./vendor/bin/phpmig migration`
 
 ## Serving
 
