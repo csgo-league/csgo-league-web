@@ -47,7 +47,7 @@ class PlayersController extends BaseController
             $totalPlayers = $this->playersHelper->getPlayersCount();
             $totalPages = ceil($totalPlayers / $limit);
 
-            if ($page > $totalPages) {
+            if ($page > $totalPages && $totalPages > 0) {
                 response()->redirect('/players/' . $totalPages);
             }
 
