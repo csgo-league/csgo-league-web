@@ -2,7 +2,6 @@
 [![HitCount](http://hits.dwyl.io/csgo-league/csgo-league-web.svg)](http://hits.dwyl.io/csgo-league/csgo-league-web)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/csgo-league/csgo-league-web/graphs/commit-activity)
 [![GitHub release](https://img.shields.io/github/release/csgo-league/csgo-league-web.svg)](https://github.com/csgo-league/csgo-league-web/releases/)
-[![Github all releases](https://img.shields.io/github/downloads/csgo-league/csgo-league-web/total.svg)](https://github.com/csgo-league/csgo-league-web/releases/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Open Source Love svg3](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/csgo-league)
 
