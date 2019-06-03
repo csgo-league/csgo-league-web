@@ -1,6 +1,7 @@
+[![CircleCI](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop.svg?style=svg)](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop)
+
 # CS:GO League Web
 A web application for PUG statistics.
-
 
 # Author
 Alex Blackham - Developer and Maintainer - [B3none](https://github.com/b3none/)
