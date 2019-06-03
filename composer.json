@@ -1,5 +1,6 @@
 {
-  "name": "b3none/league",
+  "name": "csgo-league/csgo-league-web",
+  "version": "1.0.0",
   "type": "project",
   "authors": [
     {
