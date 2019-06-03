@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop.svg?style=svg)](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop)
+[![HitCount](http://hits.dwyl.io/csgo-league/csgo-league-web.svg)](http://hits.dwyl.io/csgo-league/csgo-league-web)
 
 # CS:GO League Web
 A web application for PUG statistics.
