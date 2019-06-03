@@ -8,11 +8,15 @@
                 <button class="btn btn-dark search-btn" type="submit" name="Submit"> <i class="fa fa-search"></i></button>
             </form>
 
-            <div class="row">
-                {% for player in players %}
-                    {% include 'partials/player/player-card.twig' with player %}
-                {% endfor %}
-            </div>
+            {% if players|length > 1 %}
+                <div class="row">
+                    {% for player in players %}
+                        {% include 'partials/player/player-card.twig' with player %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% include 'partials/no-results.twig' %}
+            {% endif %}
 
             {% if pagination is defined %}
                 {% include 'partials/pagination.twig' with pagination %}

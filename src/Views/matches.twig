@@ -12,9 +12,7 @@
                 {% include 'partials/match/match-bar.twig' with match %}
             {% endfor %}
         {% else %}
-            <h1 style="margin-top:20px;text-align:center;">
-                No Results!
-            </h1>
+            {% include 'partials/no-results.twig' %}
         {% endif %}
 
         {% if pagination is defined %}
