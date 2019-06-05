@@ -2,13 +2,23 @@
 
 namespace B3none\League\Middleware;
 
-use Pecee\Http\Middleware\IMiddleware;
+use Pecee\Http\Middleware\IMiddleware as BaseMiddleware;
 use Pecee\Http\Request;
 
-class AuthMiddleware implements IMiddleware
+class AuthMiddleware implements BaseMiddleware
 {
+    protected $apiKeys = [];
+
     /**
-     * Make sure that the request has been authenticated with the API key
+     * AuthMiddleware constructor.
+     */
+    public function __construct()
+    {
+        $this->apiKeys = explode(',', env('API_KEYS'));
+    }
+
+    /**
+     * Make sure that the request has been authenticated with a valid API Key
      *
      * @param Request $request
      */
