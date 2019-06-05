@@ -54,7 +54,9 @@ class DiscordController extends BaseController
     public function generateDiscordLink(string $discordId): string
     {
         try {
-            return json_encode($this->discordHelper->generateDiscordLinkCode($discordId));
+            return json_encode(
+                $this->discordHelper->generateDiscordLinkCode($discordId)
+            );
         } catch (Exception $e) {
             ExceptionHelper::handle($e);
         }
@@ -70,6 +72,8 @@ class DiscordController extends BaseController
     {
         $name = input()->post('name')->getValue();
 
-        $this->discordHelper->updateName($discordId, $name);
+        return json_encode(
+            $this->discordHelper->updateName($discordId, $name)
+        );
     }
 }

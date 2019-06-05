@@ -176,15 +176,15 @@ class DiscordHelper extends BaseHelper
      *
      * @param string $discordId
      * @param string $name
-     * @return string
+     * @return array
      */
-    public function updateName(string $discordId, string $name): string
+    public function updateName(string $discordId, string $name): array
     {
         if (!$this->isAlreadyLinked($discordId)) {
-            return json_encode([
+            return [
                 'success' => false,
                 'error' => 'link_discord'
-            ]);
+            ];
         }
 
         $update = $this->db->update('players', [
@@ -193,8 +193,8 @@ class DiscordHelper extends BaseHelper
             'name' => $name
         ]);
 
-        return json_encode([
+        return [
             'success' => $update->execute()
-        ]);
+        ];
     }
 }
