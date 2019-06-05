@@ -7,6 +7,9 @@ use Pecee\Http\Request;
 
 class AuthMiddleware implements BaseMiddleware
 {
+    /**
+     * @var array
+     */
     protected $apiKeys = [];
 
     /**
