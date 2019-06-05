@@ -26,7 +26,7 @@ class AuthMiddleware implements BaseMiddleware
     {
         $key = $request->getHeader('authentication');
 
-        if ($key != env('API_KEY')) {
+        if (!in_array($key, $this->apiKeys)) {
             die(
                 json_encode([
                     'success' => false,
