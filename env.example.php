@@ -34,9 +34,10 @@ $variables = [
 
     // You should also randomly generate an API key
     // Here's a link which will generate one for you
+    // I'd suggest giving each API key a comment saying what it is
     // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain
     'API_KEYS' => [
-        ''
+        '', // Discord bot
     ]
 ];
 

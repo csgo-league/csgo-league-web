@@ -172,6 +172,8 @@ class DiscordHelper extends BaseHelper
     }
 
     /**
+     * Update the name in the DB
+     *
      * @param string $discordId
      * @param string $name
      * @return string
@@ -185,8 +187,14 @@ class DiscordHelper extends BaseHelper
             ]);
         }
 
+        $update = $this->db->update('players', [
+            'discord' => $discordId
+        ], [
+            'name' => $name
+        ]);
+
         return json_encode([
-            'success' => true
+            'success' => $update->execute()
         ]);
     }
 }
