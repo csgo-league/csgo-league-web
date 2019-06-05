@@ -7,16 +7,22 @@ use Pecee\Http\Request;
 
 class AuthMiddleware implements IMiddleware
 {
+    /**
+     * Make sure that the request has been authenticated with the API key
+     *
+     * @param Request $request
+     */
     public function handle(Request $request): void
     {
-        $request->getHeader('authentication');
+        $key = $request->getHeader('authentication');
 
-        // Authenticate user, will be available using request()->user
-        $request->user = User::authenticate();
-
-        // If authentication failed, redirect request to user-login page.
-        if ($request->user === null) {
-            $request->setRewriteUrl(url('user.login'));
+        if ($key != env('API_KEY')) {
+            die(
+                json_encode([
+                    'success' => false,
+                    'error' => 'invalid_api_key'
+                ])
+            );
         }
     }
 }
