@@ -30,7 +30,12 @@ $variables = [
         'de_overpass,/img/maps/overpass.jpg',
         'de_train,/img/maps/train.jpg',
         'de_inferno,/img/maps/inferno.jpg',
-    ]
+    ],
+
+    // You should also randomly generate an API key
+    // Here's a link which will generate one for you
+    // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain
+    'API_KEY' => ''
 ];
 
 foreach ($variables as $key => $value) {

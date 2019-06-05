@@ -59,4 +59,17 @@ class DiscordController extends BaseController
             ExceptionHelper::handle($e);
         }
     }
+
+    /**
+     * Update a linked users name
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function updateName(string $discordId): string
+    {
+        $name = input()->post('name')->getValue();
+
+        $this->discordHelper->updateName($discordId, $name);
+    }
 }

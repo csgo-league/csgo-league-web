@@ -170,4 +170,23 @@ class DiscordHelper extends BaseHelper
 
         return true;
     }
+
+    /**
+     * @param string $discordId
+     * @param string $name
+     * @return string
+     */
+    public function updateName(string $discordId, string $name): string
+    {
+        if (!$this->isAlreadyLinked($discordId)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'link_discord'
+            ]);
+        }
+
+        return json_encode([
+            'success' => true
+        ]);
+    }
 }
