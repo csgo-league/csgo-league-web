@@ -211,4 +211,34 @@ class DiscordHelper extends BaseHelper
             'linked' => $this->isAlreadyLinked($discordId)
         ];
     }
+
+    /**
+     * Get a players name by their discord ID
+     *
+     * @param string $discordId
+     * @return array
+     */
+    public function getName(string $discordId): array
+    {
+        $query = $this->db->query('
+            SELECT name
+            FROM players
+            WHERE discord = :discordId
+        ', [
+            ':discordId' => $discordId
+        ]);
+
+        $response = $query->fetch();
+        if ($response === false) {
+            return [
+                'success' => false
+            ];
+        }
+
+
+        return [
+            'success' => true,
+            'linked' => $response['name']
+        ];
+    }
 }

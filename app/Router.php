@@ -94,6 +94,7 @@ class Router
         });
 
         // Link discord
+        SimpleRouter::get('/discord/name/{discordId}', DiscordController::class . '@getName');
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Anything that's not registered fallback to the homepage.
