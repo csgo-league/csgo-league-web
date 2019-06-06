@@ -4,6 +4,7 @@ use B3none\League\Controllers\AssetsController;
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
 use B3none\League\Helpers\ExceptionHelper;
+use B3none\League\Middleware\AuthMiddleware;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
 use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
@@ -88,6 +89,11 @@ class Router
         // Link discord
         SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
+
+        // Routes which require authentication
+        SimpleRouter::group(['middleware' => AuthMiddleware::class], function () {
+            SimpleRouter::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
+        });
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, Exception $exception) {

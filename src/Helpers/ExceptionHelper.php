@@ -2,16 +2,18 @@
 
 namespace B3none\League\Helpers;
 
+use Throwable;
+
 class ExceptionHelper
 {
     /**
      * Exception handler
      *
-     * @param \Throwable $error
+     * @param Throwable $error
      * @param bool $shouldDie
      * @return bool
      */
-    public static function handle(\Throwable $error, bool $shouldDie = true): bool
+    public static function handle(Throwable $error, bool $shouldDie = true): bool
     {
         header('HTTP/1.1 500 Internal Server Error');
 

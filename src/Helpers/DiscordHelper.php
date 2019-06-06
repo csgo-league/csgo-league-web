@@ -170,4 +170,31 @@ class DiscordHelper extends BaseHelper
 
         return true;
     }
+
+    /**
+     * Update the name in the DB
+     *
+     * @param string $discordId
+     * @param string $name
+     * @return array
+     */
+    public function updateName(string $discordId, string $name): array
+    {
+        if (!$this->isAlreadyLinked($discordId)) {
+            return [
+                'success' => false,
+                'error' => 'link_discord'
+            ];
+        }
+
+        $update = $this->db->update('players', [
+            'discord' => $discordId
+        ], [
+            'name' => $name
+        ]);
+
+        return [
+            'success' => $update->execute()
+        ];
+    }
 }
