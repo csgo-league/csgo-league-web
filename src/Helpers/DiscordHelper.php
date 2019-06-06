@@ -197,4 +197,18 @@ class DiscordHelper extends BaseHelper
             'success' => $update->execute()
         ];
     }
+
+    /**
+     * Update the name in the DB
+     *
+     * @param string $discordId
+     * @return array
+     */
+    public function checkLink(string $discordId): array
+    {
+        return [
+            'success' => true,
+            'linked' => $this->isAlreadyLinked($discordId)
+        ];
+    }
 }

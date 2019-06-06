@@ -90,6 +90,7 @@ class Router
         SimpleRouter::group(['middleware' => AuthMiddleware::class], function () {
             SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
             SimpleRouter::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
+            SimpleRouter::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
         });
 
         // Link discord
