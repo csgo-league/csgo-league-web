@@ -17,7 +17,7 @@ if (file_exists(__DIR__ . '/../env.php')) {
     }
 }
 
-if (env('API_KEY') === '') {
+if (env('API_KEYS') === '') {
     die('Please set the API_KEY value in the env.php');
 }
 
