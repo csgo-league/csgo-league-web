@@ -86,14 +86,14 @@ class Router
         SimpleRouter::get('/login', LoginController::class . '@login');
         SimpleRouter::get('/logout', LoginController::class . '@logout');
 
-        // Link discord
-        SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
-        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
-
         // Routes which require authentication
         SimpleRouter::group(['middleware' => AuthMiddleware::class], function () {
+            SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
             SimpleRouter::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
         });
+
+        // Link discord
+        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Anything that's not registered fallback to the homepage.
         SimpleRouter::error(function(Request $request, Exception $exception) {
