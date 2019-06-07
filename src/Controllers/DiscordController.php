@@ -76,4 +76,30 @@ class DiscordController extends BaseController
             $this->discordHelper->updateName($discordId, $name)
         );
     }
+
+    /**
+     * Check whether the user is linked on the system
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function checkDiscordLink(string $discordId): string
+    {
+        return json_encode(
+            $this->discordHelper->checkLink($discordId)
+        );
+    }
+
+    /**
+     * Get a client's name based on their discordId
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function getName(string $discordId): string
+    {
+        return json_encode(
+            $this->discordHelper->getName($discordId)
+        );
+    }
 }
