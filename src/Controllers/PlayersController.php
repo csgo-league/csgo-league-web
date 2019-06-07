@@ -56,9 +56,11 @@ class PlayersController extends BaseController
                 'nav' => [
                     'active' => 'players',
                     'loggedIn' => $this->steam->loggedIn(),
-                    'user' => $this->authorisedUser
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
                 ],
                 'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
                 'title' => 'Players',
                 'players' => $players,
                 'pagination' => [

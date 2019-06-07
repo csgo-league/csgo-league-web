@@ -48,7 +48,8 @@ class HomeController extends BaseController
                 'nav' => [
                     'active' => 'home',
                     'loggedIn' => $this->steam->loggedIn(),
-                    'user' => $this->authorisedUser
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
                 ],
                 'baseTitle' => env('BASE_TITLE'),
                 'description' => env('DESCRIPTION'),
