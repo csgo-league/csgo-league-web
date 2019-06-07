@@ -18,7 +18,7 @@ const paths = {
   }
 };
 
-export const clean = (subDirectory = false) => del([`build/${(subDirectory ? '/' + subDirectory : '')}`]);
+export const clean = (subDirectory = false) => del([`build/${(subDirectory ? '/' + subDirectory : '')}`, `app/cache/twig`]);
 
 export function styles() {
   return gulp.src(paths.styles.src)
