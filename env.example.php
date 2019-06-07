@@ -37,7 +37,8 @@ $variables = [
     // I'd suggest giving each API key a comment saying what it is
     // https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain
     'API_KEYS' => [
-        '', // Discord bot
+        // '', // Discord bot
+        // '', // CS:GO Server
     ]
 ];
 
