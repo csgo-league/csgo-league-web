@@ -9,7 +9,7 @@
 A web application for PUG statistics.
 
 # Author
-Alex Blackham - Developer and Maintainer - [B3none](https://github.com/b3none/)
+[B3none](https://github.com/b3none/) - Developer and Maintainer
 
 ## Watch for releases
 
