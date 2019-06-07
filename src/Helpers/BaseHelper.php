@@ -18,11 +18,8 @@ class BaseHelper
      */
     public function __construct()
     {
+        $this->validateConfig();
         $this->db = self::getDatabaseHandler();
-
-        if (env('API_KEYS') === '') {
-            throw new Exception('Please set the API_KEY value in the env.php');
-        }
     }
 
     /**
@@ -39,5 +36,26 @@ class BaseHelper
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD')
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function validateConfig()
+    {
+        $requiredConfigs = [
+            'DB_NAME',
+            'DB_HOST',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'API_KEYS',
+            'STEAM_API_KEY',
+        ];
+
+        foreach ($requiredConfigs as $config) {
+            if (env($config) === '') {
+                throw new Exception("Please set the $config in the env.php");
+            }
+        }
     }
 }
