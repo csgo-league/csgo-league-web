@@ -41,10 +41,6 @@ $variables = [
         // '', // Discord bot
         // '', // CS:GO Server
     ],
-
-    // Development mode is for local development use
-    // You want to keep this as no on your server
-    'DEVELOPMENT_MODE' => 'no'
 ];
 
 foreach ($variables as $key => $value) {
