@@ -44,7 +44,8 @@ class MatchController extends BaseController
             'nav' => [
                 'active' => 'matches',
                 'loggedIn' => $this->steam->loggedIn(),
-                'user' => $this->authorisedUser
+                'user' => $this->authorisedUser,
+                'discordInviteLink' => env('DISCORD')
             ],
             'baseTitle' => env('BASE_TITLE'),
             'description' => env('DESCRIPTION'),

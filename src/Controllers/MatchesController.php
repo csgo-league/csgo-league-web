@@ -53,9 +53,11 @@ class MatchesController extends BaseController
                 'nav' => [
                     'active' => 'matches',
                     'loggedIn' => $this->steam->loggedIn(),
-                    'user' => $this->authorisedUser
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
                 ],
                 'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
                 'title' => 'Matches',
                 'matches' => $matches,
                 'pagination' => [
@@ -85,11 +87,14 @@ class MatchesController extends BaseController
 
             return $this->twig->render('matches.twig', [
                 'nav' => [
-                    'active' => 'matches'
+                    'active' => 'matches',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
                 ],
                 'baseTitle' => env('BASE_TITLE'),
-                'title' => 'Matches',
                 'description' => env('DESCRIPTION'),
+                'title' => 'Matches',
                 'matches' => $matches,
                 'searchedValue' => $search
             ]);

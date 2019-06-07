@@ -10,6 +10,7 @@ $variables = [
     'PLAYERS_PAGE_LIMIT' => 12, // Page limit for players page.
     'WEBSITE' => '/home', // Path to your main website
     'URL' => '', // The URL to the league panel
+    'DISCORD' => '', // A permanent invite link to your Discord server
 
     'BASE_TITLE' => 'B3none', // This is the base title for your site.
     'DESCRIPTION' => 'Top quality PUGs and 10 mans.', // Meta description

@@ -24,6 +24,13 @@
                         <i class="fas fa-users"></i>&nbsp;Players
                     </a>
                 </li>
+                {% if nav.discordInviteLink %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link nav-margins" href="{{ nav.discordInviteLink }}" target="_blank">
+                            <i class="fas fa-gamepad"></i>&nbsp;Play Now
+                        </a>
+                    </li>
+                {% endif %}
                 {% if nav.loggedIn %}
                     <li class="nav-item" role="presentation">
                         <a class="nav-link {% if nav.active == 'myprofile' %}active {% endif %}nav-margins" href="/profile/{{ nav.user.steamid }}">

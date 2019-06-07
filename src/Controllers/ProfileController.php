@@ -55,12 +55,13 @@ class ProfileController extends BaseController
                 'nav' => [
                     'active' => $this->authorisedUser['steamid'] == $steamId ? 'myprofile' : '',
                     'loggedIn' => $this->steam->loggedIn(),
-                    'user' => $this->authorisedUser
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
                 ],
-                'player' => $player,
-                'matches' => $matches,
                 'baseTitle' => env('BASE_TITLE'),
                 'description' => env('DESCRIPTION'),
+                'player' => $player,
+                'matches' => $matches,
                 'title' => 'Profile',
             ]);
         } catch (Exception $exception) {
