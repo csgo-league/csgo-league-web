@@ -38,7 +38,7 @@ The steps below are all written with the presumption that you're using Ubuntu.
 ## Installation
 
 ### Settings
-1. `git clone https://github.com/b3none/csgo-league-web`
+1. `git clone https://github.com/csgo-league/csgo-league-web`
 2. `composer install`
 3. `npm i`
 4. `npm i -g gulp`
