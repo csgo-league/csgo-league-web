@@ -54,8 +54,9 @@ The steps below are all written with the presumption that you're using Ubuntu.
 ## Serving
 
 ### Locally
-1. `cd web`
-2. `php -S localhost:5000`
+1. Set `DEVELOPMENT_MODE` to `yes` in the `env.php`
+2. `cd web`
+3. `php -S localhost:5000`
 
 ### Server 
 1. Point the `league` CNAME at your dedicated server.

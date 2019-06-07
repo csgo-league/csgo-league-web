@@ -32,8 +32,7 @@ class BaseController
         try {
             $loader = new FilesystemLoader(__DIR__ . '/../Views');
 
-            $remote = $_SERVER['REMOTE_ADDR'];
-            if ($remote === '127.0.0.1' || $remote === '::1') {
+            if (env('DEVELOPMENT_MODE')) {
                 $port = $_SERVER['SERVER_PORT'];
 
                 $this->twig = new Environment($loader);
