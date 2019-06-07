@@ -3,6 +3,7 @@
 namespace B3none\League\Helpers;
 
 use Medoo\Medoo;
+use \Exception;
 
 class BaseHelper
 {
@@ -11,11 +12,24 @@ class BaseHelper
      */
     protected $db;
 
+    /**
+     * BaseHelper constructor.
+     * @throws Exception
+     */
     public function __construct()
     {
         $this->db = self::getDatabaseHandler();
+
+        if (env('API_KEYS') === '') {
+            throw new Exception('Please set the API_KEY value in the env.php');
+        }
     }
 
+    /**
+     * Get the db handler
+     *
+     * @return Medoo
+     */
     public static function getDatabaseHandler(): Medoo
     {
         return new Medoo([
