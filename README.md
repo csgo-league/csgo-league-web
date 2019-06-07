@@ -32,6 +32,7 @@ The steps below are all written with the presumption that you're using Ubuntu.
 3. NPM
 4. PHP 7.1 or newer
 5. Gulp
+6. Node 8 or newer
 
 
 ## Installation
