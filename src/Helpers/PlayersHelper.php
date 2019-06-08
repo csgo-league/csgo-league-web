@@ -144,11 +144,8 @@ class PlayersHelper extends BaseHelper
         $response = $query->fetchAll();
 
         foreach ($response as $player) {
-            $steam = $this->converter->createFromSteamID($player['steam']);
-
             $this->db->insert('players', [
-                'steam' => $player['steam'],
-                'steam64' => $steam->getSteamID64(),
+                'steam' => $player['steam']
             ]);
         }
     }
