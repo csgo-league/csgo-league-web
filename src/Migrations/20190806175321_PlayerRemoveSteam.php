@@ -4,7 +4,7 @@
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
-class RankingRemoveName extends Migration
+class PlayerRemoveSteam extends Migration
 {
     /**
      * Do the migration
@@ -17,7 +17,7 @@ class RankingRemoveName extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `rankme` DROP COLUMN `name`;
+            ALTER TABLE `players` DROP COLUMN `steam`;
         ');
 
         return $query->execute();
@@ -34,7 +34,7 @@ class RankingRemoveName extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `rankme` ADD COLUMN `name` text;
+            ALTER TABLE `players` ADD COLUMN `steam` varchar(100) NOT NULL;
         ');
 
         return $query->execute();
