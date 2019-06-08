@@ -17,8 +17,8 @@ class SteamColumns extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `sql_matches` CHANGE COLUMN `steam64` `steam` varchar(100);
-            ALTER TABLE `players` CHANGE COLUMN `steam64` `steam` varchar(100);
+            ALTER TABLE `sql_matches` CHANGE COLUMN `steam64` `steam` varchar(100) NOT NULL;
+            ALTER TABLE `players` CHANGE COLUMN `steam64` `steam` varchar(100) NOT NULL;
         ');
 
         return $query->execute();
@@ -35,8 +35,8 @@ class SteamColumns extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `sql_matches` CHANGE COLUMN `steam` `steam64` varchar(100);
-            ALTER TABLE `players` CHANGE COLUMN `steam` `steam64` varchar(100);
+            ALTER TABLE `sql_matches` CHANGE COLUMN `steam` `steam64` varchar(100) NOT NULL;
+            ALTER TABLE `players` CHANGE COLUMN `steam` `steam64` varchar(100) NOT NULL;
         ');
 
         return $query->execute();
