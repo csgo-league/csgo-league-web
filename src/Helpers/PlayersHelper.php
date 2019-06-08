@@ -55,9 +55,6 @@ class PlayersHelper extends BaseHelper
 
         $response = $query->fetchAll();
 
-        echo json_encode($response);
-        die;
-
         foreach ($response as $key => $player) {
             $response[$key] = $this->formatPlayer($player);
         }
