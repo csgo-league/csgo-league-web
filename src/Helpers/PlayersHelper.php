@@ -46,7 +46,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT *
             FROM rankme
-            JOIN players ON players.steam = rankme.steam
+            JOIN players ON players.steam64 = rankme.steam
             ORDER BY rankme.score DESC LIMIT :offset, :limit
         ', [
             ':offset' => $offset,
@@ -73,7 +73,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT *
             FROM rankme
-            JOIN players ON players.steam = rankme.steam
+            JOIN players ON players.steam64 = rankme.steam
             ORDER BY rankme.score DESC LIMIT :limit
         ', [
             ':limit' => $players

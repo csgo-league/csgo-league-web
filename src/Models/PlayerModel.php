@@ -5,8 +5,6 @@ namespace B3none\League\Models;
 class PlayerModel
 {
     protected $steam;
-    protected $name;
-    protected $lastIP;
     protected $score;
     protected $kills;
     protected $deaths;
@@ -87,8 +85,6 @@ class PlayerModel
     public function __construct(array $item)
     {
         $this->steam = $item['steam'];
-        $this->name = $item['name'];
-        $this->lastIP = $item['lastip'];
         $this->score = $item['score'];
         $this->kills = $item['kills'];
         $this->deaths = $item['deaths'];
