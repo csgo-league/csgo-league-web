@@ -133,7 +133,7 @@ class DiscordHelper extends BaseHelper
             $update = $this->db->update('players', [
                 'discord' => $discordId
             ], [
-                'steam64' => $steamId
+                'steam' => $steamId
             ]);
 
             if ($update->execute()) {
