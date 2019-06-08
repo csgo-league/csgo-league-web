@@ -22,6 +22,9 @@ class MatchHelper extends BaseHelper
 
         $matchPlayers = $query->fetchAll();
 
+        echo json_encode($matchPlayers);
+        die;
+
         return $matchPlayers ? $this->formatMatchPlayers($matchPlayers) : null;
     }
 
