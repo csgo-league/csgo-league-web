@@ -46,7 +46,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT *
             FROM rankme
-            JOIN players ON players.steam64 = rankme.steam
+            LEFT JOIN players ON players.steam64 = rankme.steam
             ORDER BY rankme.score DESC LIMIT :offset, :limit
         ', [
             ':offset' => $offset,
@@ -54,6 +54,9 @@ class PlayersHelper extends BaseHelper
         ]);
 
         $response = $query->fetchAll();
+
+        echo json_encode($response);
+        die;
 
         foreach ($response as $key => $player) {
             $response[$key] = $this->formatPlayer($player);
@@ -73,7 +76,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT *
             FROM rankme
-            JOIN players ON players.steam64 = rankme.steam
+            LEFT JOIN players ON players.steam64 = rankme.steam
             ORDER BY rankme.score DESC LIMIT :limit
         ', [
             ':limit' => $players
@@ -98,7 +101,7 @@ class PlayersHelper extends BaseHelper
     {
         $query = $this->db->query('
             SELECT * FROM rankme 
-            JOIN players ON players.steam = rankme.steam 
+            LEFT JOIN players ON players.steam64 = rankme.steam
             WHERE name LIKE :like_search OR steam = :search OR steam64 = :search 
             ORDER BY score DESC
         ', [
@@ -164,7 +167,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT * 
             FROM rankme 
-            JOIN players ON players.steam = rankme.steam 
+            LEFT JOIN players ON players.steam64 = rankme.steam 
             WHERE players.steam64 = :steam
         ', [
             ':steam' => $steamId,
