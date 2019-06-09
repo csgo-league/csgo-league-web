@@ -80,11 +80,7 @@ class DiscordHelper extends BaseHelper
             ':discordId' => $discordId
         ]);
 
-        if ($query->rowCount() === 0) {
-            return false;
-        }
-
-        return true;
+        return $query->rowCount() !== 0;
     }
 
     /**
