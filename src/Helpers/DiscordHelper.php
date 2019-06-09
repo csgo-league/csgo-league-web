@@ -188,9 +188,9 @@ class DiscordHelper extends BaseHelper
         }
 
         $update = $this->db->update('players', [
-            'discord' => $discordId
+            'discord_name' => $name
         ], [
-            'name' => $name
+            'discord' => $discordId
         ]);
 
         return [
@@ -221,7 +221,7 @@ class DiscordHelper extends BaseHelper
     public function getName(string $discordId): array
     {
         $query = $this->db->query('
-            SELECT name
+            SELECT discord_name
             FROM players
             WHERE discord = :discordId
         ', [
