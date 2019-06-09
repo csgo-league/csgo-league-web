@@ -29,6 +29,10 @@ class AuthMiddleware implements BaseMiddleware
     {
         $key = $request->getHeader('authentication');
 
+        if ($key === null) {
+            $key = $request->getHeader('http_authentication');
+        }
+
         if (!in_array($key, $this->apiKeys)) {
             die(
                 json_encode([
