@@ -175,10 +175,10 @@ class DiscordHelper extends BaseHelper
      * Update the name in the DB
      *
      * @param string $discordId
-     * @param string $name
+     * @param string $discordName
      * @return array
      */
-    public function updateName(string $discordId, string $name): array
+    public function updateName(string $discordId, string $discordName): array
     {
         if (!$this->isAlreadyLinked($discordId)) {
             return [
@@ -188,7 +188,7 @@ class DiscordHelper extends BaseHelper
         }
 
         $update = $this->db->update('players', [
-            'discord_name' => $name
+            'discord_name' => $discordName
         ], [
             'discord' => $discordId
         ]);
@@ -229,16 +229,21 @@ class DiscordHelper extends BaseHelper
         ]);
 
         $response = $query->fetch();
-        if ($response === false) {
-            return [
-                'success' => false
+        if ($response === false || !$response['discord_name']) {
+            $error = [
+                'success' => false,
             ];
-        }
 
+            if (!$response['discord_name']) {
+                $error['error'] = 'not_set';
+            }
+
+            return $error;
+        }
 
         return [
             'success' => true,
-            'linked' => $response['name']
+            'discord_name' => $response['discord_name']
         ];
     }
 }

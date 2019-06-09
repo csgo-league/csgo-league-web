@@ -39,10 +39,10 @@ class DiscordController extends BaseController
         $steamId = $this->authorisedUser['steamid'];
 
         if ($this->discordHelper->processDiscordLink($steamId, $discordId, $code)) {
-            return "Success! You may now close this window.";
+            return 'Success! You may now close this window.';
         }
 
-        return "Failure! If you're really struggling contact B3none";
+        return 'Failure! If you\'re really struggling contact B3none';
     }
 
     /**
@@ -70,10 +70,17 @@ class DiscordController extends BaseController
      */
     public function updateName(string $discordId): string
     {
-        $name = input()->post('name')->getValue();
+        $input = input()->all();
+
+        if (!array_key_exists('discord_name', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'no_name_passed'
+            ]);
+        }
 
         return json_encode(
-            $this->discordHelper->updateName($discordId, $name)
+            $this->discordHelper->updateName($discordId, $input['discord_name'])
         );
     }
 
