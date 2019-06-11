@@ -31,26 +31,15 @@ class BaseController
     {
         try {
             $loader = new FilesystemLoader(__DIR__ . '/../Views');
+            $this->steam = SteamHelper::getSteamHelper();
 
             $remote = $_SERVER['REMOTE_ADDR'];
             if ($remote === '127.0.0.1' || $remote === '::1') {
-                $port = $_SERVER['SERVER_PORT'];
-
                 $this->twig = new Environment($loader);
-
-                $this->steam = new SteamHelper([
-                    'apikey' => env('STEAM_API_KEY'),
-                    'domainname' => "http://localhost:$port",
-                    'loginpage' => "http://localhost:$port/home",
-                    'logoutpage' => "http://localhost:$port/home",
-                    'skipAPI' => true,
-                ]);
             } else {
                 $this->twig = new Environment($loader, [
                     'cache' => __DIR__ . '/../../app/cache/twig',
                 ]);
-
-                $this->steam = SteamHelper::getSteamHelper();
             }
 
             $this->authorisedUser = $this->steam->getAuthorisedUser();

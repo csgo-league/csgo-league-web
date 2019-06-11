@@ -27,6 +27,19 @@ class SteamHelper
      */
     public static function getSteamHelper(): SteamHelper
     {
+        $remote = $_SERVER['REMOTE_ADDR'];
+        if ($remote === '127.0.0.1' || $remote === '::1') {
+            $port = $_SERVER['SERVER_PORT'];
+
+            return new self([
+                'apikey' => env('STEAM_API_KEY'),
+                'domainname' => "http://localhost:$port",
+                'loginpage' => "http://localhost:$port/home",
+                'logoutpage' => "http://localhost:$port/home",
+                'skipAPI' => true,
+            ]);
+        }
+
         return new self([
             'apikey' => env('STEAM_API_KEY'), // Steam API KEY
             'domainname' => env('URL'), // Displayed domain in the login-screen
