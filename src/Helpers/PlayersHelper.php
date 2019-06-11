@@ -12,6 +12,11 @@ class PlayersHelper extends BaseHelper
      */
     protected $converter;
 
+    /**
+     * PlayersHelper constructor.
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         parent::__construct();
