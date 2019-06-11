@@ -50,13 +50,7 @@ class BaseController
                     'cache' => __DIR__ . '/../../app/cache/twig',
                 ]);
 
-                $this->steam = new SteamHelper([
-                    'apikey' => env('STEAM_API_KEY'), // Steam API KEY
-                    'domainname' => env('URL'), // Displayed domain in the login-screen
-                    'loginpage' => env('URL') . '/home', // Returns to last page if not set
-                    'logoutpage' => env('URL') . '/home',
-                    'skipAPI' => true, // true = don't get the data from steam, just return the steam64
-                ]);
+                $this->steam = SteamHelper::getSteamHelper();
             }
 
             $this->authorisedUser = $this->steam->getAuthorisedUser();

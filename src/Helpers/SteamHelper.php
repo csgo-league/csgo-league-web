@@ -20,6 +20,23 @@ class SteamHelper
     ];
 
     /**
+     * Get steam helper
+     *
+     * @return SteamHelper
+     * @throws Exception
+     */
+    public static function getSteamHelper(): SteamHelper
+    {
+        return new self([
+            'apikey' => env('STEAM_API_KEY'), // Steam API KEY
+            'domainname' => env('URL'), // Displayed domain in the login-screen
+            'loginpage' => env('URL') . '/home', // Returns to last page if not set
+            'logoutpage' => env('URL') . '/home',
+            'skipAPI' => true, // true = don't get the data from steam, just return the steam64
+        ]);
+    }
+
+    /**
      * SteamHelper constructor.
      * @param array $config
      * @throws Exception

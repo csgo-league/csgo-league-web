@@ -10,6 +10,16 @@ class DiscordHelper extends BaseHelper
     protected $code;
 
     /**
+     * @var SteamHelper
+     */
+    protected $steam;
+
+    /**
+     * @var PlayersHelper
+     */
+    protected $player;
+
+    /**
      * DiscordHelper constructor.
      */
     public function __construct()
@@ -17,6 +27,8 @@ class DiscordHelper extends BaseHelper
         parent::__construct();
 
         $this->code = new CodeHelper();
+        $this->steam = SteamHelper::getSteamHelper();
+        $this->player = new PlayersHelper();
     }
 
     /**
@@ -125,6 +137,10 @@ class DiscordHelper extends BaseHelper
      */
     public function processDiscordLink(string $steamId, string $discordId, string $code): bool
     {
+        if ($this->steam->loggedIn() && !$this->player->isLinked($steamId)) {
+            $this->player->addPlayer($steamId);
+        }
+
         if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
             $update = $this->db->update('players', [
                 'discord' => $discordId

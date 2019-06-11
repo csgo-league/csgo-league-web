@@ -171,4 +171,38 @@ class PlayersHelper extends BaseHelper
 
         return $player ? $this->formatPlayer($player) : null;
     }
+
+    /**
+     * Check whether a steamId is linked
+     *
+     * @param string $steamId
+     * @return bool
+     */
+    public function addPlayer(string $steamId): bool
+    {
+        $query = $this->db->insert('players', [
+            'steam' => $steamId
+        ]);
+
+        return !! $query;
+    }
+
+    /**
+     * Check whether a steamId is linked
+     *
+     * @param string $steamId
+     * @return bool
+     */
+    public function isLinked(string $steamId): bool
+    {
+        $query = $this->db->query('
+            SELECT * 
+            FROM players
+            WHERE steam = :steam
+        ', [
+            ':steam' => $steamId,
+        ]);
+
+        return $query->rowCount() !== 0;
+    }
 }
