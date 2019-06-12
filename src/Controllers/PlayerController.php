@@ -38,6 +38,8 @@ class PlayerController extends BaseController
                 $player = [
                     'error' => 'not_found'
                 ];
+            } else {
+                $player['elo'] = (int)$player['elo'];
             }
 
             return json_encode(
