@@ -47,33 +47,4 @@ class PlayerController extends BaseController
             ExceptionHelper::handle($exception);
         }
     }
-
-    /**
-     * @return string
-     */
-    public function postIndex(): string
-    {
-        try {
-            $search = input()->post('search')->getValue();
-
-            if (!$search) {
-                response()->redirect('/players');
-            }
-
-            $players = $this->playersHelper->searchPlayers($search);
-
-            return $this->twig->render('players.twig', [
-                'nav' => [
-                    'active' => 'players'
-                ],
-                'players' => $players,
-                'searchedValue' => $search,
-                'title' => 'Players',
-                'baseTitle' => env('BASE_TITLE'),
-                'description' => env('DESCRIPTION'),
-            ]);
-        } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
-        }
-    }
 }
