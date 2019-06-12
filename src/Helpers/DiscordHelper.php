@@ -15,7 +15,7 @@ class DiscordHelper extends BaseHelper
     protected $steam;
 
     /**
-     * @var PlayersHelper
+     * @var PlayerHelper
      */
     protected $player;
 
@@ -28,7 +28,7 @@ class DiscordHelper extends BaseHelper
 
         $this->code = new CodeHelper();
         $this->steam = SteamHelper::getSteamHelper();
-        $this->player = new PlayersHelper();
+        $this->player = new PlayerHelper();
     }
 
     /**

@@ -3,6 +3,7 @@
 use B3none\League\Controllers\AssetsController;
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
+use B3none\League\Controllers\PlayerController;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Middleware\AuthMiddleware;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
@@ -88,13 +89,17 @@ class Router
 
         // Routes which require authentication
         SimpleRouter::group(['middleware' => AuthMiddleware::class], function () {
+            // Authorised discord endpoints
             SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
             SimpleRouter::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
             SimpleRouter::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
+            SimpleRouter::get('/discord/name/{discordId}', DiscordController::class . '@getName');
+
+            // Authorised player endpoints
+            SimpleRouter::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
         });
 
         // Link discord
-        SimpleRouter::get('/discord/name/{discordId}', DiscordController::class . '@getName');
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Anything that's not registered fallback to the homepage.
