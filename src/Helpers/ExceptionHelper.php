@@ -10,10 +10,9 @@ class ExceptionHelper
      * Exception handler
      *
      * @param Throwable $error
-     * @param bool $shouldDie
      * @return bool
      */
-    public static function handle(Throwable $error, bool $shouldDie = true): bool
+    public static function handle(Throwable $error): bool
     {
         header('HTTP/1.1 500 Internal Server Error');
 
@@ -30,12 +29,6 @@ class ExceptionHelper
             ]);
         }
 
-        echo json_encode($response);
-
-        if (!$shouldDie) {
-            return true;
-        }
-
-        die;
+        die(json_encode($response));
     }
 }
