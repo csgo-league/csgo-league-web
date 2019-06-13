@@ -32,7 +32,7 @@ $variables = [
         'de_train,/img/maps/train.jpg',
         'de_inferno,/img/maps/inferno.jpg',
     ],
-    'SERVER_ADDRESSES' => [
+    'SERVERS' => [
         // Servers
         // 'ip:port'
     ],
