@@ -14,8 +14,8 @@ class PlayerHelper extends BaseHelper
     {
         $query = $this->db->query('
             SELECT players.*, rankme.score as elo
-            FROM rankme
-            LEFT JOIN players ON players.steam = rankme.steam
+            FROM players
+            LEFT JOIN rankme ON rankme.steam = players.steam
             WHERE players.discord = :discord
         ', [
             ':discord' => $discordId,

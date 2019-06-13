@@ -38,6 +38,8 @@ class PlayerController extends BaseController
                 $player = [
                     'error' => 'not_found'
                 ];
+            } else if (!$player['elo']) {
+                $player['elo'] = 1000;
             } else {
                 $player['elo'] = (int)$player['elo'];
             }
