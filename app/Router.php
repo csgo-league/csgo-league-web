@@ -4,6 +4,7 @@ use B3none\League\Controllers\AssetsController;
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
 use B3none\League\Controllers\PlayerController;
+use B3none\League\Controllers\ServersController;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Middleware\AuthMiddleware;
 use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
@@ -97,6 +98,9 @@ class Router
 
             // Authorised player endpoints
             SimpleRouter::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
+
+            // Authorised server endpoints
+            SimpleRouter::get('/servers', ServersController::class . '@getServers');
         });
 
         // Link discord
