@@ -4,8 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24cd75221429f1ce07d8eada05e45f1e",
+    "content-hash": "90ddeadaa1ed7eefdbc62487e9f28f0a",
     "packages": [
+        {
+            "name": "b3none/server-details",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/b3none/source-server-details.git",
+                "reference": "1eff86978690148e1166dd1292488c3f3e8d6353"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/b3none/source-server-details/zipball/1eff86978690148e1166dd1292488c3f3e8d6353",
+                "reference": "1eff86978690148e1166dd1292488c3f3e8d6353",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "B3none\\ServerDetails\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Alex Blackham",
+                    "email": "ablackham2000@gmail.com"
+                }
+            ],
+            "description": "Get a source server's details",
+            "time": "2019-05-02T21:25:54+00:00"
+        },
         {
             "name": "b3none/steam-id-converter",
             "version": "1.1.0",
@@ -1398,6 +1428,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": ">=7.1",
         "ext-pdo": "*",
         "ext-json": "*"
     },

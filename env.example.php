@@ -32,6 +32,10 @@ $variables = [
         'de_train,/img/maps/train.jpg',
         'de_inferno,/img/maps/inferno.jpg',
     ],
+    'SERVER_ADDRESSES' => [
+        // Servers
+        // 'ip:port'
+    ],
 
     // You should also randomly generate an API key
     // Here's a link which will generate one for you
