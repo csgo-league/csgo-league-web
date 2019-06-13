@@ -25,11 +25,11 @@ class ServersHelper
      */
     public function getServers(bool $empty = true): array
     {
-        $servers = env('SERVERS');
+        $servers = explode(',', env('SERVERS'));
         $response = [];
 
         foreach ($servers as $connect) {
-            list($ip, $port) = str_split($connect, ':');
+            list($ip, $port) = explode(':', $connect);
             try {
                 $server = $this->serverDetails->getServer($ip, $port);
             } catch (Exception $exception) {
@@ -46,7 +46,7 @@ class ServersHelper
 
                 if (!$empty) {
                     $response[] = $serverArray;
-                } else if ($serverPlayers === 0) {
+                } elseif ($serverPlayers === 0) {
                     $response[] = $serverArray;
                 }
             }
