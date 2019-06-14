@@ -1,6 +1,5 @@
 <?php
 
-use B3none\League\Controllers\AssetsController;
 use B3none\League\Controllers\DiscordController;
 use B3none\League\Controllers\LoginController;
 use B3none\League\Controllers\PlayerController;
@@ -104,9 +103,11 @@ class Router
 
             // Authorised match endpoints
             SimpleRouter::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
-            SimpleRouter::get('/match/get/{matchId}', MatchController::class . '@getMatch');
-//            SimpleRouter::post('/match/end/{ip}/{port}', ServersController::class . '@endMatch');
+            SimpleRouter::get('/match/end/{matchId}', ServersController::class . '@endMatch');
         });
+
+        // Get a match's JSON file.
+        SimpleRouter::get('/match/get/{matchId}', MatchController::class . '@getMatch');
 
         // Link discord
         SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');

@@ -99,11 +99,34 @@ class MatchHelper extends BaseHelper
      * Get match data by match Id
      *
      * @param string $matchId
-     * @return string
+     * @return array
      */
-    public function getMatch(string $matchId): string
+    public function getMatch(string $matchId): array
     {
-        return json_decode(__DIR__. '/../../app/cache/matches/' . $matchId . '.json', true);
+        $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
+
+        if (!file_exists($matchConfig)) {
+            return [
+                'error' => 'not_found'
+            ];
+        }
+
+        return json_decode($matchConfig, true);
+    }
+
+    /**
+     * Get match data by match Id
+     *
+     * @param string $matchId
+     * @return array
+     */
+    public function endMatch(string $matchId): array
+    {
+        $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
+
+        return [
+            'success' => unlink($matchConfig)
+        ];
     }
 
     protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/)
