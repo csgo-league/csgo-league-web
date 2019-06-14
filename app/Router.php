@@ -10,7 +10,7 @@ use Pecee\Http\Middleware\Exceptions\TokenMismatchException;
 use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\HttpException;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
-use Pecee\SimpleRouter\SimpleRouter;
+use Pecee\SimpleRouter\SimpleRouter as Route;
 use B3none\League\Controllers\HomeController;
 use B3none\League\Controllers\MatchController;
 use B3none\League\Controllers\MatchesController;
@@ -29,14 +29,14 @@ class Router
 
         // Start the routing
         try {
-            SimpleRouter::start();
+            Route::start();
         } catch (TokenMismatchException $e) {
             die($e->getMessage());
         } catch (NotFoundHttpException $e) {
             die($e->getMessage());
         } catch (HttpException $e) {
             die($e->getMessage());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
@@ -50,70 +50,71 @@ class Router
         $homeRedirects = [
             '/',
             '/match',
-            '/profile'
+            '/profile',
+            '/discord',
         ];
         foreach ($homeRedirects as $homeRedirect) {
-            SimpleRouter::get($homeRedirect, function () {
+            Route::get($homeRedirect, function () {
                 response()->redirect('/home');
             });
         }
 
         // Get home
-        SimpleRouter::get('/home', HomeController::class . '@getIndex');
+        Route::get('/home', HomeController::class . '@getIndex');
 
         // Get matches
-        SimpleRouter::get('/matches', MatchesController::class . '@getIndex');
-        SimpleRouter::get('/matches/{page}', MatchesController::class . '@getIndex');
+        Route::get('/matches', MatchesController::class . '@getIndex');
+        Route::get('/matches/{page}', MatchesController::class . '@getIndex');
 
         // Search matches
-        SimpleRouter::post('/matches', MatchesController::class . '@postIndex');
-        SimpleRouter::post('/matches/{page}', MatchesController::class . '@postIndex');
+        Route::post('/matches', MatchesController::class . '@postIndex');
+        Route::post('/matches/{page}', MatchesController::class . '@postIndex');
 
         // Get players
-        SimpleRouter::get('/players', PlayersController::class . '@getPlayers');
-        SimpleRouter::get('/players/{page}', PlayersController::class . '@getPlayers');
+        Route::get('/players', PlayersController::class . '@getPlayers');
+        Route::get('/players/{page}', PlayersController::class . '@getPlayers');
 
         // Search players
-        SimpleRouter::post('/players', PlayersController::class . '@postIndex');
-        SimpleRouter::post('/players/{page}', PlayersController::class . '@postIndex');
+        Route::post('/players', PlayersController::class . '@postIndex');
+        Route::post('/players/{page}', PlayersController::class . '@postIndex');
 
         // Get match
-        SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatchView');
+        Route::get('/match/{matchId}', MatchController::class . '@getMatchView');
 
         // Get profile
-        SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
+        Route::get('/profile/{steamId}', ProfileController::class . '@getProfile');
 
         // Log in & log out
-        SimpleRouter::get('/login', LoginController::class . '@login');
-        SimpleRouter::get('/logout', LoginController::class . '@logout');
+        Route::get('/login', LoginController::class . '@login');
+        Route::get('/logout', LoginController::class . '@logout');
 
         // Routes which require authentication
-        SimpleRouter::group(['middleware' => AuthMiddleware::class], function () {
+        Route::group(['middleware' => AuthMiddleware::class], function () {
             // Authorised discord endpoints
-            SimpleRouter::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
-            SimpleRouter::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
-            SimpleRouter::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
-            SimpleRouter::get('/discord/name/{discordId}', DiscordController::class . '@getName');
+            Route::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
+            Route::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
+            Route::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
+            Route::get('/discord/name/{discordId}', DiscordController::class . '@getName');
 
             // Authorised player endpoints
-            SimpleRouter::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
+            Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
 
             // Authorised server endpoints
-            SimpleRouter::get('/servers', ServersController::class . '@getServers');
+            Route::get('/servers', ServersController::class . '@getServers');
 
             // Authorised match endpoints
-            SimpleRouter::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
-            SimpleRouter::get('/match/end/{matchId}', ServersController::class . '@endMatch');
+            Route::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
+            Route::get('/match/end/{matchId}', ServersController::class . '@endMatch');
         });
 
         // Get a match's JSON file.
-        SimpleRouter::get('/match/get/{matchId}', MatchController::class . '@getMatch');
+        Route::get('/match/get/{matchId}', MatchController::class . '@getMatch');
 
         // Link discord
-        SimpleRouter::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
+        Route::get('/discord/{discordId}/{code}', DiscordController::class . '@linkDiscord');
 
         // Anything that's not registered fallback to the homepage.
-        SimpleRouter::error(function(Request $request, Exception $exception) {
+        Route::error(function(Request $request, Exception $exception) {
             $remote = $_SERVER['REMOTE_ADDR'];
 
             if ($remote !== '127.0.0.1' && $remote !== '::1') {
