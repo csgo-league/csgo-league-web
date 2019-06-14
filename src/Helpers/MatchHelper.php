@@ -110,6 +110,10 @@ class MatchHelper extends BaseHelper
         $server->connect();
 
         $server->exec('get5_loadmatch_url ' . env('WEBSITE') . '/match/get/' . $matchId);
+
+        return [
+            'match_id' => $matchId
+        ];
     }
 
     /**
@@ -146,7 +150,14 @@ class MatchHelper extends BaseHelper
         ];
     }
 
-    protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/)
+    /**
+     * Generate a match and return the matchId
+     *
+     * @param array $teamOne
+     * @param array $teamTwo
+     * @return int
+     */
+    protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/): int
     {
         $matchId = $this->generateMatchId();
         $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
@@ -183,6 +194,7 @@ class MatchHelper extends BaseHelper
                 'get5_kick_when_no_match_loaded' => 1,
                 'get5_print_damage' => 1,
                 'get5_time_to_start' => 300,
+                'league_matches_force_matchid' => $matchId
             ],
         ];
 
@@ -191,29 +203,49 @@ class MatchHelper extends BaseHelper
         return $matchId;
     }
 
-    protected function generateMatchId()
+    /**
+     * Generate MatchId
+     *
+     * @return int
+     */
+    protected function generateMatchId(): int
     {
-        $attempts = 0;
-        $length = 5;
         do {
-            $code = $this->codeHelper->generate($length);
+            $matchId = $this->getMostRecentMatchId();
+        } while ($this->doesMatchIdExist(++$matchId));
 
-            if (++$attempts == 3) {
-                $length += 1;
-                $attempts = 0;
-            }
-        } while ($this->doesMatchIdExist($code));
+        return $matchId;
     }
 
-    protected function doesMatchIdExist(string $matchId)
+    /**
+     * Check whether the given matchId exists.
+     *
+     * @param int $matchId
+     * @return bool
+     */
+    protected function doesMatchIdExist(int $matchId): bool
     {
         // Check whether the matchId already exists in the database.
-        $query = $this->db->query('SELECT * FROM matches WHERE match_id = :matchId', [
+        $query = $this->db->query('SELECT matches.match_id FROM matches WHERE match_id = :matchId', [
             ':matchId' => $matchId
         ]);
 
-        $rows = $query->rowCount();
+        return $query->rowCount() !== 0;
+    }
 
-        return $rows !== 0;
+    /**
+     * Get the most recent matchId
+     *
+     * @return int
+     */
+    protected function getMostRecentMatchId(): int
+    {
+        $query = $this->db->query('SELECT matches.match_id FROM matches ORDER BY matches.match_id DESC LIMIT 1');
+
+        $response = $query->fetch() ?? [
+            'match_id' => 0
+        ];
+
+        return $response['match_id'];
     }
 }
