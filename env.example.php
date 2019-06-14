@@ -32,6 +32,8 @@ $variables = [
         'de_train,/img/maps/train.jpg',
         'de_inferno,/img/maps/inferno.jpg',
     ],
+
+    'RCON' => '', // Servers RCON password. (Must be the same on every server)
     'SERVERS' => [
         // Servers (this cannot be a URL)
         // 'ip:port'

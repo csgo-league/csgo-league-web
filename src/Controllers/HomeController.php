@@ -5,6 +5,7 @@ namespace B3none\League\Controllers;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchesHelper;
 use B3none\League\Helpers\PlayersHelper;
+use Exception;
 
 class HomeController extends BaseController
 {
@@ -59,7 +60,7 @@ class HomeController extends BaseController
                 'leftPlayers' => $leftPlayers,
                 'rightPlayers' => $rightPlayers
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             ExceptionHelper::handle($exception);
         }
     }

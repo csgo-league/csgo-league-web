@@ -2,6 +2,8 @@
 
 namespace B3none\League\Helpers;
 
+use Reflex\Rcon\Rcon;
+
 class MatchHelper extends BaseHelper
 {
     /**
@@ -80,5 +82,14 @@ class MatchHelper extends BaseHelper
         $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
 
         return $player;
+    }
+
+    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo)
+    {
+        $server = new Rcon($ip, $port, env('RCON'));
+
+        $server->connect();
+
+        $server->exec('get5_endmatch');
     }
 }

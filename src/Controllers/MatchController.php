@@ -2,6 +2,7 @@
 
 namespace B3none\League\Controllers;
 
+use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchHelper;
 use Exception;
 
@@ -28,28 +29,55 @@ class MatchController extends BaseController
      */
     public function getMatch(string $matchId): string
     {
-        if ($matchId != (int)$matchId) {
-            throw new Exception('Please only pass an integer to the matchId value.');
+        try {
+            if ($matchId != (int)$matchId) {
+                throw new Exception('Please only pass an integer to the matchId value.');
+            }
+
+            $match = $this->matchHelper->getMatchPlayers($matchId);
+
+            if ($match === null) {
+                response()->redirect('/matches');
+
+                die;
+            }
+
+            return $this->twig->render('match.twig', array_merge($match, [
+                'nav' => [
+                    'active' => 'matches',
+                    'loggedIn' => $this->steam->loggedIn(),
+                    'user' => $this->authorisedUser,
+                    'discordInviteLink' => env('DISCORD')
+                ],
+                'baseTitle' => env('BASE_TITLE'),
+                'description' => env('DESCRIPTION'),
+                'title' => 'Match',
+            ]));
+        } catch (Exception $exception) {
+            ExceptionHelper::handle($exception);
+        }
+    }
+
+    public function startMatch(string $ip, string $port)
+    {
+        $input = input()->all();
+
+        if (!array_key_exists('team_one', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'team_one_missing'
+            ]);
         }
 
-        $match = $this->matchHelper->getMatchPlayers($matchId);
-
-        if ($match === null) {
-            response()->redirect('/matches');
-
-            die;
+        if (!array_key_exists('team_one', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'team_two_missing'
+            ]);
         }
 
-        return $this->twig->render('match.twig', array_merge($match, [
-            'nav' => [
-                'active' => 'matches',
-                'loggedIn' => $this->steam->loggedIn(),
-                'user' => $this->authorisedUser,
-                'discordInviteLink' => env('DISCORD')
-            ],
-            'baseTitle' => env('BASE_TITLE'),
-            'description' => env('DESCRIPTION'),
-            'title' => 'Match',
-        ]));
+        return json_encode(
+            $this->matchHelper->startMatch($ip, $port, $input['team_one'], $input['team_two'])
+        );
     }
 }

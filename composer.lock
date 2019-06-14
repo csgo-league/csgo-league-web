@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90ddeadaa1ed7eefdbc62487e9f28f0a",
+    "content-hash": "f56000159762b8237c5692c72d6b7b38",
     "packages": [
         {
             "name": "b3none/server-details",
@@ -1401,6 +1401,39 @@
                 "standards"
             ],
             "time": "2019-05-28T07:50:59+00:00"
+        },
+        {
+            "name": "team-reflex/rcon-php",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teamreflex/RconPHP.git",
+                "reference": "0356bc7665eda243eb18f0b1c28b0fa690b61748"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teamreflex/RconPHP/zipball/0356bc7665eda243eb18f0b1c28b0fa690b61748",
+                "reference": "0356bc7665eda243eb18f0b1c28b0fa690b61748",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reflex\\Rcon\\": "src/Rcon"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Cole",
+                    "email": "david@team-reflex.com"
+                }
+            ],
+            "description": "CS:GO Rcon client made in PHP.",
+            "time": "2016-01-22T09:59:27+00:00"
         },
         {
             "name": "twig/twig",

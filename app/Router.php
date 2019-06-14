@@ -101,6 +101,7 @@ class Router
 
             // Authorised server endpoints
             SimpleRouter::get('/servers', ServersController::class . '@getServers');
+            SimpleRouter::post('/servers/{ip}/{port}', ServersController::class . '@getServers');
         });
 
         // Link discord
