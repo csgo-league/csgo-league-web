@@ -30,14 +30,14 @@ class Router
         // Start the routing
         try {
             Route::start();
-        } catch (TokenMismatchException $e) {
-            die($e->getMessage());
-        } catch (NotFoundHttpException $e) {
-            die($e->getMessage());
-        } catch (HttpException $e) {
-            die($e->getMessage());
-        } catch (Exception $e) {
-            die($e->getMessage());
+        } catch (TokenMismatchException $exception) {
+            ExceptionHelper::handle($exception);
+        } catch (NotFoundHttpException $exception) {
+            ExceptionHelper::handle($exception);
+        } catch (HttpException $exception) {
+            ExceptionHelper::handle($exception);
+        } catch (Exception $exception) {
+            ExceptionHelper::handle($exception);
         }
     }
 
