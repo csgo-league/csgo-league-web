@@ -101,7 +101,10 @@ class Router
 
             // Authorised server endpoints
             SimpleRouter::get('/servers', ServersController::class . '@getServers');
-            SimpleRouter::post('/servers/{ip}/{port}', ServersController::class . '@getServers');
+
+            // Authorised match endpoints
+            SimpleRouter::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
+//            SimpleRouter::post('/match/end/{ip}/{port}', ServersController::class . '@endMatch');
         });
 
         // Link discord
