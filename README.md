@@ -9,7 +9,7 @@
 A web application for PUG statistics.
 
 # Author
-[B3none](https://github.com/b3none/) - Developer and Maintainer
+[B3none](https://github.com/b3none/) - Developer / Maintainer
 
 ## Watch for releases
 
