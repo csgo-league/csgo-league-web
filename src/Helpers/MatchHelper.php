@@ -84,12 +84,54 @@ class MatchHelper extends BaseHelper
         return $player;
     }
 
-    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo)
+    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo, string $map)
     {
-        $server = new Rcon($ip, $port, env('RCON'));
+        $matchId = $this->generateMatch();
 
+        $setup = [
+            'matchid' => $matchId,
+            'num_maps' => 1,
+            'players_per_team' => 5,
+            'min_players_to_ready' => 10,
+            'min_spectators_to_ready' => 0,
+            'skip_veto' => false,
+            'veto_first' => 'team1',
+            'side_type' => 'always_knife',
+            'spectators' => [
+                'players' => [],
+            ],
+            'maplist' => [
+                'de_dust2',
+                'de_inferno',
+                'de_mirage',
+                'de_nuke',
+                'de_overpass',
+                'de_train',
+                'de_vertigo',
+            ],
+            'team1' => [
+                'players' => [],
+            ],
+            'team2' => [
+                'players' => [],
+            ],
+            'cvars' => [
+                'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
+                'get5_kick_when_no_match_loaded' => 1,
+                'get5_print_damage' => 1,
+                'get5_time_to_start' => 300,
+            ],
+        ];
+
+        // Execute the config on the server
+        $server = new Rcon($ip, $port, env('RCON'));
         $server->connect();
 
         $server->exec('get5_endmatch');
+    }
+
+    protected function generateMatch()
+    {
+        return 69;
     }
 }
