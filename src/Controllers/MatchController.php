@@ -58,6 +58,13 @@ class MatchController extends BaseController
         }
     }
 
+    /**
+     * Start a match
+     *
+     * @param string $ip
+     * @param string $port
+     * @return false|string
+     */
     public function startMatch(string $ip, string $port)
     {
         $input = input()->all();
@@ -69,18 +76,38 @@ class MatchController extends BaseController
             ]);
         }
 
-        if (!array_key_exists('team_one', $input)) {
+        if (!array_key_exists('team_two', $input)) {
             return json_encode([
                 'success' => false,
                 'error' => 'team_two_missing'
             ]);
         }
 
+        $teamOne = $input['team_one'];
+        if (count($teamOne) != 5) {
+            return json_encode([
+                'success' => false,
+                'error' => 'team_one_wrong_size'
+            ]);
+        }
+
+        $teamTwo = $input['team_two'];
+        if (count($teamTwo) != 5) {
+            return json_encode([
+                'success' => false,
+                'error' => 'team_two_wrong_size'
+            ]);
+        }
+
         return json_encode(
-            $this->matchHelper->startMatch($ip, $port, $input['team_one'], $input['team_two'])
+            $this->matchHelper->startMatch($ip, $port, $teamOne, $teamTwo)
         );
     }
 
+    /**
+     * @param string $matchId
+     * @return false|string
+     */
     public function getMatch(string $matchId)
     {
         return json_encode(
