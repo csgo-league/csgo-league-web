@@ -2,10 +2,27 @@
 
 namespace B3none\League\Helpers;
 
+use Exception;
 use Reflex\Rcon\Rcon;
 
 class MatchHelper extends BaseHelper
 {
+    /**
+     * @var CodeHelper
+     */
+    protected $codeHelper;
+
+    /**
+     * MatchHelper constructor.
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->codeHelper = new CodeHelper();
+    }
+
     /**
      * @param string $matchId
      * @return array|null
@@ -131,6 +148,9 @@ class MatchHelper extends BaseHelper
 
     protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/)
     {
+        $matchId = $this->generateMatchId();
+        $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
+
         $setup = [
             'matchid' => $matchId,
             'num_maps' => 1,
@@ -159,13 +179,41 @@ class MatchHelper extends BaseHelper
                 'players' => $teamTwo,
             ],
             'cvars' => [
-                'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
+                'hostname' => env('BASE_TITLE') . ' | Scrim | github.com/csgo-league',
                 'get5_kick_when_no_match_loaded' => 1,
                 'get5_print_damage' => 1,
                 'get5_time_to_start' => 300,
             ],
         ];
 
-        return 69;
+        file_put_contents($matchConfig, json_encode($setup));
+
+        return $matchId;
+    }
+
+    protected function generateMatchId()
+    {
+        $attempts = 0;
+        $length = 5;
+        do {
+            $code = $this->codeHelper->generate($length);
+
+            if (++$attempts == 3) {
+                $length += 1;
+                $attempts = 0;
+            }
+        } while ($this->doesMatchIdExist($code));
+    }
+
+    protected function doesMatchIdExist(string $matchId)
+    {
+        // Check whether the matchId already exists in the database.
+        $query = $this->db->query('SELECT * FROM matches WHERE match_id = :matchId', [
+            ':matchId' => $matchId
+        ]);
+
+        $rows = $query->rowCount();
+
+        return $rows !== 0;
     }
 }
