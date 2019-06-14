@@ -84,10 +84,30 @@ class MatchHelper extends BaseHelper
         return $player;
     }
 
-    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo, string $map)
+    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo/*, string $map*/)
     {
-        $matchId = $this->generateMatch();
+        $matchId = $this->generateMatch($teamOne, $teamTwo/*, $map*/);
 
+        // Execute the config on the server
+        $server = new Rcon($ip, $port, env('RCON'));
+        $server->connect();
+
+        $server->exec('get5_loadmatch_url ' . env('WEBSITE') . '/match/get/' . $matchId);
+    }
+
+    /**
+     * Get match data by match Id
+     *
+     * @param string $matchId
+     * @return string
+     */
+    public function getMatch(string $matchId): string
+    {
+        return json_decode(__DIR__. '/../../app/cache/matches/' . $matchId . '.json', true);
+    }
+
+    protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/)
+    {
         $setup = [
             'matchid' => $matchId,
             'num_maps' => 1,
@@ -110,10 +130,10 @@ class MatchHelper extends BaseHelper
                 'de_vertigo',
             ],
             'team1' => [
-                'players' => [],
+                'players' => $teamOne,
             ],
             'team2' => [
-                'players' => [],
+                'players' => $teamTwo,
             ],
             'cvars' => [
                 'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
@@ -123,15 +143,6 @@ class MatchHelper extends BaseHelper
             ],
         ];
 
-        // Execute the config on the server
-        $server = new Rcon($ip, $port, env('RCON'));
-        $server->connect();
-
-        $server->exec('get5_endmatch');
-    }
-
-    protected function generateMatch()
-    {
         return 69;
     }
 }

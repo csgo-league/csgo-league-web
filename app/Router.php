@@ -79,7 +79,7 @@ class Router
         SimpleRouter::post('/players/{page}', PlayersController::class . '@postIndex');
 
         // Get match
-        SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatch');
+        SimpleRouter::get('/match/{matchId}', MatchController::class . '@getMatchView');
 
         // Get profile
         SimpleRouter::get('/profile/{steamId}', ProfileController::class . '@getProfile');
@@ -104,6 +104,7 @@ class Router
 
             // Authorised match endpoints
             SimpleRouter::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
+            SimpleRouter::get('/match/get/{matchId}', MatchController::class . '@getMatch');
 //            SimpleRouter::post('/match/end/{ip}/{port}', ServersController::class . '@endMatch');
         });
 

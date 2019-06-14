@@ -27,7 +27,7 @@ class MatchController extends BaseController
      * @param string $matchId
      * @return string
      */
-    public function getMatch(string $matchId): string
+    public function getMatchView(string $matchId): string
     {
         try {
             if ($matchId != (int)$matchId) {
@@ -78,6 +78,13 @@ class MatchController extends BaseController
 
         return json_encode(
             $this->matchHelper->startMatch($ip, $port, $input['team_one'], $input['team_two'])
+        );
+    }
+
+    public function getMatch(string $matchId)
+    {
+        return json_encode(
+            $this->matchHelper->getMatch($matchId)
         );
     }
 }
