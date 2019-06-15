@@ -3,6 +3,9 @@
 namespace B3none\League\Helpers;
 
 use Exception;
+use Reflex\Rcon\Exceptions\NotAuthenticatedException;
+use Reflex\Rcon\Exceptions\RconAuthException;
+use Reflex\Rcon\Exceptions\RconConnectException;
 use Reflex\Rcon\Rcon;
 
 class MatchHelper extends BaseHelper
@@ -109,9 +112,9 @@ class MatchHelper extends BaseHelper
      * @param array $teamOne
      * @param array $teamTwo
      * @return array
-     * @throws \Reflex\Rcon\Exceptions\NotAuthenticatedException
-     * @throws \Reflex\Rcon\Exceptions\RconAuthException
-     * @throws \Reflex\Rcon\Exceptions\RconConnectException
+     * @throws NotAuthenticatedException
+     * @throws RconAuthException
+     * @throws RconConnectException
      */
     public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo): array
     {
@@ -121,7 +124,9 @@ class MatchHelper extends BaseHelper
         $server = new Rcon($ip, $port, env('RCON'));
         $server->connect();
 
-        $server->exec('get5_loadmatch_url ' . preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId);
+        $matchConfigUrl = preg_replace('(^https?://)', '', env('WEBSITE'));
+        $matchConfigUrl .= "/match/get/$matchId";
+        $server->exec("get5_loadmatch_url $matchConfigUrl");
 
         return [
             'url' => preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId,
