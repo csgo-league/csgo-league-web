@@ -180,7 +180,7 @@ class MatchHelper extends BaseHelper
         $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
 
         $setup = [
-            'matchid' => $matchId,
+            'matchid' => (string)$matchId,
             'num_maps' => 1,
             'players_per_team' => 5,
             'min_players_to_ready' => 10,
@@ -210,8 +210,9 @@ class MatchHelper extends BaseHelper
                 'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
                 'get5_kick_when_no_match_loaded' => 1,
                 'get5_print_damage' => 1,
+                'get5_check_auths' => 1,
+                'league_matches_force_matchid' => $matchId,
                 'get5_time_to_start' => 300,
-                'league_matches_force_matchid' => $matchId
             ],
         ];
 
