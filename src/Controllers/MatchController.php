@@ -140,14 +140,36 @@ class MatchController extends BaseController
         );
     }
 
-//    /**
-//     * @param string $matchId
-//     * @return string
-//     */
-//    public function endMatch(string $matchId): string
-//    {
-//        return json_encode(
-//            $this->matchHelper->getMatch($matchId)
-//        );
-//    }
+    /**
+     * @param string $matchId
+     * @return string
+     */
+    public function endMatch(string $matchId): string
+    {
+        $input = input()->all();
+
+        if (empty($input['ip'])) {
+            return json_encode([
+                'success' => false,
+                'error' => 'ip_empty'
+            ]);
+        } elseif (!array_key_exists('port', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'port_missing'
+            ]);
+        } elseif (empty($input['port'])) {
+            return json_encode([
+                'success' => false,
+                'error' => 'port_empty'
+            ]);
+        }
+
+        $ip = $input['ip'];
+        $port = $input['port'];
+
+        return json_encode(
+            $this->matchHelper->endMatch($matchId, $ip, $port)
+        );
+    }
 }

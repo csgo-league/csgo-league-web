@@ -157,8 +157,13 @@ class MatchHelper extends BaseHelper
      * @param string $matchId
      * @return array
      */
-    public function endMatch(string $matchId): array
+    public function endMatch(string $matchId, string $ip, string $port): array
     {
+        $server = new Rcon($ip, $port, env('RCON'));
+        $server->connect();
+
+        $server->exec('get5_endmatch; map de_mirage');
+
         $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         return [
