@@ -61,11 +61,9 @@ class MatchController extends BaseController
     /**
      * Start a match
      *
-     * @param string $ip
-     * @param string $port
-     * @return false|string
+     * @return string
      */
-    public function startMatch()
+    public function startMatch(): string
     {
         $input = input()->all();
 
@@ -127,9 +125,9 @@ class MatchController extends BaseController
 
     /**
      * @param string $matchId
-     * @return false|string
+     * @return string
      */
-    public function getMatch(string $matchId)
+    public function getMatch(string $matchId): string
     {
         return json_encode(
             $this->matchHelper->getMatch($matchId)
