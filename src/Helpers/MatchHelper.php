@@ -103,7 +103,17 @@ class MatchHelper extends BaseHelper
         return $player;
     }
 
-    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo)
+    /**
+     * @param string $ip
+     * @param string $port
+     * @param array $teamOne
+     * @param array $teamTwo
+     * @return array
+     * @throws \Reflex\Rcon\Exceptions\NotAuthenticatedException
+     * @throws \Reflex\Rcon\Exceptions\RconAuthException
+     * @throws \Reflex\Rcon\Exceptions\RconConnectException
+     */
+    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo): array
     {
         $matchId = $this->generateMatch($teamOne, $teamTwo);
 
