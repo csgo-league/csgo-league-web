@@ -124,12 +124,9 @@ class MatchHelper extends BaseHelper
         $server = new Rcon($ip, $port, env('RCON'));
         $server->connect();
 
-        $matchConfigUrl = preg_replace('(^https?://)', '', env('WEBSITE'));
-        $matchConfigUrl .= "/match/get/$matchId";
-        $server->exec("get5_loadmatch_url $matchConfigUrl");
+        $server->exec("get5_loadmatch_url " . preg_replace('(^https?://)', '', env('URL')) . "/match/get/$matchId");
 
         return [
-            'url' => preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId,
             'match_id' => $matchId
         ];
     }
