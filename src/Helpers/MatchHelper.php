@@ -269,6 +269,6 @@ class MatchHelper extends BaseHelper
             'match_id' => 1
         ];
 
-        return $response['match_id'];
+        return $response['match_id'] ?? 1;
     }
 }
