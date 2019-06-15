@@ -249,7 +249,7 @@ class MatchHelper extends BaseHelper
             ':matchId' => $matchId
         ]);
 
-        $matches = array_filter(scandir(self::MATCHES_CACHE), function($item) {
+        $matches = array_filter(scandir(self::MATCHES_CACHE), function ($item) {
             return !is_dir(self::MATCHES_CACHE . "/$item");
         });
 
