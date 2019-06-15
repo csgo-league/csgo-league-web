@@ -106,8 +106,6 @@ class MatchHelper extends BaseHelper
     public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo/*, string $map*/)
     {
         $matchId = $this->generateMatch($teamOne, $teamTwo);
-        echo $matchId;
-        die;
 
         // Execute the config on the server
         $server = new Rcon($ip, $port, env('RCON'));
@@ -195,7 +193,7 @@ class MatchHelper extends BaseHelper
                 'players' => $teamTwo,
             ],
             'cvars' => [
-                'hostname' => env('BASE_TITLE') . ' | Scrim | github.com/csgo-league',
+                'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
                 'get5_kick_when_no_match_loaded' => 1,
                 'get5_print_damage' => 1,
                 'get5_time_to_start' => 300,
