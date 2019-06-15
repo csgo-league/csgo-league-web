@@ -7,6 +7,8 @@ use Reflex\Rcon\Rcon;
 
 class MatchHelper extends BaseHelper
 {
+    const MATCHES_CACHE = __DIR__ . '/../../app/cache/matches';
+
     /**
      * @var CodeHelper
      */
@@ -103,7 +105,9 @@ class MatchHelper extends BaseHelper
 
     public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo/*, string $map*/)
     {
-        $matchId = $this->generateMatch($teamOne, $teamTwo/*, $map*/);
+        $matchId = $this->generateMatch($teamOne, $teamTwo);
+        echo $matchId;
+        die;
 
         // Execute the config on the server
         $server = new Rcon($ip, $port, env('RCON'));
@@ -124,7 +128,7 @@ class MatchHelper extends BaseHelper
      */
     public function getMatch(string $matchId): array
     {
-        $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
+        $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         if (!file_exists($matchConfig)) {
             return [
@@ -143,7 +147,7 @@ class MatchHelper extends BaseHelper
      */
     public function endMatch(string $matchId): array
     {
-        $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
+        $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         return [
             'success' => unlink($matchConfig)
@@ -157,9 +161,10 @@ class MatchHelper extends BaseHelper
      * @param array $teamTwo
      * @return int
      */
-    protected function generateMatch(array $teamOne, array $teamTwo/*, string $map*/): int
+    protected function generateMatch(array $teamOne, array $teamTwo): int
     {
         $matchId = $this->generateMatchId();
+
         $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
 
         $setup = [
@@ -210,9 +215,10 @@ class MatchHelper extends BaseHelper
      */
     protected function generateMatchId(): int
     {
-        do {
-            $matchId = $this->getMostRecentMatchId();
-        } while ($this->doesMatchIdExist(++$matchId));
+        $matchId = $this->getMostRecentMatchId();
+        while ($this->doesMatchIdExist($matchId)) {
+            $matchId++;
+        }
 
         return $matchId;
     }
@@ -226,11 +232,15 @@ class MatchHelper extends BaseHelper
     protected function doesMatchIdExist(int $matchId): bool
     {
         // Check whether the matchId already exists in the database.
-        $query = $this->db->query('SELECT matches.match_id FROM matches WHERE match_id = :matchId', [
+        $query = $this->db->query('SELECT matches.matchid FROM matches WHERE matchid = :matchId', [
             ':matchId' => $matchId
         ]);
 
-        return $query->rowCount() !== 0;
+        $matches = array_filter(scandir(self::MATCHES_CACHE), function($item) {
+            return !is_dir(self::MATCHES_CACHE . "/$item");
+        });
+
+        return $query->rowCount() !== 0 || in_array("$matchId.json", $matches);
     }
 
     /**
@@ -240,10 +250,10 @@ class MatchHelper extends BaseHelper
      */
     protected function getMostRecentMatchId(): int
     {
-        $query = $this->db->query('SELECT matches.match_id FROM matches ORDER BY matches.match_id DESC LIMIT 1');
+        $query = $this->db->query('SELECT matchid FROM matches ORDER BY matchid DESC LIMIT 1');
 
-        $response = $query->fetch() ?? [
-            'match_id' => 0
+        $response = $query->fetch() ?: [
+            'match_id' => 1
         ];
 
         return $response['match_id'];

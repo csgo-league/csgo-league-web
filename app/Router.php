@@ -103,8 +103,8 @@ class Router
             Route::get('/servers', ServersController::class . '@getServers');
 
             // Authorised match endpoints
-            Route::post('/match/start/{ip}/{port}', ServersController::class . '@startMatch');
-            Route::get('/match/end/{matchId}', ServersController::class . '@endMatch');
+            Route::post('/match/start', MatchController::class . '@startMatch');
+            Route::get('/match/end/{matchId}', MatchController::class . '@endMatch');
         });
 
         // Get a match's JSON file.

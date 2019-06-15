@@ -65,7 +65,7 @@ class MatchController extends BaseController
      * @param string $port
      * @return false|string
      */
-    public function startMatch(string $ip, string $port)
+    public function startMatch()
     {
         $input = input()->all();
 
@@ -74,30 +74,51 @@ class MatchController extends BaseController
                 'success' => false,
                 'error' => 'team_one_missing'
             ]);
-        }
-
-        if (!array_key_exists('team_two', $input)) {
+        } elseif (!array_key_exists('team_two', $input)) {
             return json_encode([
                 'success' => false,
                 'error' => 'team_two_missing'
             ]);
+        } elseif (!array_key_exists('ip', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'ip_missing'
+            ]);
+        } elseif (empty($input['ip'])) {
+            return json_encode([
+                'success' => false,
+                'error' => 'ip_empty'
+            ]);
+        } elseif (!array_key_exists('port', $input)) {
+            return json_encode([
+                'success' => false,
+                'error' => 'port_missing'
+            ]);
+        } elseif (empty($input['port'])) {
+            return json_encode([
+                'success' => false,
+                'error' => 'port_empty'
+            ]);
         }
+
+        $ip = $input['ip'];
+        $port = $input['port'];
 
         $teamOne = $input['team_one'];
-        if (count($teamOne) != 5) {
-            return json_encode([
-                'success' => false,
-                'error' => 'team_one_wrong_size'
-            ]);
-        }
+//        if (count($teamOne) != 5) {
+//            return json_encode([
+//                'success' => false,
+//                'error' => 'team_one_wrong_size'
+//            ]);
+//        }
 
         $teamTwo = $input['team_two'];
-        if (count($teamTwo) != 5) {
-            return json_encode([
-                'success' => false,
-                'error' => 'team_two_wrong_size'
-            ]);
-        }
+//        if (count($teamTwo) != 5) {
+//            return json_encode([
+//                'success' => false,
+//                'error' => 'team_two_wrong_size'
+//            ]);
+//        }
 
         return json_encode(
             $this->matchHelper->startMatch($ip, $port, $teamOne, $teamTwo)
