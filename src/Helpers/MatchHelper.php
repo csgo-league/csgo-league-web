@@ -201,9 +201,9 @@ class MatchHelper extends BaseHelper
                 'de_inferno',
                 'de_mirage',
                 'de_nuke',
+                'de_cache',
                 'de_overpass',
                 'de_train',
-                'de_vertigo',
             ],
             'team1' => [
                 'players' => $teamOne,
