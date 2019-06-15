@@ -5,6 +5,9 @@ namespace B3none\League\Controllers;
 use B3none\League\Helpers\ExceptionHelper;
 use B3none\League\Helpers\MatchHelper;
 use Exception;
+use Reflex\Rcon\Exceptions\NotAuthenticatedException;
+use Reflex\Rcon\Exceptions\RconAuthException;
+use Reflex\Rcon\Exceptions\RconConnectException;
 
 class MatchController extends BaseController
 {
@@ -62,6 +65,9 @@ class MatchController extends BaseController
      * Start a match
      *
      * @return string
+     * @throws NotAuthenticatedException
+     * @throws RconAuthException
+     * @throws RconConnectException
      */
     public function startMatch(): string
     {
@@ -133,4 +139,15 @@ class MatchController extends BaseController
             $this->matchHelper->getMatch($matchId)
         );
     }
+
+//    /**
+//     * @param string $matchId
+//     * @return string
+//     */
+//    public function endMatch(string $matchId): string
+//    {
+//        return json_encode(
+//            $this->matchHelper->getMatch($matchId)
+//        );
+//    }
 }
