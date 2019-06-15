@@ -103,7 +103,7 @@ class MatchHelper extends BaseHelper
         return $player;
     }
 
-    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo/*, string $map*/)
+    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo)
     {
         $matchId = $this->generateMatch($teamOne, $teamTwo);
 
@@ -111,7 +111,7 @@ class MatchHelper extends BaseHelper
         $server = new Rcon($ip, $port, env('RCON'));
         $server->connect();
 
-        $server->exec('get5_loadmatch_url ' . env('WEBSITE') . '/match/get/' . $matchId);
+        $server->exec('get5_loadmatch_url ' . preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId);
 
         return [
             'match_id' => $matchId
@@ -134,6 +134,7 @@ class MatchHelper extends BaseHelper
             ];
         }
 
+        $matchConfig = file_get_contents($matchConfig);
         return json_decode($matchConfig, true);
     }
 
