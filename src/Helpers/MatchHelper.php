@@ -114,6 +114,7 @@ class MatchHelper extends BaseHelper
         $server->exec('get5_loadmatch_url ' . preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId);
 
         return [
+            'url' => preg_replace('(^https?://)', '', env('WEBSITE')) . '/match/get/' . $matchId,
             'match_id' => $matchId
         ];
     }
