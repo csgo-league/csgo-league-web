@@ -38,6 +38,7 @@ class ServersHelper
 
             if ($server !== null) {
                 $serverPlayers = $server->getPlayers();
+                $serverBots = $server->getBots();
 
                 $serverArray = [
                     'players' => $serverPlayers,
@@ -46,7 +47,7 @@ class ServersHelper
 
                 if (!$empty) {
                     $response[] = $serverArray;
-                } elseif ($serverPlayers === 0) {
+                } elseif (($serverPlayers - $serverBots) === 0) {
                     $response[] = $serverArray;
                 }
             }

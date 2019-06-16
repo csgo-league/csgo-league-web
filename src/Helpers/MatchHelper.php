@@ -155,7 +155,12 @@ class MatchHelper extends BaseHelper
      * Get match data by match Id
      *
      * @param string $matchId
+     * @param string $ip
+     * @param string $port
      * @return array
+     * @throws NotAuthenticatedException
+     * @throws RconAuthException
+     * @throws RconConnectException
      */
     public function endMatch(string $matchId, string $ip, string $port): array
     {
