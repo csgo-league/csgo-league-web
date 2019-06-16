@@ -40,14 +40,16 @@ class ServersHelper
                 $serverPlayers = $server->getPlayers();
                 $serverBots = $server->getBots();
 
+                $realPlayers = ($serverPlayers - $serverBots);
+
                 $serverArray = [
-                    'players' => $serverPlayers,
+                    'players' => $realPlayers,
                     'server' => $connect
                 ];
 
                 if (!$empty) {
                     $response[] = $serverArray;
-                } elseif (($serverPlayers - $serverBots) === 0) {
+                } elseif ($realPlayers === 0) {
                     $response[] = $serverArray;
                 }
             }
