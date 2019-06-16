@@ -7,7 +7,7 @@ class PlayerHelper extends BaseHelper
     /**
      * Get player
      *
-     * @param int|null $discordId
+     * @param int $discordId
      * @return array
      */
     public function getPlayerByDiscordId(int $discordId): array
@@ -29,7 +29,9 @@ class PlayerHelper extends BaseHelper
             }
         }
 
-        return $response;
+        return $response ?: [
+            'error' => 'not_found'
+        ];
     }
 
     /**
