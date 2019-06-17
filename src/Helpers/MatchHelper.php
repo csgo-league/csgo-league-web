@@ -191,10 +191,10 @@ class MatchHelper extends BaseHelper
 
         $setup = [
             'matchid' => (string)$matchId,
-            'num_maps' => '1',
-            'players_per_team' => '5',
-            'min_players_to_ready' => '10',
-            'min_spectators_to_ready' => '0',
+            'num_maps' => 1,
+            'players_per_team' => 5,
+            'min_players_to_ready' => 10,
+            'min_spectators_to_ready' => 0,
             'skip_veto' => false,
             'veto_first' => 'team1',
             'side_type' => 'always_knife',
