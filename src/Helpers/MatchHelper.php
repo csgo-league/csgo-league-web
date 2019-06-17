@@ -191,10 +191,10 @@ class MatchHelper extends BaseHelper
 
         $setup = [
             'matchid' => (string)$matchId,
-            'num_maps' => 1,
-            'players_per_team' => 5,
-            'min_players_to_ready' => 10,
-            'min_spectators_to_ready' => 0,
+            'num_maps' => '1',
+            'players_per_team' => '5',
+            'min_players_to_ready' => '10',
+            'min_spectators_to_ready' => '0',
             'skip_veto' => false,
             'veto_first' => 'team1',
             'side_type' => 'always_knife',
@@ -218,9 +218,9 @@ class MatchHelper extends BaseHelper
             ],
             'cvars' => [
                 'hostname' => env('BASE_TITLE') . ' Scrim | github.com/csgo-league',
-                'get5_kick_when_no_match_loaded' => 1,
-                'league_matches_force_matchid' => $matchId,
-                'get5_time_to_start' => 300,
+                'get5_kick_when_no_match_loaded' => '1',
+                'league_matches_force_matchid' => (string)$matchId,
+                'get5_time_to_start' => '600',
             ],
         ];
 
