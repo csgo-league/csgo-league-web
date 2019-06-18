@@ -76,5 +76,5 @@ The steps below are all written with the presumption that you're using Ubuntu.
 ```
 5. `sudo a2ensite csgo-league-web.conf`
 
-### Errors
+### Debugging
 1. if you get `too many redirects` error try change in `env.php` `'WEBSITE' => '/home'` to `'WEBSITE' => ''`
