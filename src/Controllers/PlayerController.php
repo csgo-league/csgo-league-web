@@ -38,10 +38,10 @@ class PlayerController extends BaseController
                 $player = [
                     'error' => 'not_found'
                 ];
-            } elseif (!$player['elo']) {
-                $player['elo'] = 1000;
+            } elseif (!$player['points']) {
+                $player['points'] = 1000;
             } else {
-                $player['elo'] = (int)$player['elo'];
+                $player['points'] = (int)$player['points'];
             }
 
             return json_encode(
