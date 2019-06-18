@@ -13,7 +13,7 @@ class PlayerHelper extends BaseHelper
     public function getPlayerByDiscordId(int $discordId): array
     {
         $query = $this->db->query('
-            SELECT players.*, rankme.score as elo
+            SELECT *, rankme.steam
             FROM players
             LEFT JOIN rankme ON rankme.steam = players.steam
             WHERE players.discord = :discord
