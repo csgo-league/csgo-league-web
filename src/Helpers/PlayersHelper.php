@@ -125,7 +125,7 @@ class PlayersHelper extends BaseHelper
         $query = $this->db->query('
             SELECT * 
             FROM rankme 
-            LEFT JOIN players ON players.steam = rankme.steam 
+            /*LEFT JOIN players ON players.steam = rankme.steam*/ 
             WHERE players.steam = :steam
         ', [
             ':steam' => $steamId,
