@@ -41,7 +41,7 @@ class PlayerController extends BaseController
             } elseif (!$player['score']) {
                 $player['score'] = 1000;
             } else {
-                $player['score'] = (int)$player['points'];
+                $player['score'] = (int)$player['score'];
             }
 
             return json_encode(
