@@ -33,7 +33,7 @@ class DiscordController extends BaseController
     public function linkDiscord(string $discordId, string $code): string
     {
         if (!$this->steam->loggedIn()) {
-            return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and try again.";
+            return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and visit this URL again.";
         }
 
         $steamId = $this->authorisedUser['steamid'];
