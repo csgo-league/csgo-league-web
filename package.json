@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/csgo-league/csgo-league-web#readme",
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/register": "^7.4.0",
-    "babel-loader": "^8.0.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
     "axios": "^0.18.1",
     "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "del": "^4.1.1",
@@ -34,11 +34,11 @@
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.0",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
     "gulp-javascript-obfuscator": "^1.1.6",
-    "uglifyjs-webpack-plugin": "^2.1.2"
+    "uglifyjs-webpack-plugin": "^2.2.0"
   }
 }
