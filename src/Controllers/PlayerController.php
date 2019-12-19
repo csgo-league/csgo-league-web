@@ -44,7 +44,7 @@ class PlayerController extends BaseController
                 $player['score'] = (int)$player['score'];
             }
 
-            $player['in_match'] = $this->playerHelper->isInMatch($player['steam']);
+            $player['inMatch'] = $this->playerHelper->isInMatch($player['steam']);
 
             return json_encode(
                 $player
