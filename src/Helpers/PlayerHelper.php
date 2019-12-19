@@ -67,4 +67,24 @@ class PlayerHelper extends BaseHelper
 
         return $query->rowCount() !== 0;
     }
+
+    /**
+     * Check whether a steamId is in an ongoing game
+     *
+     * @param string $steamId
+     * @return bool
+     */
+    public function isInMatch(string $steamId): bool
+    {
+        $query = $this->db->query('
+            SELECT * 
+            FROM matches
+            WHERE matches.end_time = null and matches_players.steam = :steam
+            LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+        ', [
+            ':steam' => $steamId,
+        ]);
+
+        return $query->rowCount() !== 0;
+    }
 }

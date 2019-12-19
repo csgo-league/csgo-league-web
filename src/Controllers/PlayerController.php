@@ -34,7 +34,7 @@ class PlayerController extends BaseController
         try {
             $player = $this->playerHelper->getPlayerByDiscordId($discordId);
 
-            if (count($player) < 1) {
+            if (count($player) < 1 || !$player['steam']) {
                 $player = [
                     'error' => 'not_found'
                 ];
@@ -43,6 +43,8 @@ class PlayerController extends BaseController
             } else {
                 $player['score'] = (int)$player['score'];
             }
+
+            $player['in_match'] = $this->playerHelper->isInMatch($player['steam']);
 
             return json_encode(
                 $player
