@@ -17,7 +17,7 @@ class PlayerRemoveSteam extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `players` DROP COLUMN `steam`;
+            ALTER TABLE `players` DROP COLUMN `steam64`;
         ');
 
         return $query->execute();
@@ -34,7 +34,7 @@ class PlayerRemoveSteam extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE `players` ADD COLUMN `steam` varchar(100) NOT NULL;
+            ALTER TABLE `players` ADD COLUMN `steam64` varchar(100) NOT NULL;
         ');
 
         return $query->execute();

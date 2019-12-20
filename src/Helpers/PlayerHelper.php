@@ -46,7 +46,7 @@ class PlayerHelper extends BaseHelper
             'steam' => $steamId
         ]);
 
-        return !! $query;
+        return !!$query;
     }
 
     /**
