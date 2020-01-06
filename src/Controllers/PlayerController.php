@@ -34,7 +34,7 @@ class PlayerController extends BaseController
         try {
             $player = $this->playerHelper->getPlayerByDiscordId($discordId);
 
-            if (count($player) < 1 || !$player['steam']) {
+            if (count($player) < 1 || !array_key_exists('steam', $player)) {
                 $player = [
                     'error' => 'not_found'
                 ];
