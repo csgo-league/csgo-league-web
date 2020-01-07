@@ -8,6 +8,8 @@
 # CS:GO League Web
 A web application for PUG statistics.
 
+Our support discord can be found [here](https://discord.gg/b5MhANU).
+
 # Author
 [B3none](https://b3none.co.uk/) - Developer / Maintainer
 
