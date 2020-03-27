@@ -148,6 +148,12 @@ class DiscordHelper extends BaseHelper
                 'steam' => $steamId
             ]);
 
+            $insert = $this->db->insert('rankme', [
+                'steam' => $steamId
+            ], [
+
+            ]);
+
             if ($update->execute()) {
                 return !!$this->db->delete('player_link_codes', [
                     'code' => $code
