@@ -149,9 +149,7 @@ class DiscordHelper extends BaseHelper
             ]);
 
             $insert = $this->db->insert('rankme', [
-                'steam' => $steamId
-            ], [
-
+                'steam' => $steamId 
             ]);
 
             if ($update->execute()) {
