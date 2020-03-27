@@ -44,7 +44,8 @@ class ServersHelper
 
                 $serverArray = [
                     'players' => $realPlayers,
-                    'server' => $connect
+                    'ip' => $ip,
+                    'port' => $port,
                 ];
 
                 if (!$empty) {
