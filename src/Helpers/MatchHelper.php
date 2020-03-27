@@ -201,11 +201,13 @@ class MatchHelper extends BaseHelper
 
         $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
 
+        $totalPlayers = count($teamOne) + count($teamTwo);
+
         $setup = [
             'matchid' => (string)$matchId,
             'num_maps' => 1,
-            'players_per_team' => 5,
-            'min_players_to_ready' => 10,
+            'players_per_team' => ceil($totalPlayers / 2),
+            'min_players_to_ready' => $totalPlayers,
             'min_spectators_to_ready' => 0,
             'skip_veto' => false,
             'veto_first' => 'team1',
