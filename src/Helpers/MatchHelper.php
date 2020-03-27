@@ -16,13 +16,20 @@ class MatchHelper extends BaseHelper
      * @var CodeHelper
      */
     protected $codeHelper;
+
     /**
      * @var ServersHelper
      */
-    private $serversHelper;
+    protected $serversHelper;
+
+    /**
+     * @var PlayerHelper
+     */
+    protected $playerHelper;
 
     /**
      * MatchHelper constructor.
+     *
      * @throws Exception
      */
     public function __construct()
@@ -31,6 +38,7 @@ class MatchHelper extends BaseHelper
 
         $this->codeHelper = new CodeHelper();
         $this->serversHelper = new ServersHelper();
+        $this->playerHelper = new PlayerHelper();
     }
 
     /**
@@ -207,6 +215,22 @@ class MatchHelper extends BaseHelper
         $matchConfig = __DIR__. '/../../app/cache/matches/' . $matchId . '.json';
 
         $totalPlayers = count($teamOne) + count($teamTwo);
+
+        foreach ($teamOne as $discordId => $name) {
+            $player = $this->playerHelper->getPlayerByDiscordId($discordId);
+
+            unset($teamOne[$discordId]);
+
+            $teamOne[$player['steam']] = $name;
+        }
+
+        foreach ($teamTwo as $discordId => $name) {
+            $player = $this->playerHelper->getPlayerByDiscordId($discordId);
+
+            unset($teamTwo[$discordId]);
+
+            $teamTwo[$player['steam']] = $name;
+        }
 
         $setup = [
             'matchid' => (string)$matchId,
