@@ -109,20 +109,7 @@ class MatchController extends BaseController
         $port = $input['port'];
 
         $teamOne = $input['team_one'];
-        if (count($teamOne) != 5) {
-            return json_encode([
-                'success' => false,
-                'error' => 'team_one_wrong_size'
-            ]);
-        }
-
         $teamTwo = $input['team_two'];
-        if (count($teamTwo) != 5) {
-            return json_encode([
-                'success' => false,
-                'error' => 'team_two_wrong_size'
-            ]);
-        }
 
         return json_encode(
             $this->matchHelper->startMatch($ip, $port, $teamOne, $teamTwo)
