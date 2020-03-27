@@ -143,7 +143,8 @@ class MatchHelper extends BaseHelper
 
         return [
             'match_id' => $matchId,
-            'server' => "$ip:$port",
+            'ip' => $ip,
+            'port' => $port,
         ];
     }
 
