@@ -139,7 +139,8 @@ class MatchHelper extends BaseHelper
         $server->exec("get5_loadmatch_url " . preg_replace('(^https?://)', '', env('URL')) . "/match/get/$matchId");
 
         return [
-            'match_id' => $matchId
+            'match_id' => $matchId,
+            'server' => "${$server['ip']}:${$server['port']}",
         ];
     }
 
