@@ -132,15 +132,18 @@ class MatchHelper extends BaseHelper
         $server = $servers[0];
         $matchId = $this->generateMatch($teamOne, $teamTwo);
 
+        $ip = $server['ip'];
+        $port = $server['port'];
+
         // Execute the config on the server
-        $server = new Rcon($server['ip'], $server['port'], env('RCON'));
+        $server = new Rcon($ip, $port, env('RCON'));
         $server->connect();
 
         $server->exec("get5_loadmatch_url " . preg_replace('(^https?://)', '', env('URL')) . "/match/get/$matchId");
 
         return [
             'match_id' => $matchId,
-            'server' => "${$server['ip']}:${$server['port']}",
+            'server' => "$ip:$port",
         ];
     }
 
