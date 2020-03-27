@@ -83,36 +83,13 @@ class MatchController extends BaseController
                 'success' => false,
                 'error' => 'team_two_missing'
             ]);
-        } elseif (!array_key_exists('ip', $input)) {
-            return json_encode([
-                'success' => false,
-                'error' => 'ip_missing'
-            ]);
-        } elseif (empty($input['ip'])) {
-            return json_encode([
-                'success' => false,
-                'error' => 'ip_empty'
-            ]);
-        } elseif (!array_key_exists('port', $input)) {
-            return json_encode([
-                'success' => false,
-                'error' => 'port_missing'
-            ]);
-        } elseif (empty($input['port'])) {
-            return json_encode([
-                'success' => false,
-                'error' => 'port_empty'
-            ]);
         }
-
-        $ip = $input['ip'];
-        $port = $input['port'];
 
         $teamOne = $input['team_one'];
         $teamTwo = $input['team_two'];
 
         return json_encode(
-            $this->matchHelper->startMatch($ip, $port, $teamOne, $teamTwo)
+            $this->matchHelper->startMatch($teamOne, $teamTwo)
         );
     }
 

@@ -16,6 +16,10 @@ class MatchHelper extends BaseHelper
      * @var CodeHelper
      */
     protected $codeHelper;
+    /**
+     * @var ServersHelper
+     */
+    private $serversHelper;
 
     /**
      * MatchHelper constructor.
@@ -26,6 +30,7 @@ class MatchHelper extends BaseHelper
         parent::__construct();
 
         $this->codeHelper = new CodeHelper();
+        $this->serversHelper = new ServersHelper();
     }
 
     /**
@@ -107,8 +112,6 @@ class MatchHelper extends BaseHelper
     }
 
     /**
-     * @param string $ip
-     * @param string $port
      * @param array $teamOne
      * @param array $teamTwo
      * @return array
@@ -116,12 +119,21 @@ class MatchHelper extends BaseHelper
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function startMatch(string $ip, string $port, array $teamOne, array $teamTwo): array
+    public function startMatch(array $teamOne, array $teamTwo): array
     {
+        $servers = $this->serversHelper->getServers(true);
+
+        if (!count($servers)) {
+            return [
+                'error' => 'No matches found',
+            ];
+        }
+
+        $server = $servers[0];
         $matchId = $this->generateMatch($teamOne, $teamTwo);
 
         // Execute the config on the server
-        $server = new Rcon($ip, $port, env('RCON'));
+        $server = new Rcon($server['ip'], $server['port'], env('RCON'));
         $server->connect();
 
         $server->exec("get5_loadmatch_url " . preg_replace('(^https?://)', '', env('URL')) . "/match/get/$matchId");
