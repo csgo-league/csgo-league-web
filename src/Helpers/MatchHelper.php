@@ -224,7 +224,7 @@ class MatchHelper extends BaseHelper
             ],
         ];
 
-        file_put_contents($matchConfig, json_encode($setup));
+        file_put_contents($matchConfig, json_encode($setup, JSON_PRETTY_PRINT));
 
         return $matchId;
     }
