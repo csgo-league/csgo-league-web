@@ -74,12 +74,12 @@ class MatchController extends BaseController
         $input = input()->all();
 
         if (!array_key_exists('team_one', $input)) {
-            return json_encode([
+            return response()->httpCode(422)->json([
                 'success' => false,
                 'error' => 'team_one_missing'
             ]);
         } elseif (!array_key_exists('team_two', $input)) {
-            return json_encode([
+            return response()->httpCode(422)->json([
                 'success' => false,
                 'error' => 'team_two_missing'
             ]);

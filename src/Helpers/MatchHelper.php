@@ -132,9 +132,11 @@ class MatchHelper extends BaseHelper
         $servers = $this->serversHelper->getServers(true);
 
         if (!count($servers)) {
-            return [
+            response()->httpCode(500)->json([
                 'error' => 'No matches found',
-            ];
+            ]);
+
+            return [];
         }
 
         $server = $servers[0];
