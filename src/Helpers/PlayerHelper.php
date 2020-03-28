@@ -82,9 +82,10 @@ class PlayerHelper extends BaseHelper
             'matches.matchid',
             'matches_players.steam'
         ], [
-            'matches_players.steam' => $steamId
+            'matches_players.steam' => $steamId,
+            'matches.matchid[!]' => null,
         ]);
 
-        return count($response) > 0;
+        return !!$response;
     }
 }
