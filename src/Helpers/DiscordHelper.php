@@ -95,6 +95,24 @@ class DiscordHelper extends BaseHelper
         return $query->rowCount() !== 0;
     }
 
+
+    /**
+     * @param string $steamId
+     * @return bool
+     */
+    protected function isInRankme(string $steamId): bool
+    {
+        $query = $this->db->query('
+            SELECT *
+            FROM rankme 
+            WHERE steam = :steam
+        ', [
+            ':steam' => $steamId
+        ]);
+
+        return $query->rowCount() !== 0;
+    }
+
     /**
      * Check whether the code exists
      *
@@ -148,9 +166,11 @@ class DiscordHelper extends BaseHelper
                 'steam' => $steamId
             ]);
 
-            $this->db->insert('rankme', [
-                'steam' => $steamId
-            ]);
+            if (!$this->isInRankme($steamId)) {
+                $this->db->insert('rankme', [
+                    'steam' => $steamId
+                ]);
+            }
 
             if ($update->execute()) {
                 return !!$this->db->delete('player_link_codes', [
