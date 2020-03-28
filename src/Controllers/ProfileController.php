@@ -65,7 +65,7 @@ class ProfileController extends BaseController
                 'title' => 'Profile',
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }

@@ -70,7 +70,7 @@ class PlayersController extends BaseController
                 ]
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 
@@ -99,7 +99,7 @@ class PlayersController extends BaseController
                 'description' => env('DESCRIPTION'),
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }

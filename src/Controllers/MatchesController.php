@@ -67,7 +67,7 @@ class MatchesController extends BaseController
                 ]
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 
@@ -99,7 +99,7 @@ class MatchesController extends BaseController
                 'searchedValue' => $search
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }

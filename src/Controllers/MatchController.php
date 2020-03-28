@@ -57,7 +57,7 @@ class MatchController extends BaseController
                 'title' => 'Match',
             ]));
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 

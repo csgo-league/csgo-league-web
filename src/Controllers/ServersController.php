@@ -37,7 +37,7 @@ class ServersController extends BaseController
                 $servers
             );
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }

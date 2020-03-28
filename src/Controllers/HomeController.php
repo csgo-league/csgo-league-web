@@ -61,7 +61,7 @@ class HomeController extends BaseController
                 'rightPlayers' => $rightPlayers
             ]);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }
