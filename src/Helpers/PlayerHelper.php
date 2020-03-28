@@ -77,7 +77,7 @@ class PlayerHelper extends BaseHelper
     public function isInMatch(string $steamId): bool
     {
         $response = $this->db->get('matches', [
-            "[<]matches_players" => 'matchid'
+            '[<]matches_players' => 'matchid'
         ], [
             'matches.matchid',
             'matches_players.steam'
