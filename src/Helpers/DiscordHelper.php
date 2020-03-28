@@ -148,7 +148,7 @@ class DiscordHelper extends BaseHelper
                 'steam' => $steamId
             ]);
 
-            $insert = $this->db->insert('rankme', [
+            $this->db->insert('rankme', [
                 'steam' => $steamId
             ]);
 
