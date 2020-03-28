@@ -76,15 +76,15 @@ class PlayerHelper extends BaseHelper
      */
     public function isInMatch(string $steamId): bool
     {
-        $query = $this->db->query('
-            SELECT * 
-            FROM matches
-            WHERE matches.end_time is null and matches_players.steam = :steam
-            LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
-        ', [
-            ':steam' => $steamId,
+        $response = $this->db->get('matches', [
+            "[<]matches_players" => 'matchid'
+        ], [
+            'matches.matchid',
+            'matches_players.steam'
+        ], [
+            'matches_players.steam' => $steamId
         ]);
 
-        return $query->rowCount() !== 0;
+        return count($response) > 0;
     }
 }
