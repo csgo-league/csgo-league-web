@@ -46,11 +46,9 @@ class PlayerController extends BaseController
 
             $player['inMatch'] = $this->playerHelper->isInMatch($player['steam']);
 
-            return json_encode(
-                $player
-            );
+            response()->json($player);
         } catch (Exception $exception) {
-            ExceptionHelper::handle($exception);
+            return ExceptionHelper::handle($exception);
         }
     }
 }
