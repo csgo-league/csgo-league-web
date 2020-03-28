@@ -35,9 +35,9 @@ class PlayerController extends BaseController
             $player = $this->playerHelper->getPlayerByDiscordId($discordId);
 
             if (count($player) < 1 || !array_key_exists('steam', $player)) {
-                $player = [
+                return response()->httpCode(404)->json([
                     'error' => 'not_found'
-                ];
+                ]);
             } elseif (!$player['score']) {
                 $player['score'] = 1000;
             } else {
