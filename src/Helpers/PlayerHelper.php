@@ -79,7 +79,7 @@ class PlayerHelper extends BaseHelper
         $query = $this->db->query('
             SELECT * 
             FROM matches
-            WHERE matches.end_time = null and matches_players.steam = :steam
+            WHERE matches.end_time is null and matches_players.steam = :steam
             LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
         ', [
             ':steam' => $steamId,
