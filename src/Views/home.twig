@@ -1,22 +1,22 @@
 {% extends 'partials/base.twig' %}
 
+{% set title = 'Home' %}
+
 {% block content %}
-    <a href="{{ website }}" style="text-decoration: none;">
-        <div class="main-panel background-gradient text-center text-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h1 class="text-capitalize text-white" style="font-size:45px;margin-bottom:0;">
-                            {{ baseTitle }}
-                        </h1>
-                        <p style="font-size:20px;">
-                            {{ description }}
-                        </p>
-                    </div>
+    <div class="main-panel background-gradient text-center text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-capitalize text-white" style="font-size:45px;margin-bottom:0;">
+                        {{ baseTitle }}
+                    </h1>
+                    <p style="font-size:20px;">
+                        {{ description }}
+                    </p>
                 </div>
             </div>
         </div>
-    </a>
+    </div>
 
     {% include 'partials/match/latest-matches.twig' with latestMatches %}
 
