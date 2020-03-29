@@ -11,7 +11,7 @@ class MatchesHelper extends BaseHelper
      */
     public function getMatchesCount(): int
     {
-        return $this->db->count('sql_matches_scoretotal');
+        return $this->db->count('matches');
     }
 
     /**
@@ -52,9 +52,11 @@ class MatchesHelper extends BaseHelper
     public function getLatestMatches(int $limit = 3)
     {
         $query = $this->db->query('
-            SELECT * 
-            FROM sql_matches_scoretotal 
-            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
+            SELECT matches_maps.* 
+            FROM matches
+            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            ORDER BY matches.end_time 
+            DESC LIMIT :limit
         ', [
             ':limit' => (int)$limit
         ]);
@@ -75,18 +77,15 @@ class MatchesHelper extends BaseHelper
     public function searchMatches(string $search): array
     {
         $query = $this->db->query('
-            SELECT DISTINCT 
-            sql_matches_scoretotal.match_id,
-            sql_matches_scoretotal.map,
-            sql_matches_scoretotal.team_2,
-            sql_matches_scoretotal.team_3,
-            sql_matches_scoretotal.timestamp
-            FROM sql_matches_scoretotal 
-            INNER JOIN sql_matches ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches.name LIKE :like_search 
-            OR sql_matches.steam = :search 
-            OR sql_matches_scoretotal.match_id = :search
-            ORDER BY sql_matches_scoretotal.timestamp DESC
+            SELECT DISTINCT
+            matches_maps.*
+            FROM matches
+            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+            WHERE matches_players.name LIKE :like_search 
+            OR matches_players.steam = :search 
+            OR matches.matchid = :search
+            ORDER BY matches_maps.end_time DESC
         ', [
             ':search' => $search,
             ':like_search' => '%'.$search.'%',
@@ -156,18 +155,13 @@ class MatchesHelper extends BaseHelper
     public function getPlayerMatches(string $steamId, int $matches = 3): array
     {
         $query = $this->db->query('
-            SELECT 
-            sql_matches_scoretotal.match_id, 
-            sql_matches_scoretotal.timestamp, 
-            sql_matches_scoretotal.map, 
-            sql_matches.kills,
-            sql_matches.deaths
-            
-            FROM sql_matches 
-            JOIN sql_matches_scoretotal 
-            ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches.steam = :steam 
-            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :limit
+            SELECT DISTINCT
+            matches_maps.*
+            FROM matches
+            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+            WHERE matches_players.steam = :steam
+            ORDER BY matches_maps.end_time DESC LIMIT :limit
         ', [
             ':steam' => $steamId,
             ':limit' => $matches,
