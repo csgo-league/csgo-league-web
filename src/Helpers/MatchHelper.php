@@ -48,11 +48,13 @@ class MatchHelper extends BaseHelper
     public function getMatchPlayers(string $matchId): ?array
     {
         $query = $this->db->query('
-            SELECT sql_matches_scoretotal.*, sql_matches.*
-            FROM sql_matches_scoretotal 
-            INNER JOIN sql_matches ON sql_matches_scoretotal.match_id = sql_matches.match_id
-            WHERE sql_matches_scoretotal.match_id = :matchId 
-            ORDER BY sql_matches.score DESC
+            SELECT DISTINCT
+            matches_maps.*, matches_players.*, matches.team1_name, matches.team2_name
+            FROM matches
+            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+            WHERE matches.matchid = :matchId 
+            ORDER BY matches_players.playerscore DESC
         ', [
             ':matchId' => $matchId,
         ]);
@@ -82,19 +84,19 @@ class MatchHelper extends BaseHelper
         ];
 
         foreach ($players as $player) {
-            if ($player['team'] == 2) {
+            if ($player['team'] == 'team2') {
                 $formattedPlayers['ct']['players'][] = $this->formatMatchPlayer($player);
-                $formattedPlayers['ct']['score'] = $player['team_2'];
+                $formattedPlayers['ct']['score'] = $player['team2_score'];
 
-                if (array_key_exists('teamname_2', $player) && !empty($player['teamname_2'])) {
-                    $formattedPlayers['ct']['name'] = $player['teamname_2'];
+                if (array_key_exists('team2_name', $player) && !empty($player['team2_name'])) {
+                    $formattedPlayers['ct']['name'] = $player['team2_name'];
                 }
-            } elseif ($player['team'] == 3) {
+            } elseif ($player['team'] == 'team1') {
                 $formattedPlayers['t']['players'][] = $this->formatMatchPlayer($player);
-                $formattedPlayers['t']['score'] = $player['team_3'];
+                $formattedPlayers['t']['score'] = $player['team1_score'];
 
-                if (array_key_exists('teamname_3', $player) && !empty($player['teamname_3'])) {
-                    $formattedPlayers['t']['name'] = $player['teamname_3'];
+                if (array_key_exists('team1_name', $player) && !empty($player['team1_name'])) {
+                    $formattedPlayers['t']['name'] = $player['team1_name'];
                 }
             }
         }

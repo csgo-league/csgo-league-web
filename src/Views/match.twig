@@ -35,13 +35,7 @@
                                         KDR
                                     </th>
                                     <th>
-                                        MVPs
-                                    </th>
-                                    <th>
                                         Score
-                                    </th>
-                                    <th>
-                                        Ping
                                     </th>
                                 </tr>
                             </thead>
@@ -71,13 +65,7 @@
                                             {{ player.kdr|number_format(2, '.', ',') }}
                                         </td>
                                         <td>
-                                            {{ player.mvps }}
-                                        </td>
-                                        <td>
-                                            {{ player.score }}
-                                        </td>
-                                        <td>
-                                            {{ player.ping }}
+                                            {{ player.playerscore }}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -126,13 +114,7 @@
                                         KDR
                                     </th>
                                     <th>
-                                        MVPs
-                                    </th>
-                                    <th>
                                         Score
-                                    </th>
-                                    <th>
-                                        Ping
                                     </th>
                                 </tr>
                             </thead>
@@ -162,13 +144,7 @@
                                             {{ player.kdr|number_format(2, '.', ',') }}
                                         </td>
                                         <td>
-                                            {{ player.mvps }}
-                                        </td>
-                                        <td>
-                                            {{ player.score }}
-                                        </td>
-                                        <td>
-                                            {{ player.ping }}
+                                            {{ player.playerscore }}
                                         </td>
                                     </tr>
                                 {% endfor %}
