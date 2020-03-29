@@ -156,7 +156,7 @@ class MatchesHelper extends BaseHelper
     {
         $query = $this->db->query('
             SELECT DISTINCT
-            matches_maps.*
+            matches_maps.*, matches_players.kills, matches_players.deaths
             FROM matches
             LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
             LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
@@ -170,7 +170,7 @@ class MatchesHelper extends BaseHelper
         $response = $query->fetchAll();
 
         foreach ($response as $key => $match) {
-            $response[$key]['map_image'] = $this->getMatchMapImage($match['map']);
+            $response[$key]['map_image'] = $this->getMatchMapImage($match['mapname']);
         }
 
         return $response;

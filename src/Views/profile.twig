@@ -39,22 +39,86 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <h4><i class="fas fa-crosshairs"></i>&nbsp;Kills: {{ player.kills }}</h4>
-                                    <h4><i class="fas fa-skull"></i>&nbsp;Deaths:&nbsp;<strong>{{ player.deaths }}</strong><br></h4>
-                                    <h4><i class="fas fa-dot-circle"></i> KDR: {{ player.kdr|number_format(2, '.', ',') }}<br></h4>
+                                <div class="col-4 text-left col-centered">
+                                    <div class="row profile-stats">
+                                        <div class="col-9 text-right nopadding-right">
+                                            <h4>Kills</h4>
+                                            <h1>{{player.kills}}</h1>
+                                        </div>
+                                        <div class="col-3 nopadding-right">
+                                            <i class="fas fa-crosshairs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-9 text-right nopadding-right">
+                                            <h4>Assists</h4>
+                                            <h1>{{player.assists}}</h1>
+                                        </div>
+                                        <div class="col-3 nopadding-right">
+                                            <i class="far fa-handshake"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-9 text-right nopadding-right">
+                                            <h4>Deaths</h4>
+                                            <h1>{{player.deaths}}</h1>
+                                        </div>
+                                        <div class="col-3 nopadding-right">
+                                            <i class="fas fa-skull"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <h4><i class="far fa-handshake" style="font-size:16px;"></i>&nbsp;Assists: {{ player.assists }}</h4>
-                                    <h4><i class="fas fa-meh"></i>&nbsp;Shots: {{ player.shots }}</h4>
-                                    <h4><i class="fas fa-chess-queen"></i>&nbsp;Damage: {{ player.damage }}</h4>
+                                <div class="col-4 text-center col-centered">
+                                    <div class="row profile-stats">
+                                        <div class="col-12">
+                                            <h4>Elo</h4>
+                                            <h1>{{player.score}}</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-12">
+                                            <h4>K/D Ratio</h4>
+                                            <h1>{{ player.kdr|number_format(2, '.', ',') }}</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-12">
+                                            <h4>Played Matches</h4>
+                                            <h1><span class="text-success">{{player.match_win}}</span> | <span class="text-warning">{{player.match_draw}}</span> | <span class="text-danger">{{player.match_lose}}</span></h1>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <h4><i class="fas fa-ruler-combined" style="font-size:18px;"></i>&nbsp;ADR: {{ player.adr|number_format(2, '.', ',') }}</h4>
-                                    <h4><i class="fas fa-calculator"></i>&nbsp;Hits: {{ player.hits }}</h4>
-                                    <h4><i class="fas fa-user-slash" style="font-size:16px;"></i>HS: {{ player.headshots }}</h4>
+                                <div class="col-4 text-right col-centered">
+                                    <div class="row profile-stats">
+                                        <div class="col-3 nopadding-left">
+                                            <i class="fas fa-bullseye"></i>
+                                        </div>
+                                        <div class="col-9 text-left nopadding-left">
+                                            <h4>ADR</h4>
+                                            <h1>{{ player.adr|number_format(2, '.', ',') }}</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-3 nopadding-left">
+                                            <i class="fas fa-user-slash"></i>
+                                        </div>
+                                        <div class="col-9 text-left nopadding-left">
+                                            <h4>Headshots</h4>
+                                            <h1>{{ player.headshots }}</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row profile-stats">
+                                        <div class="col-3 nopadding-left">
+                                            <i class="fas fa-history"></i>
+                                        </div>
+                                        <div class="col-9 text-left nopadding-left">
+                                            <h4>Time Played</h4>
+                                            <h1 class="seconds-to-readable">{{player.connected}}</h1>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             {#<div class="social-icons-profile" style="margin-top:15px;">#}
                                 {#<a href="https://steamcommunity.com/profiles/{{ player.steam }}" style="margin-left:10px;color:#171A21;"><i class="fab fa-steam"></i></a>#}
                                 {#<a href="#" style="margin-left:10px;color:#6441a4;"><i class="fab fa-twitch"></i></a>#}
@@ -79,7 +143,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         {% for match in matches %}
                             <div class="col-md-4" style="margin-top:15px;">
                                 {% include 'partials/match/profile-matches.twig' with match %}
