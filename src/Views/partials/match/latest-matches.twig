@@ -4,7 +4,7 @@
             <h1>Latest matches</h1>
         </a>
 
-        {% if latestMatches|length > 1 %}
+        {% if latestMatches %}
             <div id="matches" class="row" style="margin-top:-25px;">
                 <div class="col-md-12">
                     {% for match in latestMatches %}

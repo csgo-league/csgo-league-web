@@ -26,9 +26,11 @@ class MatchesHelper extends BaseHelper
         $offset = ($page - 1) * $limit;
 
         $query = $this->db->query('
-            SELECT * 
-            FROM sql_matches_scoretotal
-            ORDER BY sql_matches_scoretotal.timestamp DESC LIMIT :offset, :limit
+            SELECT matches_maps.* 
+            FROM matches
+            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            ORDER BY matches.end_time 
+            DESC LIMIT :offset, :limit
         ', [
             ':offset' => $offset,
             ':limit' => (int)$limit
@@ -107,18 +109,18 @@ class MatchesHelper extends BaseHelper
      */
     protected function formatMatch(array $match): array
     {
-        $half = ($match['team_2'] + $match['team_3']) / 2;
+        $half = ($match['team1_score'] + $match['team2_score']) / 2;
         $half = ceil($half);
 
-        if ($match['team_2'] > $half) {
+        if ($match['team1_score'] > $half) {
             $match['icon'] = 'ct_icon.png';
-        } elseif ($match['team_2'] == $half && $match['team_3'] == $half) {
+        } elseif ($match['team1_score'] == $half && $match['team2_score'] == $half) {
             $match['icon'] = 'tie_icon.png';
         } else {
             $match['icon'] = 't_icon.png';
         }
 
-        $match['map_image'] = $this->getMatchMapImage($match['map']);
+        $match['map_image'] = $this->getMatchMapImage($match['mapname']);
 
         return $match;
     }
