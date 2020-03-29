@@ -29,8 +29,8 @@ class MatchesHelper extends BaseHelper
             SELECT matches_maps.* 
             FROM matches
             LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
-            ORDER BY matches.end_time 
-            DESC LIMIT :offset, :limit
+            ORDER BY matches_maps.end_time DESC
+            LIMIT :offset, :limit
         ', [
             ':offset' => $offset,
             ':limit' => (int)$limit
@@ -55,8 +55,8 @@ class MatchesHelper extends BaseHelper
             SELECT matches_maps.* 
             FROM matches
             LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
-            ORDER BY matches.end_time 
-            DESC LIMIT :limit
+            ORDER BY matches_maps.end_time DESC
+            LIMIT :limit
         ', [
             ':limit' => (int)$limit
         ]);
@@ -161,7 +161,8 @@ class MatchesHelper extends BaseHelper
             LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
             LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
             WHERE matches_players.steam = :steam
-            ORDER BY matches_maps.end_time DESC LIMIT :limit
+            ORDER BY matches_maps.end_time DESC
+            LIMIT :limit
         ', [
             ':steam' => $steamId,
             ':limit' => $matches,
