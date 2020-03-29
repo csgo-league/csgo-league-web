@@ -27,11 +27,11 @@ class PlayerRemoveSteam extends Migration
      * Undo the migration
      */
     public function down()
-    {
+{
         /**
          * @var $db Medoo
          */
-        $db = $this->get('db');
+                    $db = $this->get('db');
 
         $query = $db->query('
             ALTER TABLE `players` ADD COLUMN `steam64` varchar(100) NOT NULL;
