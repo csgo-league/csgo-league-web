@@ -54,7 +54,7 @@ class DiscordController extends BaseController
     public function generateDiscordLink(string $discordId): string
     {
         try {
-            return json_encode(
+            return response()->json(
                 $this->discordHelper->generateDiscordLinkCode($discordId)
             );
         } catch (Exception $e) {
@@ -73,13 +73,13 @@ class DiscordController extends BaseController
         $input = input()->all();
 
         if (!array_key_exists('discord_name', $input)) {
-            return json_encode([
+            return response()->json([
                 'success' => false,
                 'error' => 'no_name_passed'
             ]);
         }
 
-        return json_encode(
+        return response()->json(
             $this->discordHelper->updateName($discordId, $input['discord_name'])
         );
     }
@@ -92,7 +92,7 @@ class DiscordController extends BaseController
      */
     public function checkDiscordLink(string $discordId): string
     {
-        return json_encode(
+        return response()->json(
             $this->discordHelper->checkLink($discordId)
         );
     }
@@ -105,7 +105,7 @@ class DiscordController extends BaseController
      */
     public function getName(string $discordId): string
     {
-        return json_encode(
+        return response()->json(
             $this->discordHelper->getName($discordId)
         );
     }

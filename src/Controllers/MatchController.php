@@ -88,7 +88,7 @@ class MatchController extends BaseController
         $teamOne = $input['team_one'];
         $teamTwo = $input['team_two'];
 
-        return json_encode(
+        return response()->json(
             $this->matchHelper->startMatch($teamOne, $teamTwo)
         );
     }
@@ -99,7 +99,7 @@ class MatchController extends BaseController
      */
     public function getMatch(string $matchId): string
     {
-        return json_encode(
+        return response()->json(
             $this->matchHelper->getMatch($matchId)
         );
     }
@@ -113,17 +113,17 @@ class MatchController extends BaseController
         $input = input()->all();
 
         if (empty($input['ip'])) {
-            return json_encode([
+            return response()->json([
                 'success' => false,
                 'error' => 'ip_empty'
             ]);
         } elseif (!array_key_exists('port', $input)) {
-            return json_encode([
+            return response()->json([
                 'success' => false,
                 'error' => 'port_missing'
             ]);
         } elseif (empty($input['port'])) {
-            return json_encode([
+            return response()->json([
                 'success' => false,
                 'error' => 'port_empty'
             ]);
@@ -132,7 +132,7 @@ class MatchController extends BaseController
         $ip = $input['ip'];
         $port = $input['port'];
 
-        return json_encode(
+        return response()->json(
             $this->matchHelper->endMatch($matchId, $ip, $port)
         );
     }

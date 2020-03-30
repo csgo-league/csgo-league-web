@@ -33,7 +33,7 @@ class ServersController extends BaseController
         try {
             $servers = $this->serversHelper->getServers();
 
-            return json_encode(
+            return response()->json(
                 $servers
             );
         } catch (Exception $exception) {
