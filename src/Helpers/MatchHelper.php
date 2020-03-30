@@ -225,6 +225,11 @@ class MatchHelper extends BaseHelper
 
             unset($teamOne[$discordId]);
 
+            $this->db->insert('matches_players', [
+                'matchid' => $matchId,
+                'steam' => $player['steam'],
+            ]);
+
             $teamOne[$player['steam']] = $name;
         }
 
@@ -232,6 +237,11 @@ class MatchHelper extends BaseHelper
             $player = $this->playerHelper->getPlayerByDiscordId($discordId);
 
             unset($teamTwo[$discordId]);
+
+            $this->db->insert('matches_players', [
+                'matchid' => $matchId,
+                'steam' => $player['steam'],
+            ]);
 
             $teamTwo[$player['steam']] = $name;
         }
