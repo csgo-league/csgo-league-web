@@ -28,7 +28,7 @@ class MatchesHelper extends BaseHelper
         $query = $this->db->query('
             SELECT matches_maps.* 
             FROM matches
-            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            JOIN matches_maps ON matches_maps.matchid = matches.matchid
             ORDER BY matches_maps.end_time DESC
             LIMIT :offset, :limit
         ', [
