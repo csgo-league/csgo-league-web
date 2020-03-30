@@ -109,12 +109,15 @@ class SteamHelper
      *
      * @return string
      */
-    public function loginUrl(): string
+    public function loginUrl($discordId = null, $code = null): string
     {
+        
+        $returnTo = ($discordId === null || $code === null) ? $this->settings['loginpage'] : env('URL') . "/{$discordId}/{$code}";
+        
         $params = [
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
             'openid.mode' => 'checkid_setup',
-            'openid.return_to' => $this->settings['loginpage'],
+            'openid.return_to' => $returnTo,
             'openid.realm' => $this->settings['loginpage'],
             'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
