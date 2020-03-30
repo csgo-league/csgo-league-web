@@ -28,36 +28,63 @@ If you appreciate the project then please take the time to star our repository.
 ## Recommendations
 The steps below are all written with the presumption that you're using Ubuntu.
 
-## Prerequisites
+# Installation
+
+### Prerequisites
 1. Apache2
 2. Composer
 3. NPM
 4. PHP 7.1 or newer
 5. Gulp
-6. Node 8 or newer
+6. Node 10 or newer.
+7. Zip and Unzip
+8. MySQL 5.7
+
+`sudo apt install apache2 composer php php-mysql php-json php-simplexml mysql-server zip unzip -y`
 
 
-## Installation
+### Installing NodeJS 10
+`curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh`
+`sudo bash nodesource_setup.sh`
+`sudo apt-get install nodejs`
 
-### Settings
-1. `git clone https://github.com/csgo-league/csgo-league-web`
-2. `composer install`
-3. `npm i`
-4. `npm i -g gulp`
-5. `gulp build`
+### Installing the Web Interface
+1. CD into `/var/www/`
+2. Remove the html directory with `rm -rf html/`
+3. `git clone https://github.com/csgo-league/csgo-league-web`
+4. `cd csgo-league-web/`
+5. `composer install`
+6. `npm i`
+7. `sudo npm i -g gulp`
+8. `gulp build`
 
-### DB Migration
-1. Create Database
-2. Change `env.example.php` to `env.php`
-3. Edit `env.php` for your Database
-4. Migrate your DB with `./vendor/bin/phpmig migrate`
+# Database Setup
+1. We need to secure our MySQL installation, to do this run the command `mysql_secure_installation`.
+2. Follow the steps and make sure to disable remote root login and disable the default database.
 
+### Setting up our user
+1. Login to MYSQL with the command `mysql -u root -p`.
+2. Now we need to make our database and a user that can connect to it.
+```
+CREATE USER 'league'@'%' IDENTIFIED BY '{password}';
+CREATE DATABASE panel;
+GRANT ALL PRIVILEGES ON panel.* TO 'league'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+```
+Then edit your MYSQL Conf to allow external connections to the database. 
+`nano /etc/mysql/mysql.conf.d/mysqld.cnf` and change the `bind-address` to `0.0.0.0`
 
-## Serving
+Now restart the MySQL service with `sudo service mysql restart`
 
-### Locally
-1. `cd web`
-2. `php -S localhost:5000`
+Next we'll configure the web panel to use our database and communicate with the bot and game servers.
+```
+cd /var/www/csgo-league-web
+cp env.example.php env.php
+nano env.php
+```
+Fill out all of the fields with your information like MySQL, Servers, RCON, and Unique API Key. You can generate your API Key with the link provided in the `env.php` file.
+
+Once finished Mirgrate your DB with `./vendor/bin/phpmig migrate`
 
 ### Server 
 1. Point the `league` CNAME at your dedicated server.
@@ -77,6 +104,10 @@ The steps below are all written with the presumption that you're using Ubuntu.
 </VirtualHost>
 ```
 5. `sudo a2ensite csgo-league-web.conf`
+
+Finally make sure to `chown www-data:www-data app` in the `/csgo-league-web` directory.
+
+You should be all set!
 
 ### Debugging
 1. if you get `too many redirects` error try change in `env.php` `'WEBSITE' => '/home'` to `'WEBSITE' => ''`
