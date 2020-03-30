@@ -39,7 +39,7 @@ class PlayerController extends BaseController
                     'error' => 'not_found'
                 ]);
             } elseif (!$player['score']) {
-                $player['score'] = 1000;
+                $player['score'] = 0;
             } else {
                 $player['score'] = (int)$player['score'];
             }
