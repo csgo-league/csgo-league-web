@@ -34,12 +34,10 @@ class AuthMiddleware implements BaseMiddleware
         }
 
         if (!in_array($key, $this->apiKeys)) {
-            die(
-                json_encode([
-                    'success' => false,
-                    'error' => 'invalid_api_key'
-                ])
-            );
+            response()->json([
+                'success' => false,
+                'error' => 'invalid_api_key'
+            ]);
         }
     }
 }

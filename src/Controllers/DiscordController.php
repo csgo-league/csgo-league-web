@@ -58,7 +58,7 @@ class DiscordController extends BaseController
                 $this->discordHelper->generateDiscordLinkCode($discordId)
             );
         } catch (Exception $e) {
-            ExceptionHelper::handle($e);
+            return ExceptionHelper::handle($e);
         }
     }
 
