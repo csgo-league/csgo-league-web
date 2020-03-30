@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop.svg?style=svg)](https://circleci.com/gh/csgo-league/csgo-league-web/tree/develop)
 [![HitCount](http://hits.dwyl.io/csgo-league/csgo-league-web.svg)](http://hits.dwyl.io/csgo-league/csgo-league-web)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/csgo-league/csgo-league-web/graphs/commit-activity)
 [![GitHub release](https://img.shields.io/github/release/csgo-league/csgo-league-web.svg)](https://github.com/csgo-league/csgo-league-web/releases/)
