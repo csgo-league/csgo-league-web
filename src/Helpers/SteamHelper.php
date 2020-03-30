@@ -111,25 +111,17 @@ class SteamHelper
      */
     public function loginUrl($discordId = null, $code = null): string
     {
-        if ($discordId === null || $code === null) {
-            $params = [
-                'openid.ns' => 'http://specs.openid.net/auth/2.0',
-                'openid.mode' => 'checkid_setup',
-                'openid.return_to' => $this->settings['loginpage'],
-                'openid.realm' => $this->settings['loginpage'],
-                'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
-                'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
-            ];
-        } else {
-            $params = [
-                'openid.ns' => 'http://specs.openid.net/auth/2.0',
-                'openid.mode' => 'checkid_setup',
-                'openid.return_to' => 'http://pugs.viquity.pro/{$discordId}/{$code}',  # FIXME: Get host dynamically
-                'openid.realm' => $this->settings['loginpage'],
-                'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
-                'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
-            ];
-        }
+        
+        $returnTo = ($discordId === null || $code === null) ? $this->settings['loginpage'] : env('URL') . "/{$discordId}/{$code}";
+        
+        $params = [
+            'openid.ns' => 'http://specs.openid.net/auth/2.0',
+            'openid.mode' => 'checkid_setup',
+            'openid.return_to' => $returnTo,
+            'openid.realm' => $this->settings['loginpage'],
+            'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
+            'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
+        ];
 
         return 'https://steamcommunity.com/openid/login?' . http_build_query($params, '', '&');
     }
