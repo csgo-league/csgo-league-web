@@ -169,6 +169,7 @@ class DiscordHelper extends BaseHelper
             if (!$this->isInRankme($steamId)) {
                 $this->db->insert('rankme', [
                     'steam' => $steamId
+                    'score' => '1000'
                 ]);
             }
 
