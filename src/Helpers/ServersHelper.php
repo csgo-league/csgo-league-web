@@ -52,6 +52,7 @@ class ServersHelper
                     $response[] = $serverArray;
                 } elseif ($realPlayers === 0) {
                     $response[] = $serverArray;
+                    break;
                 }
             }
         }
