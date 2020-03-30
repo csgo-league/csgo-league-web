@@ -54,7 +54,7 @@ class MatchesHelper extends BaseHelper
         $query = $this->db->query('
             SELECT matches_maps.* 
             FROM matches
-            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            JOIN matches_maps ON matches_maps.matchid = matches.matchid
             ORDER BY matches_maps.end_time DESC
             LIMIT :limit
         ', [
@@ -80,7 +80,7 @@ class MatchesHelper extends BaseHelper
             SELECT DISTINCT
             matches_maps.*
             FROM matches
-            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            JOIN matches_maps ON matches_maps.matchid = matches.matchid
             LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
             WHERE matches_players.name LIKE :like_search 
             OR matches_players.steam = :search 
@@ -158,7 +158,7 @@ class MatchesHelper extends BaseHelper
             SELECT DISTINCT
             matches_maps.*, matches_players.kills, matches_players.deaths
             FROM matches
-            LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            JOIN matches_maps ON matches_maps.matchid = matches.matchid
             LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
             WHERE matches_players.steam = :steam
             ORDER BY matches_maps.end_time DESC
