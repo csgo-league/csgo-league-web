@@ -104,7 +104,7 @@ Once finished Mirgrate your DB with `./vendor/bin/phpmig migrate`
 ```
 5. `sudo a2ensite csgo-league-web.conf`
 
-Finally make sure to `chown www-data:www-data app` in the `/csgo-league-web` directory.
+Finally make sure to `chown -R www-data:www-data app` in the `/csgo-league-web` directory.
 
 You should be all set!
 
