@@ -46,6 +46,27 @@ class Router
      */
     protected function registerRoutes()
     {
+        // Routes which require authentication
+        Route::group(['middleware' => AuthMiddleware::class], function () {
+            // Authorised discord endpoints
+            Route::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
+            Route::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
+            Route::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
+            Route::get('/discord/name/{discordId}', DiscordController::class . '@getName');
+
+            // Authorised player endpoints
+            Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
+            Route::post('/players/discord', PlayerController::class . '@getPlayersByDiscordIds');
+
+            // Authorised server endpoints
+            Route::get('/servers', ServersController::class . '@getServers');
+
+            // Authorised match endpoints
+            Route::post('/match/start', MatchController::class . '@startMatch');
+            Route::get('/match/end/{matchId}', MatchController::class . '@endMatch');
+        });
+
+
         // Redirect to the homepage.
         $homeRedirects = [
             '/',
@@ -87,25 +108,6 @@ class Router
         // Log in & log out
         Route::get('/login', LoginController::class . '@login');
         Route::get('/logout', LoginController::class . '@logout');
-
-        // Routes which require authentication
-        Route::group(['middleware' => AuthMiddleware::class], function () {
-            // Authorised discord endpoints
-            Route::get('/discord/generate/{discordId}', DiscordController::class . '@generateDiscordLink');
-            Route::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
-            Route::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
-            Route::get('/discord/name/{discordId}', DiscordController::class . '@getName');
-
-            // Authorised player endpoints
-            Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
-
-            // Authorised server endpoints
-            Route::get('/servers', ServersController::class . '@getServers');
-
-            // Authorised match endpoints
-            Route::post('/match/start', MatchController::class . '@startMatch');
-            Route::get('/match/end/{matchId}', MatchController::class . '@endMatch');
-        });
 
         // Get a match's JSON file.
         Route::get('/match/get/{matchId}', MatchController::class . '@getMatch');

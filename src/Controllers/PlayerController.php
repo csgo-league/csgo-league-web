@@ -51,4 +51,55 @@ class PlayerController extends BaseController
             return ExceptionHelper::handle($exception);
         }
     }
+
+    /**
+     * Get players by discord Ids.
+     *
+     * @return string
+     */
+    public function getPlayersByDiscordIds(): string
+    {
+        try {
+            $data = input()->all();
+
+            if (!array_key_exists('discordIds', $data)) {
+                return response()->httpCode(422)->json([
+                    'error' => 'invalid_discord_ids',
+                ]);
+            } elseif (!is_array($data['discordIds'])) {
+                return response()->httpCode(422)->json([
+                    'error' => 'invalid_discord_ids',
+                ]);
+            } elseif (count($data['discordIds']) < 1) {
+                return response()->httpCode(422)->json([
+                    'error' => 'invalid_discord_ids',
+                ]);
+            }
+
+            $players = $this->playerHelper->getPlayersByDiscordIds($data['discordIds']);
+
+            if (array_key_exists('error', $players)) {
+                return response()->json($players);
+            }
+
+            $formattedPlayers = [];
+            foreach ($players as $key => $player) {
+                if (count($player) < 1 || !array_key_exists('steam', $player)) {
+                    continue;
+                } elseif (!$player['score']) {
+                    $player['score'] = 0;
+                } else {
+                    $player['score'] = (int)$player['score'];
+                }
+
+                $player['inMatch'] = $this->playerHelper->isInMatch($player['steam']);
+
+                $formattedPlayers[] = $player;
+            }
+
+            return response()->json($formattedPlayers);
+        } catch (Exception $exception) {
+            return ExceptionHelper::handle($exception);
+        }
+    }
 }

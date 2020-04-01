@@ -80,11 +80,13 @@ class PlayersController extends BaseController
     public function postIndex(): string
     {
         try {
-            $search = input()->post('search')->getValue();
+            $search = input()->post('search');
 
             if (!$search) {
                 response()->redirect('/players');
             }
+
+            $search = $search->getValue();
 
             $players = $this->playersHelper->searchPlayers($search);
 

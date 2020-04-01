@@ -35,6 +35,51 @@ class PlayerHelper extends BaseHelper
     }
 
     /**
+     * Get player
+     *
+     * @param array $discordIds
+     * @return array
+     */
+    public function getPlayersByDiscordIds(array $discordIds): array
+    {
+        $whereString = '';
+        $whereVariables = [];
+        $count = 0;
+        foreach ($discordIds as $discordId) {
+            if ($count !== 0) {
+                $whereString .= ' OR ';
+            }
+
+            $whereString .= 'players.discord = :discordId' . $count;
+            $whereVariables['discordId' . $count] = $discordId;
+            $count++;
+        }
+
+        $query = $this->db->query("
+            SELECT *, rankme.steam
+            FROM players
+            LEFT JOIN rankme ON rankme.steam = players.steam
+            WHERE 1=1 AND (
+                $whereString
+            )
+        ", $whereVariables);
+
+        $response = $query->fetchAll();
+
+        foreach ($response as $playerKey => $player) {
+            foreach ($player as $key => $value) {
+                if (is_numeric($key)) {
+                    unset($response[$playerKey][$key]);
+                }
+            }
+        }
+
+        return $response ?: [
+            'error' => 'none_found'
+        ];
+    }
+
+    /**
      * Check whether a steamId is linked
      *
      * @param string $steamId
