@@ -50,12 +50,13 @@ The steps below are all written with the presumption that you're using Ubuntu.
 ### Installing the Web Interface
 1. CD into `/var/www/`
 2. Remove the html directory with `rm -rf html/`
-3. `git clone https://github.com/csgo-league/csgo-league-web`
-4. `cd csgo-league-web/`
-5. `composer install`
-6. `npm i`
-7. `sudo npm i -g gulp`
-8. `gulp build`
+3. Disable the default site `sudo a2dissite 000-default.conf`.
+4. `git clone https://github.com/csgo-league/csgo-league-web`
+5. `cd csgo-league-web/`
+6. `composer install`
+7. `npm i`
+8. `sudo npm i -g gulp`
+9. `gulp build`
 
 # Database Setup
 1. We need to secure our MySQL installation, to do this run the command `mysql_secure_installation`.
