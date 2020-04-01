@@ -83,7 +83,7 @@ nano env.php
 ```
 Fill out all of the fields with your information like MySQL, Servers, RCON, and Unique API Key. You can generate your API Key with the link provided in the `env.php` file.
 
-Once finished Mirgrate your DB with `./vendor/bin/phpmig migrate`
+Once finished Migrate your DB with `./vendor/bin/phpmig migrate`
 
 ### Server 
 1. Point the `league` CNAME at your dedicated server.
