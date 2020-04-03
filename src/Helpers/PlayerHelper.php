@@ -33,6 +33,38 @@ class PlayerHelper extends BaseHelper
             'error' => 'not_found'
         ];
     }
+    /**
+     * Get player match by discord id
+     *
+     * @param int $discordId
+     * @return array
+     */
+    public function getPlayerMatchByDiscordId(int $discordId): array
+    {
+        $query = $this->db->query('
+            SELECT matches_maps.*
+            FROM players
+            JOIN matches_players ON matches_players.steam = players.steam 
+            JOIN matches ON matches.matchid = matches_players.matchid
+            JOIN matches_maps ON matches_maps.matchid = matches.matchid
+            WHERE players.discord = :discord
+            AND matches_maps.end_time IS NULL
+        ', [
+            ':discord' => $discordId,
+        ]);
+
+        $response = $query->fetch();
+
+        foreach ($response as $key => $value) {
+            if (is_numeric($key)) {
+                unset($response[$key]);
+            }
+        }
+
+        return $response ?: [
+            'error' => 'not_found'
+        ];
+    }
 
     /**
      * Get player

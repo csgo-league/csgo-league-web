@@ -57,6 +57,7 @@ class Router
             // Authorised player endpoints
             Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
             Route::post('/players/discord', PlayerController::class . '@getPlayersByDiscordIds');
+            Route::get('/player/discord/{discordId}/match', PlayerController::class . '@getPlayerMatchByDiscordId');
 
             // Authorised server endpoints
             Route::get('/servers', ServersController::class . '@getServers');

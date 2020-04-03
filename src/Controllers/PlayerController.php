@@ -53,6 +53,29 @@ class PlayerController extends BaseController
     }
 
     /**
+     * Get players.
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function getPlayerMatchByDiscordId(string $discordId): string
+    {
+        try {
+            $match = $this->playerHelper->getPlayerMatchByDiscordId($discordId);
+
+            if (count($match) < 1 || !array_key_exists('team1_score', $match)) {
+                return response()->httpCode(404)->json([
+                    'error' => 'not_found'
+                ]);
+            }
+
+            return response()->json($match);
+        } catch (Exception $exception) {
+            return ExceptionHelper::handle($exception);
+        }
+    }
+
+    /**
      * Get players by discord Ids.
      *
      * @return string
