@@ -80,6 +80,20 @@ class SteamHelper
                 // ID Proven, get data from steam and save them
                 if ($this->settings['skipAPI']) {
                     $_SESSION['steamdata']['steamid'] = $steamId;
+
+                    if (array_key_exists('discordid', $_SESSION) && $_SESSION['discordid']) {
+                        $discordHelper = new DiscordHelper();
+
+                        $discordHelper->processDiscordLink($steamId, $_SESSION['discordid']);
+
+                        $db = BaseHelper::getDatabaseHandler();
+                        $db->delete('player_link_codes', [
+                            'discord' => $_SESSION['discordid'],
+                        ]);
+
+                        unset($_SESSION['discordid']);
+                    }
+
                     return; // Skip API here
                 }
 
@@ -159,7 +173,7 @@ class SteamHelper
             ],
         ]);
 
-        $result = file_get_contents('https://steamcommunity.com/openid/login', false, $context);
+        $result = @file_get_contents('https://steamcommunity.com/openid/login', false, $context);
 
         // Validate wheather it's true and if we have a good ID
         preg_match('#^https://steamcommunity.com/openid/id/([0-9]{17,25})#', $_GET['openid_claimed_id'], $matches);
@@ -180,12 +194,7 @@ class SteamHelper
             return false;
         }
 
-        unset($_SESSION['steamdata']); // Delete the users info from the cache, DOESNT DESTROY YOUR SESSION!
-
-        // End the session if theres no more data in it
-        if (!isset($_SESSION[0])) {
-            session_destroy();
-        }
+        session_destroy();
         
         // If the logout-page is set, go there
         if ($this->settings['logoutpage'] != '') {
@@ -203,6 +212,6 @@ class SteamHelper
     public function loggedIn(): bool
     {
         $user = $this->getAuthorisedUser();
-        return  $user !== null && $user['steamid'] !== '';
+        return $user !== null && $user['steamid'] !== '';
     }
 }

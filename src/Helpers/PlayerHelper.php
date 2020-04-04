@@ -120,7 +120,7 @@ class PlayerHelper extends BaseHelper
     public function addPlayer(string $steamId): bool
     {
         $query = $this->db->insert('players', [
-            'steam' => $steamId
+            'steam' => $steamId,
         ]);
 
         return !!$query;

@@ -119,7 +119,7 @@ class DiscordHelper extends BaseHelper
      * @param string $code
      * @return bool
      */
-    protected function doesCodeExist(string $code): bool
+    public function doesCodeExist(string $code): bool
     {
         $query = $this->db->query('SELECT * FROM player_link_codes WHERE code = :code', [
             ':code' => $code
@@ -132,6 +132,7 @@ class DiscordHelper extends BaseHelper
         }
 
         $response = $query->fetch();
+
         if ($response === false) {
             return false;
         } elseif ($response['expires'] < time()) {
@@ -150,33 +151,39 @@ class DiscordHelper extends BaseHelper
      *
      * @param string $steamId
      * @param string $discordId
-     * @param string $code
+     * @param string|null $code
      * @return bool
      */
-    public function processDiscordLink(string $steamId, string $discordId, string $code): bool
+    public function processDiscordLink(string $steamId, string $discordId, ?string $code = null): bool
     {
         if ($this->steam->loggedIn() && !$this->player->isLinked($steamId)) {
             $this->player->addPlayer($steamId);
         }
 
-        if ($this->doesCodeExist($code) && $this->checkDiscordLink($discordId, $code)) {
-            $update = $this->db->update('players', [
-                'discord' => $discordId
-            ], [
-                'steam' => $steamId
+        if (!is_null($code) && (!$this->doesCodeExist($code) || !$this->checkDiscordLink($discordId, $code))) {
+            return false;
+        }
+
+        $update = $this->db->update('players', [
+            'discord' => $discordId,
+        ], [
+            'steam' => $steamId,
+        ]);
+
+        if (!$this->isInRankme($steamId)) {
+            $this->db->insert('rankme', [
+                'steam' => $steamId,
             ]);
+        }
 
-            if (!$this->isInRankme($steamId)) {
-                $this->db->insert('rankme', [
-                    'steam' => $steamId
-                ]);
+        if ($update->execute()) {
+            if (is_null($code)) {
+                return true;
             }
 
-            if ($update->execute()) {
-                return !!$this->db->delete('player_link_codes', [
-                    'code' => $code
-                ]);
-            }
+            return !!$this->db->delete('player_link_codes', [
+                'code' => $code,
+            ]);
         }
 
         return false;
@@ -189,22 +196,20 @@ class DiscordHelper extends BaseHelper
      * @param string $code
      * @return bool
      */
-    protected function checkDiscordLink(string $discordId, string $code): bool
+    public function checkDiscordLink(string $discordId, string $code): bool
     {
         $query = $this->db->query('
             SELECT expires
             FROM player_link_codes 
-            WHERE discord = :discordId AND code = :code
+            WHERE discord = :discordId
+            AND code = :code
+            AND expires > UNIX_TIMESTAMP()
         ', [
             ':code' => $code,
             ':discordId' => $discordId
         ]);
 
-        if ($query->rowCount() === 0) {
-            return false;
-        }
-
-        return true;
+        return $query->rowCount() !== 0;
     }
 
     /**

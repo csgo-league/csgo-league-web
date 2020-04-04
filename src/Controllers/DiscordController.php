@@ -33,7 +33,12 @@ class DiscordController extends BaseController
     public function linkDiscord(string $discordId, string $code): string
     {
         if (!$this->steam->loggedIn()) {
-            return "<a href=\"{$this->steam->loginUrl()}\">Login with Steam</a> and visit this URL again.";
+            if ($this->discordHelper->doesCodeExist($code) && $this->discordHelper->checkDiscordLink($discordId, $code)) {
+                $_SESSION['discordid'] = $discordId;
+            }
+
+            header('Location: ' . $this->steam->loginUrl());
+            return '';
         }
 
         $steamId = $this->authorisedUser['steamid'];
@@ -42,7 +47,7 @@ class DiscordController extends BaseController
             return 'Success! You may now close this window.';
         }
 
-        return 'Failure! If you\'re really struggling contact B3none';
+        return 'Failure! Please try again and if you\'re really struggling contact B3none';
     }
 
     /**
