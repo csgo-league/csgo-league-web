@@ -162,16 +162,16 @@ class SteamHelper
 
         // Stored to send a Content-Length header
         $data = http_build_query($params);
-        $context = stream_context_create([
-            'http' => [
+        $context = stream_context_create(array(
+            'http' => array(
                 'method' => 'POST',
                 'header' =>
-                    'Accept-language: en\r\n' .
+                    'Accept-language: en\r\n'.
                     'Content-type: application/x-www-form-urlencoded\r\n' .
                     'Content-Length: ' . strlen($data) . '\r\n',
                 'content' => $data,
-            ],
-        ]);
+            ),
+        ));
 
         $result = @file_get_contents('https://steamcommunity.com/openid/login', false, $context);
 
@@ -195,7 +195,7 @@ class SteamHelper
         }
 
         session_destroy();
-        
+
         // If the logout-page is set, go there
         if ($this->settings['logoutpage'] != '') {
             header('Location: ' . $this->settings['logoutpage']);

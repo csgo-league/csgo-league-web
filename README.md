@@ -37,26 +37,42 @@ The steps below are all written with the presumption that you're using Ubuntu.
 5. Gulp
 6. Node 10 or newer.
 7. Zip and Unzip
-8. MySQL 5.7
+8. MySQL 5.7 or MariaDB 10.4
+9. OpenSSL
 
-`sudo apt install apache2 composer php php-mysql php-json php-simplexml mysql-server zip unzip -y`
+### Default Install
+`sudo apt install apache2 composer openssl php php-mysql php-json php-simplexml mysql-server zip unzip -y`
 
+### Ubuntu 18.04 Install
+`sudo apt install apache2 composer openssl php7.2 php7.2-mysql php7.2-json php7.2-simplexml mariadb-server zip unzip -y`
+
+### Debian 10.3 Install
+`sudo apt install apache2 composer openssl php7.3 php7.3-mysql php7.3-json php7.3-simplexml mariadb-server zip unzip -y`
 
 ### Installing NodeJS 10
-`curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh`
-`sudo bash nodesource_setup.sh`
-`sudo apt-get install nodejs`
+1. Download and install NodeJS repo: `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -`
+2. Install NodeJS version 10: `sudo apt-get install nodejs`
+3. Check installed version: `npm -v`
+4. Check installed version: `node -v`
+
+### Installing NodeJS Version Manager (https://github.com/nvm-sh/nvm)
+1. Download and install NodeJS repo: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
+2. Install NodeJS version 10: `nvm install 10.19`
+3. Set NodeJS version to 10: `nvm use 10.19`
+4. Check installed version: `npm -v`
+5. Check installed version: `node -v`
 
 ### Installing the Web Interface
-1. CD into `/var/www/`
+1. Change directory to web default `cd /var/www/`
 2. Remove the html directory with `rm -rf html/`
 3. Disable the default site `sudo a2dissite 000-default.conf`.
-4. `git clone https://github.com/csgo-league/csgo-league-web`
-5. `cd csgo-league-web/`
-6. `composer install`
-7. `npm i`
-8. `sudo npm i -g gulp`
-9. `gulp build`
+4. Enable mod_rewrite `sudo a2enmod rewrite`.
+5. Clone repo: `git clone https://github.com/csgo-league/csgo-league-web`
+6. Change directory to repo: `cd csgo-league-web/`
+7. Install requirements: `composer install`
+8. Install NodeJS requirements: `npm i`
+9. Install gulp globally: `sudo npm i -g gulp`
+10. Build: `gulp build`
 
 # Database Setup
 1. We need to secure our MySQL installation, to do this run the command `mysql_secure_installation`.
@@ -71,7 +87,7 @@ CREATE DATABASE panel;
 GRANT ALL PRIVILEGES ON panel.* TO 'league'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
-Then edit your MYSQL Conf to allow external connections to the database. 
+Then edit your MYSQL Conf to allow external connections to the database.
 `nano /etc/mysql/mysql.conf.d/mysqld.cnf` and change the `bind-address` to `0.0.0.0`
 
 Now restart the MySQL service with `sudo service mysql restart`
@@ -86,7 +102,7 @@ Fill out all of the fields with your information like MySQL, Servers, RCON, and 
 
 Once finished Migrate your DB with `./vendor/bin/phpmig migrate`
 
-### Server 
+### Server
 1. Point the `league` CNAME at your dedicated server.
 2. `cd /etc/apache2/sites-available`
 3. `nano csgo-league-web.conf`
@@ -99,6 +115,7 @@ Once finished Migrate your DB with `./vendor/bin/phpmig migrate`
 
     <Directory /var/www/csgo-league-web/web>
         Options -Indexes
+        AllowOverride All
         FallbackResource /index.php
     </Directory>
 </VirtualHost>
