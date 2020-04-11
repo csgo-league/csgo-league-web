@@ -56,6 +56,7 @@ class Router
 
             // Authorised player endpoints
             Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
+            Route::get('/player/discord/{discordId}/ban', PlayerController::class . '@getBanPlayerByDiscordId');
             Route::post('/players/discord', PlayerController::class . '@getPlayersByDiscordIds');
             Route::get('/player/discord/{discordId}/match', PlayerController::class . '@getPlayerMatchByDiscordId');
 

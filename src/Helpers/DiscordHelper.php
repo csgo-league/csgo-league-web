@@ -168,6 +168,7 @@ class DiscordHelper extends BaseHelper
             'discord' => $discordId,
         ], [
             'steam' => $steamId,
+            'is_banned' => false,
         ]);
 
         if (!$this->isInRankme($steamId)) {

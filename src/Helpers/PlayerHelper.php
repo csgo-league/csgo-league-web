@@ -33,6 +33,7 @@ class PlayerHelper extends BaseHelper
             'error' => 'not_found'
         ];
     }
+
     /**
      * Get player match by discord id
      *
@@ -62,6 +63,33 @@ class PlayerHelper extends BaseHelper
         }
 
         return $response ?: [
+            'error' => 'not_found'
+        ];
+    }
+
+    /**
+     * Get player match by discord id
+     *
+     * @param int $discordId
+     * @return array
+     */
+    public function banPlayerByDiscordId(int $discordId): array
+    {
+        $update = $this->db->update('players', [
+            'is_banned' => true,
+        ], [
+            'discord' => $discordId,
+        ]);
+
+        $response = $update->execute();
+
+        if ($response) {
+            return [
+                'success' => true,
+            ];
+        }
+
+        return [
             'error' => 'not_found'
         ];
     }
