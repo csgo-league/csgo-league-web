@@ -17,7 +17,7 @@ class AddIsBanned extends Migration
         $db = $this->get('db');
 
         $query = $db->query('
-            ALTER TABLE players ADD COLUMN `is_banned` tinyint(1);
+            ALTER TABLE players ADD COLUMN `is_banned` tinyint(1) DEFAULT 0;
         ');
 
         return $query->execute();
