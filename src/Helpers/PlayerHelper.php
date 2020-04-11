@@ -68,7 +68,7 @@ class PlayerHelper extends BaseHelper
     }
 
     /**
-     * Get player match by discord id
+     * Ban a player by discord id
      *
      * @param int $discordId
      * @return array
@@ -77,6 +77,33 @@ class PlayerHelper extends BaseHelper
     {
         $update = $this->db->update('players', [
             'is_banned' => true,
+        ], [
+            'discord' => $discordId,
+        ]);
+
+        $response = $update->execute();
+
+        if ($response) {
+            return [
+                'success' => true,
+            ];
+        }
+
+        return [
+            'error' => 'not_found'
+        ];
+    }
+
+    /**
+     * Unban a player by discord id
+     *
+     * @param int $discordId
+     * @return array
+     */
+    public function unbanPlayerByDiscordId(int $discordId): array
+    {
+        $update = $this->db->update('players', [
+            'is_banned' => false,
         ], [
             'discord' => $discordId,
         ]);

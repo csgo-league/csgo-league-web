@@ -62,6 +62,15 @@ class PlayerController extends BaseController
     }
 
     /**
+     * @param string $discordId
+     * @return string
+     */
+    public function getUnbanPlayerByDiscordId(string $discordId): string
+    {
+        return response()->json($this->playerHelper->unbanPlayerByDiscordId($discordId));
+    }
+
+    /**
      * Get players.
      *
      * @param string $discordId
