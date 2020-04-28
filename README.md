@@ -126,5 +126,24 @@ Finally make sure to `chown -R www-data:www-data app` in the `/csgo-league-web` 
 
 You should be all set!
 
+### 429 (Too many requests) fix for projects with lots of website visits.
+1. Download `https://github.com/Rob--W/cors-anywhere` or `git clone https://github.com/Rob--W/cors-anywhere.git`
+2. Use `screen` or alternative to run this code in background
+3. Launch it
+```
+cd cors-anywhere
+node server.js
+```
+4. Edit `/var/www/csgo-league-web/assets/scripts/listeners/steam-profile.js`,  
+change line 14 to  
+```axios.get(`http://{YOUR IP}:8080/https://steamcommunity.com/profiles/${steam}?xml=true`)```  
+Don't forget to change `{YOUR IP}` to IP of server.  
+5. Build web side again  
+```
+cd /var/www/csgo-league-web/
+gulp build
+```
+P.S.: Don't forget to clean cache of your web browser.
+
 ### Debugging
 1. if you get `too many redirects` error try change in `env.php` `'WEBSITE' => '/home'` to `'WEBSITE' => ''`
