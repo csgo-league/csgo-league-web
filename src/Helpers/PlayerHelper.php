@@ -7,10 +7,10 @@ class PlayerHelper extends BaseHelper
     /**
      * Get player
      *
-     * @param int $discordId
+     * @param string $discordId
      * @return array
      */
-    public function getPlayerByDiscordId(int $discordId): array
+    public function getPlayerByDiscordId(string $discordId): array
     {
         $query = $this->db->query('
             SELECT *, rankme.steam
@@ -40,7 +40,7 @@ class PlayerHelper extends BaseHelper
      * @param int $discordId
      * @return array
      */
-    public function getPlayerMatchByDiscordId(int $discordId): array
+    public function getPlayerMatchByDiscordId(string $discordId): array
     {
         $query = $this->db->query('
             SELECT matches_maps.*
