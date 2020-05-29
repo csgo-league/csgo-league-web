@@ -129,7 +129,7 @@ class MatchHelper extends BaseHelper
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function startMatch(array $teamOne, array $teamTwo): array
+    public function startMatch(array $teamOne, array $teamTwo, array $maps = []): array
     {
         $servers = $this->serversHelper->getServers(true);
 
@@ -142,7 +142,7 @@ class MatchHelper extends BaseHelper
         }
 
         $server = $servers[0];
-        $matchId = $this->generateMatch($teamOne, $teamTwo);
+        $matchId = $this->generateMatch($teamOne, $teamTwo, $maps);
 
         $ip = $server['ip'];
         $port = $server['port'];
@@ -210,9 +210,10 @@ class MatchHelper extends BaseHelper
      *
      * @param array $teamOne
      * @param array $teamTwo
+     * @param array $maps
      * @return int
      */
-    protected function generateMatch(array $teamOne, array $teamTwo): int
+    protected function generateMatch(array $teamOne, array $teamTwo, array $maps = []): int
     {
         $matchId = $this->generateMatchId();
 
@@ -246,19 +247,21 @@ class MatchHelper extends BaseHelper
             $teamTwo[$player['steam']] = $name;
         }
 
+        $hasMaps = count($maps) > 0;
+
         $setup = [
             'matchid' => (string)$matchId,
-            'num_maps' => 1,
+            'num_maps' => $hasMaps ? count($maps) : 1,
             'players_per_team' => ceil($totalPlayers / 2),
             'min_players_to_ready' => $totalPlayers,
             'min_spectators_to_ready' => 0,
-            'skip_veto' => false,
+            'skip_veto' => $hasMaps,
             'veto_first' => 'team1',
             'side_type' => 'always_knife',
             'spectators' => [
                 'players' => [],
             ],
-            'maplist' => [
+            'maplist' => $hasMaps ? $maps : [
                 'de_dust2',
                 'de_inferno',
                 'de_mirage',
