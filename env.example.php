@@ -4,6 +4,7 @@ $variables = [
     'DB_HOST' => '', // Your database ip address or host name.
     'DB_USERNAME' => '', // Your database username.
     'DB_PASSWORD' => '', // Your database password.
+    'DB_PORT' => '', // Your database port.
     'DB_NAME' => '', // Your database name.
     'STEAM_API_KEY' => '', // Your steam API key.
     'MATCHES_PAGE_LIMIT' => 10, // Page limit for matches page.

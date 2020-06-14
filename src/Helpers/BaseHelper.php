@@ -34,7 +34,8 @@ class BaseHelper
             'database_name' => env('DB_NAME'),
             'server' => env('DB_HOST'),
             'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD')
+            'password' => env('DB_PASSWORD'),
+            'port' => env('DB_PORT')
         ]);
     }
 
@@ -47,6 +48,7 @@ class BaseHelper
             'DB_NAME',
             'DB_HOST',
             'DB_USERNAME',
+            'DB_PORT',
             'DB_PASSWORD',
             'API_KEYS',
             'STEAM_API_KEY',
