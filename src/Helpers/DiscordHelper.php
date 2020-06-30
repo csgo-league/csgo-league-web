@@ -251,7 +251,7 @@ class DiscordHelper extends BaseHelper
         if (!$this->isAlreadyLinked($discordId)) {
             return [
                 'success' => false,
-                'error' => 'link_discord'
+                'error' => 'unlink_discord'
             ];
         }
 
