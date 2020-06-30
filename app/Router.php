@@ -53,6 +53,7 @@ class Router
             Route::post('/discord/update/{discordId}', DiscordController::class . '@updateName');
             Route::get('/discord/check/{discordId}', DiscordController::class . '@checkDiscordLink');
             Route::get('/discord/name/{discordId}', DiscordController::class . '@getName');
+            Route::post('/discord/delete/{discordId}', DiscordController::class . '@unlinkDiscord');
 
             // Authorised player endpoints
             Route::get('/player/discord/{discordId}', PlayerController::class . '@getPlayerByDiscordId');
