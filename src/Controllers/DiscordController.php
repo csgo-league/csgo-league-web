@@ -51,6 +51,19 @@ class DiscordController extends BaseController
     }
 
     /**
+     * Unlink Discord
+     *
+     * @param string $discordId
+     * @return string
+     */
+    public function unlinkDiscord(string $discordId): string
+    {
+        return response()->json(
+            $this->discordHelper->unlinkDiscord($discordId)
+        );
+    }
+
+    /**
      * Generate discord link
      *
      * @param string $discordId

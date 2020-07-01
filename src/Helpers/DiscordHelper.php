@@ -241,6 +241,30 @@ class DiscordHelper extends BaseHelper
     }
 
     /**
+     * Delete a player from the DB
+     *
+     * @param string $discordId
+     * @return array
+     */
+    public function unlinkDiscord(string $discordId): array
+    {
+        if (!$this->isAlreadyLinked($discordId)) {
+            return [
+                'success' => false,
+                'error' => 'unlink_discord'
+            ];
+        }
+
+        $delete = $this->db->delete('players', [
+            'discord' => $discordId,
+        ]);
+
+        return [
+            'success' => $delete->execute()
+        ];
+    }
+
+    /**
      * Update the name in the DB
      *
      * @param string $discordId
