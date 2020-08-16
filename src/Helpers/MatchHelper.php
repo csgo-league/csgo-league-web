@@ -191,9 +191,50 @@ class MatchHelper extends BaseHelper
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function endMatch(string $matchId, string $ip, string $port): array
+    public function endMatch(string $matchId): array
     {
-        $server = new Rcon($ip, $port, env('RCON'));
+        $query = $this->db->query('
+            SELECT
+            end_time,
+            server_ip,
+            server_port
+            FROM matches
+            WHERE matches.matchid = :matchId
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        $match = $query->fetch();
+
+        if (!$match) {
+            return [
+                'success' => false,
+                'error' => 'Match not found',
+            ];
+        }
+
+        if ($match['end_time']) {
+            return [
+                'success' => false,
+                'error' => 'Match is already over',
+            ];
+        }
+
+        if (!array_key_exists('server_ip', $match) || !$match['server_ip']) {
+            return [
+                'success' => false,
+                'error' => 'server_ip does not exist or is not valid',
+            ];
+        }
+
+        if (!array_key_exists('server_port', $match) || !$match['server_port']) {
+            return [
+                'success' => false,
+                'error' => 'server_port does not exist or is not valid',
+            ];
+        }
+
+        $server = new Rcon($match['server_ip'], $match['server_port'], env('RCON'));
         $server->connect();
 
         $server->exec('get5_endmatch; map de_mirage');
@@ -201,7 +242,7 @@ class MatchHelper extends BaseHelper
         $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         return [
-            'success' => unlink($matchConfig)
+            'success' => unlink($matchConfig),
         ];
     }
 
