@@ -205,6 +205,27 @@ class MatchHelper extends BaseHelper
 
         $match = $query->fetch();
 
+        if (!$match) {
+            return [
+                'success' => false,
+                'error' => 'Match not found',
+            ];
+        }
+
+        if (!array_key_exists('server_ip', $match) || !$match['server_ip']) {
+            return [
+                'success' => false,
+                'error' => 'server_ip does not exist or is not valid',
+            ];
+        }
+
+        if (!array_key_exists('server_port', $match) || !$match['server_port']) {
+            return [
+                'success' => false,
+                'error' => 'server_port does not exist or is not valid',
+            ];
+        }
+
         $server = new Rcon($match['server_ip'], $match['server_port'], env('RCON'));
         $server->connect();
 
