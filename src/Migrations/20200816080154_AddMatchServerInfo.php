@@ -4,7 +4,7 @@
 use Medoo\Medoo;
 use Phpmig\Migration\Migration;
 
-class AddIsBanned extends Migration
+class AddMatchServerInfo extends Migration
 {
     /**
      * Do the migration
