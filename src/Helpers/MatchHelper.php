@@ -193,7 +193,19 @@ class MatchHelper extends BaseHelper
      */
     public function endMatch(string $matchId, string $ip, string $port): array
     {
-        $server = new Rcon($ip, $port, env('RCON'));
+        $query = $this->db->query('
+            SELECT
+            server_ip
+            server_port
+            FROM matches
+            WHERE matches.matchid = :matchId
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        $match = $query->fetch();
+
+        $server = new Rcon($match['server_ip'], $match['server_port'], env('RCON'));
         $server->connect();
 
         $server->exec('get5_endmatch; map de_mirage');
@@ -201,7 +213,7 @@ class MatchHelper extends BaseHelper
         $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         return [
-            'success' => unlink($matchConfig)
+            'success' => unlink($matchConfig),
         ];
     }
 
