@@ -191,11 +191,12 @@ class MatchHelper extends BaseHelper
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function endMatch(string $matchId, string $ip, string $port): array
+    public function endMatch(string $matchId): array
     {
         $query = $this->db->query('
             SELECT
-            server_ip
+            end_time,
+            server_ip,
             server_port
             FROM matches
             WHERE matches.matchid = :matchId
@@ -209,6 +210,13 @@ class MatchHelper extends BaseHelper
             return [
                 'success' => false,
                 'error' => 'Match not found',
+            ];
+        }
+
+        if ($match['end_time']) {
+            return [
+                'success' => false,
+                'error' => 'Match is already over',
             ];
         }
 

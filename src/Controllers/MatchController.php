@@ -112,30 +112,8 @@ class MatchController extends BaseController
      */
     public function endMatch(string $matchId): string
     {
-        $input = input()->all();
-
-        if (empty($input['ip'])) {
-            return response()->json([
-                'success' => false,
-                'error' => 'ip_empty'
-            ]);
-        } elseif (!array_key_exists('port', $input)) {
-            return response()->json([
-                'success' => false,
-                'error' => 'port_missing'
-            ]);
-        } elseif (empty($input['port'])) {
-            return response()->json([
-                'success' => false,
-                'error' => 'port_empty'
-            ]);
-        }
-
-        $ip = $input['ip'];
-        $port = $input['port'];
-
         return response()->json(
-            $this->matchHelper->endMatch($matchId, $ip, $port)
+            $this->matchHelper->endMatch($matchId)
         );
     }
 }
