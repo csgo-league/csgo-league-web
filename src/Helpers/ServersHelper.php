@@ -5,7 +5,7 @@ namespace B3none\League\Helpers;
 use B3none\ServerDetails\Client as ServerDetails;
 use Exception;
 
-class ServersHelper
+class ServersHelper extends BaseHelper
 {
     /**
      * @var ServerDetails
@@ -47,10 +47,21 @@ class ServersHelper
                     'ip' => $ip,
                     'port' => $port,
                 ];
+                
+                $query = $this->db->query('
+                    SELECT *
+                    FROM matches
+                    WHERE end_time IS NULL
+                    AND matches.server_ip = :ip
+                    AND matches.server_port = :port
+                ', [
+                    ':ip' => $ip,
+                    ':port' => $port,
+                ]);
 
                 if (!$empty) {
                     $response[] = $serverArray;
-                } elseif ($realPlayers === 0) {
+                } elseif ($realPlayers === 0 && $query->rowCount() === 0) {
                     $response[] = $serverArray;
                     break;
                 }
