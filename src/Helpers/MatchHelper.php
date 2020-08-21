@@ -167,6 +167,12 @@ class MatchHelper extends BaseHelper
         foreach ($servers as $connect) {
             list($ip, $port) = explode(':', $connect);
 
+            $isServerOnline = fsockopen($ip, (int)$port, $errno, $errstr, 1);
+
+            if (!$isServerOnline) {
+                continue;
+            }
+
             $serverArray = [
                 'ip' => $ip,
                 'port' => $port,
