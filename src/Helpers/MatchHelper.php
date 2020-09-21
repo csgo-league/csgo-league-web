@@ -187,7 +187,7 @@ class MatchHelper extends BaseHelper
             ', [
                 ':ip' => $ip,
                 ':port' => $port,
-            ]);                
+            ]);
 
             if ($query->rowCount() === 0) {
                 $response[] = $serverArray;
@@ -196,7 +196,7 @@ class MatchHelper extends BaseHelper
         }
 
         return $response;
-    }    
+    }
 
     /**
      * Get match data by match Id
