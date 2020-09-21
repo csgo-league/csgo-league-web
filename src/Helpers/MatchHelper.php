@@ -18,11 +18,6 @@ class MatchHelper extends BaseHelper
     protected $codeHelper;
 
     /**
-     * @var ServersHelper
-     */
-    protected $serversHelper;
-
-    /**
      * @var PlayerHelper
      */
     protected $playerHelper;
@@ -37,7 +32,6 @@ class MatchHelper extends BaseHelper
         parent::__construct();
 
         $this->codeHelper = new CodeHelper();
-        $this->serversHelper = new ServersHelper();
         $this->playerHelper = new PlayerHelper();
     }
 
@@ -131,7 +125,7 @@ class MatchHelper extends BaseHelper
      */
     public function startMatch(array $teamOne, array $teamTwo, array $maps = []): array
     {
-        $servers = $this->serversHelper->getServers(true);
+        $servers = $this->getServers();
 
         if (!count($servers)) {
             response()->httpCode(500)->json([
@@ -159,6 +153,50 @@ class MatchHelper extends BaseHelper
             'port' => $port,
         ];
     }
+
+    /**
+     * Get servers
+     *
+     * @return array
+     */
+    public function getServers(): array
+    {
+        $servers = explode(',', env('SERVERS'));
+        $response = [];
+
+        foreach ($servers as $connect) {
+            list($ip, $port) = explode(':', $connect);
+
+            $isServerOnline = fsockopen($ip, (int)$port, $errno, $errstr, 1);
+
+            if (!$isServerOnline) {
+                continue;
+            }
+
+            $serverArray = [
+                'ip' => $ip,
+                'port' => $port,
+            ];
+
+            $query = $this->db->query('
+                SELECT *
+                FROM matches
+                WHERE matches.server_ip = :ip
+                AND matches.server_port = :port
+                AND matches.end_time IS NULL
+            ', [
+                ':ip' => $ip,
+                ':port' => $port,
+            ]);                
+
+            if ($query->rowCount() === 0) {
+                $response[] = $serverArray;
+                break;
+            }
+        }
+
+        return $response;
+    }    
 
     /**
      * Get match data by match Id
