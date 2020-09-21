@@ -68,6 +68,7 @@ class Router
             // Authorised match endpoints
             Route::post('/match/start', MatchController::class . '@startMatch');
             Route::get('/match/end/{matchId}', MatchController::class . '@endMatch');
+            Route::get('/match/status/{matchId}', MatchController::class . '@isMatchLive');
         });
 
 

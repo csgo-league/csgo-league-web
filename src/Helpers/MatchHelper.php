@@ -380,4 +380,37 @@ class MatchHelper extends BaseHelper
 
         return $response['match_id'] ?? 1;
     }
+
+    /**
+     * @param string $matchId
+     * @return array
+     */
+    public function checkLive(string $matchId): array
+    {
+        return [
+            'success' => true,
+            'live' => $this->isMatchLive($matchId)
+        ];
+    }
+
+    /**
+     * Return whether the match is live.
+     *
+     * @param string $matchId
+     * @return bool
+     */
+    public function isMatchLive(string $matchId): bool
+    {
+        $query = $this->db->query('
+            SELECT
+            end_time
+            FROM matches
+            WHERE matches.matchid = :matchId
+            AND matches.end_time IS NULL
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        return $query->rowCount() !== 0;
+    }
 }
