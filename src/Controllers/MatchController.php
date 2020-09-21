@@ -119,7 +119,7 @@ class MatchController extends BaseController
 
     /**
      * Check whether the match is live.
-     * 
+     *
      * @param string $matchId
      * @return string
      */
