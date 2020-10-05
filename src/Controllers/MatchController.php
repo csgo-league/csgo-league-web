@@ -129,4 +129,16 @@ class MatchController extends BaseController
             $this->matchHelper->checkLive($matchId)
         );
     }
+
+    /**
+     * Check whether the matches are live.
+     *
+     * @return string
+     */
+    public function getMatchesStatus(): string
+    {
+        return response()->json(
+            $this->matchHelper->getMatchesStatus()
+        );
+    }
 }

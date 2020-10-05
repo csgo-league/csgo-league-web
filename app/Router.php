@@ -69,6 +69,7 @@ class Router
             Route::post('/match/start', MatchController::class . '@startMatch');
             Route::get('/match/end/{matchId}', MatchController::class . '@endMatch');
             Route::get('/match/status/{matchId}', MatchController::class . '@isMatchLive');
+            Route::get('/match/status', MatchController::class . '@getMatchesStatus');
         });
 
 
