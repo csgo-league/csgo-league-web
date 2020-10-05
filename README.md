@@ -83,7 +83,7 @@ The steps below are all written with the presumption that you're using Ubuntu.
 2. Now we need to make our database and a user that can connect to it.
 ```
 CREATE USER 'league'@'%' IDENTIFIED BY '{password}';
-CREATE DATABASE panel;
+CREATE DATABASE panel CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 GRANT ALL PRIVILEGES ON panel.* TO 'league'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
