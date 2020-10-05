@@ -413,4 +413,24 @@ class MatchHelper extends BaseHelper
 
         return $query->rowCount() !== 0;
     }
+
+    /**
+     * Return matches status.
+     *
+     * @return array
+     */
+    public function getMatchesStatus(): array
+    {
+        $query = $this->db->query('SELECT matchid, end_time FROM matches');
+
+        $matches = $query->fetchAll();
+
+        $response = [];
+
+        foreach ($matches as $match) {
+            $response[$match['matchid']] = !isset($match['end_time']);
+        }
+
+        return $response;
+    }
 }
