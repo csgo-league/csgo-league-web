@@ -312,11 +312,11 @@ class MatchHelper extends BaseHelper
                 'de_train',
             ],
             'team1' => [
-                'name' => array_values($teamOne)[0],
+                'name' => $teamOne[key($teamOne)],
                 'players' => $teamOne,
             ],
             'team2' => [
-                'name' => array_values($teamTwo)[0],
+                'name' => $teamTwo[key($teamTwo)],
                 'players' => $teamTwo,
             ],
             'cvars' => [
