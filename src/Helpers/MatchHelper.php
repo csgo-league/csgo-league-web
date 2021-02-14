@@ -65,6 +65,42 @@ class MatchHelper extends BaseHelper
     }
 
     /**
+     * @param string $matchId
+     * @return array
+     */
+    public function getMatchScoreboard(string $matchId): array
+    {
+        $query = $this->db->query('
+            SELECT DISTINCT
+                players.discord,
+                matches_players.team,
+                matches_players.kills,
+                matches_players.deaths,
+                matches_players.assists,
+                matches_players.playerscore,
+                matches_maps.team1_score,
+                matches_maps.team2_score
+            FROM matches
+                LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+                LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+                LEFT JOIN players ON matches_players.steam = players.steam
+            WHERE matches_maps.matchid = :matchId
+            ORDER BY matches_players.playerscore DESC
+        ', [
+            ':matchId' => $matchId,
+            ':mapName' => $mapName
+        ]);
+
+        $matchScoreboard = $query->fetchAll();
+
+        if (!$matchScoreboard) {
+            return [];
+        }
+
+        return $this->formatMatchPlayer($matchScoreboard);
+    }
+
+    /**
      * @param array $players
      * @return array
      */
@@ -116,7 +152,9 @@ class MatchHelper extends BaseHelper
             $player['kdr'] = 0;
         }
 
-        $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
+        if (array_key_exists('name', $player) && !empty($player['name'])) {
+            $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
+        }
 
         return $player;
     }

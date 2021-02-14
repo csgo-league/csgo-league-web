@@ -141,4 +141,15 @@ class MatchController extends BaseController
             $this->matchHelper->getMatchesStatus()
         );
     }
+
+    /**
+     * @param string $matchId
+     * @return string
+     */
+    public function getMatchScoreboard(string $matchId): string
+    {
+        return response()->json(
+            $this->matchHelper->getMatchScoreboard($matchId)
+        );
+    }
 }
