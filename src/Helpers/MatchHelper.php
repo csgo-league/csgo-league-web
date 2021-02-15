@@ -88,7 +88,6 @@ class MatchHelper extends BaseHelper
             ORDER BY matches_players.playerscore DESC
         ', [
             ':matchId' => $matchId,
-            ':mapName' => $mapName
         ]);
 
         $matchScoreboard = $query->fetchAll();
