@@ -328,6 +328,14 @@ class MatchHelper extends BaseHelper
             $teamTwo[$player['steam']] = $name;
         }
 
+        foreach ($spectators as $discordId => $name) {
+            $player = $this->playerHelper->getPlayerByDiscordId($discordId);
+
+            unset($spectators[$discordId]);
+
+            $spectators[$player['steam']] = $name;
+        }
+
         $hasMaps = count($maps) > 0;
 
         $setup = [
