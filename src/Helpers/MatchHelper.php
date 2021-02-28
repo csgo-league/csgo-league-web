@@ -161,12 +161,14 @@ class MatchHelper extends BaseHelper
     /**
      * @param array $teamOne
      * @param array $teamTwo
+     * @param array $spectators
+     * @param array $maps
      * @return array
      * @throws NotAuthenticatedException
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function startMatch(array $teamOne, array $teamTwo, array $maps = []): array
+    public function startMatch(array $teamOne, array $teamTwo, array $spectators = [], array $maps = []): array
     {
         $servers = $this->serversHelper->getServers(true);
 
@@ -179,7 +181,7 @@ class MatchHelper extends BaseHelper
         }
 
         $server = $servers[0];
-        $matchId = $this->generateMatch($teamOne, $teamTwo, $maps);
+        $matchId = $this->generateMatch($teamOne, $teamTwo, $spectators, $maps);
 
         $ip = $server['ip'];
         $port = $server['port'];
@@ -288,10 +290,11 @@ class MatchHelper extends BaseHelper
      *
      * @param array $teamOne
      * @param array $teamTwo
+     * @param array $spectators
      * @param array $maps
      * @return int
      */
-    protected function generateMatch(array $teamOne, array $teamTwo, array $maps = []): int
+    protected function generateMatch(array $teamOne, array $teamTwo, array $spectators = [], array $maps = []): int
     {
         $matchId = $this->generateMatchId();
 
@@ -337,7 +340,7 @@ class MatchHelper extends BaseHelper
             'veto_first' => 'team1',
             'side_type' => 'always_knife',
             'spectators' => [
-                'players' => [],
+                'players' => $spectators,
             ],
             'maplist' => $hasMaps ? $maps : [
                 'de_dust2',
