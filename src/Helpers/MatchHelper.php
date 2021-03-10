@@ -65,6 +65,41 @@ class MatchHelper extends BaseHelper
     }
 
     /**
+     * @param string $matchId
+     * @return array
+     */
+    public function getMatchScoreboard(string $matchId): array
+    {
+        $query = $this->db->query('
+            SELECT DISTINCT
+                players.discord,
+                matches_players.team,
+                matches_players.kills,
+                matches_players.deaths,
+                matches_players.assists,
+                matches_players.playerscore,
+                matches_maps.team1_score,
+                matches_maps.team2_score
+            FROM matches
+                LEFT JOIN matches_maps ON matches_maps.matchid = matches.matchid
+                LEFT JOIN matches_players ON matches_players.matchid = matches.matchid
+                LEFT JOIN players ON matches_players.steam = players.steam
+            WHERE matches_maps.matchid = :matchId
+            ORDER BY matches_players.playerscore DESC
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        $matchScoreboard = $query->fetchAll();
+
+        if (!$matchScoreboard) {
+            return [];
+        }
+
+        return $this->formatMatchPlayer($matchScoreboard);
+    }
+
+    /**
      * @param array $players
      * @return array
      */
@@ -116,7 +151,9 @@ class MatchHelper extends BaseHelper
             $player['kdr'] = 0;
         }
 
-        $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
+        if (array_key_exists('name', $player) && !empty($player['name'])) {
+            $player['name'] = htmlspecialchars(substr($player['name'], 0, 32));
+        }
 
         return $player;
     }
@@ -191,9 +228,50 @@ class MatchHelper extends BaseHelper
      * @throws RconAuthException
      * @throws RconConnectException
      */
-    public function endMatch(string $matchId, string $ip, string $port): array
+    public function endMatch(string $matchId): array
     {
-        $server = new Rcon($ip, $port, env('RCON'));
+        $query = $this->db->query('
+            SELECT
+            end_time,
+            server_ip,
+            server_port
+            FROM matches
+            WHERE matches.matchid = :matchId
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        $match = $query->fetch();
+
+        if (!$match) {
+            return [
+                'success' => false,
+                'error' => 'Match not found',
+            ];
+        }
+
+        if ($match['end_time']) {
+            return [
+                'success' => false,
+                'error' => 'Match is already over',
+            ];
+        }
+
+        if (!array_key_exists('server_ip', $match) || !$match['server_ip']) {
+            return [
+                'success' => false,
+                'error' => 'server_ip does not exist or is not valid',
+            ];
+        }
+
+        if (!array_key_exists('server_port', $match) || !$match['server_port']) {
+            return [
+                'success' => false,
+                'error' => 'server_port does not exist or is not valid',
+            ];
+        }
+
+        $server = new Rcon($match['server_ip'], $match['server_port'], env('RCON'));
         $server->connect();
 
         $server->exec('get5_endmatch; map de_mirage');
@@ -201,7 +279,7 @@ class MatchHelper extends BaseHelper
         $matchConfig = self::MATCHES_CACHE . "/$matchId.json";
 
         return [
-            'success' => unlink($matchConfig)
+            'success' => unlink($matchConfig),
         ];
     }
 
@@ -338,5 +416,58 @@ class MatchHelper extends BaseHelper
         ];
 
         return $response['match_id'] ?? 1;
+    }
+
+    /**
+     * @param string $matchId
+     * @return array
+     */
+    public function checkLive(string $matchId): array
+    {
+        return [
+            'success' => true,
+            'live' => $this->isMatchLive($matchId)
+        ];
+    }
+
+    /**
+     * Return whether the match is live.
+     *
+     * @param string $matchId
+     * @return bool
+     */
+    public function isMatchLive(string $matchId): bool
+    {
+        $query = $this->db->query('
+            SELECT
+            end_time
+            FROM matches
+            WHERE matches.matchid = :matchId
+            AND matches.end_time IS NULL
+        ', [
+            ':matchId' => $matchId,
+        ]);
+
+        return $query->rowCount() !== 0;
+    }
+
+    /**
+     * Return matches status.
+     *
+     * @return array
+     */
+    public function getMatchesStatus(): array
+    {
+        $query = $this->db->query('SELECT matchid, end_time FROM matches');
+
+        $matches = $query->fetchAll();
+
+        $response = [];
+
+        foreach ($matches as $match) {
+            $response[$match['matchid']] = !isset($match['end_time']);
+        }
+
+        return $response;
     }
 }
