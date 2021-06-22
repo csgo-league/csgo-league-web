@@ -20,6 +20,7 @@ $variables = [
     // map_name,/path/to/map/from/web
     'MAPS' => [
         'de_austria,/img/maps/austria.jpg',
+        'de_ancient,/img/maps/ancient.jpg',
         'de_cache,/img/maps/cache.jpg',
         'de_canals,/img/maps/canals.jpg',
         'de_cbble,/img/maps/cbble.jpg',
