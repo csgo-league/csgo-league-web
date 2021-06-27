@@ -11,7 +11,7 @@ export function listen() {
 }
 
 const updateSteamProfile = (element, steam) => {
-  axios.get(`https://cors-anywhere.herokuapp.com/https://steamcommunity.com/profiles/${steam}?xml=true`)
+  axios.get(`https://secret-ocean-49799.herokuapp.com/https://steamcommunity.com/profiles/${steam}?xml=true`)
     .then(response => {
       let profileXML;
 
