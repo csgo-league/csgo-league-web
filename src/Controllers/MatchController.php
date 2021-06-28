@@ -88,10 +88,11 @@ class MatchController extends BaseController
         $teamOne = $input['team_one'];
         $teamTwo = $input['team_two'];
 
-        $maps = array_key_exists('maps', $input) ? explode(',', $input['maps']) : [];
+        $spectators = array_key_exists('spectators', $input) ? $input['spectators'] : [];
+        $maps = array_key_exists('maps', $input) ? $input['maps'] : [];
 
         return response()->json(
-            $this->matchHelper->startMatch($teamOne, $teamTwo, $maps)
+            $this->matchHelper->startMatch($teamOne, $teamTwo, $spectators, $maps)
         );
     }
 
