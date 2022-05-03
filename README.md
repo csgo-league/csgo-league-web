@@ -32,7 +32,7 @@ The steps below are all written with the presumption that you're using Ubuntu.
 1. Apache2
 2. Composer
 3. NPM
-4. PHP 7.1 or newer
+4. ~ PHP 7
 5. Gulp
 6. Node 10 or newer.
 7. Zip and Unzip
