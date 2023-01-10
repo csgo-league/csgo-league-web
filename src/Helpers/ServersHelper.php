@@ -29,7 +29,7 @@ class ServersHelper
             try {
                 $query->Connect($ip, (int) $port);
 
-                $serverPlayers = $query->GetPlayers();
+                $serverPlayers = count($query->GetPlayers());
             } catch(Exception $e) {
                 $didConnect = false;
             } finally {

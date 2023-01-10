@@ -170,7 +170,7 @@ class MatchHelper extends BaseHelper
      */
     public function startMatch(array $teamOne, array $teamTwo, array $spectators = [], array $maps = []): array
     {
-        $servers = $this->serversHelper->getServers(true);
+        $servers = $this->serversHelper->getServers();
 
         if (!count($servers)) {
             response()->httpCode(500)->json([
