@@ -24,6 +24,7 @@
     "squizlabs/php_codesniffer": "^3.4",
     "davedevelopment/phpmig": "^1.5",
     "b3none/server-details": "^1.0",
-    "team-reflex/rcon-php": "^1.0"
+    "team-reflex/rcon-php": "^1.0",
+    "xpaw/php-source-query-class": "^2.1"
   }
 }

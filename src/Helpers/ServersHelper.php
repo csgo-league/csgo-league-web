@@ -2,21 +2,11 @@
 
 namespace B3none\League\Helpers;
 
-use B3none\ServerDetails\Client as ServerDetails;
 use Exception;
+use xPaw\SourceQuery\SourceQuery;
 
 class ServersHelper
 {
-    /**
-     * @var ServerDetails
-     */
-    protected $serverDetails;
-
-    public function __construct()
-    {
-        $this->serverDetails = ServerDetails::create();
-    }
-
     /**
      * Get servers
      *
@@ -29,28 +19,33 @@ class ServersHelper
         $response = [];
 
         foreach ($servers as $connect) {
-            list($ip, $port) = explode(':', $connect);
+            [$ip, $port] = explode(':', $connect);
+
+            $didConnect = true;
+            $serverPlayers = 0;
+
+            $query = new SourceQuery();
+
             try {
-                $server = $this->serverDetails->getServer($ip, $port);
-            } catch (Exception $exception) {
-                $server = null;
+                $query->Connect($ip, (int) $port);
+
+                $serverPlayers = $query->GetPlayers();
+            } catch(Exception $e) {
+                $didConnect = false;
+            } finally {
+                $query->Disconnect();
             }
 
-            if ($server !== null) {
-                $serverPlayers = $server->getPlayers();
-                $serverBots = $server->getBots();
-
-                $realPlayers = ($serverPlayers - $serverBots);
-
+            if ($didConnect) {
                 $serverArray = [
-                    'players' => $realPlayers,
+                    'players' => $serverPlayers,
                     'ip' => $ip,
                     'port' => $port,
                 ];
 
                 if (!$empty) {
                     $response[] = $serverArray;
-                } elseif ($realPlayers === 0) {
+                } elseif ($serverPlayers === 0) {
                     $response[] = $serverArray;
                     break;
                 }
