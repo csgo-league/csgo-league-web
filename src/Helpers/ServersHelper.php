@@ -30,7 +30,7 @@ class ServersHelper
                 $query->Connect($ip, (int) $port);
 
                 $serverPlayers = count($query->GetPlayers());
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $didConnect = false;
             } finally {
                 $query->Disconnect();
