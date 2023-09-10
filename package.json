@@ -34,7 +34,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
-    "node-sass": "^7.0.3",
+    "node-sass": "^9.0.0",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
